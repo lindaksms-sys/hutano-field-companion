@@ -18,6 +18,16 @@ env.allowRemoteModels = true; // only fetched on cache miss; install is an expli
 env.useBrowserCache = true;
 env.useWasmCache = true;
 env.cacheKey = AI_MODEL.cacheName;
+// Name the file in network errors (model/runtime URLs only, never narrative text).
+const baseFetch = env.fetch;
+env.fetch = (async (input: RequestInfo | URL, init?: RequestInit) => {
+  try {
+    return await baseFetch(input as string, init);
+  } catch (e) {
+    const u = String(input instanceof Request ? input.url : input).split("?")[0];
+    throw new Error(`${(e as Error).message} (${u.slice(-80)})`);
+  }
+}) as typeof env.fetch;
 
 const post = (m: WorkerOut) => (self as unknown as Worker).postMessage(m);
 
