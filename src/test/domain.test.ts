@@ -70,7 +70,7 @@ describe("verification invalidation", () => {
   });
 
   it("blocks verification while suggestions are pending", async () => {
-    const fx = FIXTURES[0];
+    const fx = FIXTURES[0]!;
     const rec = await createDraft({ rawNarrative: fx.narrative, inputLanguage: "en", isSynthetic: true });
     const r = await applyExtraction(rec.id, await demoAdapter.extract(fx.narrative, "en"));
     expect(verificationBlockers(r.fields).pending.length).toBeGreaterThan(0);
@@ -84,9 +84,9 @@ describe("unknown and negation preservation", () => {
       const res = await demoAdapter.extract(fx.narrative, fx.language);
       for (const s of Object.values(res.suggestions)) expect(fx.narrative).toContain(s!.source);
     }
-    const en = await demoAdapter.extract(FIXTURES[0].narrative, "en");
+    const en = await demoAdapter.extract(FIXTURES[0]!.narrative, "en");
     expect(en.suggestions.concern?.value).toContain("Denies vomiting");
-    const sn = await demoAdapter.extract(FIXTURES[1].narrative, "sn");
+    const sn = await demoAdapter.extract(FIXTURES[1]!.narrative, "sn");
     expect(sn.suggestions.concern?.value).toContain("Hapana fivha");
     expect(sn.suggestions.encounterDate).toBeUndefined();
   });
