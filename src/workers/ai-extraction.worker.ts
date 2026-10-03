@@ -21,6 +21,10 @@ env.cacheKey = AI_MODEL.cacheName;
 // Name the file in network errors (model/runtime URLs only, never narrative text).
 const baseFetch = env.fetch;
 env.fetch = (async (input: RequestInfo | URL, init?: RequestInit) => {
+  // Some internal lookups ignore `revision` and ask for /resolve/main/; force the pinned revision
+  // so every request hits the same cached, pinned files.
+  if (typeof input === "string" && input.includes(`/${AI_MODEL.id}/resolve/main/`))
+    input = input.replace(`/${AI_MODEL.id}/resolve/main/`, `/${AI_MODEL.id}/resolve/${AI_MODEL.revision}/`);
   try {
     return await baseFetch(input as string, init);
   } catch (e) {
