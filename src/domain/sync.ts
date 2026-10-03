@@ -1,72 +1,158 @@
-import { getDB } from "./db";
-import type { EncounterRecord } from "./types";
+import { getDB, inFlight } from "./db";
+import { getCurrentUserId, getEpoch } from "./session";
+import type { OutboxEntry, RevisionPayload } from "./types";
 
-/** Outbox = verified + queued. Drafts / in-review records never sync. */
-export const getOutbox = () =>
-  getDB()
-    .encounters.where("syncStatus")
-    .equals("queued")
-    .filter((r) => r.reviewStatus === "verified")
-    .toArray();
+export type StoreError = { kind: "network" | "auth" | "duplicate" | "other"; message: string };
+export type InsertResult = { ok: true; receivedAt: string } | { ok: false; error: StoreError };
+export type SelectResult =
+  | { ok: true; row: (RevisionPayload & { received_at: string }) | null }
+  | { ok: false; error: StoreError };
 
-export interface ServerAck {
-  id: string;
-  serverRevision: number;
-  acknowledgedAt: string;
+/** Append-only remote store. Implemented for Supabase in src/lib/supabase-store.ts. */
+export interface RevisionStore {
+  insert(p: RevisionPayload): Promise<InsertResult>;
+  selectById(id: string): Promise<SelectResult>;
 }
 
-/** Future transport (e.g. external Supabase). Must check serverRevision before overwriting. */
-export interface SyncTransport {
-  configured: boolean;
-  push(records: EncounterRecord[]): Promise<ServerAck[]>;
+export function pendingOutbox(uid: string | null) {
+  if (!uid) return Promise.resolve([] as OutboxEntry[]);
+  return getDB().outbox.where("ownerId").equals(uid).filter((e) => e.status === "pending").toArray();
 }
 
-export function backendConfig() {
-  const url = import.meta.env['VITE_SUPABASE_URL'] as string | undefined;
-  const key = import.meta.env['VITE_SUPABASE_PUBLISHABLE_KEY'] as string | undefined;
-  return { url: url || null, configured: Boolean(url && key) };
+/** Canonical JSON (sorted keys) for payload comparison against jsonb round-trips. */
+function canon(v: unknown): string {
+  if (Array.isArray(v)) return `[${v.map(canon).join(",")}]`;
+  if (v && typeof v === "object")
+    return `{${Object.keys(v as object).sort().map((k) => `${JSON.stringify(k)}:${canon((v as Record<string, unknown>)[k])}`).join(",")}}`;
+  return JSON.stringify(v ?? null);
+}
+const sameTime = (a: string, b: string) => new Date(a).getTime() === new Date(b).getTime();
+
+export function samePayload(local: RevisionPayload, remote: RevisionPayload): boolean {
+  return (
+    local.id === remote.id &&
+    local.owner_id === remote.owner_id &&
+    local.encounter_id === remote.encounter_id &&
+    local.device_id === remote.device_id &&
+    local.local_revision === remote.local_revision &&
+    local.language === remote.language &&
+    local.raw_narrative === remote.raw_narrative &&
+    remote.review_status === "verified" &&
+    remote.is_synthetic === true &&
+    canon(local.fields) === canon(remote.fields) &&
+    sameTime(local.verified_at, remote.verified_at) &&
+    sameTime(local.client_updated_at, remote.client_updated_at)
+  );
 }
 
-/** No backend is wired in this prototype. There is no network code here by design. */
-export const transport: SyncTransport = {
-  configured: false,
-  async push() {
-    throw new Error("Backend not configured");
-  },
-};
+export type DrainOutcome =
+  | { status: "busy" }
+  | { status: "not_signed_in" }
+  | { status: "offline"; sent: number; remaining: number }
+  | { status: "auth_paused"; sent: number; remaining: number; message: string }
+  | { status: "account_changed"; sent: number }
+  | { status: "done"; sent: number; rejected: number; remaining: number; lastError: string | null };
 
-export type SyncOutcome =
-  | { ok: false; reason: "backend_not_configured" | "offline" | "error"; message: string }
-  | { ok: true; acknowledged: number };
+let draining = false;
+export const isDraining = () => draining;
 
-export async function runSync(t: SyncTransport = transport): Promise<SyncOutcome> {
-  if (!t.configured)
-    return { ok: false, reason: "backend_not_configured", message: "Backend not configured" };
-  if (typeof navigator !== "undefined" && !navigator.onLine)
-    return { ok: false, reason: "offline", message: "Device offline" };
-  const outbox = await getOutbox();
+/** Acknowledge one entry — only if the same account is still active (epoch unchanged). */
+async function acknowledge(entry: OutboxEntry, receivedAt: string, uid: string, epoch: number) {
+  const db = getDB();
+  return db.transaction("rw", db.encounters, db.outbox, async () => {
+    if (getEpoch() !== epoch || getCurrentUserId() !== uid) return false;
+    const e = await db.outbox.get(entry.revisionId);
+    if (e) {
+      e.status = "acked";
+      e.ackedAt = receivedAt;
+      e.lastError = null;
+      await db.outbox.put(e);
+    }
+    const r = await db.encounters.get(entry.encounterId);
+    // Only the exact acknowledged revision becomes synced; later edits stay pending.
+    if (r && r.ownerId === uid && r.localRevision === entry.localRevision && r.reviewStatus === "verified") {
+      r.syncStatus = "synced";
+      r.serverRevision = entry.localRevision;
+      r.lastSyncedAt = receivedAt;
+      await db.encounters.put(r);
+    }
+    return true;
+  });
+}
+
+async function noteFailure(entry: OutboxEntry, msg: string, uid: string, epoch: number, reject = false) {
+  const db = getDB();
+  await db.transaction("rw", db.outbox, async () => {
+    if (getEpoch() !== epoch || getCurrentUserId() !== uid) return;
+    const e = await db.outbox.get(entry.revisionId);
+    if (!e) return;
+    e.attempts += 1;
+    e.lastError = msg;
+    if (reject) e.status = "rejected";
+    await db.outbox.put(e);
+  });
+}
+
+/** Single-flight drain of the signed-in account's outbox. App must be open; no background sync. */
+export async function drainOutbox(store: RevisionStore, isOnline: () => boolean = () => (typeof navigator === "undefined" ? true : navigator.onLine)): Promise<DrainOutcome> {
+  if (draining) return { status: "busy" };
+  const uid = getCurrentUserId();
+  if (!uid) return { status: "not_signed_in" };
+  draining = true;
+  const epoch = getEpoch();
+  let sent = 0;
+  let rejected = 0;
+  let lastError: string | null = null;
   try {
-    const acks = await t.push(outbox);
-    const db = getDB();
-    await db.transaction("rw", db.encounters, async () => {
-      for (const a of acks) {
-        const r = await db.encounters.get(a.id);
-        // Only mark synced if the record wasn't changed after being queued.
-        if (r && r.reviewStatus === "verified" && r.syncStatus === "queued") {
-          r.syncStatus = "synced";
-          r.serverRevision = a.serverRevision;
-          r.lastSyncedAt = a.acknowledgedAt;
-          await db.encounters.put(r);
+    const entries = await pendingOutbox(uid);
+    for (let i = 0; i < entries.length; i++) {
+      const entry = entries[i]!;
+      if (getEpoch() !== epoch) return { status: "account_changed", sent };
+      if (!isOnline()) return { status: "offline", sent, remaining: entries.length - i };
+      inFlight.add(entry.revisionId);
+      try {
+        const res = await store.insert(entry.payload); // same id + payload on every retry
+        if (getEpoch() !== epoch) return { status: "account_changed", sent };
+        let receivedAt: string | null = null;
+        if (res.ok) receivedAt = res.receivedAt;
+        else if (res.error.kind === "duplicate") {
+          const sel = await store.selectById(entry.revisionId);
+          if (getEpoch() !== epoch) return { status: "account_changed", sent };
+          if (sel.ok && sel.row && samePayload(entry.payload, sel.row)) receivedAt = sel.row.received_at;
+          else if (sel.ok) {
+            lastError = sel.row ? "Server copy differs from local snapshot" : "Conflicting revision already on server";
+            await noteFailure(entry, lastError, uid, epoch, true);
+            rejected++;
+            continue;
+          } else {
+            lastError = sel.error.message;
+            if (sel.error.kind === "network") return { status: "offline", sent, remaining: entries.length - i };
+            if (sel.error.kind === "auth") return { status: "auth_paused", sent, remaining: entries.length - i, message: sel.error.message };
+            await noteFailure(entry, lastError, uid, epoch);
+            continue;
+          }
+        } else {
+          lastError = res.error.message;
+          await noteFailure(entry, lastError, uid, epoch);
+          if (res.error.kind === "network") return { status: "offline", sent, remaining: entries.length - i };
+          if (res.error.kind === "auth") return { status: "auth_paused", sent, remaining: entries.length - i, message: res.error.message };
+          continue;
         }
+        if (await acknowledge(entry, receivedAt, uid, epoch)) sent++;
+        else return { status: "account_changed", sent };
+      } finally {
+        inFlight.delete(entry.revisionId);
       }
-    });
-    return { ok: true, acknowledged: acks.length };
-  } catch (e) {
-    return { ok: false, reason: "error", message: (e as Error).message };
+    }
+    const remaining = (await pendingOutbox(uid)).length;
+    return { status: "done", sent, rejected, remaining, lastError };
+  } finally {
+    draining = false;
   }
 }
 
-export async function lastSuccessfulSync(): Promise<string | null> {
-  const recs = await getDB().encounters.filter((r) => r.lastSyncedAt !== null).toArray();
-  return recs.map((r) => r.lastSyncedAt!).sort().at(-1) ?? null;
+export async function lastSuccessfulSync(uid: string | null): Promise<string | null> {
+  if (!uid) return null;
+  const acked = await getDB().outbox.where("ownerId").equals(uid).filter((e) => e.status === "acked").toArray();
+  return acked.map((e) => e.ackedAt!).sort().at(-1) ?? null;
 }
