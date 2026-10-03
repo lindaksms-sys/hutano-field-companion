@@ -124,13 +124,13 @@ export function validateModelOutput(
       rejected.push(k);
       continue;
     }
-    const chosen = (idx as number[]).map((i) => segs[i - 1]);
+    const chosen = (idx as number[]).map((i) => segs[i - 1]!);
     if (chosen.some((s) => s.withheld)) {
       rejected.push(k);
       continue;
     }
     // Whole sentences only (keeps negation such as "Hapana fivha" / "no fever" intact).
-    const source = narrative.slice(chosen[0].start, chosen[chosen.length - 1].end);
+    const source = narrative.slice(chosen[0]!.start, chosen[chosen.length - 1]!.end);
     if (!source || !narrative.includes(source)) {
       rejected.push(k);
       continue;

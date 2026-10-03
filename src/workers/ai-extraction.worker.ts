@@ -30,11 +30,10 @@ let loadedBackend: AiBackend | null = null;
 async function load(backend: AiBackend, report: boolean) {
   if (model && loadedBackend === backend) return;
   const v = AI_VARIANTS[backend];
-  const progress_callback = report
-    ? (p: { status: string; file?: string; loaded?: number; total?: number }) => {
-        if (p.status === "progress" && p.file) post({ type: "progress", file: p.file, loaded: p.loaded ?? 0, total: p.total ?? 0 });
-      }
-    : undefined;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const progress_callback = (p: any) => {
+    if (report && p.status === "progress" && p.file) post({ type: "progress", file: p.file, loaded: p.loaded ?? 0, total: p.total ?? 0 });
+  };
   tokenizer = await AutoTokenizer.from_pretrained(AI_MODEL.id, { revision: AI_MODEL.revision, progress_callback });
   if (report) post({ type: "phase", phase: "initializing" });
   model = await AutoModelForCausalLM.from_pretrained(AI_MODEL.id, {
@@ -128,6 +127,6 @@ self.onmessage = async (e: MessageEvent<WorkerIn>) => {
     }
   } catch (err) {
     const m = (err as Error)?.message || String(err);
-    post({ type: "error", id: msg.type === "generate" ? msg.id : undefined, message: /quota|QuotaExceeded/i.test(m) ? `Storage full: ${m}` : m });
+    post({ type: "error", ...(msg.type === "generate" ? { id: msg.id } : {}), message: /quota|QuotaExceeded/i.test(m) ? `Storage full: ${m}` : m });
   }
 };
