@@ -31,7 +31,7 @@ export function appShellServiceWorker(): Plugin {
         skipWaiting: false,
         clientsClaim: true,
         cleanupOutdatedCaches: true,
-        navigateFallback: undefined,
+        navigateFallback: null,
         sourcemap: false,
         mode: "production",
         runtimeCaching: [
