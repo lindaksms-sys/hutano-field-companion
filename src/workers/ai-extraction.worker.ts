@@ -25,6 +25,15 @@ env.fetch = (async (input: RequestInfo | URL, init?: RequestInit) => {
   // so every request hits the same cached, pinned files.
   if (typeof input === "string" && input.includes(`/${AI_MODEL.id}/resolve/main/`))
     input = input.replace(`/${AI_MODEL.id}/resolve/main/`, `/${AI_MODEL.id}/resolve/${AI_MODEL.revision}/`);
+  // Cache-first for pinned model/runtime files so metadata lookups also work offline.
+  if (typeof input === "string") {
+    try {
+      const hit = await (await caches.open(AI_MODEL.cacheName)).match(input);
+      if (hit) return (init?.method ?? "GET").toUpperCase() === "HEAD" ? new Response(null, { status: hit.status, headers: hit.headers }) : hit;
+    } catch {
+      /* fall through to network */
+    }
+  }
   try {
     return await baseFetch(input as string, init);
   } catch (e) {
