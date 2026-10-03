@@ -5,7 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { StatusPill } from "@/components/StatusPill";
-import { getEncounter, saveFields, verificationBlockers, verify, missingFields } from "@/domain/repository";
+import { useAuth } from "@/lib/auth";
+import { adoptRecord, getEncounter, saveFields, verificationBlockers, verify, missingFields } from "@/domain/repository";
 import { FIELD_KEYS, type EncounterRecord, type FieldKey, type FieldValue } from "@/domain/types";
 import { FIELD_LABELS, LANG_LABELS, REVIEW_LABELS, STATE_LABELS, SYNC_LABELS } from "@/lib/labels";
 
@@ -35,6 +36,7 @@ function Review() {
   const [confirmed, setConfirmed] = useState(false);
   const [focus, setFocus] = useState<FieldKey | null>(null);
   const [loadErr, setLoadErr] = useState<string | null>(null);
+  const { user } = useAuth();
 
   const load = (r: EncounterRecord | undefined) => {
     setRec(r ?? null);
@@ -46,7 +48,7 @@ function Review() {
   };
   useEffect(() => {
     getEncounter(id).then(load, (e) => setLoadErr((e as Error).message));
-  }, [id]);
+  }, [id, user?.id]);
 
   const blockers = useMemo(() => (fields ? verificationBlockers(fields) : null), [fields]);
 
@@ -103,7 +105,16 @@ function Review() {
         <StatusPill tone={rec.reviewStatus === "verified" ? "success" : "pending"}>{REVIEW_LABELS[rec.reviewStatus]}</StatusPill>
         <StatusPill>{SYNC_LABELS[rec.syncStatus]}</StatusPill>
         <StatusPill>Rev {rec.localRevision}</StatusPill>
+        {rec.ownerId === null && <StatusPill tone="pending">Unowned demo</StatusPill>}
       </div>
+      {rec.ownerId === null && user && (
+        <div className="flex flex-wrap items-center gap-3 rounded-lg border border-pending-border bg-pending/40 p-3 text-sm">
+          <span className="mr-auto">Captured without an account. It will not sync unless you adopt it into {user.email}.</span>
+          <Button variant="outline" className="h-10" onClick={async () => {
+            try { load(await adoptRecord(rec.id, user.id)); } catch (e) { setSave({ kind: "error", msg: `Adopt failed: ${(e as Error).message}` }); }
+          }}>Adopt into my account</Button>
+        </div>
+      )}
       {rec.reviewStatus === "verified" && (
         <p className="rounded-lg bg-success p-3 text-sm font-semibold text-success-foreground">
           Verified {new Date(rec.verifiedAt!).toLocaleString()}. Any edit will remove verification and require review again.

@@ -16,6 +16,7 @@ export function EncounterCard({ r }: { r: EncounterRecord }) {
           {REVIEW_LABELS[r.reviewStatus]}
         </StatusPill>
         {r.isSynthetic && <StatusPill>Synthetic</StatusPill>}
+        {r.ownerId === null && <StatusPill tone="pending">Unowned demo</StatusPill>}
       </div>
       <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{r.rawNarrative || "(empty narrative)"}</p>
       <p className="mt-2 text-xs text-muted-foreground">

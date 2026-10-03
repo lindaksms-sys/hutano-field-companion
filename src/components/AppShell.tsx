@@ -3,7 +3,7 @@ import { Home, List, RefreshCw, Settings } from "lucide-react";
 import type { ReactNode } from "react";
 import { useOnline } from "@/lib/hooks";
 import { useI18n, type Key } from "@/lib/i18n";
-import { backendConfig } from "@/domain/sync";
+import { useAuth } from "@/lib/auth";
 import { StatusPill } from "./StatusPill";
 
 const NAV: { to: "/" | "/encounters" | "/sync" | "/settings"; key: Key; Icon: typeof Home }[] = [
@@ -16,7 +16,7 @@ const NAV: { to: "/" | "/encounters" | "/sync" | "/settings"; key: Key; Icon: ty
 export function AppShell({ children }: { children: ReactNode }) {
   const { t, lang, setLang } = useI18n();
   const online = useOnline();
-  const backend = backendConfig().configured;
+  const { user } = useAuth();
   return (
     <div className="min-h-screen bg-background pb-24 md:pb-8">
       <header className="sticky top-0 z-20 border-b border-border bg-card/95 backdrop-blur">
@@ -40,8 +40,10 @@ export function AppShell({ children }: { children: ReactNode }) {
           <div className="ml-auto flex items-center gap-2">
             <StatusPill tone={online ? "success" : "pending"}>
               {online ? t("online") : t("offline")}
-              {!backend && ` · ${t("localOnly")}`}
             </StatusPill>
+            <Link to="/auth" className="hidden min-h-10 items-center rounded-md border border-input bg-card px-3 text-sm font-semibold sm:inline-flex">
+              {user ? "Account" : "Sign in"}
+            </Link>
             <div className="flex overflow-hidden rounded-md border border-input" role="group" aria-label="Interface language">
               {(["en", "sn"] as const).map((l) => (
                 <button
@@ -60,6 +62,9 @@ export function AppShell({ children }: { children: ReactNode }) {
           {t("prototype")}
         </p>
       </header>
+      <div className="border-b border-border bg-muted px-4 py-1.5 text-center text-xs font-semibold text-muted-foreground">
+        {user ? <>Signed in · {user.email}</> : <><Link to="/auth" className="underline">Sign in</Link> to sync. {t("localOnly")} until then.</>}
+      </div>
       <main className="mx-auto max-w-5xl px-4 py-5">{children}</main>
       <nav className="fixed inset-x-0 bottom-0 z-20 grid grid-cols-4 border-t border-border bg-card md:hidden">
         {NAV.map(({ to, key, Icon }) => (

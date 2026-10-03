@@ -8,7 +8,8 @@ import {
 import { StatusPill } from "@/components/StatusPill";
 import { aiAdapter, demoAdapter } from "@/domain/extraction";
 import { clearDemoData, exportDemoRecords } from "@/domain/repository";
-import { backendConfig } from "@/domain/sync";
+import { supabaseConfig } from "@/lib/supabase";
+import { useAuth } from "@/lib/auth";
 import { useStorageStatus } from "@/lib/hooks";
 import { useI18n } from "@/lib/i18n";
 
@@ -30,7 +31,8 @@ function SettingsPage() {
   const { status, requestPersist } = useStorageStatus();
   const { lang, setLang } = useI18n();
   const [msg, setMsg] = useState<string | null>(null);
-  const cfg = backendConfig();
+  const cfg = supabaseConfig();
+  const { user } = useAuth();
 
   async function doExport() {
     try {
@@ -55,7 +57,9 @@ function SettingsPage() {
         {status.error && <p className="px-4 pb-3 text-sm font-semibold text-destructive">{status.error}</p>}
         <Row k="Persistent storage" v={status.persisted === true ? <StatusPill tone="success">Granted</StatusPill> : status.persisted === false ? <StatusPill tone="pending">Not granted — browser may clear data</StatusPill> : "Unsupported"} />
         <Row k="Storage used / quota" v={`${mb(status.usage)} / ${mb(status.quota)}`} />
-        <Row k="Backend sync" v={<StatusPill tone="pending">{cfg.configured ? "Env present, not implemented" : "Not configured"}</StatusPill>} />
+        <Row k="Backend" v={<StatusPill tone={cfg.configured ? "success" : "pending"}>{cfg.configured ? "Configured (external Supabase)" : "Not configured"}</StatusPill>} />
+        <Row k="Account" v={<StatusPill tone={user ? "success" : "pending"}>{user ? "Signed in" : "Not signed in"}</StatusPill>} />
+        <Row k="Cloud sync" v="Manual / on reconnect, app must be open" />
         <Row k="Extraction" v={<StatusPill tone="pending">{demoAdapter.label}</StatusPill>} />
         <Row k="AI extraction" v={<StatusPill>{aiAdapter.configured ? "Configured" : "Not implemented"}</StatusPill>} />
         <Row k="Offline capture" v="Works after first load (local storage)" />
@@ -110,7 +114,7 @@ function SettingsPage() {
       </Section>
 
       <p className="text-xs text-muted-foreground">
-        Privacy: records are unencrypted in this browser. Anyone with access to this unlocked device and browser profile can read them. Avoid shared devices.
+        Privacy: local records are unencrypted in this browser. Anyone with access to this unlocked device and browser profile can read them. Avoid shared devices.
       </p>
     </div>
   );
