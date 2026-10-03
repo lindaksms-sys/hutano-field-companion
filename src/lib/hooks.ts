@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { listEncounters } from "@/domain/repository";
+import { onUserChange } from "@/domain/session";
 import type { EncounterRecord } from "@/domain/types";
+import { onSyncChange } from "./sync-runner";
 
 export function useOnline() {
   const [online, setOnline] = useState(true);
@@ -17,6 +19,7 @@ export function useOnline() {
   return online;
 }
 
+/** Encounters visible to the current account (own + unowned demo). Reloads on account change and sync. */
 export function useEncounters() {
   const [records, setRecords] = useState<EncounterRecord[] | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -31,6 +34,12 @@ export function useEncounters() {
   }, []);
   useEffect(() => {
     void reload();
+    const a = onUserChange(() => void reload());
+    const b = onSyncChange((o) => o && void reload());
+    return () => {
+      a();
+      b();
+    };
   }, [reload]);
   return { records, error, reload };
 }
@@ -44,13 +53,7 @@ export interface StorageStatus {
 }
 
 export function useStorageStatus() {
-  const [s, setS] = useState<StorageStatus>({
-    indexedDB: "checking",
-    error: null,
-    persisted: null,
-    usage: null,
-    quota: null,
-  });
+  const [s, setS] = useState<StorageStatus>({ indexedDB: "checking", error: null, persisted: null, usage: null, quota: null });
   const check = useCallback(async () => {
     let idb: StorageStatus["indexedDB"] = "ok";
     let error: string | null = null;
