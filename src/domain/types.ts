@@ -54,6 +54,8 @@ export interface EncounterRecord {
   rawNarrative: string;
   inputLanguage: InputLanguage;
   isSynthetic: boolean;
+  /** Supabase auth user id, or null for an unowned local demo record. */
+  ownerId: string | null;
   fields: Record<FieldKey, FieldValue>;
   extraction: ExtractionMeta | null;
   reviewStatus: ReviewStatus;
@@ -61,7 +63,7 @@ export interface EncounterRecord {
   localRevision: number;
   serverRevision: number | null;
   verifiedAt: string | null;
-  /** Only ever set from a real server acknowledgement. */
+  /** serverRevision = the local revision the server acknowledged. Only ever set from a real server acknowledgement. */
   lastSyncedAt: string | null;
 }
 
@@ -81,4 +83,34 @@ export function emptyFields(): Record<FieldKey, FieldValue> {
     FieldKey,
     FieldValue
   >;
+}
+
+/** Immutable snapshot payload, created once when a record is verified (or adopted). */
+export interface RevisionPayload {
+  id: string;
+  owner_id: string;
+  encounter_id: string;
+  device_id: string;
+  local_revision: number;
+  schema_version: 1;
+  language: InputLanguage;
+  raw_narrative: string;
+  fields: Record<FieldKey, FieldValue>;
+  review_status: "verified";
+  verified_at: string;
+  client_updated_at: string;
+  is_synthetic: true;
+}
+
+export interface OutboxEntry {
+  revisionId: string;
+  ownerId: string;
+  encounterId: string;
+  localRevision: number;
+  payload: RevisionPayload;
+  status: "pending" | "acked" | "rejected";
+  attempts: number;
+  lastError: string | null;
+  createdAt: string;
+  ackedAt: string | null;
 }

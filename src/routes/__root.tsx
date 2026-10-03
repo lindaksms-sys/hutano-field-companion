@@ -15,6 +15,8 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { AppShell } from "../components/AppShell";
 import { I18nProvider } from "../lib/i18n";
 import { registerAppServiceWorker } from "../lib/pwa";
+import { AuthProvider } from "../lib/auth";
+import { runSyncNow } from "../lib/sync-runner";
 
 function NotFoundComponent() {
   return (
@@ -128,15 +130,21 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   useEffect(() => {
     void registerAppServiceWorker();
+    // Foreground store-and-forward: retry the queue when connectivity returns.
+    const onOnline = () => void runSyncNow();
+    window.addEventListener("online", onOnline);
+    return () => window.removeEventListener("online", onOnline);
   }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <I18nProvider>
-        <AppShell>
-          <Outlet />
-        </AppShell>
+        <AuthProvider>
+          <AppShell>
+            <Outlet />
+          </AppShell>
+        </AuthProvider>
       </I18nProvider>
     </QueryClientProvider>
   );

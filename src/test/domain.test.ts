@@ -12,11 +12,14 @@ import {
   verificationBlockers,
   verify,
 } from "@/domain/repository";
-import { getOutbox, runSync, transport } from "@/domain/sync";
+import { setCurrentUser } from "@/domain/session";
 import { FIELD_KEYS } from "@/domain/types";
 
 let n = 0;
-beforeEach(() => setDB(new HutanoDB(`test-${n++}`)));
+beforeEach(() => {
+  setDB(new HutanoDB(`test-${n++}`));
+  setCurrentUser(null);
+});
 
 async function verifiedRecord() {
   const rec = await createDraft({ rawNarrative: "free text", inputLanguage: "en", isSynthetic: true });
@@ -107,17 +110,3 @@ describe("unknown and negation preservation", () => {
   });
 });
 
-describe("no sync without backend", () => {
-  it("does not sync or mark records synced", async () => {
-    const v = await verifiedRecord();
-    await createDraft({ rawNarrative: "draft", inputLanguage: "en", isSynthetic: true });
-    expect(transport.configured).toBe(false);
-    const out = await runSync();
-    expect(out.ok).toBe(false);
-    const after = await getEncounter(v.id);
-    expect(after?.syncStatus).toBe("queued");
-    expect(after?.lastSyncedAt).toBeNull();
-    const outbox = await getOutbox();
-    expect(outbox.map((r) => r.id)).toEqual([v.id]); // drafts excluded
-  });
-});

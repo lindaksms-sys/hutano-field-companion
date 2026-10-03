@@ -27,7 +27,7 @@ export const REVIEW_LABELS: Record<ReviewStatus, string> = {
 
 export const SYNC_LABELS: Record<SyncStatus, string> = {
   local_only: "On this device only",
-  queued: "Queued — waiting for backend",
+  queued: "Verified — waiting to upload",
   synced: "Synced",
 };
 

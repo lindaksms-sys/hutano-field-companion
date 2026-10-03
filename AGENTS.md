@@ -12,7 +12,9 @@
 ## Hutano architecture rules
 - All encounter persistence goes through `src/domain/repository.ts` mutate(); it bumps localRevision and invalidates verification — keeps audit/verification guarantees in one place.
 - Extraction is behind the `ExtractionAdapter` interface; adapters must return exact narrative substrings as sources and never infer/translate — prevents hallucinated clinical data.
-- Sync goes through the `SyncTransport` interface; records become `synced` only from a real server ack — no simulated sync.
+- Sync drains the IndexedDB outbox through the `RevisionStore` interface (insert/select only, single-flight, epoch-guarded); records become `synced` only for the exact acknowledged revision — no simulated sync, no overwrites.
+- Backend is an external Supabase project used directly from the browser under RLS; do not enable Lovable Cloud. Schema copies live in docs/backend (already applied, never re-run).
+- Local records are partitioned by `ownerId`; unowned records need explicit adopt — never transfer between accounts.
 - Dexie DB is created lazily via getDB() — SSR must never touch IndexedDB.
 - Service worker is registered only from `src/lib/pwa.ts` (guarded) — avoids stale caches in preview.
 - Encounter data never goes to localStorage or telemetry.
