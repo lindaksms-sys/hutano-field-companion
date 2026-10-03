@@ -90,34 +90,6 @@ function NewEncounter() {
     void nav({ to: "/encounters/$id", params: { id } });
   }
 
-  // Legacy path kept for reference by tests of the demo flow.
-  async function save(extract: boolean) {
-    setError(null);
-    setPhase("saving");
-    let id: string;
-    try {
-      const rec = await createDraft({ rawNarrative: text, inputLanguage: lang, isSynthetic: true });
-      id = rec.id;
-      setSavedId(id);
-    } catch (e) {
-      setPhase("idle");
-      setError(`Not saved. Local storage write failed: ${(e as Error).message}`);
-      return;
-    }
-    if (extract) {
-      setPhase("extracting");
-      try {
-        const res = await demoAdapter.extract(text, lang);
-        await applyExtraction(id, res);
-      } catch (e) {
-        // Draft is already saved; continue to manual review.
-        setError(`Draft saved, but extraction failed: ${(e as Error).message}`);
-      }
-    }
-    setPhase("idle");
-    void nav({ to: "/encounters/$id", params: { id } });
-  }
-
   return (
     <div className="mx-auto max-w-2xl space-y-5">
       <h1 className="text-2xl font-bold">New encounter</h1>

@@ -1,0 +1,100 @@
+import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { StatusPill } from "@/components/StatusPill";
+import { AI_MODEL, AI_VARIANTS } from "@/lib/ai-config";
+import { cancelInstall, estimateBytes, installModel, removeModel, storageHeadroom } from "@/lib/ai-model";
+import { useAiState } from "@/lib/use-ai";
+
+const mb = (n: number) => `${Math.round(n / 1e6)} MB`;
+
+export function AiModelPanel() {
+  const ai = useAiState();
+  const [free, setFree] = useState<number | null>(null);
+  const [confirm, setConfirm] = useState(false);
+  useEffect(() => {
+    void storageHeadroom().then((s) => setFree(s.free));
+  }, [ai.kind]);
+
+  const backend = ai.kind === "not_downloaded" || ai.kind === "downloading" || ai.kind === "initializing" ? ai.backend : ai.kind === "error" ? ai.backend : ai.kind === "ready" ? ai.manifest.backend : null;
+
+  return (
+    <div className="space-y-3 p-4 text-sm">
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="mr-auto font-semibold">Status</span>
+        {ai.kind === "checking" && <StatusPill>Checking…</StatusPill>}
+        {ai.kind === "unsupported" && <StatusPill tone="danger">Not supported: {ai.reason}</StatusPill>}
+        {ai.kind === "not_downloaded" && <StatusPill>Not downloaded</StatusPill>}
+        {ai.kind === "downloading" && <StatusPill tone="pending">Downloading {mb(ai.loaded)} / {mb(ai.total)}</StatusPill>}
+        {ai.kind === "initializing" && <StatusPill tone="pending">{ai.phase === "verifying" ? "Testing a real inference…" : "Initializing…"}</StatusPill>}
+        {ai.kind === "ready" && <StatusPill tone="success">Ready · installed and tested</StatusPill>}
+        {ai.kind === "error" && <StatusPill tone="danger">Error</StatusPill>}
+      </div>
+
+      {ai.kind === "error" && <p role="alert" className="font-semibold text-destructive">{ai.message}</p>}
+
+      <ul className="list-disc space-y-1 pl-5 text-muted-foreground">
+        <li>Experimental. Suggests whole sentences from your note for each field; you check and accept each one. Never diagnoses or advises.</li>
+        <li>Shona ability is not validated. Original text is always kept as written; nothing is translated.</li>
+        <li>Runs only on this device. Notes are never sent anywhere for AI.</li>
+        <li>Needs a recent desktop or high-end phone with about 1.5 GB free memory. Slow devices may take minutes per note or fail; manual capture always works.</li>
+      </ul>
+
+      {backend && (
+        <p>
+          Download for this device ({backend === "webgpu" ? "WebGPU, q4f16" : "WebAssembly, q8"}): about <strong>{mb(estimateBytes(backend))}</strong> (from the model's published file sizes).
+          {free !== null && <> Browser storage free: about {mb(free)}.</>} Use Wi-Fi.
+        </p>
+      )}
+
+      {ai.kind === "downloading" && (
+        <div className="space-y-2">
+          <div className="h-3 overflow-hidden rounded-full bg-muted" role="progressbar" aria-valuenow={Math.round((ai.loaded / Math.max(ai.total, 1)) * 100)} aria-valuemin={0} aria-valuemax={100}>
+            <div className="h-full bg-primary" style={{ width: `${Math.min(100, (ai.loaded / Math.max(ai.total, 1)) * 100)}%` }} />
+          </div>
+          <p className="truncate text-xs text-muted-foreground">{ai.file}</p>
+        </div>
+      )}
+
+      <div className="flex flex-wrap gap-2">
+        {(ai.kind === "not_downloaded" || ai.kind === "error") && backend && !confirm && (
+          <Button className="h-12" onClick={() => setConfirm(true)}>{ai.kind === "error" ? "Retry download" : "Download on-device AI"}</Button>
+        )}
+        {confirm && (ai.kind === "not_downloaded" || ai.kind === "error") && backend && (
+          <div className="w-full space-y-2 rounded-lg border border-pending-border bg-pending/40 p-3">
+            <p>Download about {mb(estimateBytes(backend))} and store it in this browser? Nothing from your notes is used for this step.</p>
+            <div className="flex gap-2">
+              <Button className="h-11" onClick={() => { setConfirm(false); void installModel(); }}>Yes, download</Button>
+              <Button variant="outline" className="h-11" onClick={() => setConfirm(false)}>Not now</Button>
+            </div>
+          </div>
+        )}
+        {(ai.kind === "downloading" || ai.kind === "initializing") && (
+          <Button variant="outline" className="h-12" onClick={cancelInstall}>Cancel</Button>
+        )}
+        {(ai.kind === "ready" || ai.kind === "error" || ai.kind === "not_downloaded") && (
+          <Button variant="outline" className="h-12" onClick={() => void removeModel()}>Remove model files</Button>
+        )}
+      </div>
+      <p className="text-xs text-muted-foreground">Removing deletes only the model files. Your encounter records are not touched.</p>
+
+      <details>
+        <summary className="cursor-pointer font-semibold text-primary">Diagnostics</summary>
+        <dl className="mt-2 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-xs">
+          <dt>Model</dt><dd className="break-all">{AI_MODEL.id}</dd>
+          <dt>Revision</dt><dd className="break-all">{AI_MODEL.revision}</dd>
+          <dt>License</dt><dd>{AI_MODEL.license}</dd>
+          <dt>Library</dt><dd>{AI_MODEL.library}</dd>
+          <dt>Runtime</dt><dd className="break-all">{AI_MODEL.runtime}</dd>
+          <dt>Variants</dt><dd>WebGPU {AI_VARIANTS.webgpu.dtype} · WASM {AI_VARIANTS.wasm.dtype}</dd>
+          {ai.kind === "ready" && (
+            <>
+              <dt>Installed</dt><dd>{new Date(ai.manifest.installedAt).toLocaleString()} · {ai.manifest.backend}/{ai.manifest.dtype}</dd>
+              <dt>Cached</dt><dd>{ai.manifest.cachedKeys.length} files · {mb(ai.manifest.cachedBytes)}</dd>
+              <dt>Test run</dt><dd>{Math.round(ai.manifest.smokeMs / 1000)} s · {ai.manifest.smokeParsed ? "valid JSON" : "ran, output not JSON"}</dd>
+            </>
+          )}
+        </dl>
+      </details>
+    </div>
+  );
+}

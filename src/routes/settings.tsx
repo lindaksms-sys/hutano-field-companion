@@ -6,13 +6,15 @@ import {
   AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { StatusPill } from "@/components/StatusPill";
-import { aiAdapter, demoAdapter } from "@/domain/extraction";
+import { demoAdapter } from "@/domain/extraction";
 import { clearDemoData, exportDemoRecords } from "@/domain/repository";
 import { supabaseConfig } from "@/lib/supabase";
 import { useAuth } from "@/lib/auth";
 import { useStorageStatus } from "@/lib/hooks";
 import { useOfflineState } from "@/lib/use-offline";
 import { useI18n } from "@/lib/i18n";
+import { AiModelPanel } from "@/components/AiModelPanel";
+import { useAiState } from "@/lib/use-ai";
 
 export const Route = createFileRoute("/settings")({
   head: () => ({
@@ -35,6 +37,7 @@ function SettingsPage() {
   const cfg = supabaseConfig();
   const offline = useOfflineState();
   const { user } = useAuth();
+  const ai = useAiState();
 
   async function doExport() {
     try {
@@ -63,7 +66,7 @@ function SettingsPage() {
         <Row k="Account" v={<StatusPill tone={user ? "success" : "pending"}>{user ? "Signed in" : "Not signed in"}</StatusPill>} />
         <Row k="Cloud sync" v="Manual / on reconnect, app must be open" />
         <Row k="Extraction" v={<StatusPill tone="pending">{demoAdapter.label}</StatusPill>} />
-        <Row k="AI extraction" v={<StatusPill>{aiAdapter.configured ? "Configured" : "Not implemented"}</StatusPill>} />
+        <Row k="On-device AI (experimental)" v={<StatusPill tone={ai.kind === "ready" ? "success" : "pending"}>{ai.kind === "ready" ? `Installed · ${ai.manifest.backend}` : ai.kind === "unsupported" ? "Not supported here" : "Not installed"}</StatusPill>} />
         <Row k="Offline app (after first online load)" v={
           offline.kind === "ready" ? <StatusPill tone="success">Ready · {offline.pages} pages cached{offline.updateWaiting ? " · update after closing tabs" : ""}</StatusPill>
           : offline.kind === "installing" || offline.kind === "checking" ? <StatusPill tone="pending">Preparing — not ready yet</StatusPill>
@@ -72,10 +75,14 @@ function SettingsPage() {
           : <StatusPill tone="danger">Not supported by this browser</StatusPill>
         } />
         <Row k="Offline capture" v="Saved on this device; sync needs internet" />
-        <Row k="Offline AI" v="Not implemented" />
+        <Row k="Offline AI" v={ai.kind === "ready" ? "Works offline on this device once installed" : "Install the model below first"} />
         {status.persisted === false && (
           <div className="p-4"><Button variant="outline" className="h-11" onClick={requestPersist}>Request persistent storage</Button></div>
         )}
+      </Section>
+
+      <Section title="On-device AI extraction (experimental)">
+        <AiModelPanel />
       </Section>
 
       <Section title="Interface language">
