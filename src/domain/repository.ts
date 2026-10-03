@@ -1,6 +1,6 @@
 import { getDB, getDeviceId, inFlight, type HutanoDB } from "./db";
 import type { ExtractionResult } from "./extraction";
-import { getCurrentUserId } from "./session";
+import { getCurrentUserId, getEpoch } from "./session";
 import {
   emptyFields,
   FIELD_KEYS,
@@ -121,15 +121,38 @@ async function mutate(
   });
 }
 
-export function applyExtraction(id: string, result: ExtractionResult) {
+/** Guards for slow (AI) extraction: a result is applied only to the exact revision/account it was computed for. */
+export interface ExtractionGuard {
+  localRevision: number;
+  ownerId: string | null;
+  epoch: number;
+}
+export const guardFor = (r: EncounterRecord): ExtractionGuard => ({ localRevision: r.localRevision, ownerId: r.ownerId, epoch: getEpoch() });
+
+function checkGuard(r: EncounterRecord, g?: ExtractionGuard) {
+  if (!g) return;
+  if (getEpoch() !== g.epoch || r.ownerId !== g.ownerId) throw new Error("Stale extraction: account changed; result discarded.");
+  if (r.localRevision !== g.localRevision) throw new Error("Stale extraction: record changed while extraction ran; result discarded.");
+}
+
+/** Record a failed/cancelled extraction on the saved draft (fields untouched). */
+export function recordExtractionFailure(id: string, meta: { adapterId: string; adapterLabel: string; isAI: boolean; failure: string; ai?: ExtractionResult["ai"] }, guard?: ExtractionGuard) {
   return mutate(id, (r) => {
+    checkGuard(r, guard);
+    r.extraction = { adapterId: meta.adapterId, adapterLabel: meta.adapterLabel, isAI: meta.isAI, ranAt: now(), matchedFixtureId: null, ...(meta.ai ?? {}), failure: meta.failure };
+  }, { keepVerification: true });
+}
+
+export function applyExtraction(id: string, result: ExtractionResult, guard?: ExtractionGuard) {
+  return mutate(id, (r) => {
+    checkGuard(r, guard);
     for (const k of FIELD_KEYS) {
       const s = result.suggestions[k];
       if (!s || r.fields[k].origin === "worker") continue;
       if (!r.rawNarrative.includes(s.source)) continue;
       r.fields[k] = { value: s.value, source: s.source, state: "pending", origin: "extraction", suggestedValue: s.value, notRecordedReason: null };
     }
-    r.extraction = { adapterId: result.adapterId, adapterLabel: result.adapterLabel, isAI: result.isAI, ranAt: now(), matchedFixtureId: result.matchedFixtureId };
+    r.extraction = { adapterId: result.adapterId, adapterLabel: result.adapterLabel, isAI: result.isAI, ranAt: now(), matchedFixtureId: result.matchedFixtureId, ...(result.ai ?? {}), failure: null };
     if (r.reviewStatus === "draft") r.reviewStatus = "in_review";
   });
 }

@@ -44,6 +44,15 @@ export interface ExtractionMeta {
   isAI: boolean;
   ranAt: string;
   matchedFixtureId: string | null;
+  /** On-device AI provenance (optional; absent for demo/older records). */
+  modelId?: string;
+  modelRevision?: string;
+  backend?: string;
+  dtype?: string;
+  durationMs?: number;
+  rejectedFields?: string[];
+  /** Set when extraction failed or was cancelled; the draft is kept for manual review. */
+  failure?: string | null;
 }
 
 export interface EncounterRecord {
