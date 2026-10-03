@@ -24,7 +24,7 @@ env.fetch = (async (input: RequestInfo | URL, init?: RequestInit) => {
   try {
     return await baseFetch(input as string, init);
   } catch (e) {
-    const u = String(input instanceof Request ? input.url : input).split("?")[0];
+    const u = String(input instanceof Request ? input.url : input).split("?")[0] ?? "";
     throw new Error(`${(e as Error).message} (${u.slice(-80)})`);
   }
 }) as typeof env.fetch;
