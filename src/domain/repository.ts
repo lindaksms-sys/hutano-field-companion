@@ -140,7 +140,7 @@ export function recordExtractionFailure(id: string, meta: { adapterId: string; a
   return mutate(id, (r) => {
     checkGuard(r, guard);
     r.extraction = { adapterId: meta.adapterId, adapterLabel: meta.adapterLabel, isAI: meta.isAI, ranAt: now(), matchedFixtureId: null, ...(meta.ai ?? {}), failure: meta.failure };
-  }, { keepVerification: true });
+  });
 }
 
 export function applyExtraction(id: string, result: ExtractionResult, guard?: ExtractionGuard) {
