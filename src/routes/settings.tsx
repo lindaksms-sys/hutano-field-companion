@@ -11,6 +11,7 @@ import { clearDemoData, exportDemoRecords } from "@/domain/repository";
 import { supabaseConfig } from "@/lib/supabase";
 import { useAuth } from "@/lib/auth";
 import { useStorageStatus } from "@/lib/hooks";
+import { useOfflineState } from "@/lib/use-offline";
 import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/settings")({
@@ -32,6 +33,7 @@ function SettingsPage() {
   const { lang, setLang } = useI18n();
   const [msg, setMsg] = useState<string | null>(null);
   const cfg = supabaseConfig();
+  const offline = useOfflineState();
   const { user } = useAuth();
 
   async function doExport() {
@@ -62,7 +64,14 @@ function SettingsPage() {
         <Row k="Cloud sync" v="Manual / on reconnect, app must be open" />
         <Row k="Extraction" v={<StatusPill tone="pending">{demoAdapter.label}</StatusPill>} />
         <Row k="AI extraction" v={<StatusPill>{aiAdapter.configured ? "Configured" : "Not implemented"}</StatusPill>} />
-        <Row k="Offline capture" v="Works after first load (local storage)" />
+        <Row k="Offline app (after first online load)" v={
+          offline.kind === "ready" ? <StatusPill tone="success">Ready · {offline.pages} pages cached{offline.updateWaiting ? " · update after closing tabs" : ""}</StatusPill>
+          : offline.kind === "installing" || offline.kind === "checking" ? <StatusPill tone="pending">Preparing — not ready yet</StatusPill>
+          : offline.kind === "disabled" ? <StatusPill>Off here ({offline.reason})</StatusPill>
+          : offline.kind === "failed" ? <StatusPill tone="danger">Failed: {offline.message}</StatusPill>
+          : <StatusPill tone="danger">Not supported by this browser</StatusPill>
+        } />
+        <Row k="Offline capture" v="Saved on this device; sync needs internet" />
         <Row k="Offline AI" v="Not implemented" />
         {status.persisted === false && (
           <div className="p-4"><Button variant="outline" className="h-11" onClick={requestPersist}>Request persistent storage</Button></div>
