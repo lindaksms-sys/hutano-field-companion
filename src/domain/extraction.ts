@@ -13,7 +13,10 @@ export interface ExtractionResult {
   isAI: boolean;
   matchedFixtureId: string | null;
   suggestions: Partial<Record<FieldKey, Suggestion>>;
+  ai?: { modelId: string; modelRevision: string; backend: string; dtype: string; durationMs: number; rejectedFields?: FieldKey[] };
 }
+
+export type AdapterChoice = "manual" | "demo" | "ondevice";
 
 /** Swappable async extraction boundary. */
 export interface ExtractionAdapter {

@@ -145,7 +145,13 @@ function Review() {
               />
             </details>
             <p className="mt-3 text-xs font-semibold text-pending-foreground">
-              {rec.extraction ? `${rec.extraction.adapterLabel}${rec.extraction.matchedFixtureId ? " · matched synthetic example" : " · no example matched; fill fields manually"}` : "No extraction run — manual entry."}
+              {!rec.extraction
+                ? "No extraction run — manual entry."
+                : rec.extraction.failure
+                  ? `${rec.extraction.adapterLabel} · no suggestions (${rec.extraction.failure}) — fill fields manually`
+                  : rec.extraction.isAI
+                    ? `${rec.extraction.adapterLabel} · ${rec.extraction.modelId ?? ""} (${rec.extraction.backend ?? "?"}/${rec.extraction.dtype ?? "?"}) · ${Math.round((rec.extraction.durationMs ?? 0) / 1000)} s · whole-sentence suggestions, check each against the note${rec.extraction.rejectedFields?.length ? ` · ${rec.extraction.rejectedFields.length} invalid selection(s) discarded` : ""}`
+                    : `${rec.extraction.adapterLabel}${rec.extraction.matchedFixtureId ? " · matched synthetic example" : " · no example matched; fill fields manually"}`}
             </p>
           </div>
 
