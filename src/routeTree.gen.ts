@@ -10,33 +10,102 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as SyncRouteImport } from './routes/sync'
+import { Route as EncountersIndexRouteImport } from './routes/encounters.index'
+import { Route as EncountersIdRouteImport } from './routes/encounters.$id'
+import { Route as EncountersNewRouteImport } from './routes/encounters.new'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SyncRoute = SyncRouteImport.update({
+  id: '/sync',
+  path: '/sync',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EncountersIndexRoute = EncountersIndexRouteImport.update({
+  id: '/encounters/',
+  path: '/encounters/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EncountersIdRoute = EncountersIdRouteImport.update({
+  id: '/encounters/$id',
+  path: '/encounters/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EncountersNewRoute = EncountersNewRouteImport.update({
+  id: '/encounters/new',
+  path: '/encounters/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/settings': typeof SettingsRoute
+  '/sync': typeof SyncRoute
+  '/encounters/$id': typeof EncountersIdRoute
+  '/encounters/new': typeof EncountersNewRoute
+  '/encounters/': typeof EncountersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/settings': typeof SettingsRoute
+  '/sync': typeof SyncRoute
+  '/encounters/$id': typeof EncountersIdRoute
+  '/encounters/new': typeof EncountersNewRoute
+  '/encounters': typeof EncountersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/settings': typeof SettingsRoute
+  '/sync': typeof SyncRoute
+  '/encounters/$id': typeof EncountersIdRoute
+  '/encounters/new': typeof EncountersNewRoute
+  '/encounters/': typeof EncountersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/settings'
+    | '/sync'
+    | '/encounters/$id'
+    | '/encounters/new'
+    | '/encounters/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/settings'
+    | '/sync'
+    | '/encounters/$id'
+    | '/encounters/new'
+    | '/encounters'
+  id:
+    | '__root__'
+    | '/'
+    | '/settings'
+    | '/sync'
+    | '/encounters/$id'
+    | '/encounters/new'
+    | '/encounters/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SettingsRoute: typeof SettingsRoute
+  SyncRoute: typeof SyncRoute
+  EncountersIdRoute: typeof EncountersIdRoute
+  EncountersNewRoute: typeof EncountersNewRoute
+  EncountersIndexRoute: typeof EncountersIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +117,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sync': {
+      id: '/sync'
+      path: '/sync'
+      fullPath: '/sync'
+      preLoaderRoute: typeof SyncRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/encounters/': {
+      id: '/encounters/'
+      path: '/encounters'
+      fullPath: '/encounters/'
+      preLoaderRoute: typeof EncountersIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/encounters/$id': {
+      id: '/encounters/$id'
+      path: '/encounters/$id'
+      fullPath: '/encounters/$id'
+      preLoaderRoute: typeof EncountersIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/encounters/new': {
+      id: '/encounters/new'
+      path: '/encounters/new'
+      fullPath: '/encounters/new'
+      preLoaderRoute: typeof EncountersNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SettingsRoute: SettingsRoute,
+  SyncRoute: SyncRoute,
+  EncountersIdRoute: EncountersIdRoute,
+  EncountersNewRoute: EncountersNewRoute,
+  EncountersIndexRoute: EncountersIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

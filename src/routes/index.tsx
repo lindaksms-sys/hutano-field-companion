@@ -1,24 +1,58 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Button } from "@/components/ui/button";
+import { EncounterCard } from "@/components/EncounterCard";
+import { useEncounters } from "@/lib/hooks";
+import { useI18n } from "@/lib/i18n";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "Hutano — Field companion for Village Health Workers" },
+      { name: "description", content: "Offline-first encounter documentation with human review. Prototype, synthetic data only." },
+      { property: "og:title", content: "Hutano — VHW field companion" },
+      { property: "og:description", content: "Capture Shona/English encounter notes, review, and verify locally." },
+    ],
+  }),
+  component: Home,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function Home() {
+  const { t } = useI18n();
+  const { records, error } = useEncounters();
+  const count = (s: string) => records?.filter((r) => r.reviewStatus === s).length ?? 0;
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="space-y-6">
+      <section className="rounded-2xl bg-primary p-6 text-primary-foreground">
+        <h1 className="text-2xl font-bold">Mhoroi. Record an encounter.</h1>
+        <p className="mt-1 max-w-prose text-sm opacity-90">
+          Type the visit in Shona, English or both. It is saved on this device first. You review and verify every field — Hutano makes no clinical decisions.
+        </p>
+        <Button asChild size="lg" variant="secondary" className="mt-4 h-12 text-base">
+          <Link to="/encounters/new">{t("newEncounter")}</Link>
+        </Button>
+      </section>
+      {error && (
+        <p role="alert" className="rounded-lg border border-destructive bg-destructive/10 p-3 text-sm font-semibold text-destructive">
+          Local storage failed: {error}. Records cannot be saved on this browser.
+        </p>
+      )}
+      <section className="grid grid-cols-3 gap-3">
+        {[
+          ["Drafts", count("draft")],
+          ["Need review", count("in_review")],
+          ["Verified", count("verified")],
+        ].map(([l, n]) => (
+          <div key={l} className="rounded-xl border border-border bg-card p-4">
+            <div className="text-2xl font-bold">{records ? n : "–"}</div>
+            <div className="text-xs font-semibold text-muted-foreground">{l}</div>
+          </div>
+        ))}
+      </section>
+      <section className="space-y-3">
+        <h2 className="text-lg font-bold">Recent</h2>
+        {records?.length === 0 && <p className="text-sm text-muted-foreground">No encounters on this device yet.</p>}
+        {records?.slice(0, 3).map((r) => <EncounterCard key={r.id} r={r} />)}
+      </section>
     </div>
   );
 }
