@@ -150,7 +150,7 @@ cue_meaning = {
     "makore": "years (age: 'ane makore 4' = is 4 years old)", "mwedzi": "months (age in months)",
     "rimwe": "one", "mumwe": "one (other noun class)", "maviri": "two", "mbiri": "two (other class)", "matatu": "three",
     "mana": "four", "mashanu": "five", "matanhatu": "six", "manomwe": "seven", "masere": "eight", "mapfumbamwe": "nine", "gumi": "ten",
-    "kwemazuva": "for … days (duration)", "kwemavhiki": "for … weeks", "kwesvondo": "for … week", "kwemasvondo": "for … weeks",
+    "kwemazuva": "for … days (duration)", "kwesvondo": "for … week", "kwemasvondo": "for … weeks",
     "kwemwedzi": "for … months", "kwemakore": "for … years (duration, NOT age)", "kwenguva": "for a period of",
     "anogara": "lives (at/in)", "anobva": "comes from", "amai": "mother", "baba": "father", "mukoma": "older sibling",
     "hanzvadzi": "sibling of opposite sex", "sekuru": "grandfather / maternal uncle", "ambuya": "grandmother",
@@ -158,7 +158,7 @@ cue_meaning = {
     "mukadzi": "woman OR wife (ambiguous; another person only with an explicit relationship word, else abstain)",
     "tete": "paternal aunt", "babamunini": "father's younger brother", "ndichadzoka": "I will come back (worker follow-up)",
     "dzoka": "come back / return", "achadzoka": "he/she will come back", "svondo rinouya": "next week",
-    "kwevhiki": "for … week", "vhiki rinouya": "next week", "mbuya": "grandmother", "muchengeti": "carer / caregiver",
+    "kwevhiki": "for … week (vhiki spelling)", "kwemavhiki": "for … weeks (vhiki spelling)", "vhiki rinouya": "next week (vhiki spelling)", "mbuya": "grandmother (mbuya spelling)", "muchengeti": "carer / caregiver",
     "ndichauya zvakare": "I will come again (worker follow-up)", "ndichadzokera": "I will return to (worker follow-up)",
     "tichadzoka": "we will come back (worker follow-up)",
 }

@@ -375,8 +375,10 @@ cue_dictionary.rules.2e7d9108,cue_dictionary,come back / return,dzoka,,src/domai
 cue_dictionary.rules.dd356244,cue_dictionary,ten,gumi,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.4198ecdb,cue_dictionary,sibling of opposite sex,hanzvadzi,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.1b54507c,cue_dictionary,for … weeks,kwemasvondo,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
+cue_dictionary.rules.64a9d883,cue_dictionary,for … weeks (vhiki spelling),kwemavhiki,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.ab1c1f65,cue_dictionary,for … months,kwemwedzi,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.cc6e99d3,cue_dictionary,for a period of,kwenguva,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
+cue_dictionary.rules.45b27768,cue_dictionary,for … week (vhiki spelling),kwevhiki,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.9f8f7eec,cue_dictionary,four,mana,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.a00bbe56,cue_dictionary,seven,manomwe,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.b4ddce18,cue_dictionary,nine,mapfumbamwe,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
@@ -386,6 +388,7 @@ cue_dictionary.rules.bec9703f,cue_dictionary,six,matanhatu,,src/domain/rules.ts 
 cue_dictionary.rules.b802f384,cue_dictionary,three,matatu,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.ad782ecd,cue_dictionary,two,maviri,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.1b8dd803,cue_dictionary,two (other class),mbiri,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
+cue_dictionary.rules.f7108a89,cue_dictionary,grandmother (mbuya spelling),mbuya,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.6680781f,cue_dictionary,carer / caregiver,muchengeti,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.143307d6,cue_dictionary,mukadzi wake,mukadzi wake,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.b39780bf,cue_dictionary,older sibling,mukoma,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
@@ -397,6 +400,7 @@ cue_dictionary.rules.54119c36,cue_dictionary,grandfather / maternal uncle,sekuru
 cue_dictionary.rules.f3619af6,cue_dictionary,next week,svondo rinouya,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.3b2f8f61,cue_dictionary,paternal aunt,tete,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.e48a19fa,cue_dictionary,we will come back (worker follow-up),tichadzoka,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
+cue_dictionary.rules.ee0a94b5,cue_dictionary,next week (vhiki spelling),vhiki rinouya,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.checks.e0b1f9c8,cue_dictionary,he/she said,akati,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.99c696c6,cue_dictionary,they said (respectful),vakati,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.7cb8b7a0,cue_dictionary,complains / cries of,anochema,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
