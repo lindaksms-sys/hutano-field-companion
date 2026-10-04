@@ -128,3 +128,31 @@ export interface OutboxEntry {
   createdAt: string;
   ackedAt: string | null;
 }
+
+export type AuditAction =
+  | "created"
+  | "edited"
+  | "extraction"
+  | "extraction_failed"
+  | "verified"
+  | "adopted"
+  | "synced"
+  | "deleted"
+  | "cleared";
+
+/** Append-only local audit entry. Holds action metadata and field names only — never note text or field values. */
+export interface AuditEntry {
+  id: string;
+  encounterId: string;
+  ownerId: string | null;
+  at: string;
+  action: AuditAction;
+  fromRevision: number | null;
+  toRevision: number | null;
+  /** Field keys (and "narrative") that changed; names only. */
+  changed: string[];
+  /** True when this action removed an earlier verification. */
+  verificationRemoved: boolean;
+  /** Optional worker-entered reason (delete). Kept short. */
+  reason: string | null;
+}

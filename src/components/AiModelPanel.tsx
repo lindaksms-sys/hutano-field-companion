@@ -10,14 +10,17 @@ import { useAiState } from "@/lib/use-ai";
 const mb = (n: number) => `${Math.round(n / 1e6)} MB`;
 
 export function AiModelPanel() {
-  const { tl } = useI18n();
+  const { tl, tf } = useI18n();
   const ai = useAiState();
   const [free, setFree] = useState<number | null>(null);
   const [confirm, setConfirm] = useState(false);
   const [mode, setMode] = useState<AiBackend>("wasm");
   const [copied, setCopied] = useState(false);
+  const [host, setHost] = useState("");
+  useEffect(() => setHost(location.host), []);
   useEffect(() => setMode(getBackendPreference()), []);
   const gpuAvailable = ai.kind === "not_downloaded" ? ai.gpuAvailable : null;
+  const cachedFiles = ai.kind === "not_downloaded" ? (ai.cachedFiles ?? null) : null;
   useEffect(() => {
     void storageHeadroom().then((s) => setFree(s.free));
   }, [ai.kind]);
@@ -52,7 +55,14 @@ export function AiModelPanel() {
         </div>
       )}
 
-      {(ai.kind === "not_downloaded" || ai.kind === "error") && (
+      {cachedFiles && (
+        <div className="space-y-2 rounded-lg border border-pending-border bg-pending/40 p-3">
+          <p className="font-semibold">{tl("Model files are already on this device. A quick check is needed before use — nothing is downloaded.")}</p>
+          <Button className="h-12 w-full sm:w-auto" onClick={() => { setCopied(false); void installModel(cachedFiles); }}>{tl("Check installed files (no download)")}</Button>
+        </div>
+      )}
+
+      {(ai.kind === "not_downloaded" || ai.kind === "error") && !cachedFiles && (
         <fieldset className="space-y-2">
           <legend className="font-semibold">{tl("Mode")}</legend>
           {([
@@ -73,6 +83,7 @@ export function AiModelPanel() {
         <li>Experimental. Suggests whole sentences from your note for each field; you check and accept each one. Never diagnoses or advises.</li>
         <li>Shona ability is not validated. Original text is always kept as written; nothing is translated.</li>
         <li>{tl("Runs only on this device. Notes are never sent anywhere for AI.")}</li>
+        <li>{tf("Installed per browser and web address: open Hutano at the same address ({host}) to reuse it. Private/incognito windows or clearing site data remove it.", { host })}</li>
         <li>Needs a recent desktop or high-end phone with about 1.5 GB free memory. Slow devices may take minutes per note or fail; manual capture always works.</li>
       </ul>
 
@@ -93,7 +104,7 @@ export function AiModelPanel() {
       )}
 
       <div className="flex flex-wrap gap-2">
-        {(ai.kind === "not_downloaded" || ai.kind === "error") && backend && !confirm && (
+        {(ai.kind === "not_downloaded" || ai.kind === "error") && backend && !confirm && !cachedFiles && (
           <Button className="h-12" onClick={() => setConfirm(true)}>{ai.kind === "error" ? tl("Retry download") : tl("Download on-device AI")}</Button>
         )}
         {confirm && (ai.kind === "not_downloaded" || ai.kind === "error") && backend && (

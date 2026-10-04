@@ -93,7 +93,7 @@ Unknown values stay `null`. Verification requires: no pending suggestions, every
 - **Works now:** local capture, draft-before-extraction, demo extraction on fixtures (plus literal `SYN-####` codes and ISO dates), manual entry of all fields, missing-documentation panel, review/verify, invalidation on edit, persistence across reloads, JSON export, clear demo data, truthful status pages, installable manifest, production app-shell service worker (offline after first load).
 - **Also works:** email/password auth with confirmation state, per-account partitioning, explicit adopt, upload of verified synthetic snapshots.
 - **Experimental:** on-device AI extraction (see below).
-- **Not implemented:** cloud AI, background sync, downloading server records, two-way conflict resolution, encryption at rest, remote wipe, Shona UI validation.
+- **Not implemented:** cloud AI, background sync, downloading server records, two-way conflict resolution, encryption at rest, remote wipe.
 
 ## Privacy limitations
 
@@ -132,3 +132,17 @@ Translator handoff: [docs/shona-review.md](docs/shona-review.md) and `docs/shona
 - Shona synthetic note (67 s): code `SYN-0042` correct. Location and concern picked the **wrong** sentences, and one invalid selection was discarded. Quality on Shona is poor; human review is essential.
 - Cold offline: new browser process, network disabled. The app opened from the offline cache, showed AI Ready and ran inference (58 s, same output as online). Reloading the saved draft offline worked.
 - Unit tests: `src/test/ai-extraction.test.ts` (validator, made-up values, negation, malformed JSON, injection, stale/account guards, cancellation). The full suite now has 48 tests, including `src/test/hybrid-extraction.test.ts` (rules, segmentation of decimals, hybrid checks, provenance, strict smoke check). Validator tests are not accuracy evidence.
+
+## Edit, delete and audit history (local)
+
+- **Edit:** draft and in-review records are editable directly; verified records are read-only until **Edit record** is pressed, and any saved change removes verification.
+- **Delete:** the encounter page has **Delete encounter** with confirmation and an optional reason. It removes the record and any not-yet-sent upload from this device. Copies already uploaded stay on the server (append-only).
+- **History:** each record shows an on-device audit log (created, edited, suggestions added, verified, adopted, uploaded, deleted, cleared) with revision numbers and changed field names only — never note text or values.
+
+## On-device AI: staying installed
+
+The model is stored per browser **and per web address** (e.g. `hutano.creativehauz.space` and the Lovable preview are separate). Installing asks the browser for persistent storage. If the files remain but the install record is lost, Settings offers **Check installed files (no download)**. Private windows or clearing site data remove the model.
+
+## Shona interface status
+
+The Shona interface text has been approved by the project's Shona reviewer (user-confirmed, October 2026). New texts added after approval are listed in `docs/shona-still-to-translate.csv` and show in English until translated. The extraction rules' Shona cue list and evaluation annotations remain separate and are still described as provisional in the evaluation report.

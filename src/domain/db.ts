@@ -1,5 +1,5 @@
 import Dexie, { type Table } from "dexie";
-import type { EncounterRecord, OutboxEntry } from "./types";
+import type { AuditEntry, EncounterRecord, OutboxEntry } from "./types";
 
 export interface MetaRow {
   key: string;
@@ -10,6 +10,7 @@ export class HutanoDB extends Dexie {
   encounters!: Table<EncounterRecord, string>;
   outbox!: Table<OutboxEntry, string>;
   meta!: Table<MetaRow, string>;
+  audit!: Table<AuditEntry, string>;
   constructor(name = "hutano") {
     super(name);
     this.version(1).stores({
@@ -29,6 +30,13 @@ export class HutanoDB extends Dexie {
             if (r.ownerId === undefined) r.ownerId = null; // pre-auth records become unowned demo
           }),
       );
+    // v3: append-only local audit log (actions + field names only, never note text).
+    this.version(3).stores({
+      encounters: "id, updatedAt, reviewStatus, syncStatus, isSynthetic, ownerId",
+      outbox: "revisionId, ownerId, encounterId, status",
+      meta: "key",
+      audit: "id, encounterId, ownerId, at",
+    });
   }
 }
 

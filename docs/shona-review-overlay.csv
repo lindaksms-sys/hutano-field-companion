@@ -326,7 +326,7 @@ review_states.encounters_new.b473221e,Gwaro rachengetwa · muenzaniso wekutora r
 offline_ai_install.encounters_new.11766136,Gwaro rachengetwa · AI iri pamudziyo iri kushanda…,adopted,"user-supplied proposal, not clinician validated",,r2,yes
 review_states.encounters_new.60f9157d,Chengetedzai gwaro moshandisa muenzaniso wekutora ruzivo,adopted,"user-supplied proposal, not clinician validated",,r3,yes
 offline_ai_install.encounters_new.58ddf9b0,Chengetedzai gwaro moshandisa AI iri pamudziyo,adopted,"user-supplied proposal, not clinician validated",,r3,yes
-ui.index.888c6d4a,Mhoroi. Nyorai kushanya.,adopted,"user-supplied proposal, not clinician validated",,r2,yes
+ui.index.940ac19f,Mhoroi. Nyorai kushanya.,adopted,"user-supplied proposal, not clinician validated",,r2,yes
 review_states.index.e545f3c8,"Nyorai kushanya muChiShona, Chirungu kana zvose. Zvinotanga kuchengetwa pamudziyo uyu. Imi munoongorora nekusimbisa chikamu chimwe nechimwe — Hutano haiite sarudzo dzekurapa.",adopted,"user-supplied proposal, not clinician validated",,r3,yes
 ui.index.76eec760,Zvichangoburwa,adopted,"user-supplied proposal, not clinician validated",,r2,yes
 ui.index.3a347eb3,Hapana zvakanyorwa pamudziyo uyu parizvino.,adopted,"user-supplied proposal, not clinician validated",,r2,yes
@@ -343,7 +343,6 @@ ui.settings.2c577619,Hazvina kubvumidzwa — bhurawuzha ringadzima data,adopted,
 ui.settings.2a135131,Zviri kugadzirwa — hazvisati zvagadzirira,adopted,"user-supplied proposal, not clinician validated",,r2,yes
 ui.settings.5eca817b,Hazvitsigirwi nebhurawuzha iri,adopted,"user-supplied proposal, not clinician validated",,r2,yes
 ui.settings.7b856771,Kumbirai kuchengetwa kwechigarire,adopted,"user-supplied proposal, not clinician validated",,r3,yes
-review_states.settings.8505326b,"Shanduro yeChiShona ichiri kuongororwa, yakamirira kusimbiswa nevatauri veChiShona.",adopted,"user-supplied proposal, not clinician validated",,r3,yes
 safety_privacy.settings.88f3af40,Tumirai kunze zvinyorwa zvekufungidzira (JSON),adopted,"user-supplied proposal, not clinician validated",,r3,yes
 ui.settings.088574aa,Dzimai data remuenzaniso,adopted,"user-supplied proposal, not clinician validated",,r3,yes
 safety_privacy.settings.00698334,Dzima zvinyorwa zvese zvekufungidzira?,adopted,"user-supplied proposal, not clinician validated",,r2,yes
@@ -379,7 +378,6 @@ offline_ai_install.settings.d118e233,AI isina indaneti,adopted,"user-supplied pr
 offline_ai_install.settings.9873117f,Inoshanda musina indaneti pamudziyo uyu kana yaiswa,adopted,"user-supplied proposal, not clinician validated",,r2,yes
 offline_ai_install.settings.c7c904a3,Tangai maisa modheru iri pazasi,adopted,"user-supplied proposal, not clinician validated",,r2,yes
 ui.settings.649df08a,Chirungu,adopted,"user-supplied proposal, not clinician validated",,r2,yes
-review_states.settings.7de466df,ChiShona (gwaro risati rapera),adopted,"user-supplied proposal, not clinician validated",,r2,yes
 sync.sync.905f6309,Tumira zvinyorwa,adopted,"user-supplied proposal, not clinician validated",,r3,yes
 sync.sync.848d80ca,Hamuna kupinda muakaundi,adopted,"user-supplied proposal, not clinician validated",,r2,yes
 auth.sync.75dce38d,Pindai muakaundi kuti mutumire zvinyorwa,adopted,"user-supplied proposal, not clinician validated",,r3,yes

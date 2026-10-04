@@ -1,4 +1,6 @@
 key,category,english_source_meaning,current_shona_draft,reviewer_proposed_shona,context_placeholders,notes
+review_states.EncounterHistory.aed3b8c6,review_states,Verified,,,src/components/EncounterHistory.tsx · message string,[P1]
+ui.EncounterHistory.222de262,ui,Original narrative,,,src/components/EncounterHistory.tsx · message string,[P1]
 ui.labels.1c3416f3,ui,Patient code,,Kodhi yemurwere,src/lib/labels.ts · message string,"[P1] [review r1: adopted; user-supplied proposal, not clinician validated]"
 ui.labels.7aef0776,ui,Age (with units if stated),,"Zera (makore kana mwedzi, kana zvataurwa)",src/lib/labels.ts · message string,"[P1] [review r3: provisional; user-supplied proposal, not clinician validated] Age units provisional (field accepts years/months as written)."
 ui.labels.9678cbce,ui,Village / ward,,Musha / Ward,src/lib/labels.ts · message string,"[P1] [review r2: provisional; user-supplied proposal, not clinician validated] Ward kept as official administrative label. Needs native Shona VHW validation"
@@ -106,6 +108,8 @@ offline_ai_install.AiModelPanel.5cb83ffb,offline_ai_install,Ready · installed a
 error.AiModelPanel.7f2f6a15,error,Error,,Kukanganisa,src/components/AiModelPanel.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 ui.AiModelPanel.8e3df45a,ui,Copied,,Zvakopwa,src/components/AiModelPanel.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 safety_privacy.AiModelPanel.30035a3c,safety_privacy,Copy diagnostic (no patient data),,Kopai mashoko ekuongorora dambudziko (hapana ruzivo rwevarwere),src/components/AiModelPanel.tsx · message string,"[review r3: adopted; user-supplied proposal, not clinician validated]"
+offline_ai_install.AiModelPanel.27a0d4d1,offline_ai_install,Model files are already on this device. A quick check is needed before use — nothing is downloaded.,,,src/components/AiModelPanel.tsx · message string,
+offline_ai_install.AiModelPanel.471d3d50,offline_ai_install,Check installed files (no download),,,src/components/AiModelPanel.tsx · message string,
 ui.AiModelPanel.a7b93d21,ui,Mode,,Nzira,src/components/AiModelPanel.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 ui.AiModelPanel.931a1645,ui,Compatibility / CPU (tested in desktop browser),,Compatibility / CPU (yakaedzwa pabhurawuzha yekombiyuta),src/components/AiModelPanel.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 ui.AiModelPanel.a4311c57,ui,Slower. The only mode tested so far.,,Inononoka. Ndiyo chete nzira yaedzwa kusvika parizvino.,src/components/AiModelPanel.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
@@ -114,6 +118,7 @@ ui.AiModelPanel.c598562f,ui,No suitable GPU found in this browser.,,Hapana GPU y
 error.AiModelPanel.d13bf790,error,Untested. May fail or give different results.,,Hazvina kuedzwa. Zvinogona kutadza kana kupa mhinduro dzakasiyana.,src/components/AiModelPanel.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 offline_ai_install.AiModelPanel.c3858280,offline_ai_install,Only the chosen mode is downloaded. Switching later means a separate download. Not yet verified on any phone.,,Nzira yasarudzwa chete ndiyo inodhawunirodhwa. Kuchinja gare gare kunoreva kudhawunirodha kwakasiyana. Hazvisati zvaedzwa pafoni ipi neipi.,src/components/AiModelPanel.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 ui.AiModelPanel.b9fcf5ea,ui,Runs only on this device. Notes are never sent anywhere for AI.,,Inoshanda pamudziyo uyu chete. Zvinyorwa hazvitumirwi kune imwe nzvimbo kuti zvishandiswe neAI.,src/components/AiModelPanel.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
+offline_ai_install.AiModelPanel.8b9bf198,offline_ai_install,Installed per browser and web address: open Hutano at the same address ({host}) to reuse it. Private/incognito windows or clearing site data remove it.,,,src/components/AiModelPanel.tsx · message string · placeholders: {host},Keep placeholders exactly; reorder words around them if natural.
 ui.AiModelPanel.6aaa821b,ui,"WebGPU, q4f16",,"WebGPU, q4f16",src/components/AiModelPanel.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 ui.AiModelPanel.3338369f,ui,"WebAssembly, q8",,"WebAssembly, q8",src/components/AiModelPanel.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 offline_ai_install.AiModelPanel.255673bf,offline_ai_install,Retry download,,Edzazve kudhawunirodha,src/components/AiModelPanel.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
@@ -148,6 +153,20 @@ ui.EncounterCard.47c8ff7e,ui,No patient code,,Hapana kodhi yemurwere,src/compone
 safety_privacy.EncounterCard.76ecec7c,safety_privacy,Synthetic,,Zvekufungidzira,src/components/EncounterCard.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 ui.EncounterCard.ce5a2f9e,ui,Unowned demo,,Gwaro remuenzaniso risina muridzi,src/components/EncounterCard.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 ui.EncounterCard.d059a91a,ui,(empty narrative),,(rondedzero isina chinhu),src/components/EncounterCard.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
+review_states.EncounterHistory.f51885e9,review_states,Draft created,,,src/components/EncounterHistory.tsx · message string,
+review_states.EncounterHistory.978e8c33,review_states,Edited,,,src/components/EncounterHistory.tsx · message string,
+ui.EncounterHistory.e1a08971,ui,Suggestions added,,,src/components/EncounterHistory.tsx · message string,
+error.EncounterHistory.5991eb87,error,Extraction failed,,,src/components/EncounterHistory.tsx · message string,
+auth.EncounterHistory.cedbdc1f,auth,Adopted into account,,,src/components/EncounterHistory.tsx · message string,
+auth.EncounterHistory.48f5aa39,auth,Uploaded (server confirmed),,,src/components/EncounterHistory.tsx · message string,
+ui.EncounterHistory.d3bad4f9,ui,Deleted from this device,,,src/components/EncounterHistory.tsx · message string,
+ui.EncounterHistory.6ebf408b,ui,Cleared with demo data,,,src/components/EncounterHistory.tsx · message string,
+ui.EncounterHistory.b4cc6562,ui,History ({count}),,,src/components/EncounterHistory.tsx · message string · placeholders: {count},Keep placeholders exactly; reorder words around them if natural.
+ui.EncounterHistory.57199d00,ui,"Audit log kept on this device. Records actions and field names only, not note text.",,,src/components/EncounterHistory.tsx · message string,
+ui.EncounterHistory.85bfb518,ui,Rev {revision},,,src/components/EncounterHistory.tsx · message string · placeholders: {revision},Keep placeholders exactly; reorder words around them if natural.
+ui.EncounterHistory.eda3bdc4,ui,Changed:,,,src/components/EncounterHistory.tsx · message string,
+review_states.EncounterHistory.5e5726f3,review_states,Verification removed — needs review again,,,src/components/EncounterHistory.tsx · message string,
+ui.EncounterHistory.f147508d,ui,Reason: {reason},,,src/components/EncounterHistory.tsx · message string · placeholders: {reason},Keep placeholders exactly; reorder words around them if natural.
 safety_privacy.StorageErrorPanel.fa2323c3,safety_privacy,Hutano storage diagnostic (no patient data),,Mashoko ekuongorora dambudziko rekuchengetera reHutano (hapana ruzivo rwevarwere),src/components/StorageErrorPanel.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 ui.StorageErrorPanel.035257ef,ui,· mobile,,· nharembozha,src/components/StorageErrorPanel.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 ui.StorageErrorPanel.1604a818,ui,not granted,,hazvina kubvumidzwa,src/components/StorageErrorPanel.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
@@ -193,6 +212,7 @@ ui.extraction.9bb79157,ui,AI extraction is not configured in this prototype.,,Ku
 ui.fixtures.b12ddd70,ui,English example,,Muenzaniso weChirungu,src/domain/fixtures.ts · title attribute,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 ui.fixtures.46e11b38,ui,Shona example,,Muenzaniso weChiShona,src/domain/fixtures.ts · title attribute,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 ui.fixtures.c73f2094,ui,Mixed Shona/English example,,Muenzaniso wakasanganiswa ChiShona/Chirungu,src/domain/fixtures.ts · title attribute,"[review r2: adopted; user-supplied proposal, not clinician validated]"
+ui.repository.f00b98ad,ui,& Partial,,,src/domain/repository.ts · JSX text,
 ui.repository.b34c7106,ui,Record not found,,Gwaro harina kuwanikwa,src/domain/repository.ts · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 auth.repository.762bfef5,auth,Human verification not confirmed,,Bhokisi rekusimbisa kuti gwaro raongororwa nemunhu harina kumakwa,src/domain/repository.ts · message string,"[review r3: provisional; user-supplied proposal, not clinician validated] Explains the review checkbox was not ticked."
 ui.repository.7b11e226,ui,Record has unresolved fields,,Gwaro rine zvikamu zvisati zvagadziriswa,src/domain/repository.ts · message string,"[review r3: adopted; user-supplied proposal, not clinician validated]"
@@ -263,6 +283,7 @@ ui.encounters_id.33ce4174,ui,Loading…,,Zviri kuvhurwa…,src/routes/encounters
 ui.encounters_id.8d74b2d8,ui,Record not found on this device.,,Gwaro harina kuwanikwa pamudziyo uyu.,src/routes/encounters.$id.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 ui.encounters_id.63fb6b19,ui,Back to encounters,,Dzokerai kuzvakanyorwa,src/routes/encounters.$id.tsx · message string,"[review r3: adopted; user-supplied proposal, not clinician validated]"
 error.encounters_id.0155555d,error,Not verified: {errorMessage},,,src/routes/encounters.$id.tsx · message string · placeholders: {errorMessage},Keep placeholders exactly; reorder words around them if natural.
+error.encounters_id.841e7182,error,Delete failed: {errorMessage},,,src/routes/encounters.$id.tsx · message string · placeholders: {errorMessage},Keep placeholders exactly; reorder words around them if natural.
 review_states.encounters_id.641bb431,review_states,Review encounter,,Ongororai kushanya,src/routes/encounters.$id.tsx · message string,"[review r3: adopted; user-supplied proposal, not clinician validated]"
 ui.encounters_id.85bfb518,ui,Rev {revision},,,src/routes/encounters.$id.tsx · message string · placeholders: {revision},Keep placeholders exactly; reorder words around them if natural.
 ui.encounters_id.ce5a2f9e,ui,Unowned demo,,Gwaro remuenzaniso risina muridzi,src/routes/encounters.$id.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
@@ -270,6 +291,8 @@ auth.encounters_id.fe7285ac,auth,Captured without an account. It will not sync u
 error.encounters_id.6e0fad27,error,Adopt failed: {errorMessage},,,src/routes/encounters.$id.tsx · message string · placeholders: {errorMessage},Keep placeholders exactly; reorder words around them if natural.
 auth.encounters_id.b0df8ae9,auth,Adopt into my account,,Isai muakaundi yangu,src/routes/encounters.$id.tsx · message string,"[review r3: adopted; user-supplied proposal, not clinician validated]"
 review_states.encounters_id.76b5f0ef,review_states,Verified {date}. Any edit will remove verification and require review again.,,,src/routes/encounters.$id.tsx · message string · placeholders: {date},Keep placeholders exactly; reorder words around them if natural.
+ui.encounters_id.ab680b51,ui,Edit record,,,src/routes/encounters.$id.tsx · message string,
+ui.encounters_id.70a7cc48,ui,Stop editing,,,src/routes/encounters.$id.tsx · message string,
 ui.encounters_id.19ae22ef,ui,Edit narrative,,Gadzirisai rondedzero,src/routes/encounters.$id.tsx · message string,"[review r3: adopted; user-supplied proposal, not clinician validated]"
 ui.encounters_id.55fa4a86,ui,No extraction run — manual entry.,,Hapana kutora ruzivo kubva muzvinyorwa kwaitwa — kupinza nemaoko.,src/routes/encounters.$id.tsx · message string,"[review r3: adopted; user-supplied proposal, not clinician validated]"
 error.encounters_id.00447a13,error,{adapterLabel} · no suggestions ({failureReason}) — fill fields manually,,,"src/routes/encounters.$id.tsx · message string · placeholders: {adapterLabel}, {failureReason}",Keep placeholders exactly; reorder words around them if natural.
@@ -286,6 +309,14 @@ review_states.encounters_id.840ff6a1,review_states,Before verifying:,,,src/route
 review_states.encounters_id.2db89dbd,review_states,{count} suggestion(s) to accept or edit.,,,src/routes/encounters.$id.tsx · message string · placeholders: {count},Keep placeholders exactly; reorder words around them if natural.
 review_states.encounters_id.9925ee3c,review_states,not recorded,,hazvina kunyorwa,src/routes/encounters.$id.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 ui.encounters_id.56a2285c,ui,Saving…,,Zviri kuchengetwa…,src/routes/encounters.$id.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
+ui.encounters_id.4328aa89,ui,Delete encounter,,,src/routes/encounters.$id.tsx · message string,
+sync.encounters_id.5dc6a493,sync,Removes it from this device. It has not been uploaded.,,,src/routes/encounters.$id.tsx · message string,
+ui.encounters_id.ab4c1e5a,ui,The deletion is kept in the device history.,,,src/routes/encounters.$id.tsx · message string,
+ui.encounters_id.cbec4fe9,ui,Delete this encounter?,,,src/routes/encounters.$id.tsx · message string,
+error.encounters_id.2e8aa616,error,This cannot be undone on this device. Export first if you need a copy.,,,src/routes/encounters.$id.tsx · message string,
+ui.encounters_id.f9e7ec5e,ui,"Reason (optional, e.g. duplicate entry)",,,src/routes/encounters.$id.tsx · message string,
+ui.encounters_id.77dfd213,ui,Cancel,,,src/routes/encounters.$id.tsx · message string,
+ui.encounters_id.f6fdbe48,ui,Delete,,,src/routes/encounters.$id.tsx · message string,
 ui.encounters_id.6da13add,ui,Source,,,src/routes/encounters.$id.tsx · message string,
 ui.encounters_id.398cd27d,ui,"rule, not AI",,"mutemo, kwete AI",src/routes/encounters.$id.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 offline_ai_install.encounters_id.d10a6ccb,offline_ai_install,on-device AI,,AI iri pamudziyo,src/routes/encounters.$id.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
@@ -327,7 +358,7 @@ ui.index.67b5df69,ui,Hutano — Field companion for Village Health Workers,,Huta
 offline_ai_install.index.19185bce,offline_ai_install,"Offline-first encounter documentation with human review. Prototype, synthetic data only.",,"Kunyora zvekushanya kunoshanda musina indaneti, nekuongororwa nemunhu. Chigadzirwa chekuyedza, data rekufungidzira chete.",src/routes/index.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 ui.index.021224c6,ui,Hutano — VHW field companion,,Hutano — Mubatsiri wevashandi vehutano,src/routes/index.tsx · message string,"[review r3: provisional; user-supplied proposal, not clinician validated] Title provisional."
 review_states.index.99f2d194,review_states,"Capture Shona/English encounter notes, review, and verify locally.",,"Nyorai zvekushanya muChiShona/Chirungu, ongororai, mosimbisa pamudziyo.",src/routes/index.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
-ui.index.888c6d4a,ui,Mhoroi. Record an encounter.,,Mhoroi. Nyorai kushanya.,src/routes/index.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
+ui.index.940ac19f,ui,Hello. Record an encounter.,,Mhoroi. Nyorai kushanya.,src/routes/index.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 review_states.index.e545f3c8,review_states,"Type the visit in Shona, English or both. It is saved on this device first. You review and verify every field — Hutano makes no clinical decisions.",,"Nyorai kushanya muChiShona, Chirungu kana zvose. Zvinotanga kuchengetwa pamudziyo uyu. Imi munoongorora nekusimbisa chikamu chimwe nechimwe — Hutano haiite sarudzo dzekurapa.",src/routes/index.tsx · message string,"[review r3: adopted; user-supplied proposal, not clinician validated]"
 review_states.index.22a31d86,review_states,Drafts,,Magwaro asati apera,src/routes/index.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 review_states.index.201a4493,review_states,Need review,,Zvinoda kuongororwa,src/routes/index.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
@@ -375,8 +406,8 @@ ui.settings.7b856771,ui,Request persistent storage,,Kumbirai kuchengetwa kwechig
 offline_ai_install.settings.5dc06a98,offline_ai_install,On-device AI extraction (experimental),,Kutora ruzivo kubva muzvinyorwa neAI iri pamudziyo (zvekuyedza),src/routes/settings.tsx · message string,"[review r3: adopted; user-supplied proposal, not clinician validated]"
 ui.settings.9407e9ca,ui,Interface language,,Mutauro wechirongwa,src/routes/settings.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 ui.settings.649df08a,ui,English,,Chirungu,src/routes/settings.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
-review_states.settings.7de466df,review_states,Shona (draft),,ChiShona (gwaro risati rapera),src/routes/settings.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
-review_states.settings.8505326b,review_states,Shona translations are drafts awaiting native-speaker validation.,,"Shanduro yeChiShona ichiri kuongororwa, yakamirira kusimbiswa nevatauri veChiShona.",src/routes/settings.tsx · message string,"[review r3: adopted; user-supplied proposal, not clinician validated]"
+ui.settings.5b84cc8c,ui,Shona,,,src/routes/settings.tsx · message string,
+review_states.settings.fafc4335,review_states,Shona interface approved by the project's Shona reviewer.,,,src/routes/settings.tsx · message string,
 safety_privacy.settings.8cdecd21,safety_privacy,Synthetic demo data,,Data remuenzaniso rekufungidzira,src/routes/settings.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 safety_privacy.settings.88f3af40,safety_privacy,Export synthetic records (JSON),,Tumirai kunze zvinyorwa zvekufungidzira (JSON),src/routes/settings.tsx · message string,"[review r3: adopted; user-supplied proposal, not clinician validated]"
 ui.settings.088574aa,ui,Clear demo data,,Dzimai data remuenzaniso,src/routes/settings.tsx · message string,"[review r3: adopted; user-supplied proposal, not clinician validated]"
