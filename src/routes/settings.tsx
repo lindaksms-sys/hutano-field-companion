@@ -120,7 +120,7 @@ function SettingsPage() {
                     }
                   }}
                 >
-                  Delete
+                  {tl("Delete")}
                 </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
