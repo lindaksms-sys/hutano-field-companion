@@ -11,6 +11,8 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Offline-first encounter documentation with human review. Prototype, synthetic data only." },
       { property: "og:title", content: "Hutano — VHW field companion" },
       { property: "og:description", content: "Capture Shona/English encounter notes, review, and verify locally." },
+      { property: "og:image", content: "https://hutano.creativehauz.space/og-image.jpg" },
+      { name: "twitter:image", content: "https://hutano.creativehauz.space/og-image.jpg" },
     ],
   }),
   component: Home,
