@@ -111,7 +111,7 @@ function Review() {
       </div>
       {rec.ownerId === null && user && (
         <div className="flex flex-wrap items-center gap-3 rounded-lg border border-pending-border bg-pending/40 p-3 text-sm">
-          <span className="mr-auto">{tf("Captured without an account. It will not sync unless you adopt it into {email}.", { email: user.email })}</span>
+          <span className="mr-auto">{tf("Captured without an account. It will not sync unless you adopt it into {email}.", { email: user.email ?? "" })}</span>
           <Button variant="outline" className="h-10" onClick={async () => {
             try { load(await adoptRecord(rec.id, user.id)); } catch (e) { setSave({ kind: "error", msg: tf("Adopt failed: {errorMessage}", { errorMessage: (e as Error).message }) }); }
           }}>{tl("Adopt into my account")}</Button>
