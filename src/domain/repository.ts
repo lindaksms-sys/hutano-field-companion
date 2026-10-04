@@ -150,7 +150,7 @@ export function applyExtraction(id: string, result: ExtractionResult, guard?: Ex
       const s = result.suggestions[k];
       if (!s || r.fields[k].origin === "worker") continue;
       if (!r.rawNarrative.includes(s.source)) continue;
-      r.fields[k] = { value: s.value, source: s.source, state: "pending", origin: "extraction", suggestedValue: s.value, notRecordedReason: null };
+      r.fields[k] = { value: s.value, source: s.source, state: "pending", origin: "extraction", suggestedValue: s.value, notRecordedReason: null, suggestedBy: s.by ?? (result.isAI ? "model" : "fixture") };
     }
     r.extraction = { adapterId: result.adapterId, adapterLabel: result.adapterLabel, isAI: result.isAI, ranAt: now(), matchedFixtureId: result.matchedFixtureId, ...(result.ai ?? {}), failure: null };
     if (r.reviewStatus === "draft") r.reviewStatus = "in_review";

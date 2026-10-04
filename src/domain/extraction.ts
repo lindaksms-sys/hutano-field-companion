@@ -5,6 +5,8 @@ export interface Suggestion {
   value: string;
   /** Exact substring of the narrative. */
   source: string;
+  /** Provenance: deterministic rule, on-device model, or demo fixture. Rules are not AI. */
+  by?: "rule" | "model" | "fixture";
 }
 
 export interface ExtractionResult {
@@ -13,7 +15,7 @@ export interface ExtractionResult {
   isAI: boolean;
   matchedFixtureId: string | null;
   suggestions: Partial<Record<FieldKey, Suggestion>>;
-  ai?: { modelId: string; modelRevision: string; backend: string; dtype: string; durationMs: number; rejectedFields?: FieldKey[] };
+  ai?: { modelId: string; modelRevision: string; backend: string; dtype: string; durationMs: number; rejectedFields?: FieldKey[]; ruleFields?: FieldKey[]; modelFields?: FieldKey[]; warning?: string };
 }
 
 export type AdapterChoice = "manual" | "demo" | "ondevice";
@@ -44,7 +46,7 @@ export const demoAdapter: ExtractionAdapter = {
     const suggestions: ExtractionResult["suggestions"] = {};
     if (fixture) {
       for (const [k, v] of Object.entries(fixture.mappings)) {
-        if (v && narrative.includes(v)) suggestions[k as FieldKey] = { value: v, source: v };
+        if (v && narrative.includes(v)) suggestions[k as FieldKey] = { value: v, source: v, by: "fixture" };
       }
     } else {
       const code = narrative.match(/\bSYN-\d{3,6}\b/);

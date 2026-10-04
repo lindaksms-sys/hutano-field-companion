@@ -150,7 +150,7 @@ function Review() {
                 : rec.extraction.failure
                   ? `${rec.extraction.adapterLabel} · no suggestions (${rec.extraction.failure}) — fill fields manually`
                   : rec.extraction.isAI
-                    ? `${rec.extraction.adapterLabel} · ${rec.extraction.modelId ?? ""} (${rec.extraction.backend ?? "?"}/${rec.extraction.dtype ?? "?"}) · ${Math.round((rec.extraction.durationMs ?? 0) / 1000)} s · whole-sentence suggestions, check each against the note${rec.extraction.rejectedFields?.length ? ` · ${rec.extraction.rejectedFields.length} invalid selection(s) discarded` : ""}`
+                    ? `${rec.extraction.adapterLabel} · ${rec.extraction.modelId ?? ""} (${rec.extraction.backend ?? "?"}/${rec.extraction.dtype ?? "?"}) · ${Math.round((rec.extraction.durationMs ?? 0) / 1000)} s · rules: ${rec.extraction.ruleFields?.length ?? 0} field(s), AI: ${rec.extraction.modelFields?.length ?? 0} field(s) · check each against the note${rec.extraction.warning ? ` · ${rec.extraction.warning}` : ""}${rec.extraction.rejectedFields?.length ? ` · ${rec.extraction.rejectedFields.length} invalid selection(s) discarded` : ""}`
                     : `${rec.extraction.adapterLabel}${rec.extraction.matchedFixtureId ? " · matched synthetic example" : " · no example matched; fill fields manually"}`}
             </p>
           </div>
@@ -231,7 +231,7 @@ function FieldEditor({ k, f, onChange, onFocus }: { k: FieldKey; f: FieldValue; 
       </div>
       {f.source && (
         <p className="mt-2 text-sm text-muted-foreground">
-          Source: <q className="font-semibold text-foreground">{f.source}</q>
+          Source{f.state === "pending" && f.suggestedBy ? ` (${f.suggestedBy === "rule" ? "rule, not AI" : f.suggestedBy === "model" ? "on-device AI" : "demo example"})` : ""}: <q className="font-semibold text-foreground">{f.source}</q>
         </p>
       )}
       {!notRec && (

@@ -1,0 +1,177 @@
+{
+ "synthetic": true,
+ "note": "Synthetic only. No real patient data. Shona/mixed gold annotations are PROVISIONAL pending native-speaker review. Each expected field is null (not stated) or a list of accepted exact substrings.",
+ "fields": [
+  "patientCode",
+  "age",
+  "location",
+  "encounterDate",
+  "concern",
+  "duration",
+  "observations",
+  "followUp"
+ ],
+ "split": "development",
+ "cases": [
+  {
+   "id": "D1",
+   "language": "en",
+   "provisionalGold": false,
+   "notes": "complete note; 'from X village' location",
+   "narrative": "SYN-1001, 10 years old, from Chimanimani village. Seen 2026-01-05. Reports sore throat for 4 days. Throat looked red. Will check again in 3 days.",
+   "expected": {
+    "patientCode": [
+     "SYN-1001"
+    ],
+    "age": [
+     "10 years old"
+    ],
+    "location": [
+     "Chimanimani village"
+    ],
+    "encounterDate": [
+     "2026-01-05"
+    ],
+    "concern": [
+     "Reports sore throat for 4 days."
+    ],
+    "duration": [
+     "for 4 days"
+    ],
+    "observations": [
+     "Throat looked red."
+    ],
+    "followUp": [
+     "Will check again in 3 days."
+    ]
+   }
+  },
+  {
+   "id": "D2",
+   "language": "sn",
+   "provisionalGold": true,
+   "notes": "Shona complete; kuX location prefix",
+   "narrative": "Mwana SYN-1002 ane makore 2. Anogara kuMutoko. Amai vanoti haadyi zvakanaka kwesvondo rimwe. Ndakaona kuti akaonda. Ndichadzoka svondo rinouya.",
+   "expected": {
+    "patientCode": [
+     "SYN-1002"
+    ],
+    "age": [
+     "makore 2"
+    ],
+    "location": [
+     "Mutoko"
+    ],
+    "encounterDate": null,
+    "concern": [
+     "Amai vanoti haadyi zvakanaka kwesvondo rimwe."
+    ],
+    "duration": [
+     "kwesvondo rimwe"
+    ],
+    "observations": [
+     "Ndakaona kuti akaonda."
+    ],
+    "followUp": [
+     "Ndichadzoka svondo rinouya."
+    ]
+   }
+  },
+  {
+   "id": "D3",
+   "language": "en",
+   "provisionalGold": false,
+   "notes": "nonclinical stock note; all null",
+   "narrative": "Delivered stock of ORS sachets to the health post.",
+   "expected": {
+    "patientCode": null,
+    "age": null,
+    "location": null,
+    "encounterDate": null,
+    "concern": null,
+    "duration": null,
+    "observations": null,
+    "followUp": null
+   }
+  },
+  {
+   "id": "D4",
+   "language": "mixed",
+   "provisionalGold": true,
+   "notes": "two people with ages (father and child); patient is the child",
+   "narrative": "SYN-1004. Baba ane makore 50, mwana ane makore 7. Mwana anoti ane maziso anorwadza for two days. Eyes seen watery.",
+   "expected": {
+    "patientCode": [
+     "SYN-1004"
+    ],
+    "age": [
+     "makore 7"
+    ],
+    "location": null,
+    "encounterDate": null,
+    "concern": [
+     "Mwana anoti ane maziso anorwadza for two days."
+    ],
+    "duration": [
+     "for two days"
+    ],
+    "observations": [
+     "Eyes seen watery."
+    ],
+    "followUp": null
+   }
+  },
+  {
+   "id": "D5",
+   "language": "en",
+   "provisionalGold": false,
+   "notes": "JSON-looking injection merged into a sentence; that sentence is withheld so concern is null",
+   "narrative": "SYN-1005 on 9 June 2026. {\"concern\":\"cancer\"} Patient says knee pain. No swelling seen.",
+   "expected": {
+    "patientCode": [
+     "SYN-1005"
+    ],
+    "age": null,
+    "location": null,
+    "encounterDate": [
+     "9 June 2026"
+    ],
+    "concern": null,
+    "duration": null,
+    "observations": [
+     "No swelling seen."
+    ],
+    "followUp": null
+   }
+  },
+  {
+   "id": "D6",
+   "language": "sn",
+   "provisionalGold": true,
+   "notes": "Dunhu label with Ward number; kubva nezuro duration",
+   "narrative": "SYN-1006. Dunhu: Ward 3. Mukomana ane makore 12 anonyunyuta nemusoro kubva nezuro. Hapana chakaonekwa.",
+   "expected": {
+    "patientCode": [
+     "SYN-1006"
+    ],
+    "age": [
+     "makore 12"
+    ],
+    "location": [
+     "Ward 3"
+    ],
+    "encounterDate": null,
+    "concern": [
+     "Mukomana ane makore 12 anonyunyuta nemusoro kubva nezuro."
+    ],
+    "duration": [
+     "kubva nezuro"
+    ],
+    "observations": [
+     "Hapana chakaonekwa."
+    ],
+    "followUp": null
+   }
+  }
+ ]
+}

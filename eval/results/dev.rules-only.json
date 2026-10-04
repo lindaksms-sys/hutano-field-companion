@@ -1,0 +1,407 @@
+{
+ "model": "onnx-community/Qwen3-0.6B-ONNX",
+ "revision": "da1453100cf3ff33ef56d17983fc7a8648706db6",
+ "runtime": "onnxruntime-node cpu q8",
+ "ranAt": "2026-10-04T04:33:11.389Z",
+ "tallies": {
+  "rules": {
+   "en|patientCode": {
+    "tp": 2,
+    "fp": 0,
+    "fn": 0,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 2
+   },
+   "en|ALL": {
+    "tp": 7,
+    "fp": 0,
+    "fn": 4,
+    "ca": 13,
+    "goldNull": 13,
+    "goldPos": 11
+   },
+   "en|age": {
+    "tp": 1,
+    "fp": 0,
+    "fn": 0,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 1
+   },
+   "en|location": {
+    "tp": 1,
+    "fp": 0,
+    "fn": 0,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 1
+   },
+   "en|encounterDate": {
+    "tp": 2,
+    "fp": 0,
+    "fn": 0,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 2
+   },
+   "en|concern": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 1,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 1
+   },
+   "en|duration": {
+    "tp": 1,
+    "fp": 0,
+    "fn": 0,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 1
+   },
+   "en|observations": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 2,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 2
+   },
+   "en|followUp": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 1,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 1
+   },
+   "ALL|patientCode": {
+    "tp": 5,
+    "fp": 0,
+    "fn": 0,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 5
+   },
+   "ALL|ALL": {
+    "tp": 17,
+    "fp": 0,
+    "fn": 12,
+    "ca": 19,
+    "goldNull": 19,
+    "goldPos": 29
+   },
+   "ALL|age": {
+    "tp": 3,
+    "fp": 0,
+    "fn": 1,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 4
+   },
+   "ALL|location": {
+    "tp": 3,
+    "fp": 0,
+    "fn": 0,
+    "ca": 3,
+    "goldNull": 3,
+    "goldPos": 3
+   },
+   "ALL|encounterDate": {
+    "tp": 2,
+    "fp": 0,
+    "fn": 0,
+    "ca": 4,
+    "goldNull": 4,
+    "goldPos": 2
+   },
+   "ALL|concern": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 4,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 4
+   },
+   "ALL|duration": {
+    "tp": 4,
+    "fp": 0,
+    "fn": 0,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 4
+   },
+   "ALL|observations": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 5,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 5
+   },
+   "ALL|followUp": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 2,
+    "ca": 4,
+    "goldNull": 4,
+    "goldPos": 2
+   },
+   "sn|patientCode": {
+    "tp": 2,
+    "fp": 0,
+    "fn": 0,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 2
+   },
+   "sn|ALL": {
+    "tp": 8,
+    "fp": 0,
+    "fn": 5,
+    "ca": 3,
+    "goldNull": 3,
+    "goldPos": 13
+   },
+   "sn|age": {
+    "tp": 2,
+    "fp": 0,
+    "fn": 0,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 2
+   },
+   "sn|location": {
+    "tp": 2,
+    "fp": 0,
+    "fn": 0,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 2
+   },
+   "sn|encounterDate": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 0
+   },
+   "sn|concern": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 2,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 2
+   },
+   "sn|duration": {
+    "tp": 2,
+    "fp": 0,
+    "fn": 0,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 2
+   },
+   "sn|observations": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 2,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 2
+   },
+   "sn|followUp": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 1,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 1
+   },
+   "mixed|patientCode": {
+    "tp": 1,
+    "fp": 0,
+    "fn": 0,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 1
+   },
+   "mixed|ALL": {
+    "tp": 2,
+    "fp": 0,
+    "fn": 3,
+    "ca": 3,
+    "goldNull": 3,
+    "goldPos": 5
+   },
+   "mixed|age": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 1,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 1
+   },
+   "mixed|location": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 0
+   },
+   "mixed|encounterDate": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 0
+   },
+   "mixed|concern": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 1,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 1
+   },
+   "mixed|duration": {
+    "tp": 1,
+    "fp": 0,
+    "fn": 0,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 1
+   },
+   "mixed|observations": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 1,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 1
+   },
+   "mixed|followUp": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 0
+   }
+  }
+ },
+ "latencyMs": {
+  "baseline": [],
+  "hybrid": []
+ },
+ "cases": [
+  {
+   "id": "D1",
+   "language": "en",
+   "rules": {
+    "patientCode": {
+     "value": "SYN-1001",
+     "by": "rule"
+    },
+    "age": {
+     "value": "10 years old",
+     "by": "rule"
+    },
+    "encounterDate": {
+     "value": "2026-01-05",
+     "by": "rule"
+    },
+    "location": {
+     "value": "Chimanimani village",
+     "by": "rule"
+    },
+    "duration": {
+     "value": "for 4 days",
+     "by": "rule"
+    }
+   }
+  },
+  {
+   "id": "D2",
+   "language": "sn",
+   "rules": {
+    "patientCode": {
+     "value": "SYN-1002",
+     "by": "rule"
+    },
+    "age": {
+     "value": "makore 2",
+     "by": "rule"
+    },
+    "location": {
+     "value": "Mutoko",
+     "by": "rule"
+    },
+    "duration": {
+     "value": "kwesvondo rimwe",
+     "by": "rule"
+    }
+   }
+  },
+  {
+   "id": "D3",
+   "language": "en",
+   "rules": {}
+  },
+  {
+   "id": "D4",
+   "language": "mixed",
+   "rules": {
+    "patientCode": {
+     "value": "SYN-1004",
+     "by": "rule"
+    },
+    "duration": {
+     "value": "for two days",
+     "by": "rule"
+    }
+   }
+  },
+  {
+   "id": "D5",
+   "language": "en",
+   "rules": {
+    "patientCode": {
+     "value": "SYN-1005",
+     "by": "rule"
+    },
+    "encounterDate": {
+     "value": "9 June 2026",
+     "by": "rule"
+    }
+   }
+  },
+  {
+   "id": "D6",
+   "language": "sn",
+   "rules": {
+    "patientCode": {
+     "value": "SYN-1006",
+     "by": "rule"
+    },
+    "age": {
+     "value": "makore 12",
+     "by": "rule"
+    },
+    "location": {
+     "value": "Ward 3",
+     "by": "rule"
+    },
+    "duration": {
+     "value": "kubva nezuro",
+     "by": "rule"
+    }
+   }
+  }
+ ]
+}
