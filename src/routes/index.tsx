@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { EncounterCard } from "@/components/EncounterCard";
 import { useEncounters } from "@/lib/hooks";
 import { useI18n } from "@/lib/i18n";
+import { InstallApp } from "@/components/InstallApp";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -36,6 +37,7 @@ function Home() {
           <Link to="/encounters/new">{t("newEncounter")}</Link>
         </Button>
       </section>
+      <InstallApp />
       {error && (
         <StorageErrorPanel error={error} onRetry={async () => { resetDBConnection(); await reload(); }} />
       )}
