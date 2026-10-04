@@ -53,7 +53,7 @@ export type WorkerOut =
 
 /** Fixed synthetic smoke prompt run during install, before the model is marked Ready. */
 export const AI_SMOKE_MESSAGES = [
-  { role: "system", content: 'Reply with one JSON object only: {"patientCode": <segment number or null>}' },
+  { role: "system", content: 'Reply with one JSON object only, exactly {"patientCode": N} where N is the number of the sentence that contains a patient code.' },
   { role: "user", content: "[1] Synthetic patient SYN-0001 seen today." },
 ];
 
