@@ -1,0 +1,40 @@
+# Shona translation review: completion report
+
+Status: proposed translations. These are **not** clinician-validated or native-speaker-certified.
+
+## Counts
+- Total rows reviewed: **492**
+- Rows translated (`reviewer_proposed_shona` filled in): **464**
+- Rows intentionally not translated: **28**
+  - 17 `out_of_scope_model_prompt` (model prompt text, left unchanged)
+  - 11 frozen synthetic examples (`synthetic_example_demo` 2, `_dev` 3, `_heldout` 6), left unchanged. Some have notes describing future reviewed wording.
+- Rows flagged "Needs native Shona VHW validation": **30**
+
+## Checks performed
+- Every eligible row has a non-empty proposed Shona value.
+- Every `{placeholder}` matches the English source exactly, checked automatically for all 464 rows.
+- Columns other than `reviewer_proposed_shona` and `notes` are byte-identical to the previous version, and model prompt and synthetic rows are unchanged.
+- Technical tokens (JSON, GPU, CPU, WebGPU, WebAssembly, q4f16, q8, IndexedDB, Supabase, Wi-Fi, MB, GB, ISO dates) and the name "Hutano" are kept as they are.
+
+## Terms needing native Shona VHW validation
+- Age with units: "Zera rine zviyero kana zvataurwa"
+- Ward: kept as "Ward" (official label), as in "Musha / Ward"
+- Stated duration: "Nguva yataurwa" (may be too vague)
+- Follow-up notes: "Zvinyorwa zvekutevera"
+- Worker-recorded observation wording
+- Meaning distinctions: missing vs not recorded vs negative finding; carer; age vs duration; patient-reported vs observed vs follow-up plan
+- mukadzi / murume / mukadzi wake: these words can name either a person's sex or a relationship, so the parser must not assume a relationship without context
+- anochema: means "cries", not reliably "complains of"
+- anorwadza: depends on context; "ari kurwadziwa" is used for "is in pain"
+- musoro (head) vs kurwadziwa nemusoro (headache)
+- kwesvondo: replaced by kwevhiki rimwe / kwemavhiki
+- tichaona: too vague on its own to count as a follow-up plan
+- anonyunyuta, ari kunzwa, anenge achiti, tichaongorora, rwadzo, kurwadza
+- Official VHW title in the page title
+
+## Files changed
+- docs/shona-translation.csv
+- docs/shona-translation-review.md
+
+## Known follow-up
+The translations were written directly into the CSV, as requested. The generator `scripts/shona-inventory.py` merges reviewer text only from `docs/shona-review-overlay.csv`. Because of this, the overlay regeneration test will fail until these values are also copied into the overlay, and regenerating the CSV now would overwrite them.
