@@ -5,7 +5,8 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 
 /** Minimal RFC 4180 CSV parser (quoted fields, embedded commas/newlines). */
-function parseCsv(t: string): Record<string, string>[] {
+type Row = { key: string; reviewer_proposed_shona: string; attribution: string };
+function parseCsv(t: string): Row[] {
   const rows: string[][] = [];
   let row: string[] = [], cell = "", q = false;
   for (let i = 0; i < t.length; i++) {
@@ -23,7 +24,7 @@ function parseCsv(t: string): Record<string, string>[] {
   }
   if (cell || row.length) { row.push(cell); rows.push(row); }
   const [head, ...body] = rows;
-  return body.map((r) => Object.fromEntries(head!.map((h, j) => [h, r[j] ?? ""])));
+  return body.map((r) => Object.fromEntries(head!.map((h, j) => [h, r[j] ?? ""])) as unknown as Row);
 }
 
 const csvRows = parseCsv(readFileSync("docs/shona-translation.csv", "utf8"));
@@ -34,8 +35,8 @@ describe("Shona reviewer overlay", () => {
     const byKey = new Map(csvRows.map((r) => [r.key, r]));
     for (const o of overlay) {
       expect(o.attribution).toBe("user-supplied proposal, not clinician validated");
-      if (o.key!.startsWith("term.")) continue;
-      expect(byKey.get(o.key!)?.reviewer_proposed_shona, o.key).toBe(o.reviewer_proposed_shona);
+      if (o.key.startsWith("term.")) continue;
+      expect(byKey.get(o.key)?.reviewer_proposed_shona, o.key).toBe(o.reviewer_proposed_shona);
     }
   });
 
