@@ -29,20 +29,42 @@ export class AiExtractionError extends Error {
 // Segments that look like instructions aimed at the model, not visit notes.
 const INJECTION = /\b(ignore|disregard|forget)\b.{0,40}\b(instruction|previous|above|rules?|system)|\b(system|assistant|developer)\s*(prompt|message|:)|<\/?(think|system|im_start|im_end)|\{\s*"|```|\byou are (now|an?) (ai|assistant|model)\b|\b(output|return|reply|respond)\b.{0,30}\bjson\b/i;
 
-/** Split into sentence/clause segments with exact offsets. Whitespace between segments is dropped. */
+const ABBREV = new Set(["dr", "mr", "mrs", "ms", "st", "approx", "temp", "vs", "e.g", "i.e", "no", "wt", "ht", "resp"]);
+
+/**
+ * Split into sentence/clause segments with exact offsets. Whitespace between segments is dropped.
+ * Decimals (37.5), dotted dates (25.03.2026), abbreviations (Dr., approx.) and e.g./i.e. do not split.
+ */
 export function segmentNarrative(narrative: string): Segment[] {
   if (!narrative.trim()) throw new AiExtractionError("Narrative is empty.");
   if (narrative.length > AI_LIMITS.maxNarrativeChars)
     throw new AiExtractionError(`Narrative is longer than ${AI_LIMITS.maxNarrativeChars} characters; use manual review.`);
+  const cuts: number[] = []; // exclusive end offsets
+  for (let i = 0; i < narrative.length; i++) {
+    const c = narrative[i]!;
+    if (c === "\n") { cuts.push(i); continue; }
+    if (!".!?;".includes(c)) continue;
+    const next = narrative[i + 1];
+    if (next !== undefined && !/\s/.test(next) && !".!?;".includes(next)) continue; // 37.5, 25.03.2026, e.g.x
+    if (c === ".") {
+      const word = narrative.slice(0, i).match(/([A-Za-z.]+)$/)?.[1]?.toLowerCase();
+      const after = narrative.slice(i + 1).match(/^\s*(\S)/)?.[1];
+      if (word && ABBREV.has(word) && after && /[a-z0-9]/.test(after)) continue;
+    }
+    let j = i;
+    while (j + 1 < narrative.length && ".!?;".includes(narrative[j + 1]!)) j++;
+    cuts.push(j + 1);
+    i = j;
+  }
+  cuts.push(narrative.length);
   const segs: Segment[] = [];
-  const re = /[^.!?;\n]+[.!?;]*/g;
-  let m: RegExpExecArray | null;
-  while ((m = re.exec(narrative))) {
-    const raw = m[0];
-    const lead = raw.length - raw.trimStart().length;
+  let from = 0;
+  for (const end of cuts) {
+    const raw = narrative.slice(from, end);
+    from = end;
     const text = raw.trim();
-    if (!text) continue;
-    const start = m.index + lead;
+    if (!text || /^[.!?;]+$/.test(text)) continue;
+    const start = end - raw.length + (raw.length - raw.trimStart().length);
     if (text.length > AI_LIMITS.maxSegmentChars)
       throw new AiExtractionError("A sentence is too long for on-device extraction; use manual review.");
     segs.push({ n: segs.length + 1, start, end: start + text.length, text, withheld: INJECTION.test(text) });
