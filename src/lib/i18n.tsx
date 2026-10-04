@@ -5,16 +5,17 @@ export type Lang = "en" | "sn";
 
 // Shona text is a USER-SUPPLIED PROPOSAL (not clinician validated). Source: docs/shona-review-overlay.csv
 // -> docs/shona-translation.csv -> src/lib/sn-strings.gen.ts (scripts/shona-ui-strings.py).
+// `sn` here is the legacy draft column for the inventory only; the UI uses SN_STRINGS.
 const dict = {
-  home: { en: "Home" },
-  encounters: { en: "Encounters" },
-  sync: { en: "Sync" },
-  settings: { en: "Settings" },
-  newEncounter: { en: "New encounter" },
-  online: { en: "Device online" },
-  offline: { en: "Offline" },
-  localOnly: { en: "Local only" },
-  prototype: { en: "Prototype — synthetic demo data only. Do not enter real patient information." },
+  home: { en: "Home", sn: "Kumusha" },
+  encounters: { en: "Encounters", sn: "Zvakanyorwa" },
+  sync: { en: "Sync", sn: "Kutumira" },
+  settings: { en: "Settings", sn: "Zvirongwa" },
+  newEncounter: { en: "New encounter", sn: "Nyora kushanya kutsva" },
+  online: { en: "Device online", sn: "Paindaneti" },
+  offline: { en: "Offline", sn: "Hapana interneti" },
+  localOnly: { en: "Local only", sn: "Pamudziyo uyu chete" },
+  prototype: { en: "Prototype — synthetic demo data only. Do not enter real patient information.", sn: "Ichi chigadzirwa chekuyedza chinoshandisa data rekufungidzira chete. Musaisa ruzivo rwechokwadi rwevarwere." },
 } as const;
 export type Key = keyof typeof dict;
 
