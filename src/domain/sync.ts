@@ -59,7 +59,7 @@ export const isDraining = () => draining;
 /** Acknowledge one entry — only if the same account is still active (epoch unchanged). */
 async function acknowledge(entry: OutboxEntry, receivedAt: string, uid: string, epoch: number) {
   const db = getDB();
-  return db.transaction("rw", db.encounters, db.outbox, async () => {
+  return db.transaction("rw", db.encounters, db.outbox, db.audit, async () => {
     if (getEpoch() !== epoch || getCurrentUserId() !== uid) return false;
     const e = await db.outbox.get(entry.revisionId);
     if (e) {
@@ -76,6 +76,7 @@ async function acknowledge(entry: OutboxEntry, receivedAt: string, uid: string, 
       r.lastSyncedAt = receivedAt;
       await db.encounters.put(r);
     }
+    await writeAudit(db, { encounterId: entry.encounterId, ownerId: uid, action: "synced", fromRevision: entry.localRevision, toRevision: entry.localRevision });
     return true;
   });
 }

@@ -9,10 +9,38 @@ import {
   type FieldKey,
   type FieldValue,
   type InputLanguage,
+  type AuditAction,
+  type AuditEntry,
   type OutboxEntry,
 } from "./types";
 
 const now = () => new Date().toISOString();
+
+/** Append one audit entry (names/metadata only, never note text or values). */
+export async function writeAudit(db: HutanoDB, e: Omit<AuditEntry, "id" | "at" | "changed" | "verificationRemoved" | "reason" | "fromRevision" | "toRevision"> & Partial<AuditEntry>) {
+  await db.audit.add({
+    id: crypto.randomUUID(),
+    at: now(),
+    changed: [],
+    verificationRemoved: false,
+    reason: null,
+    fromRevision: null,
+    toRevision: null,
+    ...e,
+  });
+}
+
+function changedKeys(before: EncounterRecord, after: EncounterRecord): string[] {
+  const out: string[] = FIELD_KEYS.filter((k) => JSON.stringify(before.fields[k]) !== JSON.stringify(after.fields[k]));
+  if (before.rawNarrative !== after.rawNarrative) out.push("narrative");
+  return out;
+}
+
+/** Audit history for one record (current account only), newest first. */
+export async function listAudit(encounterId: string, uid: string | null = getCurrentUserId()) {
+  const rows = await getDB().audit.where("encounterId").equals(encounterId).toArray();
+  return rows.filter((a) => a.ownerId === null || a.ownerId === uid).sort((a, b) => b.at.localeCompare(a.at));
+}
 
 /** Records visible to an account: its own plus unowned local demo records. */
 export const visibleTo = (r: EncounterRecord, uid: string | null) =>
@@ -43,7 +71,11 @@ export async function createDraft(input: {
     verifiedAt: null,
     lastSyncedAt: null,
   };
-  await getDB().encounters.add(rec); // throws on failure; caller must surface it
+  const db = getDB();
+  await db.transaction("rw", db.encounters, db.audit, async () => {
+    await db.encounters.add(rec); // throws on failure; caller must surface it
+    await writeAudit(db, { encounterId: rec.id, ownerId: rec.ownerId, action: "created", toRevision: 1 });
+  });
   return rec;
 }
 
@@ -96,15 +128,18 @@ async function enqueueSnapshot(db: HutanoDB, r: EncounterRecord) {
 async function mutate(
   id: string,
   fn: (r: EncounterRecord) => void,
-  opts: { keepVerification?: boolean; afterWrite?: (db: HutanoDB, r: EncounterRecord) => Promise<void> } = {},
+  opts: { keepVerification?: boolean; afterWrite?: (db: HutanoDB, r: EncounterRecord) => Promise<void>; action: AuditAction },
 ): Promise<EncounterRecord> {
   const db = getDB();
-  return db.transaction("rw", db.encounters, db.outbox, db.meta, async () => {
+  return db.transaction("rw", db.encounters, db.outbox, db.meta, db.audit, async () => {
     const r = await db.encounters.get(id);
     if (!r || !visibleTo(r, getCurrentUserId())) throw new Error("Record not found");
+    const before = structuredClone(r);
     fn(r);
+    let verificationRemoved = false;
     if (!opts.keepVerification) {
       if (r.reviewStatus === "verified") {
+        verificationRemoved = true;
         r.reviewStatus = "in_review";
         r.verifiedAt = null;
         r.syncStatus = "local_only";
@@ -117,6 +152,7 @@ async function mutate(
     r.updatedAt = now();
     await db.encounters.put(r);
     if (opts.afterWrite) await opts.afterWrite(db, r);
+    await writeAudit(db, { encounterId: r.id, ownerId: r.ownerId, action: opts.action, fromRevision: before.localRevision, toRevision: r.localRevision, changed: changedKeys(before, r), verificationRemoved });
     return r;
   });
 }
@@ -140,7 +176,7 @@ export function recordExtractionFailure(id: string, meta: { adapterId: string; a
   return mutate(id, (r) => {
     checkGuard(r, guard);
     r.extraction = { adapterId: meta.adapterId, adapterLabel: meta.adapterLabel, isAI: meta.isAI, ranAt: now(), matchedFixtureId: null, ...(meta.ai ?? {}), failure: meta.failure };
-  });
+  }, { action: "extraction_failed" });
 }
 
 export function applyExtraction(id: string, result: ExtractionResult, guard?: ExtractionGuard) {
@@ -154,7 +190,7 @@ export function applyExtraction(id: string, result: ExtractionResult, guard?: Ex
     }
     r.extraction = { adapterId: result.adapterId, adapterLabel: result.adapterLabel, isAI: result.isAI, ranAt: now(), matchedFixtureId: result.matchedFixtureId, ...(result.ai ?? {}), failure: null };
     if (r.reviewStatus === "draft") r.reviewStatus = "in_review";
-  });
+  }, { action: "extraction" });
 }
 
 export function saveFields(id: string, fields: Record<FieldKey, FieldValue>, rawNarrative?: string) {
@@ -162,7 +198,7 @@ export function saveFields(id: string, fields: Record<FieldKey, FieldValue>, raw
     r.fields = fields;
     if (rawNarrative !== undefined) r.rawNarrative = rawNarrative;
     if (r.reviewStatus === "draft") r.reviewStatus = "in_review";
-  });
+  }, { action: "edited" });
 }
 
 export function missingFields(fields: Record<FieldKey, FieldValue>): FieldKey[] {
@@ -189,7 +225,7 @@ export function verify(id: string, confirmed: boolean) {
       r.verifiedAt = now();
       r.syncStatus = "queued";
     },
-    { keepVerification: true, afterWrite: enqueueSnapshot },
+    { keepVerification: true, afterWrite: enqueueSnapshot, action: "verified" },
   );
 }
 
@@ -197,7 +233,7 @@ export function verify(id: string, confirmed: boolean) {
 export async function adoptRecord(id: string, uid: string) {
   if (!uid || getCurrentUserId() !== uid) throw new Error("Sign in to adopt records");
   const db = getDB();
-  return db.transaction("rw", db.encounters, db.outbox, db.meta, async () => {
+  return db.transaction("rw", db.encounters, db.outbox, db.meta, db.audit, async () => {
     const r = await db.encounters.get(id);
     if (!r) throw new Error("Record not found");
     if (r.ownerId !== null) throw new Error("Record already belongs to an account");
@@ -205,6 +241,7 @@ export async function adoptRecord(id: string, uid: string) {
     r.updatedAt = now();
     await db.encounters.put(r);
     await enqueueSnapshot(db, r);
+    await writeAudit(db, { encounterId: r.id, ownerId: uid, action: "adopted", fromRevision: r.localRevision, toRevision: r.localRevision });
     return r;
   });
 }
@@ -217,11 +254,30 @@ export async function exportDemoRecords(): Promise<string> {
 /** Clears synthetic records visible to the current account (its own + unowned) and their outbox rows. */
 export async function clearDemoData() {
   const db = getDB();
-  return db.transaction("rw", db.encounters, db.outbox, async () => {
+  return db.transaction("rw", db.encounters, db.outbox, db.audit, async () => {
     const uid = getCurrentUserId();
-    const ids = (await db.encounters.toArray()).filter((r) => r.isSynthetic && visibleTo(r, uid)).map((r) => r.id);
-    await db.outbox.where("encounterId").anyOf(ids).delete();
+    const recs = (await db.encounters.toArray()).filter((r) => r.isSynthetic && visibleTo(r, uid));
+    const ids = recs.map((r) => r.id);
+    await db.outbox.where("encounterId").anyOf(ids).filter((e) => !inFlight.has(e.revisionId)).delete();
     await db.encounters.bulkDelete(ids);
+    for (const r of recs) await writeAudit(db, { encounterId: r.id, ownerId: r.ownerId, action: "cleared", fromRevision: r.localRevision });
     return ids.length;
+  });
+}
+
+/**
+ * Delete one record from this device, with an audit entry. Unsent snapshots are dropped;
+ * copies already uploaded stay on the server (append-only by design).
+ */
+export async function deleteEncounter(id: string, reason: string) {
+  const db = getDB();
+  return db.transaction("rw", db.encounters, db.outbox, db.audit, async () => {
+    const r = await db.encounters.get(id);
+    if (!r || !visibleTo(r, getCurrentUserId())) throw new Error("Record not found");
+    const pending = await db.outbox.where("encounterId").equals(id).filter((e) => e.status !== "acked" && !inFlight.has(e.revisionId)).primaryKeys();
+    await db.outbox.bulkDelete(pending);
+    await db.encounters.delete(id);
+    await writeAudit(db, { encounterId: id, ownerId: r.ownerId, action: "deleted", fromRevision: r.localRevision, reason: reason.trim().slice(0, 200) || null });
+    return { wasUploaded: r.serverRevision !== null };
   });
 }
