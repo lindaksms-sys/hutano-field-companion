@@ -11,6 +11,8 @@ import { clearDemoData, exportDemoRecords } from "@/domain/repository";
 import { supabaseConfig } from "@/lib/supabase";
 import { useAuth } from "@/lib/auth";
 import { useStorageStatus } from "@/lib/hooks";
+import { StorageErrorPanel } from "@/components/StorageErrorPanel";
+import { resetDBConnection } from "@/domain/db";
 import { useOfflineState } from "@/lib/use-offline";
 import { useI18n } from "@/lib/i18n";
 import { AiModelPanel } from "@/components/AiModelPanel";
@@ -31,7 +33,7 @@ export const Route = createFileRoute("/settings")({
 const mb = (n: number | null) => (n == null ? "unknown" : `${(n / 1024 / 1024).toFixed(1)} MB`);
 
 function SettingsPage() {
-  const { status, requestPersist } = useStorageStatus();
+  const { status, requestPersist, recheck } = useStorageStatus();
   const { lang, setLang, tl } = useI18n();
   const [msg, setMsg] = useState<string | null>(null);
   const cfg = supabaseConfig();
@@ -59,7 +61,7 @@ function SettingsPage() {
 
       <Section title="Readiness">
         <Row k="Local storage (IndexedDB)" v={status.indexedDB === "ok" ? <StatusPill tone="success">Working</StatusPill> : status.indexedDB === "failed" ? <StatusPill tone="danger">Failed</StatusPill> : "Checking…"} />
-        {status.error && <p className="px-4 pb-3 text-sm font-semibold text-destructive">{status.error}</p>}
+        {status.error && <div className="px-4 pb-3"><StorageErrorPanel error={status.error} onRetry={async () => { resetDBConnection(); await recheck(); }} /></div>}
         <Row k="Persistent storage" v={status.persisted === true ? <StatusPill tone="success">Granted</StatusPill> : status.persisted === false ? <StatusPill tone="pending">Not granted — browser may clear data</StatusPill> : "Unsupported"} />
         <Row k="Storage used / quota" v={`${mb(status.usage)} / ${mb(status.quota)}`} />
         <Row k="Backend" v={<StatusPill tone={cfg.configured ? "success" : "pending"}>{cfg.configured ? "Configured (external Supabase)" : "Not configured"}</StatusPill>} />
