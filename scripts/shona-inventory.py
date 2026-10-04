@@ -31,6 +31,9 @@ SKIP_FILES = {"src/lib/i18n.tsx"}
 ATTRS = ("placeholder", "aria-label", "title", "label", "note", "alt")
 NON_UI = re.compile(r"^(?:[a-z0-9_.:/@#\-\[\]]+|[A-Z_]+|https?://.*|.*\.(?:ts|tsx|js|json|png|ico|svg|webmanifest)|use client)$")
 
+SPLIT_FRAGMENTS = {"Account created for",
+    ". Open the confirmation link sent to that address, then sign in here. You can keep capturing offline meanwhile.",
+    "Signed in as"}
 rows, seen = [], set()
 
 
@@ -210,9 +213,6 @@ for split in ("dev", "heldout"):
 
 # Priority batch 1: core workflow + meanings/cues. Marked in notes and sorted first.
 # Hand-written full messages (named placeholders). Replaces regex-captured templates and split JSX fragments.
-SPLIT_FRAGMENTS = {"Account created for",
-    ". Open the confirmation link sent to that address, then sign in here. You can keep capturing offline meanwhile.",
-    "Signed in as"}
 PH = "Keep {placeholders} exactly; reorder words around them if natural."
 MANUAL_TEMPLATES = [
  ("manual.auth.account_created", "auth", "Account created for {email}. Open the confirmation link sent to that address, then sign in here. You can keep capturing offline meanwhile.", "src/routes/auth.tsx · sign-up confirmation · {email} = address typed by the user", "[P1] " + PH),
@@ -267,7 +267,8 @@ P1_CUES = {"makore", "mwedzi", "kwemazuva", "kwesvondo", "kwemakore", "anogara",
            "vanoti", "anoti", "ndaona", "ndakaona", "hapana", "hakuna", "ndichadzoka", "nhasi", "nezuro", "musha", "dunhu", "mwana", "murwere"}
 for r in rows:
     if r["english_source_meaning"] in P1_TEXT or r["category"] in P1_CATS or (r["category"] == "cue_dictionary" and r["current_shona_draft"] in P1_CUES):
-        r["notes"] = ("[P1] " + r["notes"]).strip()
+        if not r["notes"].startswith("[P1]"):
+            r["notes"] = ("[P1] " + r["notes"]).strip()
 rows.sort(key=lambda r: 0 if r["notes"].startswith("[P1]") else 1)
 
 OUT.parent.mkdir(parents=True, exist_ok=True)
