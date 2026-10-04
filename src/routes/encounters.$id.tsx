@@ -207,38 +207,10 @@ function Review() {
           {FIELD_KEYS.map((k) => (
             <FieldEditor key={k} k={k} f={fields[k]} locked={locked} onChange={(p) => update(k, p)} onFocus={() => setFocus(k)} />
           ))}
-          <EncounterHistory encounterId={rec.id} refreshKey={`${rec.localRevision}-${rec.updatedAt}-${rec.syncStatus}`} />
-          <div className="rounded-xl border border-destructive/40 bg-card p-4">
-            <h2 className="font-bold">{tl("Delete encounter")}</h2>
-            <p className="mt-1 text-xs text-muted-foreground">
-              {rec.serverRevision !== null
-                ? tl("Removes it from this device. Copies already uploaded stay on the server (uploads are never changed or deleted).")
-                : tl("Removes it from this device. It has not been uploaded.")}{" "}
-              {tl("The deletion is kept in the device history.")}
-            </p>
-            <AlertDialog onOpenChange={(o) => { if (!o) setDelReason(""); }}>
-              <AlertDialogTrigger asChild>
-                <Button variant="destructive" className="mt-3 h-12 w-full sm:w-auto">{tl("Delete encounter")}</Button>
-              </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>{tl("Delete this encounter?")}</AlertDialogTitle>
-                  <AlertDialogDescription>{tl("This cannot be undone on this device. Export first if you need a copy.")}</AlertDialogDescription>
-                </AlertDialogHeader>
-                <Input className="min-h-11" placeholder={tl("Reason (optional, e.g. duplicate entry)")} value={delReason} maxLength={200} onChange={(e) => setDelReason(e.target.value)} />
-                <AlertDialogFooter>
-                  <AlertDialogCancel className="h-11">{tl("Cancel")}</AlertDialogCancel>
-                  <AlertDialogAction className="h-11 bg-destructive text-destructive-foreground hover:bg-destructive/90" disabled={deleting} onClick={(e) => { e.preventDefault(); void doDelete(); }}>
-                    {tl("Delete")}
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
-          </div>
         </div>
       </div>
 
-      {!locked && <section className="sticky bottom-16 z-10 space-y-3 rounded-xl border border-border bg-card p-4 shadow-lg md:bottom-4">
+      {!locked && <section className="z-10 space-y-3 md:sticky md:bottom-4 rounded-xl border border-border bg-card p-4 shadow-lg md:bottom-4">
         {save.kind === "error" && <p role="alert" className="text-sm font-bold text-destructive">{save.msg}</p>}
         {save.kind === "saved" && !dirty && <p className="text-sm font-semibold text-success-foreground">{tf("Saved on this device · {time}", { time: new Date(save.at).toLocaleTimeString() })}</p>}
         {dirty && <p className="text-sm font-semibold text-pending-foreground">{tl("Unsaved changes")}</p>}
@@ -262,6 +234,37 @@ function Review() {
           </Button>
         </div>
       </section>}
+
+      <div className="grid gap-3 lg:grid-cols-2">
+      <EncounterHistory encounterId={rec.id} refreshKey={`${rec.localRevision}-${rec.updatedAt}-${rec.syncStatus}`} />
+      <div className="rounded-xl border border-destructive/40 bg-card p-4">
+        <h2 className="font-bold">{tl("Delete encounter")}</h2>
+        <p className="mt-1 text-xs text-muted-foreground">
+          {rec.serverRevision !== null
+            ? tl("Removes it from this device. Copies already uploaded stay on the server (uploads are never changed or deleted).")
+            : tl("Removes it from this device. It has not been uploaded.")}{" "}
+          {tl("The deletion is kept in the device history.")}
+        </p>
+        <AlertDialog onOpenChange={(o) => { if (!o) setDelReason(""); }}>
+          <AlertDialogTrigger asChild>
+            <Button variant="destructive" className="mt-3 h-12 w-full sm:w-auto">{tl("Delete encounter")}</Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>{tl("Delete this encounter?")}</AlertDialogTitle>
+              <AlertDialogDescription>{tl("This cannot be undone on this device. Export first if you need a copy.")}</AlertDialogDescription>
+            </AlertDialogHeader>
+            <Input className="min-h-11" placeholder={tl("Reason (optional, e.g. duplicate entry)")} value={delReason} maxLength={200} onChange={(e) => setDelReason(e.target.value)} />
+            <AlertDialogFooter>
+              <AlertDialogCancel className="h-11">{tl("Cancel")}</AlertDialogCancel>
+              <AlertDialogAction className="h-11 bg-destructive text-destructive-foreground hover:bg-destructive/90" disabled={deleting} onClick={(e) => { e.preventDefault(); void doDelete(); }}>
+                {tl("Delete")}
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </div>
+      </div>
     </div>
   );
 }
