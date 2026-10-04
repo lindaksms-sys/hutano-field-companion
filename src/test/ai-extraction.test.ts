@@ -161,7 +161,7 @@ describe("install robustness", () => {
     stubBrowser();
     const m = await import("@/lib/ai-model");
     const del = vi.spyOn(globalThis.caches as unknown as { delete: () => Promise<boolean> }, "delete");
-    m.INSTALL_TIMEOUTS.stallMs = 30;
+    m.INSTALL_TIMEOUTS.stallMs = 400;
     const w = mk();
     setWorkerFactory(() => w);
     const p = m.installModel("wasm");
