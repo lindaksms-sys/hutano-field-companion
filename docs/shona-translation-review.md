@@ -59,3 +59,7 @@ Status: proposed translations. These are **not** clinician-validated or native-s
 
 ## Device note
 - Samsung S23 Ultra: the user reported that the on-device AI download succeeded. This confirms installation only, as reported by the user. Offline inference on that phone has not been verified.
+
+## Approval (October 2026)
+
+The user confirmed the Shona interface translations are approved by the project's Shona reviewer. The UI no longer labels Shona as a draft. Two retired overlay rows ("Shona (draft)" and the draft-status sentence) were removed because the English text no longer exists. The home heading row was re-keyed to its new English text ("Hello. Record an encounter.") with its approved Shona unchanged. 27 new texts (edit/delete/history, AI re-check, approval note) were added to `docs/shona-still-to-translate.csv`.
