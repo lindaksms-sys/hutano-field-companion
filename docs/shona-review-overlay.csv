@@ -1,0 +1,99 @@
+key,reviewer_proposed_shona,review_status,attribution,review_note,round
+i18n_core.i18n.70f8bb9a,Kumusha,adopted,"user-supplied proposal, not clinician validated",Shown in the Shona interface.,r1
+i18n_core.i18n.18817545,Zvakanyorwa,adopted,"user-supplied proposal, not clinician validated",Shown in the Shona interface (navigation).,r1
+ui.encounters_index.18817545,Zvakanyorwa,adopted,"user-supplied proposal, not clinician validated",Shown in the Shona interface (navigation).,r1
+i18n_core.i18n.c7f73bb5,Zvirongwa,adopted,"user-supplied proposal, not clinician validated",Shown in the Shona interface (navigation).,r1
+ui.settings.c7f73bb5,Zvirongwa,adopted,"user-supplied proposal, not clinician validated",Shown in the Shona interface (navigation).,r1
+i18n_core.i18n.5b9f7c68,Paindaneti,adopted,"user-supplied proposal, not clinician validated",Shown in the Shona interface.,r1
+i18n_core.i18n.e01fa717,Hapana interneti,adopted,"user-supplied proposal, not clinician validated",Shown in the Shona interface. Sync-page 'Offline' row not changed (different context).,r1
+i18n_core.i18n.dd2a3056,Pamudziyo uyu chete,adopted,"user-supplied proposal, not clinician validated",Device-neutral (app also runs on computers).,r1
+i18n_core.i18n.02fd3586,Ichi chigadzirwa chekuyedza chinoshandisa data rekufungidzira chete. Musaisa ruzivo rwechokwadi rwevarwere.,adopted,"user-supplied proposal, not clinician validated",Shown in the Shona interface.,r1
+i18n_core.i18n.57d05f4f,Nyora kushanya kutsva,provisional,"user-supplied proposal, not clinician validated",Shown (replaces older draft) but 'encounter' wording is provisional.,r1
+ui.encounters_new.57d05f4f,Nyora kushanya kutsva,provisional,"user-supplied proposal, not clinician validated",Shown (replaces older draft) but 'encounter' wording is provisional.,r1
+ui.labels.1c3416f3,Kodhi yemurwere,adopted,"user-supplied proposal, not clinician validated",,r1
+ui.labels.59d5b8d7,Zuva rekushanya,adopted,"user-supplied proposal, not clinician validated",Encounter date = patient visit date.,r1
+ui.labels.18293422,Dambudziko rataurwa,adopted,"user-supplied proposal, not clinician validated",,r1
+ui.labels.23908785,Zvakaonekwa kana kuyerwa nemushandi wehutano,adopted,"user-supplied proposal, not clinician validated",,r1
+ui.labels.3159fe42,Hapana chakanyorwa,adopted,"user-supplied proposal, not clinician validated",,r1
+ui.encounters_id.179359b3,Chengetedza shanduko,adopted,"user-supplied proposal, not clinician validated",,r1
+ui.AiModelPanel.77dfd213,Kanzura,adopted,"user-supplied proposal, not clinician validated",,r1
+ui.settings.77dfd213,Kanzura,adopted,"user-supplied proposal, not clinician validated",,r1
+ui.settings.f6fdbe48,Dzima,adopted,"user-supplied proposal, not clinician validated",,r1
+ui.error-page.8007defd,Enda kumusha,adopted,"user-supplied proposal, not clinician validated",,r1
+ui.__root.8007defd,Enda kumusha,adopted,"user-supplied proposal, not clinician validated",,r1
+ui.error-page.042c862e,Edzazve,adopted,"user-supplied proposal, not clinician validated",,r1
+ui.__root.042c862e,Edzazve,adopted,"user-supplied proposal, not clinician validated",,r1
+review_states.labels.23d33e22,Gwaro risati rapera,adopted,"user-supplied proposal, not clinician validated",,r1
+review_states.labels.33a506cf,Rinoda kuongororwa,adopted,"user-supplied proposal, not clinician validated",,r1
+review_states.encounters_index.33a506cf,Rinoda kuongororwa,adopted,"user-supplied proposal, not clinician validated",,r1
+review_states.labels.aed3b8c6,Rasimbiswa,adopted,"user-supplied proposal, not clinician validated",,r1
+review_states.encounters_index.aed3b8c6,Rasimbiswa,adopted,"user-supplied proposal, not clinician validated",,r1
+review_states.index.aed3b8c6,Rasimbiswa,adopted,"user-supplied proposal, not clinician validated",,r1
+review_states.labels.abb1a096,Zano richiri kumirira kuongororwa,adopted,"user-supplied proposal, not clinician validated",,r1
+review_states.labels.61a0572c,Ragamuchirwa,adopted,"user-supplied proposal, not clinician validated",,r1
+review_states.labels.ad5d0d0b,Ragadziridzwa nemushandi,adopted,"user-supplied proposal, not clinician validated",,r1
+review_states.labels.305cc364,Hazvina kunyorwa,adopted,"user-supplied proposal, not clinician validated",,r1
+ui.labels.9678cbce,Musha / Wadhi,provisional,"user-supplied proposal, not clinician validated",Musha (village) adopted; ward unresolved: 'Wadhi' or keep 'Ward'. Label stays English until decided.,r1
+ui.labels.7aef0776,"Zera, riine zviyero kana zvataurwa",provisional,"user-supplied proposal, not clinician validated",Needs clarity on age units (years/months). Stays English.,r1
+ui.labels.8e8ac3cc,Nguva yataurwa,provisional,"user-supplied proposal, not clinician validated",May be too vague. Stays English.,r1
+ui.labels.efc70c54,Zvinyorwa zvekutevera,provisional,"user-supplied proposal, not clinician validated",Possibly vague; alternatives kuongororazve / kudzoka kuzoona depend on the task. Stays English.,r1
+auth.AppShell.ada2e9e9,Pinda muakaundi,provisional,"user-supplied proposal, not clinician validated",Stays English.,r1
+auth.auth.ada2e9e9,Pinda muakaundi,provisional,"user-supplied proposal, not clinician validated",Stays English.,r1
+auth.auth.dc1649a1,Buda muakaundi,provisional,"user-supplied proposal, not clinician validated",Stays English.,r1
+meaning_distinction.concepts.ea68bcba,Hapana fivha,adopted,"user-supplied proposal, not clinician validated",Preserves absence but does NOT establish a measured or worker-observed finding; source cues decide report vs observation.,r1
+cue_dictionary.checks.79b8f83e,musoro (head); headache = kurwadziwa nemusoro,adopted,"user-supplied proposal, not clinician validated",Bare 'musoro' removed from problem cues.,r1
+cue_dictionary.checks.f47c8864,kurwadziwa nemusoro = headache,adopted,"user-supplied proposal, not clinician validated",Added as problem cue.,r1
+cue_dictionary.checks.9a6502ad,zvinorwadza / ari kurwadziwa (contextual),provisional,"user-supplied proposal, not clinician validated",Not a universal 'it hurts'; removed from problem cues.,r1
+cue_dictionary.rules.21765f95,mukadzi = woman OR wife,adopted,"user-supplied proposal, not clinician validated",No longer an unconditional other-person blocker; needs explicit relationship (e.g. mukadzi wake) or abstains with several people.,r1
+cue_dictionary.rules.cb7d67bd,murume = man OR husband,adopted,"user-supplied proposal, not clinician validated",As mukadzi.,r1
+cue_dictionary.checks.96299e23,tichaona (ambiguous alone),adopted,"user-supplied proposal, not clinician validated",Removed from follow-up cues; tichadzoka kuzoona / tichaongorora with context instead.,r1
+cue_dictionary.rules.ab1c1f65,kwemwedzi,question,"user-supplied proposal, not clinician validated",Reviewer line compared 'kwemwedzi' with an identical 'kwemwedzi' (likely typo). No change made; please clarify the intended distinction.,r1
+cue_dictionary.rules.5116e406,amai,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
+cue_dictionary.rules.32c8bbff,baba,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
+cue_dictionary.checks.b1b0b8de,murwere,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
+cue_dictionary.checks.1b9bcbed,chikosoro,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
+cue_dictionary.checks.58a8660f,manyoka,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
+cue_dictionary.checks.e2f347fb,fivha,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
+cue_dictionary.checks.da0bb9ae,dzihwa,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
+cue_dictionary.checks.54caab2e,kurutsa,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
+cue_dictionary.checks.aabf47b1,haadyi,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
+cue_dictionary.checks.b267b865,haarari,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
+cue_dictionary.checks.a1b1ed49,anoti,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
+cue_dictionary.checks.e0b1f9c8,akati,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
+cue_dictionary.checks.e8da026b,vanoti,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
+cue_dictionary.checks.48b9e766,ndaona,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
+cue_dictionary.checks.971fafa8,ndakaona,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
+cue_dictionary.checks.dfa10ccc,ndakatarisa,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
+cue_dictionary.checks.96c04d30,ndayera,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
+cue_dictionary.checks.ce181186,ndakayera,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
+cue_dictionary.rules.07c6ed58,ndichadzoka,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
+cue_dictionary.checks.56908a81,ndichauya,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
+cue_dictionary.checks.2dd2bed7,nhasi,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
+cue_dictionary.checks.1aa96b8f,nezuro,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
+cue_dictionary.checks.2dac81d6,mangwana,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
+cue_dictionary.rules.f3619af6,svondo rinouya,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
+cue_dictionary.rules.b05137c7,kwemazuva,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
+cue_dictionary.rules.64a9d883,kwemavhiki,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
+cue_dictionary.rules.aea439aa,kwemakore,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
+cue_dictionary.rules.105d529a,makore,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
+cue_dictionary.rules.45b27768,kwevhiki,adopted,"user-supplied proposal, not clinician validated",Added in round 1.,r1
+cue_dictionary.rules.ee0a94b5,vhiki rinouya,adopted,"user-supplied proposal, not clinician validated",Added in round 1.,r1
+cue_dictionary.rules.f7108a89,mbuya,adopted,"user-supplied proposal, not clinician validated",Added in round 1.,r1
+cue_dictionary.rules.6680781f,muchengeti,adopted,"user-supplied proposal, not clinician validated",Added in round 1.,r1
+cue_dictionary.rules.3dacdecd,ndichauya zvakare,adopted,"user-supplied proposal, not clinician validated",Added in round 1.,r1
+cue_dictionary.rules.59e1091b,ndichadzokera,adopted,"user-supplied proposal, not clinician validated",Added in round 1.,r1
+cue_dictionary.checks.f243b454,ndichadzokera,adopted,"user-supplied proposal, not clinician validated",Added in round 1.,r1
+cue_dictionary.rules.e48a19fa,tichadzoka,adopted,"user-supplied proposal, not clinician validated",Added in round 1.,r1
+cue_dictionary.checks.3a8376a5,ndakacherechedza,adopted,"user-supplied proposal, not clinician validated",Added in round 1.,r1
+cue_dictionary.checks.c1786136,ndakaongorora,adopted,"user-supplied proposal, not clinician validated",Added in round 1.,r1
+cue_dictionary.checks.a97bcff1,anenge achiti,adopted,"user-supplied proposal, not clinician validated",Added in round 1.,r1
+cue_dictionary.checks.f391d016,tichaongorora,adopted,"user-supplied proposal, not clinician validated",Added in round 1.,r1
+synthetic_example_dev.eval.ae89c0bf,Mwana SYN-1002 ane makore maviri. Anogara kuMutoko. Amai vanoti haadyi zvakanaka kwevhiki rimwe. Ndakaona kuti akaonda. Ndichadzoka svondo rinouya.,adopted,"user-supplied proposal, not clinician validated",New versioned example R1-1 in eval/cases.reviewer-r1.dev.json; original D2 frozen and unchanged.,r1
+term.unknown,Hazvizivikanwi,adopted,"user-supplied proposal, not clinician validated",Leave the field empty when not stated (siya pasina kana zvisina kutaurwa). No current UI string.,r1
+term.loading,Zviri kuvhurwa,provisional,"user-supplied proposal, not clinician validated",Opening vs processing context unclear.,r1
+term.vhw,Mushandi Wehutano Wemumusha,provisional,"user-supplied proposal, not clinician validated",Official title unverified.,r1
+term.rash,mapundu paganda / rash,provisional,"user-supplied proposal, not clinician validated",Not used in symptom rules.,r1
+term.dizziness,dzungu / kutenderera musoro,provisional,"user-supplied proposal, not clinician validated",Needs symptom distinction; not used in rules.,r1
+term.kuzvimba,kuzvimba (swelling),provisional,"user-supplied proposal, not clinician validated",Proposed; not added to rules.,r1
+term.carer_reports,amai vanoti / baba vanoti / mbuya vanoti / muchengeti anoti,adopted,"user-supplied proposal, not clinician validated",Carer report cues.,r1
+term.vague_none,Hapana chakaonekwa,adopted,"user-supplied proposal, not clinician validated",Vague; never turned into a specific negative finding.,r1
