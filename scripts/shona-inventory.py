@@ -34,6 +34,8 @@ NON_UI = re.compile(r"^(?:[a-z0-9_.:/@#\-\[\]]+|[A-Z_]+|https?://.*|.*\.(?:ts|ts
 SPLIT_FRAGMENTS = {"Account created for",
     ". Open the confirmation link sent to that address, then sign in here. You can keep capturing offline meanwhile.",
     "Signed in as"}
+CATEGORY_MESSAGES = [('network', 'Check Wi-Fi and retry; files already downloaded are kept.'), ('cache', 'Retry. If it repeats, Remove model files and download again.'), ('quota', 'Free up phone storage or browser site data, then retry.'), ('worker', 'Reload the page and retry. If it repeats, this browser may not support it.'), ('model_init', 'The device could not start the model. Try Compatibility / CPU mode, close other apps, then retry.'), ('verification', 'The model loaded but failed its test. Retry; if it repeats, Remove model files and download again.'), ('timeout', 'It stopped making progress. Retry on stable Wi-Fi; downloaded files are kept.'), ('unknown', 'Retry. If it repeats, copy the diagnostic and share it.')]
+SPLIT_FRAGMENTS |= {m for _, m in CATEGORY_MESSAGES}
 rows, seen = [], set()
 
 
@@ -249,6 +251,7 @@ MANUAL_TEMPLATES = [
  ("manual.sync.done_rejected", "sync", ", {rejected} rejected", "optional insert in manual.sync.done", PH),
  ("manual.sync.done_last_error", "sync", " — last error: {errorMessage}", "optional insert in manual.sync.done · {errorMessage} raw", PH),
 ]
+MANUAL_TEMPLATES += [(f"manual.ai.next_step.{c}", "error", m, f"src/lib/ai-model.ts NEXT_STEP · stable advice shown for error category '{c}' — replaces raw third-party error text for the user", "[P1] Stable category message; raw browser/library errors are shown only in the diagnostic and are not translated.") for c, m in CATEGORY_MESSAGES]
 for k, cat, en, ctx, notes in MANUAL_TEMPLATES:
     rows.append({"key": k, "category": cat, "english_source_meaning": en, "current_shona_draft": "",
                  "reviewer_proposed_shona": "", "context_placeholders": "hand-written full template · " + ctx, "notes": notes})
