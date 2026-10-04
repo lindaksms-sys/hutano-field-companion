@@ -16,19 +16,34 @@ export const SHONA_CUES = {
   ageYears: ["makore"], // "ane makore 4" = has 4 years
   ageMonths: ["mwedzi"],
   numbers: { rimwe: 1, mumwe: 1, maviri: 2, mbiri: 2, matatu: 3, mana: 4, mashanu: 5, matanhatu: 6, manomwe: 7, masere: 8, mapfumbamwe: 9, gumi: 10 } as Record<string, number>,
-  durationPrefixes: ["kwemazuva", "kwemavhiki", "kwesvondo", "kwemasvondo", "kwemwedzi", "kwemakore", "kwenguva"],
+  durationPrefixes: ["kwemazuva", "kwemavhiki", "kwevhiki", "kwesvondo", "kwemasvondo", "kwemwedzi", "kwemakore", "kwenguva"],
   livesIn: ["anogara", "anobva"],
-  otherPerson: ["amai", "baba", "mukoma", "hanzvadzi", "sekuru", "ambuya", "murume", "mukadzi", "tete", "babamunini"],
-  followUp: ["ndichadzoka", "dzoka", "achadzoka", "svondo rinouya"],
+  otherPerson: ["amai", "baba", "mbuya", "mukoma", "hanzvadzi", "sekuru", "ambuya", "tete", "babamunini", "muchengeti"],
+  // mukadzi = woman OR wife, murume = man OR husband (review round 1). Other person only with an explicit
+  // relationship word ("mukadzi wake"); with several people in the sentence and no relation → abstain.
+  ambiguousPerson: ["mukadzi", "murume"],
+  followUp: ["ndichadzoka", "dzoka", "achadzoka", "svondo rinouya", "vhiki rinouya", "ndichauya zvakare", "ndichadzokera", "tichadzoka"],
 } as const;
 
 const EN_NUM = "one|two|three|four|five|six|seven|eight|nine|ten|a|an";
-const SN_NUM = Object.keys(SHONA_CUES.numbers).join("|");
+// "gumi nemaviri" (12) must be matched whole, never truncated to "gumi" (10). Values are kept as written.
+const SN_UNITS = Object.keys(SHONA_CUES.numbers).filter((w) => w !== "gumi");
+const SN_NUM = `gumi(?:\\s+ne(?:${SN_UNITS.join("|")}))?|${SN_UNITS.join("|")}`;
+const AMBIG_PERSON = new RegExp(`\\b(${SHONA_CUES.ambiguousPerson.join("|")})\\b`, "i");
+const AMBIG_RELATION = new RegExp(`\\b(?:${SHONA_CUES.ambiguousPerson.join("|")})\\s+(?:wake|wangu|wako|wavo|wedu|wa[A-Z]\\w*)\\b`, "i");
+const PERSON_NOUN = /\b(mwana|mukomana|musikana|murwere|child|baby|boy|girl|patient)\b/i;
+/** "other" = explicit relationship; "unresolved" = ambiguous word alongside another person; null = not involved. */
+function ambiguousPerson(seg: Segment, idx: number): "other" | "unresolved" | null {
+  const before = seg.text.slice(0, idx);
+  if (!AMBIG_PERSON.test(before)) return null;
+  if (AMBIG_RELATION.test(seg.text)) return "other";
+  return PERSON_NOUN.test(seg.text) ? "unresolved" : null;
+}
 const OTHER_PERSON = new RegExp(
   `\\b(mother|father|mum|mom|dad|sister|brother|husband|wife|grandmother|grandfather|aunt|uncle|caregiver|carer|neighbou?r|${SHONA_CUES.otherPerson.join("|")})\\b`,
   "i",
 );
-const FOLLOWUP = /\b(return|review|revisit|come back|follow[- ]?up|next visit|next week|due|ndichadzoka|achadzoka|dzoka)\b/i;
+const FOLLOWUP = /\b(return|review|revisit|come back|follow[- ]?up|next visit|next week|due|ndichadzoka|achadzoka|dzoka|ndichadzokera|tichadzoka|ndichauya zvakare|rinouya)\b/i;
 const MONTHS = "jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?";
 
 interface Hit {
@@ -72,7 +87,13 @@ export function rulePatientCode(segs: Segment[], narrative: string) {
 }
 
 export function ruleAge(segs: Segment[], narrative: string) {
-  const notOther = (m: RegExpExecArray, seg: Segment) => !OTHER_PERSON.test(clauseBefore(seg, m.index) + m[0]);
+  let unresolved = false;
+  const notOther = (m: RegExpExecArray, seg: Segment) => {
+    if (OTHER_PERSON.test(clauseBefore(seg, m.index) + m[0])) return false;
+    const a = ambiguousPerson(seg, m.index);
+    if (a === "unresolved") unresolved = true;
+    return a === null;
+  };
   const hits = [
     // "4 years old", "18 months old", "4-year-old", "4 yrs old"
     ...scan(segs, /\b(\d{1,3}(?:\.\d)?)[- ](years?|yrs?|months?|weeks?)[- ]old\b/i, (m) => ({ text: m[0], idx: 0 }), notOther),
@@ -83,6 +104,7 @@ export function ruleAge(segs: Segment[], narrative: string) {
     // Shona (draft): "ane makore 4", "ane makore mana", "ane mwedzi 9"
     ...scan(segs, new RegExp(`\\bane\\s+((?:makore|mwedzi)\\s+(?:\\d{1,3}|${SN_NUM}))\\b`, "i"), (m) => ({ text: m[1]!, idx: m[0].indexOf(m[1]!) }), notOther),
   ];
+  if (unresolved) return null; // woman/wife or man/husband next to another person: abstain
   return single(hits, narrative);
 }
 
@@ -113,7 +135,7 @@ export function ruleLocation(segs: Segment[], narrative: string) {
     // "Chikore village", "Mutasa ward"
     ...scan(segs, new RegExp(`${place}\\s+(?:village|ward)\\b`), (m) => (okPlace(m[1]!) && !/^(The|In|At|From|Of)$/.test(m[1]!) ? { text: m[0], idx: 0 } : null)),
     // "lives in Mutasa", "from Chikore" (English); "Anogara Mutasa", "anogara kuMutasa" (draft Shona)
-    ...scan(segs, new RegExp(`\\b(?:[Ll]ives in|[Ll]ives at|[Rr]esides in|[Ff]rom|${SHONA_CUES.livesIn.map((w) => `[${w[0]!.toUpperCase()}${w[0]}]${w.slice(1)}`).join("|")})\\s+(?:ku|mu|kwa)?${place}`), (m) => (okPlace(m[1]!) && !/\s(village|ward)$/i.test(m[1]!) ? { text: m[1]!, idx: m[0].lastIndexOf(m[1]!) } : null), (m, seg) => !OTHER_PERSON.test(clauseBefore(seg, m.index))),
+    ...scan(segs, new RegExp(`\\b(?:[Ll]ives in|[Ll]ives at|[Rr]esides in|[Ff]rom|${SHONA_CUES.livesIn.map((w) => `[${w[0]!.toUpperCase()}${w[0]}]${w.slice(1)}`).join("|")})\\s+(?:ku|mu|kwa)?${place}`), (m) => (okPlace(m[1]!) && !/\s(village|ward)$/i.test(m[1]!) ? { text: m[1]!, idx: m[0].lastIndexOf(m[1]!) } : null), (m, seg) => !OTHER_PERSON.test(clauseBefore(seg, m.index)) && !AMBIG_RELATION.test(clauseBefore(seg, m.index))),
   ];
   // "Chikore village" and "Chikore" for the same place: keep the longer labelled form.
   const merged = hits.filter((h) => !hits.some((o) => o !== h && o.value.length > h.value.length && o.value.toLowerCase().includes(h.value.toLowerCase())));

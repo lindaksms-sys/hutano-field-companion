@@ -17,7 +17,9 @@ import csv, hashlib, json, re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-OUT = ROOT / "docs" / "shona-translation.csv"
+import os
+OUT = Path(os.environ["HUTANO_INVENTORY_OUT"]) if os.environ.get("HUTANO_INVENTORY_OUT") else ROOT / "docs" / "shona-translation.csv"
+OVERLAY = ROOT / "docs" / "shona-review-overlay.csv"
 COLS = ["key", "category", "english_source_meaning", "current_shona_draft", "reviewer_proposed_shona", "context_placeholders", "notes"]
 
 UI_FILES = sorted(
@@ -148,14 +150,17 @@ cue_meaning = {
     "makore": "years (age: 'ane makore 4' = is 4 years old)", "mwedzi": "months (age in months)",
     "rimwe": "one", "mumwe": "one (other noun class)", "maviri": "two", "mbiri": "two (other class)", "matatu": "three",
     "mana": "four", "mashanu": "five", "matanhatu": "six", "manomwe": "seven", "masere": "eight", "mapfumbamwe": "nine", "gumi": "ten",
-    "kwemazuva": "for … days (duration)", "kwemavhiki": "for … weeks", "kwesvondo": "for … week", "kwemasvondo": "for … weeks",
+    "kwemazuva": "for … days (duration)", "kwesvondo": "for … week", "kwemasvondo": "for … weeks",
     "kwemwedzi": "for … months", "kwemakore": "for … years (duration, NOT age)", "kwenguva": "for a period of",
     "anogara": "lives (at/in)", "anobva": "comes from", "amai": "mother", "baba": "father", "mukoma": "older sibling",
     "hanzvadzi": "sibling of opposite sex", "sekuru": "grandfather / maternal uncle", "ambuya": "grandmother",
-    "murume": "man OR husband (ambiguous; currently treated as another person -> over-abstains)",
-    "mukadzi": "woman OR wife (ambiguous; currently treated as another person -> over-abstains)",
+    "murume": "man OR husband (ambiguous; another person only with an explicit relationship word, else abstain)",
+    "mukadzi": "woman OR wife (ambiguous; another person only with an explicit relationship word, else abstain)",
     "tete": "paternal aunt", "babamunini": "father's younger brother", "ndichadzoka": "I will come back (worker follow-up)",
     "dzoka": "come back / return", "achadzoka": "he/she will come back", "svondo rinouya": "next week",
+    "kwevhiki": "for … week (vhiki spelling)", "kwemavhiki": "for … weeks (vhiki spelling)", "vhiki rinouya": "next week (vhiki spelling)", "mbuya": "grandmother (mbuya spelling)", "muchengeti": "carer / caregiver",
+    "ndichauya zvakare": "I will come again (worker follow-up)", "ndichadzokera": "I will return to (worker follow-up)",
+    "tichadzoka": "we will come back (worker follow-up)",
 }
 cues = re.search(r"SHONA_CUES = \{([\s\S]*?)\} as const;", rules).group(1)
 for w in sorted(set(re.findall(r'"([a-z][a-z ]+)"', cues)) | set(re.findall(r"\b([a-z]+):\s*\d", cues))):
@@ -165,10 +170,11 @@ extra = {
     "vanoti": "they say (respectful; carer reports)", "anoti": "he/she says (patient reports)", "akati": "he/she said",
     "vakati": "they said (respectful)", "anochema": "complains / cries of", "anonyunyuta": "complains of", "ari kunzwa": "is feeling",
     "ndaona": "I have seen/observed (worker observation)", "ndakaona": "I saw (worker observation)", "ndakatarisa": "I looked at/checked",
-    "ndayera": "I have measured", "ndakayera": "I measured", "hapana": "there is no / none (negation)", "hakuna": "there is none (negation)",
+    "ndayera": "I have measured", "ndakayera": "I measured", "ndakacherechedza": "I noticed (worker observation)", "ndakaongorora": "I examined/checked (worker observation)",
+    "anenge achiti": "he/she was saying (report; role must be explicit)", "tichaongorora": "we will check/examine (worker follow-up, context)", "hapana": "there is no / none (negation)", "hakuna": "there is none (negation)",
     "haana": "he/she does not have (negation)", "ndichauya": "I will come", "ndichadzokera": "I will return to", "rinouya": "coming/next",
-    "tichaona": "we will see (follow-up)", "kurwara": "to be sick", "ari kurwara": "is sick", "rwadzo": "pain", "kurwadza": "to hurt",
-    "anorwadza": "it hurts", "chikosoro": "cough", "manyoka": "diarrhoea", "fivha": "fever", "musoro": "head / headache",
+    "tichaona": "we will see (too vague alone; not a follow-up cue)", "kurwara": "to be sick", "ari kurwara": "is sick", "rwadzo": "pain", "kurwadza": "to hurt",
+    "anorwadza": "hurts (not a universal 'it hurts'; no longer a problem cue)", "chikosoro": "cough", "manyoka": "diarrhoea", "fivha": "fever", "musoro": "head (alone NOT a headache cue)", "kurwadziwa": "being in pain (kurwadziwa nemusoro = headache)",
     "dzihwa": "cold / runny nose", "kurutsa": "vomiting", "haadyi": "does not eat", "haarari": "does not sleep",
     "nhasi": "today", "nezuro": "yesterday", "kubva nezuro": "since yesterday (duration)", "mangwana": "tomorrow",
     "akazvarwa": "was born", "musha": "village / home", "dunhu": "ward / district", "zuva": "day / date", "mwana": "child",
@@ -268,6 +274,19 @@ P1_TEXT = {
 P1_CATS = {"i18n_core", "meaning_distinction"}
 P1_CUES = {"makore", "mwedzi", "kwemazuva", "kwesvondo", "kwemakore", "anogara", "amai", "baba", "mukadzi", "murume",
            "vanoti", "anoti", "ndaona", "ndakaona", "hapana", "hakuna", "ndichadzoka", "nhasi", "nezuro", "musha", "dunhu", "mwana", "murwere"}
+# Durable reviewer overlay: keyed by stable ID, merged on every regeneration so reviewer text is never lost.
+if OVERLAY.exists():
+    by_key = {x["key"]: x for x in rows}
+    with OVERLAY.open(encoding="utf-8", newline="") as f:
+        for o in csv.DictReader(f):
+            if o["key"].startswith("term."):
+                continue  # reviewer term with no current UI string; kept in the overlay/report only
+            if o["key"] not in by_key:
+                raise SystemExit(f"overlay key not in inventory (English text changed?): {o['key']}")
+            row = by_key[o["key"]]
+            row["reviewer_proposed_shona"] = o["reviewer_proposed_shona"]
+            tag = f"[review {o['round']}: {o['review_status']}; {o['attribution']}]"
+            row["notes"] = (row["notes"] + " " + tag + (" " + o["review_note"] if o["review_note"] else "")).strip()
 for r in rows:
     if r["english_source_meaning"] in P1_TEXT or r["category"] in P1_CATS or (r["category"] == "cue_dictionary" and r["current_shona_draft"] in P1_CUES):
         if not r["notes"].startswith("[P1]"):

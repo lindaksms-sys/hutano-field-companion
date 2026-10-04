@@ -1,3 +1,4 @@
+import { useI18n } from "@/lib/i18n";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { StatusPill } from "@/components/StatusPill";
@@ -9,6 +10,7 @@ import { useAiState } from "@/lib/use-ai";
 const mb = (n: number) => `${Math.round(n / 1e6)} MB`;
 
 export function AiModelPanel() {
+  const { tl } = useI18n();
   const ai = useAiState();
   const [free, setFree] = useState<number | null>(null);
   const [confirm, setConfirm] = useState(false);
@@ -104,7 +106,7 @@ export function AiModelPanel() {
           </div>
         )}
         {(ai.kind === "downloading" || ai.kind === "initializing") && (
-          <Button variant="outline" className="h-12" onClick={() => void cancelInstall()}>Cancel</Button>
+          <Button variant="outline" className="h-12" onClick={() => void cancelInstall()}>{tl("Cancel")}</Button>
         )}
         {(ai.kind === "ready" || ai.kind === "error" || ai.kind === "not_downloaded") && (
           <Button variant="outline" className="h-12" onClick={() => void removeModel()}>Remove model files</Button>

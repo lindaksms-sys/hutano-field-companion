@@ -2,8 +2,10 @@ import { Link } from "@tanstack/react-router";
 import type { EncounterRecord } from "@/domain/types";
 import { LANG_LABELS, REVIEW_LABELS, SYNC_LABELS } from "@/lib/labels";
 import { StatusPill } from "./StatusPill";
+import { useI18n } from "@/lib/i18n";
 
 export function EncounterCard({ r }: { r: EncounterRecord }) {
+  const { tl } = useI18n();
   return (
     <Link
       to="/encounters/$id"
@@ -13,7 +15,7 @@ export function EncounterCard({ r }: { r: EncounterRecord }) {
       <div className="flex flex-wrap items-center gap-2">
         <span className="font-bold">{r.fields.patientCode.value ?? "No patient code"}</span>
         <StatusPill tone={r.reviewStatus === "verified" ? "success" : r.reviewStatus === "draft" ? "neutral" : "pending"}>
-          {REVIEW_LABELS[r.reviewStatus]}
+          {tl(REVIEW_LABELS[r.reviewStatus])}
         </StatusPill>
         {r.isSynthetic && <StatusPill>Synthetic</StatusPill>}
         {r.ownerId === null && <StatusPill tone="pending">Unowned demo</StatusPill>}

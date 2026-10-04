@@ -1,0 +1,74 @@
+{
+  "synthetic": true,
+  "version": "reviewer-r1",
+  "split": "development",
+  "note": "USER-REVIEWED DEVELOPMENT examples (Shona review round 1, user-supplied proposal, not clinician validated). Synthetic only. NOT held-out accuracy evidence: these were written alongside the rule changes they test. The frozen eval/cases.heldout.json and eval/cases.dev.json are unchanged. Each expected field is null (not stated) or a list of accepted exact substrings; narratives are never edited or normalized.",
+  "fields": ["patientCode", "age", "location", "encounterDate", "concern", "duration", "observations", "followUp"],
+  "cases": [
+    {
+      "id": "R1-1",
+      "language": "sn",
+      "provisionalGold": true,
+      "derivedFrom": "D2 (eval/cases.dev.json, unchanged): reviewer wording 'makore maviri', 'kwevhiki rimwe'",
+      "notes": "carer report (amai vanoti) vs worker observation (ndakaona) vs explicit worker follow-up (ndichadzoka)",
+      "narrative": "Mwana SYN-1002 ane makore maviri. Anogara kuMutoko. Amai vanoti haadyi zvakanaka kwevhiki rimwe. Ndakaona kuti akaonda. Ndichadzoka svondo rinouya.",
+      "expected": { "patientCode": ["SYN-1002"], "age": ["makore maviri"], "location": ["Mutoko"], "encounterDate": null, "concern": ["Amai vanoti haadyi zvakanaka kwevhiki rimwe."], "duration": ["kwevhiki rimwe"], "observations": ["Ndakaona kuti akaonda."], "followUp": ["Ndichadzoka svondo rinouya."] }
+    },
+    {
+      "id": "R1-2",
+      "language": "sn",
+      "provisionalGold": true,
+      "notes": "compound number 'gumi nemaviri' (12) must not be cut to 'gumi'; headache = kurwadziwa nemusoro; age vs duration",
+      "narrative": "Mukomana ane makore gumi nemaviri anonyunyuta nekurwadziwa nemusoro kubva nezuro.",
+      "expected": { "patientCode": null, "age": ["makore gumi nemaviri"], "location": null, "encounterDate": null, "concern": ["Mukomana ane makore gumi nemaviri anonyunyuta nekurwadziwa nemusoro kubva nezuro."], "duration": ["kubva nezuro"], "observations": null, "followUp": null }
+    },
+    {
+      "id": "R1-3",
+      "language": "sn",
+      "provisionalGold": true,
+      "notes": "'anonzi' introduces the code; headache cue present, no reporter stated",
+      "narrative": "Mwana anonzi SYN-2010. Ari kurwadziwa nemusoro.",
+      "expected": { "patientCode": ["SYN-2010"], "age": null, "location": null, "encounterDate": null, "concern": ["Ari kurwadziwa nemusoro."], "duration": null, "observations": null, "followUp": null }
+    },
+    {
+      "id": "R1-4",
+      "language": "sn",
+      "provisionalGold": true,
+      "notes": "'Anoti' = he/she says; role not assumed to be the patient; 'ane kurwadziwa' is not an age",
+      "narrative": "Anoti ane kurwadziwa kwemudumbu kwemazuva matatu.",
+      "expected": { "patientCode": null, "age": null, "location": null, "encounterDate": null, "concern": ["Anoti ane kurwadziwa kwemudumbu kwemazuva matatu."], "duration": ["kwemazuva matatu"], "observations": null, "followUp": null }
+    },
+    {
+      "id": "R1-5",
+      "language": "sn",
+      "provisionalGold": true,
+      "notes": "worker observation only (ndaona); no concern stated",
+      "narrative": "Ndaona kuti ari kufema zvakanaka.",
+      "expected": { "patientCode": null, "age": null, "location": null, "encounterDate": null, "concern": null, "duration": null, "observations": ["Ndaona kuti ari kufema zvakanaka."], "followUp": null }
+    },
+    {
+      "id": "R1-6",
+      "language": "sn",
+      "provisionalGold": true,
+      "notes": "mukadzi = woman (patient), no relationship word: age is kept",
+      "narrative": "Mukadzi ane makore 25. Anogara kuNyanga.",
+      "expected": { "patientCode": null, "age": ["makore 25"], "location": ["Nyanga"], "encounterDate": null, "concern": null, "duration": null, "observations": null, "followUp": null }
+    },
+    {
+      "id": "R1-7",
+      "language": "sn",
+      "provisionalGold": true,
+      "notes": "'mukadzi wake' = his wife (explicit relationship): another person's age, abstain",
+      "narrative": "Mukadzi wake ane makore 30.",
+      "expected": { "patientCode": null, "age": null, "location": null, "encounterDate": null, "concern": null, "duration": null, "observations": null, "followUp": null }
+    },
+    {
+      "id": "R1-8",
+      "language": "sn",
+      "provisionalGold": true,
+      "notes": "child and murume in one sentence, relationship unresolved: abstain on age",
+      "narrative": "Mwana ane makore 3, murume ane makore 40.",
+      "expected": { "patientCode": null, "age": null, "location": null, "encounterDate": null, "concern": null, "duration": null, "observations": null, "followUp": null }
+    }
+  ]
+}
