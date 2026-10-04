@@ -76,6 +76,8 @@ def ph_name(expr: str) -> str:
 CODEY = re.compile(r";|=>|useState|Promise|const |\|\||&&|\s=\s|\]\+|\(\)|\)\.|typeof |\bvoid\b|null\)")
 def user_facing(s: str) -> bool:
     s = s.strip()
+    if s.startswith((":", "width=")) or "===" in s or s in ("Linda Kisimisi",):
+        return False
     if CODEY.search(s) or re.match(r"^[A-Z]{2,5}-\d+$", s):
         return False
     if len(s) < 2 or not re.search(r"[A-Za-z]{2}", s) or NON_UI.match(s):
@@ -207,12 +209,30 @@ for split in ("dev", "heldout"):
             add(f"synthetic_example_{split}", "eval", c["narrative"], c["narrative"], f"eval/cases.{split}.json {c['id']} ({c['language']}) · {c['notes']}",
                 "FROZEN benchmark original. Proposed rewording goes into a NEW versioned file; existing metrics are never silently changed.")
 
+# Priority batch 1: core workflow + meanings/cues. Marked in notes and sorted first.
+P1_TEXT = {
+    "Patient code", "Age (with units if stated)", "Village / ward", "Encounter date", "Reported concern", "Stated duration",
+    "Worker-recorded observations", "Follow-up notes (worker-entered)", "Empty", "Suggestion pending", "Accepted",
+    "Edited by worker", "Not recorded", "Draft", "Needs review", "Verified", "Accept suggestion", "Mark not recorded",
+    "Verify record", "Save changes", "Original narrative", "Reason (e.g. not stated by client)",
+    "Unknown — leave empty if not stated", "I reviewed every field against the original narrative and confirm this record is accurate.",
+    "What happened during the visit?", "Use synthetic data only. Do not enter real names or identifiers.",
+    "Save draft & fill in manually", "On this device only", "Verified — waiting to upload", "Synced", "Sync now",
+}
+P1_CATS = {"i18n_core", "meaning_distinction"}
+P1_CUES = {"makore", "mwedzi", "kwemazuva", "kwesvondo", "kwemakore", "anogara", "amai", "baba", "mukadzi", "murume",
+           "vanoti", "anoti", "ndaona", "ndakaona", "hapana", "hakuna", "ndichadzoka", "nhasi", "nezuro", "musha", "dunhu", "mwana", "murwere"}
+for r in rows:
+    if r["english_source_meaning"] in P1_TEXT or r["category"] in P1_CATS or (r["category"] == "cue_dictionary" and r["current_shona_draft"] in P1_CUES):
+        r["notes"] = ("[P1] " + r["notes"]).strip()
+rows.sort(key=lambda r: 0 if r["notes"].startswith("[P1]") else 1)
+
 OUT.parent.mkdir(parents=True, exist_ok=True)
 with OUT.open("w", encoding="utf-8", newline="") as f:
     w = csv.DictWriter(f, fieldnames=COLS)
     w.writeheader()
     w.writerows(rows)
 from collections import Counter
-print(len(rows), "rows")
+print(len(rows), "rows;", sum(r["notes"].startswith("[P1]") for r in rows), "priority-1")
 for k, v in sorted(Counter(r["category"] for r in rows).items()):
     print(f"  {k}: {v}")

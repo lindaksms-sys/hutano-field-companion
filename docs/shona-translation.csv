@@ -1,4 +1,88 @@
 key,category,english_source_meaning,current_shona_draft,reviewer_proposed_shona,context_placeholders,notes
+ui.labels.1c3416f3,ui,Patient code,,,src/lib/labels.ts · message string,[P1]
+ui.labels.7aef0776,ui,Age (with units if stated),,,src/lib/labels.ts · message string,[P1]
+ui.labels.9678cbce,ui,Village / ward,,,src/lib/labels.ts · message string,[P1]
+ui.labels.59d5b8d7,ui,Encounter date,,,src/lib/labels.ts · message string,[P1]
+ui.labels.18293422,ui,Reported concern,,,src/lib/labels.ts · message string,[P1]
+ui.labels.8e8ac3cc,ui,Stated duration,,,src/lib/labels.ts · message string,[P1]
+ui.labels.23908785,ui,Worker-recorded observations,,,src/lib/labels.ts · message string,[P1]
+ui.labels.efc70c54,ui,Follow-up notes (worker-entered),,,src/lib/labels.ts · message string,[P1]
+ui.labels.3159fe42,ui,Empty,,,src/lib/labels.ts · message string,[P1]
+review_states.labels.abb1a096,review_states,Suggestion pending,,,src/lib/labels.ts · message string,[P1]
+review_states.labels.61a0572c,review_states,Accepted,,,src/lib/labels.ts · message string,[P1]
+review_states.labels.ad5d0d0b,review_states,Edited by worker,,,src/lib/labels.ts · message string,[P1]
+review_states.labels.305cc364,review_states,Not recorded,,,src/lib/labels.ts · message string,[P1]
+review_states.labels.23d33e22,review_states,Draft,,,src/lib/labels.ts · message string,[P1]
+review_states.labels.33a506cf,review_states,Needs review,,,src/lib/labels.ts · message string,[P1]
+review_states.labels.aed3b8c6,review_states,Verified,,,src/lib/labels.ts · message string,[P1]
+ui.labels.dbcd4aa6,ui,On this device only,,,src/lib/labels.ts · message string,[P1]
+sync.labels.74cbfca3,sync,Verified — waiting to upload,,,src/lib/labels.ts · message string,[P1]
+sync.labels.b2ef6af6,sync,Synced,,,src/lib/labels.ts · message string,[P1]
+ui.encounters_id.222de262,ui,Original narrative,,,src/routes/encounters.$id.tsx · JSX text,[P1]
+auth.encounters_id.39cce9de,auth,I reviewed every field against the original narrative and confirm this record is accurate.,,,src/routes/encounters.$id.tsx · JSX text,[P1]
+review_states.encounters_id.43c7eed2,review_states,Verify record,,,src/routes/encounters.$id.tsx · JSX text,[P1]
+review_states.encounters_id.b9ba38cf,review_states,Accept suggestion,,,src/routes/encounters.$id.tsx · JSX text,[P1]
+review_states.encounters_id.98f6f045,review_states,Mark not recorded,,,src/routes/encounters.$id.tsx · JSX text,[P1]
+ui.encounters_id.0672523d,ui,Unknown — leave empty if not stated,,,src/routes/encounters.$id.tsx · placeholder attribute,[P1]
+ui.encounters_id.c6404149,ui,Reason (e.g. not stated by client),,,src/routes/encounters.$id.tsx · placeholder attribute,[P1]
+ui.encounters_id.179359b3,ui,Save changes,,,src/routes/encounters.$id.tsx · message string,[P1]
+review_states.encounters_index.33a506cf,review_states,Needs review,,,src/routes/encounters.index.tsx · message string,[P1]
+review_states.encounters_index.aed3b8c6,review_states,Verified,,,src/routes/encounters.index.tsx · message string,[P1]
+ui.encounters_new.1c9d6cd1,ui,What happened during the visit?,,,src/routes/encounters.new.tsx · JSX text,[P1]
+safety_privacy.encounters_new.b47630da,safety_privacy,Use synthetic data only. Do not enter real names or identifiers.,,,src/routes/encounters.new.tsx · placeholder attribute,[P1]
+review_states.encounters_new.f03ecc61,review_states,Save draft & fill in manually,,,src/routes/encounters.new.tsx · message string,[P1]
+review_states.index.aed3b8c6,review_states,Verified,,,src/routes/index.tsx · message string,[P1]
+sync.sync.2b7d938e,sync,Sync now,,,src/routes/sync.tsx · message string,[P1]
+i18n_core.i18n.70f8bb9a,i18n_core,Home,Kumba,,src/lib/i18n.tsx key home,[P1] Existing DRAFT Shona; confirm or replace.
+i18n_core.i18n.18817545,i18n_core,Encounters,Zvakanyorwa,,src/lib/i18n.tsx key encounters,[P1] Existing DRAFT Shona; confirm or replace.
+i18n_core.i18n.905f6309,i18n_core,Sync,Kutumira,,src/lib/i18n.tsx key sync,[P1] Existing DRAFT Shona; confirm or replace.
+i18n_core.i18n.c7f73bb5,i18n_core,Settings,Zvirongwa,,src/lib/i18n.tsx key settings,[P1] Existing DRAFT Shona; confirm or replace.
+i18n_core.i18n.57d05f4f,i18n_core,New encounter,Kunyora kutsva,,src/lib/i18n.tsx key newEncounter,[P1] Existing DRAFT Shona; confirm or replace.
+i18n_core.i18n.5b9f7c68,i18n_core,Device online,Paindaneti,,src/lib/i18n.tsx key online,[P1] Existing DRAFT Shona; confirm or replace.
+i18n_core.i18n.e01fa717,i18n_core,Offline,Hapana indaneti,,src/lib/i18n.tsx key offline,[P1] Existing DRAFT Shona; confirm or replace.
+i18n_core.i18n.dd2a3056,i18n_core,Local only,Pafoni chete,,src/lib/i18n.tsx key localOnly,[P1] Existing DRAFT Shona; confirm or replace.
+i18n_core.i18n.02fd3586,i18n_core,Prototype — synthetic demo data only. Do not enter real patient information.,Muedzo — data yekuedza chete. Musaisa ruzivo rwechokwadi rwevarwere.,,src/lib/i18n.tsx key prototype,[P1] Existing DRAFT Shona; confirm or replace.
+cue_dictionary.rules.5116e406,cue_dictionary,mother,amai,,src/domain/rules.ts SHONA_CUES (draft),[P1] Give common spellings/variants and whether the meaning is right in rural VHW notes.
+cue_dictionary.rules.35992aad,cue_dictionary,lives (at/in),anogara,,src/domain/rules.ts SHONA_CUES (draft),[P1] Give common spellings/variants and whether the meaning is right in rural VHW notes.
+cue_dictionary.rules.32c8bbff,cue_dictionary,father,baba,,src/domain/rules.ts SHONA_CUES (draft),[P1] Give common spellings/variants and whether the meaning is right in rural VHW notes.
+cue_dictionary.rules.aea439aa,cue_dictionary,"for … years (duration, NOT age)",kwemakore,,src/domain/rules.ts SHONA_CUES (draft),[P1] Give common spellings/variants and whether the meaning is right in rural VHW notes.
+cue_dictionary.rules.b05137c7,cue_dictionary,for … days (duration),kwemazuva,,src/domain/rules.ts SHONA_CUES (draft),[P1] Give common spellings/variants and whether the meaning is right in rural VHW notes.
+cue_dictionary.rules.20d82ccd,cue_dictionary,for … week,kwesvondo,,src/domain/rules.ts SHONA_CUES (draft),[P1] Give common spellings/variants and whether the meaning is right in rural VHW notes.
+cue_dictionary.rules.105d529a,cue_dictionary,years (age: 'ane makore 4' = is 4 years old),makore,,src/domain/rules.ts SHONA_CUES (draft),[P1] Give common spellings/variants and whether the meaning is right in rural VHW notes.
+cue_dictionary.rules.4ad55fa9,cue_dictionary,woman OR wife (ambiguous; currently treated as another person -> over-abstains),mukadzi,,src/domain/rules.ts SHONA_CUES (draft),[P1] Give common spellings/variants and whether the meaning is right in rural VHW notes.
+cue_dictionary.rules.27f71525,cue_dictionary,man OR husband (ambiguous; currently treated as another person -> over-abstains),murume,,src/domain/rules.ts SHONA_CUES (draft),[P1] Give common spellings/variants and whether the meaning is right in rural VHW notes.
+cue_dictionary.rules.148f98eb,cue_dictionary,months (age in months),mwedzi,,src/domain/rules.ts SHONA_CUES (draft),[P1] Give common spellings/variants and whether the meaning is right in rural VHW notes.
+cue_dictionary.rules.07c6ed58,cue_dictionary,I will come back (worker follow-up),ndichadzoka,,src/domain/rules.ts SHONA_CUES (draft),[P1] Give common spellings/variants and whether the meaning is right in rural VHW notes.
+cue_dictionary.checks.e8da026b,cue_dictionary,they say (respectful; carer reports),vanoti,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"[P1] Used only to filter/abstain, never to create values. Add variants and correct meaning."
+cue_dictionary.checks.a1b1ed49,cue_dictionary,he/she says (patient reports),anoti,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"[P1] Used only to filter/abstain, never to create values. Add variants and correct meaning."
+cue_dictionary.checks.48b9e766,cue_dictionary,I have seen/observed (worker observation),ndaona,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"[P1] Used only to filter/abstain, never to create values. Add variants and correct meaning."
+cue_dictionary.checks.971fafa8,cue_dictionary,I saw (worker observation),ndakaona,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"[P1] Used only to filter/abstain, never to create values. Add variants and correct meaning."
+cue_dictionary.checks.5b85e8bf,cue_dictionary,there is no / none (negation),hapana,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"[P1] Used only to filter/abstain, never to create values. Add variants and correct meaning."
+cue_dictionary.checks.3956b035,cue_dictionary,there is none (negation),hakuna,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"[P1] Used only to filter/abstain, never to create values. Add variants and correct meaning."
+cue_dictionary.checks.2dd2bed7,cue_dictionary,today,nhasi,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"[P1] Used only to filter/abstain, never to create values. Add variants and correct meaning."
+cue_dictionary.checks.1aa96b8f,cue_dictionary,yesterday,nezuro,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"[P1] Used only to filter/abstain, never to create values. Add variants and correct meaning."
+cue_dictionary.checks.cac047ee,cue_dictionary,village / home,musha,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"[P1] Used only to filter/abstain, never to create values. Add variants and correct meaning."
+cue_dictionary.checks.28ab6a25,cue_dictionary,ward / district,dunhu,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"[P1] Used only to filter/abstain, never to create values. Add variants and correct meaning."
+cue_dictionary.checks.0e93069c,cue_dictionary,child,mwana,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"[P1] Used only to filter/abstain, never to create values. Add variants and correct meaning."
+cue_dictionary.checks.b1b0b8de,cue_dictionary,patient,murwere,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"[P1] Used only to filter/abstain, never to create values. Add variants and correct meaning."
+meaning_distinction.concepts.a2f9ad19,meaning_distinction,Missing: the note does not say it (field empty),,,Concept for parsers and UI wording,[P1] Distinguish from 'not recorded' and from a negative finding.
+meaning_distinction.concepts.cf267697,meaning_distinction,"Not recorded: worker confirms it was not recorded, with a reason",,,Concept for parsers and UI wording,[P1] Different from missing and from 'no fever'.
+meaning_distinction.concepts.ea68bcba,meaning_distinction,"Negative finding: checked and absent, e.g. 'no fever' / 'Hapana fivha'",,,Concept for parsers and UI wording,[P1] Must stay a statement of absence.
+meaning_distinction.concepts.0c01dc8d,meaning_distinction,Patient (the person being seen),,,Concept for parsers and UI wording,[P1] Who the record is about.
+meaning_distinction.concepts.9511673a,meaning_distinction,Carer / caregiver (reports on behalf of the patient),,,Concept for parsers and UI wording,[P1] e.g. amai vanoti.
+meaning_distinction.concepts.dfe9f090,meaning_distinction,Health worker / VHW (the person writing the note),,,Concept for parsers and UI wording,"[P1] First person ndaona, ndichadzoka."
+meaning_distinction.concepts.9c9f742a,meaning_distinction,Age of the patient (e.g. 4 years old / ane makore 4),,,Concept for parsers and UI wording,[P1] Never confuse with duration.
+meaning_distinction.concepts.8269c9a6,meaning_distinction,Duration of the problem (e.g. for 3 days / kwemazuva matatu),,,Concept for parsers and UI wording,[P1] Never confuse with age; kwemakore = for years.
+meaning_distinction.concepts.a6b2c472,meaning_distinction,Woman vs wife (mukadzi),,,Concept for parsers and UI wording,[P1] How do VHWs write 'a woman aged 25' vs 'his wife'? Rules currently abstain.
+meaning_distinction.concepts.47add077,meaning_distinction,Man vs husband (murume),,,Concept for parsers and UI wording,[P1] Same question as mukadzi.
+meaning_distinction.concepts.c1cb7c45,meaning_distinction,"Yes / affirmed (e.g. ehe, hongu)",,,Concept for parsers and UI wording,[P1] Common affirmative spellings in notes.
+meaning_distinction.concepts.ca5c31fa,meaning_distinction,"No / denied (e.g. kwete, hapana, haana)",,,Concept for parsers and UI wording,[P1] Common negation forms.
+meaning_distinction.concepts.e79f5b70,meaning_distinction,Today / yesterday / tomorrow / next week / last week,,,Concept for parsers and UI wording,"[P1] nhasi, nezuro, mangwana, svondo rinouya, svondo rapera?"
+meaning_distinction.concepts.7028edbc,meaning_distinction,Lives in / comes from / at (village),,,Concept for parsers and UI wording,"[P1] anogara, anobva, ku-/mu- prefixes."
+meaning_distinction.concepts.f944fa95,meaning_distinction,Village / ward labels written in notes,,,Concept for parsers and UI wording,"[P1] musha, dunhu, Ward; common abbreviations."
+meaning_distinction.concepts.9ba58b11,meaning_distinction,Patient-reported problem (concern),,,Concept for parsers and UI wording,[P1] What the patient/carer says.
+meaning_distinction.concepts.d759610e,meaning_distinction,Worker-observed or measured finding (observation),,,Concept for parsers and UI wording,[P1] What the worker saw/measured.
+meaning_distinction.concepts.66b734bf,meaning_distinction,Explicit worker follow-up plan (not advice),,,Concept for parsers and UI wording,[P1] Only what the worker wrote they will do.
 ui.AiModelPanel.bae7d5be,ui,Status,,,src/components/AiModelPanel.tsx · JSX text,
 ui.AiModelPanel.820d6004,ui,Checking…,,,src/components/AiModelPanel.tsx · JSX text,
 offline_ai_install.AiModelPanel.5fe04f57,offline_ai_install,Not downloaded,,,src/components/AiModelPanel.tsx · JSX text,
@@ -117,27 +201,7 @@ ui.error-page.e2a25e6f,ui,This page didn't load,,,src/lib/error-page.ts · JSX t
 ui.error-page.c8accfd7,ui,Something went wrong on our end. You can try refreshing or head back home.,,,src/lib/error-page.ts · JSX text,
 ui.error-page.042c862e,ui,Try again,,,src/lib/error-page.ts · JSX text,
 ui.error-page.8007defd,ui,Go home,,,src/lib/error-page.ts · JSX text,
-ui.error-page.df3afd1d,ui,"width=device-width, initial-scale=1",,,src/lib/error-page.ts · message string,
 ui.hooks.0f6a9acd,ui,Local storage unavailable,,,src/lib/hooks.ts · message string,
-ui.labels.1c3416f3,ui,Patient code,,,src/lib/labels.ts · message string,
-ui.labels.7aef0776,ui,Age (with units if stated),,,src/lib/labels.ts · message string,
-ui.labels.9678cbce,ui,Village / ward,,,src/lib/labels.ts · message string,
-ui.labels.59d5b8d7,ui,Encounter date,,,src/lib/labels.ts · message string,
-ui.labels.18293422,ui,Reported concern,,,src/lib/labels.ts · message string,
-ui.labels.8e8ac3cc,ui,Stated duration,,,src/lib/labels.ts · message string,
-ui.labels.23908785,ui,Worker-recorded observations,,,src/lib/labels.ts · message string,
-ui.labels.efc70c54,ui,Follow-up notes (worker-entered),,,src/lib/labels.ts · message string,
-ui.labels.3159fe42,ui,Empty,,,src/lib/labels.ts · message string,
-review_states.labels.abb1a096,review_states,Suggestion pending,,,src/lib/labels.ts · message string,
-review_states.labels.61a0572c,review_states,Accepted,,,src/lib/labels.ts · message string,
-review_states.labels.ad5d0d0b,review_states,Edited by worker,,,src/lib/labels.ts · message string,
-review_states.labels.305cc364,review_states,Not recorded,,,src/lib/labels.ts · message string,
-review_states.labels.23d33e22,review_states,Draft,,,src/lib/labels.ts · message string,
-review_states.labels.33a506cf,review_states,Needs review,,,src/lib/labels.ts · message string,
-review_states.labels.aed3b8c6,review_states,Verified,,,src/lib/labels.ts · message string,
-ui.labels.dbcd4aa6,ui,On this device only,,,src/lib/labels.ts · message string,
-sync.labels.74cbfca3,sync,Verified — waiting to upload,,,src/lib/labels.ts · message string,
-sync.labels.b2ef6af6,sync,Synced,,,src/lib/labels.ts · message string,
 ui.labels.5b84cc8c,ui,Shona,,,src/lib/labels.ts · message string,
 ui.labels.649df08a,ui,English,,,src/lib/labels.ts · message string,
 ui.labels.c0dcb865,ui,Mixed,,,src/lib/labels.ts · message string,
@@ -153,8 +217,6 @@ ui.__root.e2a25e6f,ui,This page didn't load,,,src/routes/__root.tsx · JSX text,
 ui.__root.c8accfd7,ui,Something went wrong on our end. You can try refreshing or head back home.,,,src/routes/__root.tsx · JSX text,
 ui.__root.042c862e,ui,Try again,,,src/routes/__root.tsx · JSX text,
 ui.__root.e525a0da,ui,Hutano,,,src/routes/__root.tsx · title attribute,
-ui.__root.df3afd1d,ui,"width=device-width, initial-scale=1",,,src/routes/__root.tsx · message string,
-ui.__root.816dbbc6,ui,Linda Kisimisi,,,src/routes/__root.tsx · message string,
 auth.auth.d9e59da6,auth,Checking account…,,,src/routes/auth.tsx · JSX text,
 auth.auth.85dfa32c,auth,Account,,,src/routes/auth.tsx · JSX text,
 auth.auth.a02107c3,auth,Signed in as,,,src/routes/auth.tsx · JSX text,
@@ -182,18 +244,11 @@ ui.encounters_id.63fb6b19,ui,Back to encounters,,,src/routes/encounters.$id.tsx 
 review_states.encounters_id.641bb431,review_states,Review encounter,,,src/routes/encounters.$id.tsx · JSX text,
 ui.encounters_id.ce5a2f9e,ui,Unowned demo,,,src/routes/encounters.$id.tsx · JSX text,
 auth.encounters_id.b0df8ae9,auth,Adopt into my account,,,src/routes/encounters.$id.tsx · JSX text,
-ui.encounters_id.222de262,ui,Original narrative,,,src/routes/encounters.$id.tsx · JSX text,
 ui.encounters_id.19ae22ef,ui,Edit narrative,,,src/routes/encounters.$id.tsx · JSX text,
 safety_privacy.encounters_id.b6cac8da,safety_privacy,"Documentation completeness only — not clinical advice. If information was not recorded, mark it as such.",,,src/routes/encounters.$id.tsx · JSX text,
 ui.encounters_id.fd3d0f9c,ui,All fields filled or acknowledged.,,,src/routes/encounters.$id.tsx · JSX text,
 ui.encounters_id.29267269,ui,Unsaved changes,,,src/routes/encounters.$id.tsx · JSX text,
-auth.encounters_id.39cce9de,auth,I reviewed every field against the original narrative and confirm this record is accurate.,,,src/routes/encounters.$id.tsx · JSX text,
-review_states.encounters_id.43c7eed2,review_states,Verify record,,,src/routes/encounters.$id.tsx · JSX text,
-review_states.encounters_id.b9ba38cf,review_states,Accept suggestion,,,src/routes/encounters.$id.tsx · JSX text,
-review_states.encounters_id.98f6f045,review_states,Mark not recorded,,,src/routes/encounters.$id.tsx · JSX text,
 ui.encounters_id.fcd079cb,ui,Enter a value instead,,,src/routes/encounters.$id.tsx · JSX text,
-ui.encounters_id.0672523d,ui,Unknown — leave empty if not stated,,,src/routes/encounters.$id.tsx · placeholder attribute,
-ui.encounters_id.c6404149,ui,Reason (e.g. not stated by client),,,src/routes/encounters.$id.tsx · placeholder attribute,
 review_states.encounters_id.c2f30587,review_states,Review encounter — Hutano,,,src/routes/encounters.$id.tsx · title attribute,
 review_states.encounters_id.032f9df7,review_states,Review suggested fields against the source narrative and verify.,,,src/routes/encounters.$id.tsx · message string,
 review_states.encounters_id.217b5228,review_states,Human review and verification of an encounter record.,,,src/routes/encounters.$id.tsx · message string,
@@ -201,7 +256,6 @@ ui.encounters_id.55fa4a86,ui,No extraction run — manual entry.,,,src/routes/en
 safety_privacy.encounters_id.79c51af2,safety_privacy,· matched synthetic example,,,src/routes/encounters.$id.tsx · message string,
 review_states.encounters_id.9925ee3c,review_states,not recorded,,,src/routes/encounters.$id.tsx · message string,
 ui.encounters_id.56a2285c,ui,Saving…,,,src/routes/encounters.$id.tsx · message string,
-ui.encounters_id.179359b3,ui,Save changes,,,src/routes/encounters.$id.tsx · message string,
 ui.encounters_id.398cd27d,ui,"rule, not AI",,,src/routes/encounters.$id.tsx · message string,
 offline_ai_install.encounters_id.d10a6ccb,offline_ai_install,on-device AI,,,src/routes/encounters.$id.tsx · message string,
 ui.encounters_id.da04aeef,ui,demo example,,,src/routes/encounters.$id.tsx · message string,
@@ -219,17 +273,13 @@ ui.encounters_index.9c69eb3a,ui,Encounter records stored on this device.,,,src/r
 review_states.encounters_index.6a1505e3,review_states,"Drafts, records needing review and verified records.",,,src/routes/encounters.index.tsx · message string,
 ui.encounters_index.6a720856,ui,All,,,src/routes/encounters.index.tsx · message string,
 review_states.encounters_index.22a31d86,review_states,Drafts,,,src/routes/encounters.index.tsx · message string,
-review_states.encounters_index.33a506cf,review_states,Needs review,,,src/routes/encounters.index.tsx · message string,
-review_states.encounters_index.aed3b8c6,review_states,Verified,,,src/routes/encounters.index.tsx · message string,
 ui.encounters_new.57d05f4f,ui,New encounter,,,src/routes/encounters.new.tsx · JSX text,
 ui.encounters_new.a32b00c0,ui,Narrative language,,,src/routes/encounters.new.tsx · JSX text,
-ui.encounters_new.1c9d6cd1,ui,What happened during the visit?,,,src/routes/encounters.new.tsx · JSX text,
 ui.encounters_new.6d242a2d,ui,Original text is kept exactly as typed.,,,src/routes/encounters.new.tsx · JSX text,
 safety_privacy.encounters_new.af257d0b,safety_privacy,"Synthetic examples (fictional, for demo)",,,src/routes/encounters.new.tsx · JSX text,
 ui.encounters_new.2552a425,ui,Extraction,,,src/routes/encounters.new.tsx · JSX text,
 offline_ai_install.encounters_new.92229bc1,offline_ai_install,Install it in Settings,,,src/routes/encounters.new.tsx · JSX text,
 review_states.encounters_new.03301103,review_states,Stop AI and review manually,,,src/routes/encounters.new.tsx · JSX text,
-safety_privacy.encounters_new.b47630da,safety_privacy,Use synthetic data only. Do not enter real names or identifiers.,,,src/routes/encounters.new.tsx · placeholder attribute,
 ui.encounters_new.c8728bf0,ui,New encounter — Hutano,,,src/routes/encounters.new.tsx · title attribute,
 ui.encounters_new.4e836fdc,ui,Manual,,,src/routes/encounters.new.tsx · label attribute,
 ui.encounters_new.2d8927e4,ui,Demo (not AI),,,src/routes/encounters.new.tsx · label attribute,
@@ -240,7 +290,6 @@ ui.encounters_new.f8664e0f,ui,"Capture an encounter narrative in Shona, English 
 review_states.encounters_new.e67ac830,review_states,Saving draft…,,,src/routes/encounters.new.tsx · message string,
 review_states.encounters_new.b473221e,review_states,Draft saved · demo extraction…,,,src/routes/encounters.new.tsx · message string,
 offline_ai_install.encounters_new.11766136,offline_ai_install,Draft saved · on-device AI running…,,,src/routes/encounters.new.tsx · message string,
-review_states.encounters_new.f03ecc61,review_states,Save draft & fill in manually,,,src/routes/encounters.new.tsx · message string,
 review_states.encounters_new.60f9157d,review_states,Save draft & run demo extraction,,,src/routes/encounters.new.tsx · message string,
 offline_ai_install.encounters_new.58ddf9b0,offline_ai_install,Save draft & run on-device AI,,,src/routes/encounters.new.tsx · message string,
 error.encounters_new.d16e289e,error,Not saved. Local storage write failed: {value},,,src/routes/encounters.new.tsx · template (dynamic) · placeholders: {value},Keep placeholders exactly; reorder words around them if natural.
@@ -256,17 +305,12 @@ ui.index.021224c6,ui,Hutano — VHW field companion,,,src/routes/index.tsx · me
 review_states.index.99f2d194,review_states,"Capture Shona/English encounter notes, review, and verify locally.",,,src/routes/index.tsx · message string,
 review_states.index.22a31d86,review_states,Drafts,,,src/routes/index.tsx · message string,
 review_states.index.201a4493,review_states,Need review,,,src/routes/index.tsx · message string,
-review_states.index.aed3b8c6,review_states,Verified,,,src/routes/index.tsx · message string,
 ui.settings.c7f73bb5,ui,Settings,,,src/routes/settings.tsx · JSX text,
 ui.settings.3b4dfc97,ui,Working,,,src/routes/settings.tsx · JSX text,
-error.settings.bb803a3e,error,": status.indexedDB === ""failed"" ?",,,src/routes/settings.tsx · JSX text,
 error.settings.09fef5d8,error,Failed,,,src/routes/settings.tsx · JSX text,
 ui.settings.43b11ec4,ui,Granted,,,src/routes/settings.tsx · JSX text,
-ui.settings.a2c44c96,ui,: status.persisted === false ?,,,src/routes/settings.tsx · JSX text,
 ui.settings.2c577619,ui,Not granted — browser may clear data,,,src/routes/settings.tsx · JSX text,
 ui.settings.2a135131,ui,Preparing — not ready yet,,,src/routes/settings.tsx · JSX text,
-offline_ai_install.settings.99a74433,offline_ai_install,": offline.kind === ""disabled"" ?",,,src/routes/settings.tsx · JSX text,
-offline_ai_install.settings.93ee00c6,offline_ai_install,": offline.kind === ""failed"" ?",,,src/routes/settings.tsx · JSX text,
 ui.settings.5eca817b,ui,Not supported by this browser,,,src/routes/settings.tsx · JSX text,
 ui.settings.7b856771,ui,Request persistent storage,,,src/routes/settings.tsx · JSX text,
 review_states.settings.8505326b,review_states,Shona translations are drafts awaiting native-speaker validation.,,,src/routes/settings.tsx · JSX text,
@@ -332,37 +376,20 @@ sync.sync.4b18be23,sync,Drafts / in review (never uploaded),,,src/routes/sync.ts
 sync.sync.873ea036,sync,Last server acknowledgement,,,src/routes/sync.tsx · message string,
 sync.sync.80c3052d,sync,Never,,,src/routes/sync.tsx · message string,
 sync.sync.221ca630,sync,Syncing…,,,src/routes/sync.tsx · message string,
-sync.sync.2b7d938e,sync,Sync now,,,src/routes/sync.tsx · message string,
 sync.sync.9e150652,sync,Offline — queue kept,,,src/routes/sync.tsx · message string,
 sync.sync.47c8ff7e,sync,No patient code,,,src/routes/sync.tsx · message string,
 auth.sync.cd994d55,auth,Adopted into your account.,,,src/routes/sync.tsx · message string,
 sync.sync.73957105,sync,Server acknowledged {sent}. {remaining} still queued${o.rejected ?,,,"src/routes/sync.tsx · template (dynamic) · placeholders: {remaining}, {sent}",Keep placeholders exactly; reorder words around them if natural.
-i18n_core.i18n.70f8bb9a,i18n_core,Home,Kumba,,src/lib/i18n.tsx key home,Existing DRAFT Shona; confirm or replace.
-i18n_core.i18n.18817545,i18n_core,Encounters,Zvakanyorwa,,src/lib/i18n.tsx key encounters,Existing DRAFT Shona; confirm or replace.
-i18n_core.i18n.905f6309,i18n_core,Sync,Kutumira,,src/lib/i18n.tsx key sync,Existing DRAFT Shona; confirm or replace.
-i18n_core.i18n.c7f73bb5,i18n_core,Settings,Zvirongwa,,src/lib/i18n.tsx key settings,Existing DRAFT Shona; confirm or replace.
-i18n_core.i18n.57d05f4f,i18n_core,New encounter,Kunyora kutsva,,src/lib/i18n.tsx key newEncounter,Existing DRAFT Shona; confirm or replace.
-i18n_core.i18n.5b9f7c68,i18n_core,Device online,Paindaneti,,src/lib/i18n.tsx key online,Existing DRAFT Shona; confirm or replace.
-i18n_core.i18n.e01fa717,i18n_core,Offline,Hapana indaneti,,src/lib/i18n.tsx key offline,Existing DRAFT Shona; confirm or replace.
-i18n_core.i18n.dd2a3056,i18n_core,Local only,Pafoni chete,,src/lib/i18n.tsx key localOnly,Existing DRAFT Shona; confirm or replace.
-i18n_core.i18n.02fd3586,i18n_core,Prototype — synthetic demo data only. Do not enter real patient information.,Muedzo — data yekuedza chete. Musaisa ruzivo rwechokwadi rwevarwere.,,src/lib/i18n.tsx key prototype,Existing DRAFT Shona; confirm or replace.
 cue_dictionary.rules.65fddc67,cue_dictionary,he/she will come back,achadzoka,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
-cue_dictionary.rules.5116e406,cue_dictionary,mother,amai,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.ea39210a,cue_dictionary,grandmother,ambuya,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.23ba3d1e,cue_dictionary,comes from,anobva,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
-cue_dictionary.rules.35992aad,cue_dictionary,lives (at/in),anogara,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
-cue_dictionary.rules.32c8bbff,cue_dictionary,father,baba,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.737f52fc,cue_dictionary,father's younger brother,babamunini,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.2e7d9108,cue_dictionary,come back / return,dzoka,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.dd356244,cue_dictionary,ten,gumi,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.4198ecdb,cue_dictionary,sibling of opposite sex,hanzvadzi,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
-cue_dictionary.rules.aea439aa,cue_dictionary,"for … years (duration, NOT age)",kwemakore,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.1b54507c,cue_dictionary,for … weeks,kwemasvondo,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
-cue_dictionary.rules.b05137c7,cue_dictionary,for … days (duration),kwemazuva,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.ab1c1f65,cue_dictionary,for … months,kwemwedzi,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.cc6e99d3,cue_dictionary,for a period of,kwenguva,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
-cue_dictionary.rules.20d82ccd,cue_dictionary,for … week,kwesvondo,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
-cue_dictionary.rules.105d529a,cue_dictionary,years (age: 'ane makore 4' = is 4 years old),makore,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.9f8f7eec,cue_dictionary,four,mana,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.a00bbe56,cue_dictionary,seven,manomwe,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.b4ddce18,cue_dictionary,nine,mapfumbamwe,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
@@ -372,30 +399,20 @@ cue_dictionary.rules.bec9703f,cue_dictionary,six,matanhatu,,src/domain/rules.ts 
 cue_dictionary.rules.b802f384,cue_dictionary,three,matatu,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.ad782ecd,cue_dictionary,two,maviri,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.1b8dd803,cue_dictionary,two (other class),mbiri,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
-cue_dictionary.rules.4ad55fa9,cue_dictionary,woman OR wife (ambiguous; currently treated as another person -> over-abstains),mukadzi,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.b39780bf,cue_dictionary,older sibling,mukoma,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.264f68da,cue_dictionary,one (other noun class),mumwe,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
-cue_dictionary.rules.27f71525,cue_dictionary,man OR husband (ambiguous; currently treated as another person -> over-abstains),murume,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
-cue_dictionary.rules.148f98eb,cue_dictionary,months (age in months),mwedzi,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
-cue_dictionary.rules.07c6ed58,cue_dictionary,I will come back (worker follow-up),ndichadzoka,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.fe05bcdc,cue_dictionary,one,rimwe,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.54119c36,cue_dictionary,grandfather / maternal uncle,sekuru,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.f3619af6,cue_dictionary,next week,svondo rinouya,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.3b2f8f61,cue_dictionary,paternal aunt,tete,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
-cue_dictionary.checks.e8da026b,cue_dictionary,they say (respectful; carer reports),vanoti,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
-cue_dictionary.checks.a1b1ed49,cue_dictionary,he/she says (patient reports),anoti,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.e0b1f9c8,cue_dictionary,he/she said,akati,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.99c696c6,cue_dictionary,they said (respectful),vakati,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.7cb8b7a0,cue_dictionary,complains / cries of,anochema,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.ba4159b2,cue_dictionary,complains of,anonyunyuta,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.de1e8dda,cue_dictionary,is feeling,ari kunzwa,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
-cue_dictionary.checks.48b9e766,cue_dictionary,I have seen/observed (worker observation),ndaona,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
-cue_dictionary.checks.971fafa8,cue_dictionary,I saw (worker observation),ndakaona,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.dfa10ccc,cue_dictionary,I looked at/checked,ndakatarisa,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.96c04d30,cue_dictionary,I have measured,ndayera,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.ce181186,cue_dictionary,I measured,ndakayera,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
-cue_dictionary.checks.5b85e8bf,cue_dictionary,there is no / none (negation),hapana,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
-cue_dictionary.checks.3956b035,cue_dictionary,there is none (negation),hakuna,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.ab452a3a,cue_dictionary,he/she does not have (negation),haana,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.56908a81,cue_dictionary,I will come,ndichauya,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.f243b454,cue_dictionary,I will return to,ndichadzokera,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
@@ -414,37 +431,13 @@ cue_dictionary.checks.da0bb9ae,cue_dictionary,cold / runny nose,dzihwa,,src/doma
 cue_dictionary.checks.54caab2e,cue_dictionary,vomiting,kurutsa,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.aabf47b1,cue_dictionary,does not eat,haadyi,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.b267b865,cue_dictionary,does not sleep,haarari,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
-cue_dictionary.checks.2dd2bed7,cue_dictionary,today,nhasi,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
-cue_dictionary.checks.1aa96b8f,cue_dictionary,yesterday,nezuro,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.b41c77f8,cue_dictionary,since yesterday (duration),kubva nezuro,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.2dac81d6,cue_dictionary,tomorrow,mangwana,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.f2d875b4,cue_dictionary,was born,akazvarwa,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
-cue_dictionary.checks.cac047ee,cue_dictionary,village / home,musha,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
-cue_dictionary.checks.28ab6a25,cue_dictionary,ward / district,dunhu,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.15e2183e,cue_dictionary,day / date,zuva,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
-cue_dictionary.checks.0e93069c,cue_dictionary,child,mwana,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.ceac9b04,cue_dictionary,boy,mukomana,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.25b732b3,cue_dictionary,girl,musikana,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
-cue_dictionary.checks.b1b0b8de,cue_dictionary,patient,murwere,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.0afbc51b,cue_dictionary,at/to Mutasa (ku- location prefix),kuMutasa,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
-meaning_distinction.concepts.a2f9ad19,meaning_distinction,Missing: the note does not say it (field empty),,,Concept for parsers and UI wording,Distinguish from 'not recorded' and from a negative finding.
-meaning_distinction.concepts.cf267697,meaning_distinction,"Not recorded: worker confirms it was not recorded, with a reason",,,Concept for parsers and UI wording,Different from missing and from 'no fever'.
-meaning_distinction.concepts.ea68bcba,meaning_distinction,"Negative finding: checked and absent, e.g. 'no fever' / 'Hapana fivha'",,,Concept for parsers and UI wording,Must stay a statement of absence.
-meaning_distinction.concepts.0c01dc8d,meaning_distinction,Patient (the person being seen),,,Concept for parsers and UI wording,Who the record is about.
-meaning_distinction.concepts.9511673a,meaning_distinction,Carer / caregiver (reports on behalf of the patient),,,Concept for parsers and UI wording,e.g. amai vanoti.
-meaning_distinction.concepts.dfe9f090,meaning_distinction,Health worker / VHW (the person writing the note),,,Concept for parsers and UI wording,"First person ndaona, ndichadzoka."
-meaning_distinction.concepts.9c9f742a,meaning_distinction,Age of the patient (e.g. 4 years old / ane makore 4),,,Concept for parsers and UI wording,Never confuse with duration.
-meaning_distinction.concepts.8269c9a6,meaning_distinction,Duration of the problem (e.g. for 3 days / kwemazuva matatu),,,Concept for parsers and UI wording,Never confuse with age; kwemakore = for years.
-meaning_distinction.concepts.a6b2c472,meaning_distinction,Woman vs wife (mukadzi),,,Concept for parsers and UI wording,How do VHWs write 'a woman aged 25' vs 'his wife'? Rules currently abstain.
-meaning_distinction.concepts.47add077,meaning_distinction,Man vs husband (murume),,,Concept for parsers and UI wording,Same question as mukadzi.
-meaning_distinction.concepts.c1cb7c45,meaning_distinction,"Yes / affirmed (e.g. ehe, hongu)",,,Concept for parsers and UI wording,Common affirmative spellings in notes.
-meaning_distinction.concepts.ca5c31fa,meaning_distinction,"No / denied (e.g. kwete, hapana, haana)",,,Concept for parsers and UI wording,Common negation forms.
-meaning_distinction.concepts.e79f5b70,meaning_distinction,Today / yesterday / tomorrow / next week / last week,,,Concept for parsers and UI wording,"nhasi, nezuro, mangwana, svondo rinouya, svondo rapera?"
-meaning_distinction.concepts.7028edbc,meaning_distinction,Lives in / comes from / at (village),,,Concept for parsers and UI wording,"anogara, anobva, ku-/mu- prefixes."
-meaning_distinction.concepts.f944fa95,meaning_distinction,Village / ward labels written in notes,,,Concept for parsers and UI wording,"musha, dunhu, Ward; common abbreviations."
-meaning_distinction.concepts.9ba58b11,meaning_distinction,Patient-reported problem (concern),,,Concept for parsers and UI wording,What the patient/carer says.
-meaning_distinction.concepts.d759610e,meaning_distinction,Worker-observed or measured finding (observation),,,Concept for parsers and UI wording,What the worker saw/measured.
-meaning_distinction.concepts.66b734bf,meaning_distinction,Explicit worker follow-up plan (not advice),,,Concept for parsers and UI wording,Only what the worker wrote they will do.
 synthetic_example_demo.fixtures.6098a54a,synthetic_example_demo,"SYNTHETIC DEMO. Murwere SYN-0042, ane makore 6, kuChikomo, Ward 12. Amai vanoti mwana ane chikosoro kwemazuva matatu. Hapana fivha. Ndaona mwana achifema zvakanaka.","SYNTHETIC DEMO. Murwere SYN-0042, ane makore 6, kuChikomo, Ward 12. Amai vanoti mwana ane chikosoro kwemazuva matatu. Hapana fivha. Ndaona mwana achifema zvakanaka.",,src/domain/fixtures.ts syn-sn-1 (sn),Demo fixture. Reviewer may propose natural rewording; mappings must then be updated together.
 synthetic_example_demo.fixtures.54a482e1,synthetic_example_demo,"SYNTHETIC DEMO. SYN-0215, makore 52, Ward 3. Akati ane dizziness kwemavhiki maviri. No chest pain. BP not measured, no cuff available.","SYNTHETIC DEMO. SYN-0215, makore 52, Ward 3. Akati ane dizziness kwemavhiki maviri. No chest pain. BP not measured, no cuff available.",,src/domain/fixtures.ts syn-mx-1 (mixed),Demo fixture. Reviewer may propose natural rewording; mappings must then be updated together.
 synthetic_example_dev.eval.ae89c0bf,synthetic_example_dev,Mwana SYN-1002 ane makore 2. Anogara kuMutoko. Amai vanoti haadyi zvakanaka kwesvondo rimwe. Ndakaona kuti akaonda. Ndichadzoka svondo rinouya.,Mwana SYN-1002 ane makore 2. Anogara kuMutoko. Amai vanoti haadyi zvakanaka kwesvondo rimwe. Ndakaona kuti akaonda. Ndichadzoka svondo rinouya.,,eval/cases.dev.json D2 (sn) · Shona complete; kuX location prefix,FROZEN benchmark original. Proposed rewording goes into a NEW versioned file; existing metrics are never silently changed.
