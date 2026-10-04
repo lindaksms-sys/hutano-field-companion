@@ -32,6 +32,8 @@ export interface FieldValue {
   /** Original suggested value, kept so worker corrections are auditable. */
   suggestedValue: string | null;
   notRecordedReason: string | null;
+  /** Who produced the suggestion (optional; absent on older records). Rules are not AI. */
+  suggestedBy?: "rule" | "model" | "fixture";
 }
 
 export type ReviewStatus = "draft" | "in_review" | "verified";
@@ -51,6 +53,9 @@ export interface ExtractionMeta {
   dtype?: string;
   durationMs?: number;
   rejectedFields?: string[];
+  ruleFields?: string[];
+  modelFields?: string[];
+  warning?: string;
   /** Set when extraction failed or was cancelled; the draft is kept for manual review. */
   failure?: string | null;
 }
