@@ -204,12 +204,14 @@ export function validateModelOutput(
 }
 
 // ---- Deterministic field-type checks for model-selected narrative sentences (hybrid v2) ----
-const REPORT_CUE = /\b(says?|said|reports?|reported|complains?|complained|told|states|tells|vanoti|anoti|akati|vakati|anochema|anonyunyuta|ari kunzwa)\b/i;
-const OBS_CUE = /\b(observed|noted|checked|measured|saw|seen|examined|temp(?:erature)?|MUAC|weight|pulse|ndaona|ndakaona|ndakatarisa|ndayera|ndakayera)\b|\d+\.\d/i;
-/** Small documented problem-word list (English + draft Shona) used only to filter concern selections, never to create values. */
-const PROBLEM_CUE = /\b(pain|painful|ache|aches|hurts?|sore|cough|coughing|fever|rash|diarrh\w*|vomit\w*|tired\w*|weak|itch\w*|swelling|bleeding|not eating|sick|ill|kurwara|ari kurwara|rwadzo|kurwadza|anorwadza|chikosoro|manyoka|fivha|musoro|dzihwa|kurutsa|haadyi|haarari)\b/i;
+const REPORT_CUE = /\b(says?|said|reports?|reported|complains?|complained|told|states|tells|vanoti|anoti|akati|vakati|anenge achiti|anochema|anonyunyuta|ari kunzwa)\b/i;
+const OBS_CUE = /\b(observed|noted|checked|measured|saw|seen|examined|temp(?:erature)?|MUAC|weight|pulse|ndaona|ndakaona|ndakacherechedza|ndakatarisa|ndakaongorora|ndayera|ndakayera)\b|\d+\.\d/i;
+/** Review r1: bare 'musoro' (head) and 'anorwadza' are NOT problem cues; 'kurwadziwa (nemusoro)' is. Unapproved variants (rash/dizziness/swelling words) are deliberately absent.
+ * Small documented problem-word list (English + draft Shona) used only to filter concern selections, never to create values. */
+const PROBLEM_CUE = /\b(pain|painful|ache|aches|hurts?|sore|cough|coughing|fever|rash|diarrh\w*|vomit\w*|tired\w*|weak|itch\w*|swelling|bleeding|not eating|sick|ill|kurwara|ari kurwara|rwadzo|kurwadza|kurwadziwa|chikosoro|manyoka|fivha|dzihwa|kurutsa|haadyi|haarari)\b/i;
 const NEG_LEAD = /^(no|not|hapana|hakuna|haana)\b/i;
-const PLAN_CUE = /\b(return|review|revisit|come back|visit again|follow[- ]?up|next|will|plan|refer|ndichadzoka|achadzoka|ndichauya|ndichadzokera|rinouya|tichaona|dzoka)\b/i;
+// 'tichaona' (we will see) alone is too vague to be a follow-up plan (review r1).
+const PLAN_CUE = /\b(return|review|revisit|come back|visit again|follow[- ]?up|next|will|plan|refer|ndichadzoka|achadzoka|ndichauya|ndichadzokera|tichadzoka|tichaongorora|rinouya|dzoka)\b/i;
 const STRUCT_WORDS = new Set(["date", "village", "ward", "age", "aged", "years", "year", "old", "months", "patient", "child", "seen", "visit", "visited", "today", "mwana", "makore", "anogara", "location", "code", "name", "female", "male", "boy", "girl", "dunhu", "musha", "zuva", "baba", "amai", "mukomana", "musikana", "mukadzi", "murume", "date"]);
 
 /** True when a sentence carries only structured data already covered by rules (code/date/age/place). */

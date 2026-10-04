@@ -135,7 +135,7 @@ export function ruleLocation(segs: Segment[], narrative: string) {
     // "Chikore village", "Mutasa ward"
     ...scan(segs, new RegExp(`${place}\\s+(?:village|ward)\\b`), (m) => (okPlace(m[1]!) && !/^(The|In|At|From|Of)$/.test(m[1]!) ? { text: m[0], idx: 0 } : null)),
     // "lives in Mutasa", "from Chikore" (English); "Anogara Mutasa", "anogara kuMutasa" (draft Shona)
-    ...scan(segs, new RegExp(`\\b(?:[Ll]ives in|[Ll]ives at|[Rr]esides in|[Ff]rom|${SHONA_CUES.livesIn.map((w) => `[${w[0]!.toUpperCase()}${w[0]}]${w.slice(1)}`).join("|")})\\s+(?:ku|mu|kwa)?${place}`), (m) => (okPlace(m[1]!) && !/\s(village|ward)$/i.test(m[1]!) ? { text: m[1]!, idx: m[0].lastIndexOf(m[1]!) } : null), (m, seg) => !OTHER_PERSON.test(clauseBefore(seg, m.index))),
+    ...scan(segs, new RegExp(`\\b(?:[Ll]ives in|[Ll]ives at|[Rr]esides in|[Ff]rom|${SHONA_CUES.livesIn.map((w) => `[${w[0]!.toUpperCase()}${w[0]}]${w.slice(1)}`).join("|")})\\s+(?:ku|mu|kwa)?${place}`), (m) => (okPlace(m[1]!) && !/\s(village|ward)$/i.test(m[1]!) ? { text: m[1]!, idx: m[0].lastIndexOf(m[1]!) } : null), (m, seg) => !OTHER_PERSON.test(clauseBefore(seg, m.index)) && !AMBIG_RELATION.test(clauseBefore(seg, m.index))),
   ];
   // "Chikore village" and "Chikore" for the same place: keep the longer labelled form.
   const merged = hits.filter((h) => !hits.some((o) => o !== h && o.value.length > h.value.length && o.value.toLowerCase().includes(h.value.toLowerCase())));
