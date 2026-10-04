@@ -1,0 +1,1195 @@
+{
+ "model": "onnx-community/Qwen3-0.6B-ONNX",
+ "revision": "da1453100cf3ff33ef56d17983fc7a8648706db6",
+ "runtime": "onnxruntime-node cpu q8",
+ "ranAt": "2026-10-04T04:34:47.568Z",
+ "tallies": {
+  "rules": {
+   "en|patientCode": {
+    "tp": 2,
+    "fp": 0,
+    "fn": 0,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 2
+   },
+   "en|ALL": {
+    "tp": 7,
+    "fp": 0,
+    "fn": 4,
+    "ca": 13,
+    "goldNull": 13,
+    "goldPos": 11
+   },
+   "en|age": {
+    "tp": 1,
+    "fp": 0,
+    "fn": 0,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 1
+   },
+   "en|location": {
+    "tp": 1,
+    "fp": 0,
+    "fn": 0,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 1
+   },
+   "en|encounterDate": {
+    "tp": 2,
+    "fp": 0,
+    "fn": 0,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 2
+   },
+   "en|concern": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 1,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 1
+   },
+   "en|duration": {
+    "tp": 1,
+    "fp": 0,
+    "fn": 0,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 1
+   },
+   "en|observations": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 2,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 2
+   },
+   "en|followUp": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 1,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 1
+   },
+   "ALL|patientCode": {
+    "tp": 5,
+    "fp": 0,
+    "fn": 0,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 5
+   },
+   "ALL|ALL": {
+    "tp": 17,
+    "fp": 0,
+    "fn": 12,
+    "ca": 19,
+    "goldNull": 19,
+    "goldPos": 29
+   },
+   "ALL|age": {
+    "tp": 3,
+    "fp": 0,
+    "fn": 1,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 4
+   },
+   "ALL|location": {
+    "tp": 3,
+    "fp": 0,
+    "fn": 0,
+    "ca": 3,
+    "goldNull": 3,
+    "goldPos": 3
+   },
+   "ALL|encounterDate": {
+    "tp": 2,
+    "fp": 0,
+    "fn": 0,
+    "ca": 4,
+    "goldNull": 4,
+    "goldPos": 2
+   },
+   "ALL|concern": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 4,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 4
+   },
+   "ALL|duration": {
+    "tp": 4,
+    "fp": 0,
+    "fn": 0,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 4
+   },
+   "ALL|observations": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 5,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 5
+   },
+   "ALL|followUp": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 2,
+    "ca": 4,
+    "goldNull": 4,
+    "goldPos": 2
+   },
+   "sn|patientCode": {
+    "tp": 2,
+    "fp": 0,
+    "fn": 0,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 2
+   },
+   "sn|ALL": {
+    "tp": 8,
+    "fp": 0,
+    "fn": 5,
+    "ca": 3,
+    "goldNull": 3,
+    "goldPos": 13
+   },
+   "sn|age": {
+    "tp": 2,
+    "fp": 0,
+    "fn": 0,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 2
+   },
+   "sn|location": {
+    "tp": 2,
+    "fp": 0,
+    "fn": 0,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 2
+   },
+   "sn|encounterDate": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 0
+   },
+   "sn|concern": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 2,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 2
+   },
+   "sn|duration": {
+    "tp": 2,
+    "fp": 0,
+    "fn": 0,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 2
+   },
+   "sn|observations": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 2,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 2
+   },
+   "sn|followUp": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 1,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 1
+   },
+   "mixed|patientCode": {
+    "tp": 1,
+    "fp": 0,
+    "fn": 0,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 1
+   },
+   "mixed|ALL": {
+    "tp": 2,
+    "fp": 0,
+    "fn": 3,
+    "ca": 3,
+    "goldNull": 3,
+    "goldPos": 5
+   },
+   "mixed|age": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 1,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 1
+   },
+   "mixed|location": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 0
+   },
+   "mixed|encounterDate": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 0
+   },
+   "mixed|concern": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 1,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 1
+   },
+   "mixed|duration": {
+    "tp": 1,
+    "fp": 0,
+    "fn": 0,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 1
+   },
+   "mixed|observations": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 1,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 1
+   },
+   "mixed|followUp": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 0
+   }
+  },
+  "baseline": {
+   "en|patientCode": {
+    "tp": 2,
+    "fp": 0,
+    "fn": 0,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 2
+   },
+   "en|ALL": {
+    "tp": 2,
+    "fp": 5,
+    "fn": 9,
+    "ca": 13,
+    "goldNull": 13,
+    "goldPos": 11
+   },
+   "en|age": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 1,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 1
+   },
+   "en|location": {
+    "tp": 0,
+    "fp": 1,
+    "fn": 1,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 1
+   },
+   "en|encounterDate": {
+    "tp": 0,
+    "fp": 1,
+    "fn": 2,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 2
+   },
+   "en|concern": {
+    "tp": 0,
+    "fp": 1,
+    "fn": 1,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 1
+   },
+   "en|duration": {
+    "tp": 0,
+    "fp": 1,
+    "fn": 1,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 1
+   },
+   "en|observations": {
+    "tp": 0,
+    "fp": 1,
+    "fn": 2,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 2
+   },
+   "en|followUp": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 1,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 1
+   },
+   "ALL|patientCode": {
+    "tp": 5,
+    "fp": 0,
+    "fn": 0,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 5
+   },
+   "ALL|ALL": {
+    "tp": 5,
+    "fp": 12,
+    "fn": 24,
+    "ca": 18,
+    "goldNull": 19,
+    "goldPos": 29
+   },
+   "ALL|age": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 4,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 4
+   },
+   "ALL|location": {
+    "tp": 0,
+    "fp": 4,
+    "fn": 3,
+    "ca": 2,
+    "goldNull": 3,
+    "goldPos": 3
+   },
+   "ALL|encounterDate": {
+    "tp": 0,
+    "fp": 1,
+    "fn": 2,
+    "ca": 4,
+    "goldNull": 4,
+    "goldPos": 2
+   },
+   "ALL|concern": {
+    "tp": 0,
+    "fp": 4,
+    "fn": 4,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 4
+   },
+   "ALL|duration": {
+    "tp": 0,
+    "fp": 1,
+    "fn": 4,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 4
+   },
+   "ALL|observations": {
+    "tp": 0,
+    "fp": 2,
+    "fn": 5,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 5
+   },
+   "ALL|followUp": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 2,
+    "ca": 4,
+    "goldNull": 4,
+    "goldPos": 2
+   },
+   "sn|patientCode": {
+    "tp": 2,
+    "fp": 0,
+    "fn": 0,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 2
+   },
+   "sn|ALL": {
+    "tp": 2,
+    "fp": 5,
+    "fn": 11,
+    "ca": 3,
+    "goldNull": 3,
+    "goldPos": 13
+   },
+   "sn|age": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 2,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 2
+   },
+   "sn|location": {
+    "tp": 0,
+    "fp": 2,
+    "fn": 2,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 2
+   },
+   "sn|encounterDate": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 0
+   },
+   "sn|concern": {
+    "tp": 0,
+    "fp": 2,
+    "fn": 2,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 2
+   },
+   "sn|duration": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 2,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 2
+   },
+   "sn|observations": {
+    "tp": 0,
+    "fp": 1,
+    "fn": 2,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 2
+   },
+   "sn|followUp": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 1,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 1
+   },
+   "mixed|patientCode": {
+    "tp": 1,
+    "fp": 0,
+    "fn": 0,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 1
+   },
+   "mixed|ALL": {
+    "tp": 1,
+    "fp": 2,
+    "fn": 4,
+    "ca": 2,
+    "goldNull": 3,
+    "goldPos": 5
+   },
+   "mixed|age": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 1,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 1
+   },
+   "mixed|location": {
+    "tp": 0,
+    "fp": 1,
+    "fn": 0,
+    "ca": 0,
+    "goldNull": 1,
+    "goldPos": 0
+   },
+   "mixed|encounterDate": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 0
+   },
+   "mixed|concern": {
+    "tp": 0,
+    "fp": 1,
+    "fn": 1,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 1
+   },
+   "mixed|duration": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 1,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 1
+   },
+   "mixed|observations": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 1,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 1
+   },
+   "mixed|followUp": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 0
+   }
+  },
+  "hybrid": {
+   "en|patientCode": {
+    "tp": 2,
+    "fp": 0,
+    "fn": 0,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 2
+   },
+   "en|ALL": {
+    "tp": 11,
+    "fp": 0,
+    "fn": 0,
+    "ca": 13,
+    "goldNull": 13,
+    "goldPos": 11
+   },
+   "en|age": {
+    "tp": 1,
+    "fp": 0,
+    "fn": 0,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 1
+   },
+   "en|location": {
+    "tp": 1,
+    "fp": 0,
+    "fn": 0,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 1
+   },
+   "en|encounterDate": {
+    "tp": 2,
+    "fp": 0,
+    "fn": 0,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 2
+   },
+   "en|concern": {
+    "tp": 1,
+    "fp": 0,
+    "fn": 0,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 1
+   },
+   "en|duration": {
+    "tp": 1,
+    "fp": 0,
+    "fn": 0,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 1
+   },
+   "en|observations": {
+    "tp": 2,
+    "fp": 0,
+    "fn": 0,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 2
+   },
+   "en|followUp": {
+    "tp": 1,
+    "fp": 0,
+    "fn": 0,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 1
+   },
+   "ALL|patientCode": {
+    "tp": 5,
+    "fp": 0,
+    "fn": 0,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 5
+   },
+   "ALL|ALL": {
+    "tp": 21,
+    "fp": 2,
+    "fn": 8,
+    "ca": 19,
+    "goldNull": 19,
+    "goldPos": 29
+   },
+   "ALL|age": {
+    "tp": 3,
+    "fp": 0,
+    "fn": 1,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 4
+   },
+   "ALL|location": {
+    "tp": 3,
+    "fp": 0,
+    "fn": 0,
+    "ca": 3,
+    "goldNull": 3,
+    "goldPos": 3
+   },
+   "ALL|encounterDate": {
+    "tp": 2,
+    "fp": 0,
+    "fn": 0,
+    "ca": 4,
+    "goldNull": 4,
+    "goldPos": 2
+   },
+   "ALL|concern": {
+    "tp": 1,
+    "fp": 2,
+    "fn": 3,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 4
+   },
+   "ALL|duration": {
+    "tp": 4,
+    "fp": 0,
+    "fn": 0,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 4
+   },
+   "ALL|observations": {
+    "tp": 2,
+    "fp": 0,
+    "fn": 3,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 5
+   },
+   "ALL|followUp": {
+    "tp": 1,
+    "fp": 0,
+    "fn": 1,
+    "ca": 4,
+    "goldNull": 4,
+    "goldPos": 2
+   },
+   "sn|patientCode": {
+    "tp": 2,
+    "fp": 0,
+    "fn": 0,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 2
+   },
+   "sn|ALL": {
+    "tp": 8,
+    "fp": 1,
+    "fn": 5,
+    "ca": 3,
+    "goldNull": 3,
+    "goldPos": 13
+   },
+   "sn|age": {
+    "tp": 2,
+    "fp": 0,
+    "fn": 0,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 2
+   },
+   "sn|location": {
+    "tp": 2,
+    "fp": 0,
+    "fn": 0,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 2
+   },
+   "sn|encounterDate": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "ca": 2,
+    "goldNull": 2,
+    "goldPos": 0
+   },
+   "sn|concern": {
+    "tp": 0,
+    "fp": 1,
+    "fn": 2,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 2
+   },
+   "sn|duration": {
+    "tp": 2,
+    "fp": 0,
+    "fn": 0,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 2
+   },
+   "sn|observations": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 2,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 2
+   },
+   "sn|followUp": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 1,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 1
+   },
+   "mixed|patientCode": {
+    "tp": 1,
+    "fp": 0,
+    "fn": 0,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 1
+   },
+   "mixed|ALL": {
+    "tp": 2,
+    "fp": 1,
+    "fn": 3,
+    "ca": 3,
+    "goldNull": 3,
+    "goldPos": 5
+   },
+   "mixed|age": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 1,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 1
+   },
+   "mixed|location": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 0
+   },
+   "mixed|encounterDate": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 0
+   },
+   "mixed|concern": {
+    "tp": 0,
+    "fp": 1,
+    "fn": 1,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 1
+   },
+   "mixed|duration": {
+    "tp": 1,
+    "fp": 0,
+    "fn": 0,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 1
+   },
+   "mixed|observations": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 1,
+    "ca": 0,
+    "goldNull": 0,
+    "goldPos": 1
+   },
+   "mixed|followUp": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "ca": 1,
+    "goldNull": 1,
+    "goldPos": 0
+   }
+  }
+ },
+ "latencyMs": {
+  "baseline": [
+   12638.288617,
+   7712.002341000003,
+   10012.717751000004,
+   14013.764030999999,
+   9291.722250999992,
+   12253.121434999994
+  ],
+  "hybrid": [
+   4458.331932000001,
+   3744.9322060000013,
+   4075.1244860000006,
+   4160.625346000001,
+   3864.861203999986,
+   3234.7241630000062
+  ]
+ },
+ "cases": [
+  {
+   "id": "D1",
+   "language": "en",
+   "baselineRaw": "```json\n{\n  \"patientCode\": 1,\n  \"age\": 10,\n  \"location\": 2,\n  \"encounterDate\": 2,\n  \"concern\": [3, 4],\n  \"duration\": 4,\n  \"observations\": 5,\n  \"followUp\": null\n}\n```",
+   "hybridRaw": "{\"concern\": 3, \"observations\": 4, \"followUp\": 5}",
+   "rules": {
+    "patientCode": {
+     "value": "SYN-1001",
+     "by": "rule"
+    },
+    "age": {
+     "value": "10 years old",
+     "by": "rule"
+    },
+    "encounterDate": {
+     "value": "2026-01-05",
+     "by": "rule"
+    },
+    "location": {
+     "value": "Chimanimani village",
+     "by": "rule"
+    },
+    "duration": {
+     "value": "for 4 days",
+     "by": "rule"
+    }
+   },
+   "baseline": {
+    "patientCode": {
+     "value": "SYN-1001",
+     "by": "model"
+    },
+    "location": {
+     "value": "Seen 2026-01-05.",
+     "by": "model"
+    },
+    "encounterDate": {
+     "value": "Seen 2026-01-05.",
+     "by": "model"
+    },
+    "concern": {
+     "value": "Reports sore throat for 4 days. Throat looked red.",
+     "by": "model"
+    },
+    "duration": {
+     "value": "Throat looked red.",
+     "by": "model"
+    },
+    "observations": {
+     "value": "Will check again in 3 days.",
+     "by": "model"
+    }
+   },
+   "hybrid": {
+    "patientCode": {
+     "value": "SYN-1001",
+     "by": "rule"
+    },
+    "age": {
+     "value": "10 years old",
+     "by": "rule"
+    },
+    "encounterDate": {
+     "value": "2026-01-05",
+     "by": "rule"
+    },
+    "location": {
+     "value": "Chimanimani village",
+     "by": "rule"
+    },
+    "duration": {
+     "value": "for 4 days",
+     "by": "rule"
+    },
+    "concern": {
+     "value": "Reports sore throat for 4 days.",
+     "by": "model"
+    },
+    "observations": {
+     "value": "Throat looked red.",
+     "by": "model"
+    },
+    "followUp": {
+     "value": "Will check again in 3 days.",
+     "by": "model"
+    }
+   }
+  },
+  {
+   "id": "D2",
+   "language": "sn",
+   "baselineRaw": "{\"patientCode\":1,\"age\":null,\"location\":2,\"encounterDate\":null,\"concern\":[3,4],\"duration\":null,\"observations\":5,\"followUp\":null}",
+   "hybridRaw": "{\"concern\":2,\"observations\":3,\"followUp\":4}",
+   "rules": {
+    "patientCode": {
+     "value": "SYN-1002",
+     "by": "rule"
+    },
+    "age": {
+     "value": "makore 2",
+     "by": "rule"
+    },
+    "location": {
+     "value": "Mutoko",
+     "by": "rule"
+    },
+    "duration": {
+     "value": "kwesvondo rimwe",
+     "by": "rule"
+    }
+   },
+   "baseline": {
+    "patientCode": {
+     "value": "SYN-1002",
+     "by": "model"
+    },
+    "location": {
+     "value": "Anogara kuMutoko.",
+     "by": "model"
+    },
+    "concern": {
+     "value": "Amai vanoti haadyi zvakanaka kwesvondo rimwe. Ndakaona kuti akaonda.",
+     "by": "model"
+    },
+    "observations": {
+     "value": "Ndichadzoka svondo rinouya.",
+     "by": "model"
+    }
+   },
+   "hybrid": {
+    "patientCode": {
+     "value": "SYN-1002",
+     "by": "rule"
+    },
+    "age": {
+     "value": "makore 2",
+     "by": "rule"
+    },
+    "location": {
+     "value": "Mutoko",
+     "by": "rule"
+    },
+    "duration": {
+     "value": "kwesvondo rimwe",
+     "by": "rule"
+    }
+   }
+  },
+  {
+   "id": "D3",
+   "language": "en",
+   "baselineRaw": "{\"patientCode\": 1, \"age\": null, \"location\": 2, \"encounterDate\": null, \"concern\": [3, 4], \"duration\": null, \"observations\": 5, \"followUp\": null}",
+   "hybridRaw": "{\"concern\": null, \"observations\": null, \"followUp\": null}",
+   "rules": {},
+   "baseline": {},
+   "hybrid": {}
+  },
+  {
+   "id": "D4",
+   "language": "mixed",
+   "baselineRaw": "{\n  \"patientCode\": 1,\n  \"age\": null,\n  \"location\": 2,\n  \"encounterDate\": null,\n  \"concern\": [3, 4],\n  \"duration\": null,\n  \"observations\": 5,\n  \"followUp\": null\n}",
+   "hybridRaw": "{\"concern\": 2, \"observations\": 3, \"followUp\": 4}",
+   "rules": {
+    "patientCode": {
+     "value": "SYN-1004",
+     "by": "rule"
+    },
+    "duration": {
+     "value": "for two days",
+     "by": "rule"
+    }
+   },
+   "baseline": {
+    "patientCode": {
+     "value": "SYN-1004",
+     "by": "model"
+    },
+    "location": {
+     "value": "Baba ane makore 50, mwana ane makore 7.",
+     "by": "model"
+    },
+    "concern": {
+     "value": "Mwana anoti ane maziso anorwadza for two days. Eyes seen watery.",
+     "by": "model"
+    }
+   },
+   "hybrid": {
+    "patientCode": {
+     "value": "SYN-1004",
+     "by": "rule"
+    },
+    "duration": {
+     "value": "for two days",
+     "by": "rule"
+    },
+    "concern": {
+     "value": "Baba ane makore 50, mwana ane makore 7.",
+     "by": "model"
+    }
+   }
+  },
+  {
+   "id": "D5",
+   "language": "en",
+   "baselineRaw": "{\"patientCode\": 1, \"age\": null, \"location\": 2, \"encounterDate\": null, \"concern\": [3, 4], \"duration\": null, \"observations\": 5, \"followUp\": null}",
+   "hybridRaw": "{\"concern\": 2, \"observations\": 3, \"followUp\": 4}",
+   "rules": {
+    "patientCode": {
+     "value": "SYN-1005",
+     "by": "rule"
+    },
+    "encounterDate": {
+     "value": "9 June 2026",
+     "by": "rule"
+    }
+   },
+   "baseline": {
+    "patientCode": {
+     "value": "SYN-1005",
+     "by": "model"
+    }
+   },
+   "hybrid": {
+    "patientCode": {
+     "value": "SYN-1005",
+     "by": "rule"
+    },
+    "encounterDate": {
+     "value": "9 June 2026",
+     "by": "rule"
+    },
+    "observations": {
+     "value": "No swelling seen.",
+     "by": "model"
+    }
+   }
+  },
+  {
+   "id": "D6",
+   "language": "sn",
+   "baselineRaw": "```json\n{\n  \"patientCode\": 1,\n  \"age\": null,\n  \"location\": 2,\n  \"encounterDate\": null,\n  \"concern\": [3, 4],\n  \"duration\": null,\n  \"observations\": 5,\n  \"followUp\": null\n}\n```",
+   "hybridRaw": "{\"concern\":2,\"observations\":3,\"followUp\":4}",
+   "rules": {
+    "patientCode": {
+     "value": "SYN-1006",
+     "by": "rule"
+    },
+    "age": {
+     "value": "makore 12",
+     "by": "rule"
+    },
+    "location": {
+     "value": "Ward 3",
+     "by": "rule"
+    },
+    "duration": {
+     "value": "kubva nezuro",
+     "by": "rule"
+    }
+   },
+   "baseline": {
+    "patientCode": {
+     "value": "SYN-1006",
+     "by": "model"
+    },
+    "location": {
+     "value": "Dunhu: Ward 3.",
+     "by": "model"
+    },
+    "concern": {
+     "value": "Mukomana ane makore 12 anonyunyuta nemusoro kubva nezuro. Hapana chakaonekwa.",
+     "by": "model"
+    }
+   },
+   "hybrid": {
+    "patientCode": {
+     "value": "SYN-1006",
+     "by": "rule"
+    },
+    "age": {
+     "value": "makore 12",
+     "by": "rule"
+    },
+    "location": {
+     "value": "Ward 3",
+     "by": "rule"
+    },
+    "duration": {
+     "value": "kubva nezuro",
+     "by": "rule"
+    },
+    "concern": {
+     "value": "Dunhu: Ward 3.",
+     "by": "model"
+    }
+   }
+  }
+ ]
+}
