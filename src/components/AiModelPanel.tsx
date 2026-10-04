@@ -27,14 +27,14 @@ export function AiModelPanel() {
   return (
     <div className="space-y-3 p-4 text-sm">
       <div className="flex flex-wrap items-center gap-2">
-        <span className="mr-auto font-semibold">Status</span>
-        {ai.kind === "checking" && <StatusPill>Checking…</StatusPill>}
+        <span className="mr-auto font-semibold">{tl("Status")}</span>
+        {ai.kind === "checking" && <StatusPill>{tl("Checking…")}</StatusPill>}
         {ai.kind === "unsupported" && <StatusPill tone="danger">Not supported: {ai.reason}</StatusPill>}
-        {ai.kind === "not_downloaded" && <StatusPill>Not downloaded</StatusPill>}
+        {ai.kind === "not_downloaded" && <StatusPill>{tl("Not downloaded")}</StatusPill>}
         {ai.kind === "downloading" && <StatusPill tone="pending">Downloading {mb(ai.loaded)} / {mb(ai.total)}</StatusPill>}
-        {ai.kind === "initializing" && <StatusPill tone="pending">{ai.phase === "verifying" ? "Testing a real inference…" : "Initializing…"}</StatusPill>}
-        {ai.kind === "ready" && <StatusPill tone="success">Ready · installed and tested</StatusPill>}
-        {ai.kind === "error" && <StatusPill tone="danger">Error</StatusPill>}
+        {ai.kind === "initializing" && <StatusPill tone="pending">{ai.phase === "verifying" ? tl("Testing a real inference…") : tl("Initializing…")}</StatusPill>}
+        {ai.kind === "ready" && <StatusPill tone="success">{tl("Ready · installed and tested")}</StatusPill>}
+        {ai.kind === "error" && <StatusPill tone="danger">{tl("Error")}</StatusPill>}
       </div>
 
       {ai.kind === "error" && (
@@ -42,10 +42,10 @@ export function AiModelPanel() {
           <p className="font-semibold text-destructive">{ai.message}</p>
           {ai.diag && (
             <>
-              <p>{nextStep(ai.diag.category)} Manual capture still works.</p>
+              <p>{tl(nextStep(ai.diag.category))} Manual capture still works.</p>
               <pre className="whitespace-pre-wrap break-all rounded-lg bg-muted p-2 text-xs">{diagnosticText(ai.diag)}</pre>
               <Button variant="outline" className="h-11" onClick={() => { void navigator.clipboard?.writeText(diagnosticText(ai.diag!)).then(() => setCopied(true), () => setCopied(false)); }}>
-                {copied ? "Copied" : "Copy diagnostic (no patient data)"}
+                {copied ? tl("Copied") : tl("Copy diagnostic (no patient data)")}
               </Button>
             </>
           )}
@@ -54,10 +54,10 @@ export function AiModelPanel() {
 
       {(ai.kind === "not_downloaded" || ai.kind === "error") && (
         <fieldset className="space-y-2">
-          <legend className="font-semibold">Mode</legend>
+          <legend className="font-semibold">{tl("Mode")}</legend>
           {([
-            ["wasm", "Compatibility / CPU (tested in desktop browser)", "Slower. The only mode tested so far."],
-            ["webgpu", "GPU (experimental)", gpuAvailable === false ? "No suitable GPU found in this browser." : "Untested. May fail or give different results."],
+            ["wasm", tl("Compatibility / CPU (tested in desktop browser)"), tl("Slower. The only mode tested so far.")],
+            ["webgpu", tl("GPU (experimental)"), gpuAvailable === false ? tl("No suitable GPU found in this browser.") : tl("Untested. May fail or give different results.")],
           ] as const).map(([id, label, note]) => (
             <label key={id} className={`flex min-h-12 cursor-pointer items-start gap-3 rounded-lg border p-3 ${mode === id ? "border-primary" : "border-border"}`}>
               <input type="radio" name="ai-mode" className="mt-1 h-5 w-5" checked={mode === id} disabled={id === "webgpu" && gpuAvailable === false}
@@ -65,20 +65,20 @@ export function AiModelPanel() {
               <span><span className="block font-semibold">{label} · about {mb(estimateBytes(id))}</span><span className="text-muted-foreground">{note}</span></span>
             </label>
           ))}
-          <p className="text-xs text-muted-foreground">Only the chosen mode is downloaded. Switching later means a separate download. Not yet verified on any phone.</p>
+          <p className="text-xs text-muted-foreground">{tl("Only the chosen mode is downloaded. Switching later means a separate download. Not yet verified on any phone.")}</p>
         </fieldset>
       )}
 
       <ul className="list-disc space-y-1 pl-5 text-muted-foreground">
         <li>Experimental. Suggests whole sentences from your note for each field; you check and accept each one. Never diagnoses or advises.</li>
         <li>Shona ability is not validated. Original text is always kept as written; nothing is translated.</li>
-        <li>Runs only on this device. Notes are never sent anywhere for AI.</li>
+        <li>{tl("Runs only on this device. Notes are never sent anywhere for AI.")}</li>
         <li>Needs a recent desktop or high-end phone with about 1.5 GB free memory. Slow devices may take minutes per note or fail; manual capture always works.</li>
       </ul>
 
       {backend && (
         <p>
-          Download for this device ({backend === "webgpu" ? "WebGPU, q4f16" : "WebAssembly, q8"}): about <strong>{mb(estimateBytes(backend))}</strong> (from the model's published file sizes).
+          Download for this device ({backend === "webgpu" ? tl("WebGPU, q4f16") : tl("WebAssembly, q8")}): about <strong>{mb(estimateBytes(backend))}</strong> (from the model's published file sizes).
           {free !== null && <> Browser storage free: about {mb(free)}.</>} Use Wi-Fi.
         </p>
       )}
@@ -94,14 +94,14 @@ export function AiModelPanel() {
 
       <div className="flex flex-wrap gap-2">
         {(ai.kind === "not_downloaded" || ai.kind === "error") && backend && !confirm && (
-          <Button className="h-12" onClick={() => setConfirm(true)}>{ai.kind === "error" ? "Retry download" : "Download on-device AI"}</Button>
+          <Button className="h-12" onClick={() => setConfirm(true)}>{ai.kind === "error" ? tl("Retry download") : tl("Download on-device AI")}</Button>
         )}
         {confirm && (ai.kind === "not_downloaded" || ai.kind === "error") && backend && (
           <div className="w-full space-y-2 rounded-lg border border-pending-border bg-pending/40 p-3">
-            <p>Download about {mb(estimateBytes(mode))} ({mode === "webgpu" ? "GPU, experimental" : "Compatibility / CPU"}) and store it in this browser? Nothing from your notes is used for this step.</p>
+            <p>Download about {mb(estimateBytes(mode))} ({mode === "webgpu" ? tl("GPU, experimental") : tl("Compatibility / CPU")}) and store it in this browser? Nothing from your notes is used for this step.</p>
             <div className="flex gap-2">
-              <Button className="h-11" onClick={() => { setConfirm(false); setCopied(false); void installModel(mode); }}>Yes, download</Button>
-              <Button variant="outline" className="h-11" onClick={() => setConfirm(false)}>Not now</Button>
+              <Button className="h-11" onClick={() => { setConfirm(false); setCopied(false); void installModel(mode); }}>{tl("Yes, download")}</Button>
+              <Button variant="outline" className="h-11" onClick={() => setConfirm(false)}>{tl("Not now")}</Button>
             </div>
           </div>
         )}
@@ -109,25 +109,25 @@ export function AiModelPanel() {
           <Button variant="outline" className="h-12" onClick={() => void cancelInstall()}>{tl("Cancel")}</Button>
         )}
         {(ai.kind === "ready" || ai.kind === "error" || ai.kind === "not_downloaded") && (
-          <Button variant="outline" className="h-12" onClick={() => void removeModel()}>Remove model files</Button>
+          <Button variant="outline" className="h-12" onClick={() => void removeModel()}>{tl("Remove model files")}</Button>
         )}
       </div>
-      <p className="text-xs text-muted-foreground">Removing deletes only the model files. Your encounter records are not touched.</p>
+      <p className="text-xs text-muted-foreground">{tl("Removing deletes only the model files. Your encounter records are not touched.")}</p>
 
       <details>
-        <summary className="cursor-pointer font-semibold text-primary">Diagnostics</summary>
+        <summary className="cursor-pointer font-semibold text-primary">{tl("Diagnostics")}</summary>
         <dl className="mt-2 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-xs">
-          <dt>Model</dt><dd className="break-all">{AI_MODEL.id}</dd>
-          <dt>Revision</dt><dd className="break-all">{AI_MODEL.revision}</dd>
-          <dt>License</dt><dd>{AI_MODEL.license}</dd>
-          <dt>Library</dt><dd>{AI_MODEL.library}</dd>
-          <dt>Runtime</dt><dd className="break-all">{AI_MODEL.runtime}</dd>
-          <dt>Variants</dt><dd>WebGPU {AI_VARIANTS.webgpu.dtype} · WASM {AI_VARIANTS.wasm.dtype}</dd>
+          <dt>{tl("Model")}</dt><dd className="break-all">{AI_MODEL.id}</dd>
+          <dt>{tl("Revision")}</dt><dd className="break-all">{AI_MODEL.revision}</dd>
+          <dt>{tl("License")}</dt><dd>{AI_MODEL.license}</dd>
+          <dt>{tl("Library")}</dt><dd>{AI_MODEL.library}</dd>
+          <dt>{tl("Runtime")}</dt><dd className="break-all">{AI_MODEL.runtime}</dd>
+          <dt>{tl("Variants")}</dt><dd>WebGPU {AI_VARIANTS.webgpu.dtype} · WASM {AI_VARIANTS.wasm.dtype}</dd>
           {ai.kind === "ready" && (
             <>
-              <dt>Installed</dt><dd>{new Date(ai.manifest.installedAt).toLocaleString()} · {ai.manifest.backend}/{ai.manifest.dtype}</dd>
-              <dt>Cached</dt><dd>{ai.manifest.cachedKeys.length} files · {mb(ai.manifest.cachedBytes)}</dd>
-              <dt>Test run</dt><dd>{Math.round(ai.manifest.smokeMs / 1000)} s · {ai.manifest.smokeParsed ? "valid JSON" : "ran, output not JSON"}</dd>
+              <dt>{tl("Installed")}</dt><dd>{new Date(ai.manifest.installedAt).toLocaleString()} · {ai.manifest.backend}/{ai.manifest.dtype}</dd>
+              <dt>{tl("Cached")}</dt><dd>{ai.manifest.cachedKeys.length} files · {mb(ai.manifest.cachedBytes)}</dd>
+              <dt>{tl("Test run")}</dt><dd>{Math.round(ai.manifest.smokeMs / 1000)} s · {ai.manifest.smokeParsed ? tl("valid JSON") : tl("ran, output not JSON")}</dd>
             </>
           )}
         </dl>

@@ -14,7 +14,7 @@ const NAV: { to: "/" | "/encounters" | "/sync" | "/settings"; key: Key; Icon: ty
 ];
 
 export function AppShell({ children }: { children: ReactNode }) {
-  const { t, lang, setLang } = useI18n();
+  const { t, tl, lang, setLang } = useI18n();
   const online = useOnline();
   const { user } = useAuth();
   return (
@@ -42,9 +42,9 @@ export function AppShell({ children }: { children: ReactNode }) {
               {online ? t("online") : t("offline")}
             </StatusPill>
             <Link to="/auth" className="hidden min-h-10 items-center rounded-md border border-input bg-card px-3 text-sm font-semibold sm:inline-flex">
-              {user ? "Account" : "Sign in"}
+              {user ? tl("Account") : tl("Sign in")}
             </Link>
-            <div className="flex overflow-hidden rounded-md border border-input" role="group" aria-label="Interface language">
+            <div className="flex overflow-hidden rounded-md border border-input" role="group" aria-label={tl("Interface language")}>
               {(["en", "sn"] as const).map((l) => (
                 <button
                   key={l}
@@ -63,7 +63,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         </p>
       </header>
       <div className="border-b border-border bg-muted px-4 py-1.5 text-center text-xs font-semibold text-muted-foreground">
-        {user ? <>Signed in · {user.email}</> : <><Link to="/auth" className="underline">Sign in</Link> to sync. {t("localOnly")} until then.</>}
+        {user ? <>{tl("Signed in")} · {user.email}</> : <><Link to="/auth" className="underline">{tl("Sign in")}</Link> {tl("to sync.")} {t("localOnly")} {tl("until then.")}</>}
       </div>
       <main className="mx-auto max-w-5xl px-4 py-5">{children}</main>
       <nav className="fixed inset-x-0 bottom-0 z-20 grid grid-cols-4 border-t border-border bg-card md:hidden">

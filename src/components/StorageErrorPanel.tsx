@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { useI18n } from "@/lib/i18n";
 
 /** Builds a diagnostic with browser/storage facts only — never record contents. */
 async function buildDiagnostic(error: string) {
@@ -26,29 +27,30 @@ async function buildDiagnostic(error: string) {
 }
 
 export function StorageErrorPanel({ error, onRetry }: { error: string; onRetry: () => void | Promise<void> }) {
+  const { tl } = useI18n();
   const [copied, setCopied] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   return (
     <div role="alert" className="space-y-3 rounded-lg border border-destructive bg-destructive/10 p-4 text-sm">
-      <p className="font-bold text-destructive">This browser refused to open on-device storage, so records can't be saved here right now.</p>
+      <p className="font-bold text-destructive">{tl("This browser refused to open on-device storage, so records can't be saved here right now.")}</p>
       <p className="text-xs text-muted-foreground">Browser message: {error}</p>
-      <p className="font-semibold">Try, in order:</p>
+      <p className="font-semibold">{tl("Try, in order:")}</p>
       <ol className="list-decimal space-y-1 pl-5">
-        <li>Close every Hutano tab, then open one again.</li>
+        <li>{tl("Close every Hutano tab, then open one again.")}</li>
         <li>Open the app directly in its own tab (not inside a preview or another page).</li>
-        <li>Leave private/incognito mode and check the device has free storage.</li>
-        <li>Last resort: clear this site's data in browser settings. This deletes records saved in this browser.</li>
+        <li>{tl("Leave private/incognito mode and check the device has free storage.")}</li>
+        <li>{tl("Last resort: clear this site's data in browser settings. This deletes records saved in this browser.")}</li>
       </ol>
-      <p className="text-xs text-muted-foreground">Hutano never deletes your records automatically.</p>
+      <p className="text-xs text-muted-foreground">{tl("Hutano never deletes your records automatically.")}</p>
       <div className="flex flex-wrap gap-2">
         <Button className="h-11" disabled={busy} onClick={async () => { setBusy(true); try { await onRetry(); } finally { setBusy(false); } }}>
-          {busy ? "Retrying…" : "Retry"}
+          {busy ? tl("Retrying…") : tl("Retry")}
         </Button>
         <Button variant="outline" className="h-11" onClick={async () => {
           const text = await buildDiagnostic(error);
-          try { await navigator.clipboard.writeText(text); setCopied("Copied."); } catch { setCopied(text); }
+          try { await navigator.clipboard.writeText(text); setCopied(tl("Copied.")); } catch { setCopied(text); }
         }}>
-          Copy diagnostic (no patient data)
+          {tl("Copy diagnostic (no patient data)")}
         </Button>
       </div>
       {copied && <pre className="whitespace-pre-wrap text-xs">{copied}</pre>}

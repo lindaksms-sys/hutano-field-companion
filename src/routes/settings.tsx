@@ -30,16 +30,16 @@ export const Route = createFileRoute("/settings")({
   component: SettingsPage,
 });
 
-const mb = (n: number | null) => (n == null ? "unknown" : `${(n / 1024 / 1024).toFixed(1)} MB`);
-
 function SettingsPage() {
   const { status, requestPersist, recheck } = useStorageStatus();
-  const { lang, setLang, tl } = useI18n();
+  const { lang, setLang, tl, tf } = useI18n();
   const [msg, setMsg] = useState<string | null>(null);
   const cfg = supabaseConfig();
   const offline = useOfflineState();
   const { user } = useAuth();
   const ai = useAiState();
+
+  const mb = (n: number | null) => (n == null ? tl("unknown") : `${(n / 1024 / 1024).toFixed(1)} MB`);
 
   async function doExport() {
     try {
@@ -51,64 +51,64 @@ function SettingsPage() {
       a.click();
       URL.revokeObjectURL(url);
     } catch (e) {
-      setMsg(`Export failed: ${(e as Error).message}`);
+      setMsg(tf("Export failed: {errorMessage}", { errorMessage: (e as Error).message }));
     }
   }
 
   return (
     <div className="mx-auto max-w-2xl space-y-5">
-      <h1 className="text-2xl font-bold">Settings</h1>
+      <h1 className="text-2xl font-bold">{tl("Settings")}</h1>
 
-      <Section title="Readiness">
-        <Row k="Local storage (IndexedDB)" v={status.indexedDB === "ok" ? <StatusPill tone="success">Working</StatusPill> : status.indexedDB === "failed" ? <StatusPill tone="danger">Failed</StatusPill> : "Checking…"} />
+      <Section title={tl("Readiness")}>
+        <Row k={tl("Local storage (IndexedDB)")} v={status.indexedDB === "ok" ? <StatusPill tone="success">{tl("Working")}</StatusPill> : status.indexedDB === "failed" ? <StatusPill tone="danger">{tl("Failed")}</StatusPill> : tl("Checking…")} />
         {status.error && <div className="px-4 pb-3"><StorageErrorPanel error={status.error} onRetry={async () => { resetDBConnection(); await recheck(); }} /></div>}
-        <Row k="Persistent storage" v={status.persisted === true ? <StatusPill tone="success">Granted</StatusPill> : status.persisted === false ? <StatusPill tone="pending">Not granted — browser may clear data</StatusPill> : "Unsupported"} />
-        <Row k="Storage used / quota" v={`${mb(status.usage)} / ${mb(status.quota)}`} />
-        <Row k="Backend" v={<StatusPill tone={cfg.configured ? "success" : "pending"}>{cfg.configured ? "Configured (external Supabase)" : "Not configured"}</StatusPill>} />
-        <Row k="Account" v={<StatusPill tone={user ? "success" : "pending"}>{user ? "Signed in" : "Not signed in"}</StatusPill>} />
-        <Row k="Cloud sync" v="Manual / on reconnect, app must be open" />
-        <Row k="Extraction" v={<StatusPill tone="pending">{demoAdapter.label}</StatusPill>} />
-        <Row k="On-device AI (experimental)" v={<StatusPill tone={ai.kind === "ready" ? "success" : "pending"}>{ai.kind === "ready" ? `Installed · ${ai.manifest.backend}` : ai.kind === "unsupported" ? "Not supported here" : "Not installed"}</StatusPill>} />
-        <Row k="Offline app (after first online load)" v={
-          offline.kind === "ready" ? <StatusPill tone="success">Ready · {offline.pages} pages cached{offline.updateWaiting ? " · update after closing tabs" : ""}</StatusPill>
-          : offline.kind === "installing" || offline.kind === "checking" ? <StatusPill tone="pending">Preparing — not ready yet</StatusPill>
-          : offline.kind === "disabled" ? <StatusPill>Off here ({offline.reason})</StatusPill>
-          : offline.kind === "failed" ? <StatusPill tone="danger">Failed: {offline.message}</StatusPill>
-          : <StatusPill tone="danger">Not supported by this browser</StatusPill>
+        <Row k={tl("Persistent storage")} v={status.persisted === true ? <StatusPill tone="success">{tl("Granted")}</StatusPill> : status.persisted === false ? <StatusPill tone="pending">{tl("Not granted — browser may clear data")}</StatusPill> : tl("Unsupported")} />
+        <Row k={tl("Storage used / quota")} v={`${mb(status.usage)} / ${mb(status.quota)}`} />
+        <Row k={tl("Backend")} v={<StatusPill tone={cfg.configured ? "success" : "pending"}>{cfg.configured ? tl("Configured (external Supabase)") : tl("Not configured")}</StatusPill>} />
+        <Row k={tl("Account")} v={<StatusPill tone={user ? "success" : "pending"}>{user ? tl("Signed in") : tl("Not signed in")}</StatusPill>} />
+        <Row k={tl("Cloud sync")} v={tl("Manual / on reconnect, app must be open")} />
+        <Row k={tl("Extraction")} v={<StatusPill tone="pending">{demoAdapter.label}</StatusPill>} />
+        <Row k={tl("On-device AI (experimental)")} v={<StatusPill tone={ai.kind === "ready" ? "success" : "pending"}>{ai.kind === "ready" ? `${tl("Installed")} · ${ai.manifest.backend}` : ai.kind === "unsupported" ? tl("Not supported here") : tl("Not installed")}</StatusPill>} />
+        <Row k={tl("Offline app (after first online load)")} v={
+          offline.kind === "ready" ? <StatusPill tone="success">{tl("Ready")} · {offline.pages} {tl("pages cached")}{offline.updateWaiting ? <> {tl("· update after closing tabs")}</> : ""}</StatusPill>
+          : offline.kind === "installing" || offline.kind === "checking" ? <StatusPill tone="pending">{tl("Preparing — not ready yet")}</StatusPill>
+          : offline.kind === "disabled" ? <StatusPill>{tl("Off here")} ({tl(offline.reason)})</StatusPill>
+          : offline.kind === "failed" ? <StatusPill tone="danger">{tl("Failed")}: {offline.message}</StatusPill>
+          : <StatusPill tone="danger">{tl("Not supported by this browser")}</StatusPill>
         } />
-        <Row k="Offline capture" v="Saved on this device; sync needs internet" />
-        <Row k="Offline AI" v={ai.kind === "ready" ? "Works offline on this device once installed" : "Install the model below first"} />
+        <Row k={tl("Offline capture")} v={tl("Saved on this device; sync needs internet")} />
+        <Row k={tl("Offline AI")} v={ai.kind === "ready" ? tl("Works offline on this device once installed") : tl("Install the model below first")} />
         {status.persisted === false && (
-          <div className="p-4"><Button variant="outline" className="h-11" onClick={requestPersist}>Request persistent storage</Button></div>
+          <div className="p-4"><Button variant="outline" className="h-11" onClick={requestPersist}>{tl("Request persistent storage")}</Button></div>
         )}
       </Section>
 
-      <Section title="On-device AI extraction (experimental)">
+      <Section title={tl("On-device AI extraction (experimental)")}>
         <AiModelPanel />
       </Section>
 
-      <Section title="Interface language">
+      <Section title={tl("Interface language")}>
         <div className="flex gap-2 p-4">
           {(["en", "sn"] as const).map((l) => (
             <Button key={l} variant={lang === l ? "default" : "outline"} className="h-11" onClick={() => setLang(l)}>
-              {l === "en" ? "English" : "Shona (draft)"}
+              {l === "en" ? tl("English") : tl("Shona (draft)")}
             </Button>
           ))}
         </div>
-        <p className="px-4 pb-4 text-xs text-muted-foreground">Shona translations are drafts awaiting native-speaker validation.</p>
+        <p className="px-4 pb-4 text-xs text-muted-foreground">{tl("Shona translations are drafts awaiting native-speaker validation.")}</p>
       </Section>
 
-      <Section title="Synthetic demo data">
+      <Section title={tl("Synthetic demo data")}>
         <div className="flex flex-col gap-2 p-4 sm:flex-row">
-          <Button variant="outline" className="h-12" onClick={doExport}>Export synthetic records (JSON)</Button>
+          <Button variant="outline" className="h-12" onClick={doExport}>{tl("Export synthetic records (JSON)")}</Button>
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <Button variant="destructive" className="h-12">Clear demo data</Button>
+              <Button variant="destructive" className="h-12">{tl("Clear demo data")}</Button>
             </AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
-                <AlertDialogTitle>Delete all synthetic records?</AlertDialogTitle>
-                <AlertDialogDescription>This permanently removes every demo record from this device. It cannot be undone.</AlertDialogDescription>
+                <AlertDialogTitle>{tl("Delete all synthetic records?")}</AlertDialogTitle>
+                <AlertDialogDescription>{tl("This permanently removes every demo record from this device. It cannot be undone.")}</AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
                 <AlertDialogCancel>{tl("Cancel")}</AlertDialogCancel>
@@ -118,7 +118,7 @@ function SettingsPage() {
                       const n = await clearDemoData();
                       setMsg(`Deleted ${n} record(s).`);
                     } catch (e) {
-                      setMsg(`Delete failed: ${(e as Error).message}`);
+                      setMsg(tf("Delete failed: {errorMessage}", { errorMessage: (e as Error).message }));
                     }
                   }}
                 >
@@ -132,7 +132,7 @@ function SettingsPage() {
       </Section>
 
       <p className="text-xs text-muted-foreground">
-        Privacy: local records are unencrypted in this browser. Anyone with access to this unlocked device and browser profile can read them. Avoid shared devices.
+        {tl("Privacy: local records are unencrypted in this browser. Anyone with access to this unlocked device and browser profile can read them. Avoid shared devices.")}
       </p>
     </div>
   );
