@@ -51,15 +51,20 @@ let tokenizer: any = null;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let model: any = null;
 let loadedBackend: AiBackend | null = null;
+// Install stage/file for sanitized diagnostics (file names only, never note text).
+let stage: "download" | "initialize" | "verify" | "cache-check" = "download";
+let lastFile = "";
 
 async function load(backend: AiBackend, report: boolean) {
   if (model && loadedBackend === backend) return;
   const v = AI_VARIANTS[backend];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const progress_callback = (p: any) => {
+    if (p?.file) lastFile = String(p.file);
     if (report && p.status === "progress" && p.file) post({ type: "progress", file: p.file, loaded: p.loaded ?? 0, total: p.total ?? 0 });
   };
   tokenizer = await AutoTokenizer.from_pretrained(AI_MODEL.id, { revision: AI_MODEL.revision, progress_callback });
+  stage = "initialize";
   if (report) post({ type: "phase", phase: "initializing" });
   model = await AutoModelForCausalLM.from_pretrained(AI_MODEL.id, {
     revision: AI_MODEL.revision,
@@ -110,14 +115,18 @@ self.onmessage = async (e: MessageEvent<WorkerIn>) => {
   const msg = e.data;
   try {
     if (msg.type === "install") {
+      stage = "download";
+      lastFile = "";
       post({ type: "phase", phase: "downloading" });
       await load(msg.backend, true);
+      stage = "verify";
       post({ type: "phase", phase: "verifying" });
       // Real inference on a fixed synthetic line before reporting readiness.
       const smoke = await generate(AI_SMOKE_MESSAGES);
       // Readiness requires the exact expected answer, not merely some output.
       const check = checkSmokeOutput(smoke.text);
       if (!check.ok) throw new Error(`Model verification failed (${check.reason}); not marked ready.`);
+      stage = "cache-check";
       const inv = await cachedInventory();
       const missing = missingRequired(inv.keys, msg.backend);
       if (missing.length) throw new Error(`Model files not fully cached: ${missing.join(", ")}`);
@@ -146,6 +155,6 @@ self.onmessage = async (e: MessageEvent<WorkerIn>) => {
     }
   } catch (err) {
     const m = (err as Error)?.message || String(err);
-    post({ type: "error", ...(msg.type === "generate" ? { id: msg.id } : {}), message: /quota|QuotaExceeded/i.test(m) ? `Storage full: ${m}` : m });
+    post({ type: "error", ...(msg.type === "generate" ? { id: msg.id } : {}), message: /quota|QuotaExceeded/i.test(m) ? `Storage full: ${m}` : m, ...(msg.type === "install" ? { stage, file: lastFile.split("/").pop() ?? "" } : {}) });
   }
 };

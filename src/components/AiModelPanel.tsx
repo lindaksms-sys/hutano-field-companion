@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { StatusPill } from "@/components/StatusPill";
 import { AI_MODEL, AI_VARIANTS } from "@/lib/ai-config";
-import { cancelInstall, estimateBytes, installModel, removeModel, storageHeadroom } from "@/lib/ai-model";
+import { cancelInstall, diagnosticText, estimateBytes, getBackendPreference, installModel, nextStep, removeModel, setBackendPreference, storageHeadroom } from "@/lib/ai-model";
+import type { AiBackend } from "@/lib/ai-config";
 import { useAiState } from "@/lib/use-ai";
 
 const mb = (n: number) => `${Math.round(n / 1e6)} MB`;
@@ -11,6 +12,10 @@ export function AiModelPanel() {
   const ai = useAiState();
   const [free, setFree] = useState<number | null>(null);
   const [confirm, setConfirm] = useState(false);
+  const [mode, setMode] = useState<AiBackend>("wasm");
+  const [copied, setCopied] = useState(false);
+  useEffect(() => setMode(getBackendPreference()), []);
+  const gpuAvailable = ai.kind === "not_downloaded" ? ai.gpuAvailable : null;
   useEffect(() => {
     void storageHeadroom().then((s) => setFree(s.free));
   }, [ai.kind]);
@@ -30,7 +35,37 @@ export function AiModelPanel() {
         {ai.kind === "error" && <StatusPill tone="danger">Error</StatusPill>}
       </div>
 
-      {ai.kind === "error" && <p role="alert" className="font-semibold text-destructive">{ai.message}</p>}
+      {ai.kind === "error" && (
+        <div role="alert" className="space-y-2">
+          <p className="font-semibold text-destructive">{ai.message}</p>
+          {ai.diag && (
+            <>
+              <p>{nextStep(ai.diag.category)} Manual capture still works.</p>
+              <pre className="whitespace-pre-wrap break-all rounded-lg bg-muted p-2 text-xs">{diagnosticText(ai.diag)}</pre>
+              <Button variant="outline" className="h-11" onClick={() => { void navigator.clipboard?.writeText(diagnosticText(ai.diag!)).then(() => setCopied(true), () => setCopied(false)); }}>
+                {copied ? "Copied" : "Copy diagnostic (no patient data)"}
+              </Button>
+            </>
+          )}
+        </div>
+      )}
+
+      {(ai.kind === "not_downloaded" || ai.kind === "error") && (
+        <fieldset className="space-y-2">
+          <legend className="font-semibold">Mode</legend>
+          {([
+            ["wasm", "Compatibility / CPU (tested in desktop browser)", "Slower. The only mode tested so far."],
+            ["webgpu", "GPU (experimental)", gpuAvailable === false ? "No suitable GPU found in this browser." : "Untested. May fail or give different results."],
+          ] as const).map(([id, label, note]) => (
+            <label key={id} className={`flex min-h-12 cursor-pointer items-start gap-3 rounded-lg border p-3 ${mode === id ? "border-primary" : "border-border"}`}>
+              <input type="radio" name="ai-mode" className="mt-1 h-5 w-5" checked={mode === id} disabled={id === "webgpu" && gpuAvailable === false}
+                onChange={() => { setMode(id); setBackendPreference(id); setConfirm(false); }} />
+              <span><span className="block font-semibold">{label} · about {mb(estimateBytes(id))}</span><span className="text-muted-foreground">{note}</span></span>
+            </label>
+          ))}
+          <p className="text-xs text-muted-foreground">Only the chosen mode is downloaded. Switching later means a separate download. Not yet verified on any phone.</p>
+        </fieldset>
+      )}
 
       <ul className="list-disc space-y-1 pl-5 text-muted-foreground">
         <li>Experimental. Suggests whole sentences from your note for each field; you check and accept each one. Never diagnoses or advises.</li>
@@ -61,15 +96,15 @@ export function AiModelPanel() {
         )}
         {confirm && (ai.kind === "not_downloaded" || ai.kind === "error") && backend && (
           <div className="w-full space-y-2 rounded-lg border border-pending-border bg-pending/40 p-3">
-            <p>Download about {mb(estimateBytes(backend))} and store it in this browser? Nothing from your notes is used for this step.</p>
+            <p>Download about {mb(estimateBytes(mode))} ({mode === "webgpu" ? "GPU, experimental" : "Compatibility / CPU"}) and store it in this browser? Nothing from your notes is used for this step.</p>
             <div className="flex gap-2">
-              <Button className="h-11" onClick={() => { setConfirm(false); void installModel(); }}>Yes, download</Button>
+              <Button className="h-11" onClick={() => { setConfirm(false); setCopied(false); void installModel(mode); }}>Yes, download</Button>
               <Button variant="outline" className="h-11" onClick={() => setConfirm(false)}>Not now</Button>
             </div>
           </div>
         )}
         {(ai.kind === "downloading" || ai.kind === "initializing") && (
-          <Button variant="outline" className="h-12" onClick={cancelInstall}>Cancel</Button>
+          <Button variant="outline" className="h-12" onClick={() => void cancelInstall()}>Cancel</Button>
         )}
         {(ai.kind === "ready" || ai.kind === "error" || ai.kind === "not_downloaded") && (
           <Button variant="outline" className="h-12" onClick={() => void removeModel()}>Remove model files</Button>

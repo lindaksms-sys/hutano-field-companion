@@ -49,7 +49,7 @@ export type WorkerOut =
   | { type: "installed"; manifest: AiInstallManifest }
   | { type: "loaded" }
   | { type: "generated"; id: string; text: string; inputTokens: number; ms: number }
-  | { type: "error"; id?: string; message: string };
+  | { type: "error"; id?: string; message: string; stage?: "download" | "initialize" | "verify" | "cache-check"; file?: string };
 
 /** Fixed synthetic smoke prompt run during install, before the model is marked Ready. */
 export const AI_SMOKE_MESSAGES = [
