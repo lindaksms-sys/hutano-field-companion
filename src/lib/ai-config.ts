@@ -50,3 +50,27 @@ export type WorkerOut =
   | { type: "loaded" }
   | { type: "generated"; id: string; text: string; inputTokens: number; ms: number }
   | { type: "error"; id?: string; message: string };
+
+/** Fixed synthetic smoke prompt run during install, before the model is marked Ready. */
+export const AI_SMOKE_MESSAGES = [
+  { role: "system", content: 'Reply with one JSON object only: {"patientCode": <segment number or null>}' },
+  { role: "user", content: "[1] Synthetic patient SYN-0001 seen today." },
+];
+
+/** Smoke output must be exactly {"patientCode":1} (optionally wrapped in an empty think block / code fence). */
+export function checkSmokeOutput(text: unknown): { ok: boolean; reason: string } {
+  if (typeof text !== "string" || !text.trim()) return { ok: false, reason: "no output" };
+  const t = text.replace(/<think>[\s\S]*?<\/think>/g, "").trim().replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "").trim();
+  if (t.length > 200) return { ok: false, reason: "output too long" };
+  let o: unknown;
+  try {
+    o = JSON.parse(t);
+  } catch {
+    return { ok: false, reason: "not valid JSON" };
+  }
+  if (!o || typeof o !== "object" || Array.isArray(o)) return { ok: false, reason: "not a JSON object" };
+  const keys = Object.keys(o);
+  if (keys.length !== 1 || keys[0] !== "patientCode") return { ok: false, reason: "unexpected keys" };
+  if ((o as Record<string, unknown>).patientCode !== 1) return { ok: false, reason: "wrong answer" };
+  return { ok: true, reason: "ok" };
+}

@@ -6,7 +6,9 @@ import {
   AI_MAX_NEW_TOKENS,
   AI_MODEL,
   AI_REQUIRED_FILES,
+  AI_SMOKE_MESSAGES,
   AI_VARIANTS,
+  checkSmokeOutput,
   type AiBackend,
   type AiInstallManifest,
   type WorkerIn,
@@ -112,20 +114,14 @@ self.onmessage = async (e: MessageEvent<WorkerIn>) => {
       await load(msg.backend, true);
       post({ type: "phase", phase: "verifying" });
       // Real inference on a fixed synthetic line before reporting readiness.
-      const smoke = await generate([
-        { role: "system", content: 'Reply with one JSON object only: {"patientCode": <segment number or null>}' },
-        { role: "user", content: "[1] Synthetic patient SYN-0001 seen today." },
-      ]);
-      if (!smoke.text.trim()) throw new Error("Model produced no output during verification.");
+      const smoke = await generate(AI_SMOKE_MESSAGES);
+      // Readiness requires the exact expected answer, not merely some output.
+      const check = checkSmokeOutput(smoke.text);
+      if (!check.ok) throw new Error(`Model verification failed (${check.reason}); not marked ready.`);
       const inv = await cachedInventory();
       const missing = missingRequired(inv.keys, msg.backend);
       if (missing.length) throw new Error(`Model files not fully cached: ${missing.join(", ")}`);
-      let smokeParsed = false;
-      try {
-        smokeParsed = typeof JSON.parse(smoke.text.replace(/<think>[\s\S]*?<\/think>/g, "").trim()) === "object";
-      } catch {
-        smokeParsed = false;
-      }
+      const smokeParsed = true;
       const manifest: AiInstallManifest = {
         modelId: AI_MODEL.id,
         revision: AI_MODEL.revision,
