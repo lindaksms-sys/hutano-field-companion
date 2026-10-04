@@ -41,3 +41,30 @@ These were captured without an account. They never sync unless you explicitly ad
 Each verified revision is uploaded once as an immutable snapshot. Revisions from other devices are kept on the server; full two-way conflict resolution is not implemented and server records are not downloaded to this device yet.,Sync page explanation,,
 Server acknowledged {sent}. {remaining} still queued,Sync result (no full stop version),,Keep {placeholders} exactly
 Page not found,404 page (shown outside the language switch; stays English for now),,
+Edit record,Encounter page: edit/delete/history,,New text (Oct 2026). Keep {placeholders} exactly.
+Stop editing,Encounter page: edit/delete/history,,New text (Oct 2026). Keep {placeholders} exactly.
+Delete encounter,Encounter page: edit/delete/history,,New text (Oct 2026). Keep {placeholders} exactly.
+Delete this encounter?,Encounter page: edit/delete/history,,New text (Oct 2026). Keep {placeholders} exactly.
+This cannot be undone on this device. Export first if you need a copy.,Encounter page: edit/delete/history,,New text (Oct 2026). Keep {placeholders} exactly.
+"Reason (optional, e.g. duplicate entry)",Encounter page: edit/delete/history,,New text (Oct 2026). Keep {placeholders} exactly.
+Removes it from this device. Copies already uploaded stay on the server (uploads are never changed or deleted).,Encounter page: edit/delete/history,,New text (Oct 2026). Keep {placeholders} exactly.
+Removes it from this device. It has not been uploaded.,Encounter page: edit/delete/history,,New text (Oct 2026). Keep {placeholders} exactly.
+The deletion is kept in the device history.,Encounter page: edit/delete/history,,New text (Oct 2026). Keep {placeholders} exactly.
+History ({count}),Encounter page: edit/delete/history,,New text (Oct 2026). Keep {placeholders} exactly.
+"Audit log kept on this device. Records actions and field names only, not note text.",Encounter page: edit/delete/history,,New text (Oct 2026). Keep {placeholders} exactly.
+No history recorded yet (records made before history was added).,Encounter page: edit/delete/history,,New text (Oct 2026). Keep {placeholders} exactly.
+Changed:,Encounter page: edit/delete/history,,New text (Oct 2026). Keep {placeholders} exactly.
+Verification removed — needs review again,Encounter page: edit/delete/history,,New text (Oct 2026). Keep {placeholders} exactly.
+Reason: {reason},Encounter page: edit/delete/history,,New text (Oct 2026). Keep {placeholders} exactly.
+Draft created,Encounter page: edit/delete/history,,New text (Oct 2026). Keep {placeholders} exactly.
+Edited,Encounter page: edit/delete/history,,New text (Oct 2026). Keep {placeholders} exactly.
+Suggestions added,Encounter page: edit/delete/history,,New text (Oct 2026). Keep {placeholders} exactly.
+Extraction failed,Encounter page: edit/delete/history,,New text (Oct 2026). Keep {placeholders} exactly.
+Adopted into account,Encounter page: edit/delete/history,,New text (Oct 2026). Keep {placeholders} exactly.
+Uploaded (server confirmed),Encounter page: edit/delete/history,,New text (Oct 2026). Keep {placeholders} exactly.
+Deleted from this device,Encounter page: edit/delete/history,,New text (Oct 2026). Keep {placeholders} exactly.
+Cleared with demo data,Encounter page: edit/delete/history,,New text (Oct 2026). Keep {placeholders} exactly.
+Shona interface approved by the project's Shona reviewer.,Settings,,New text (Oct 2026). Keep {placeholders} exactly.
+Model files are already on this device. A quick check is needed before use — nothing is downloaded.,Settings,,New text (Oct 2026). Keep {placeholders} exactly.
+Check installed files (no download),Settings,,New text (Oct 2026). Keep {placeholders} exactly.
+Installed per browser and web address: open Hutano at the same address ({host}) to reuse it. Private/incognito windows or clearing site data remove it.,Settings,,New text (Oct 2026). Keep {placeholders} exactly.

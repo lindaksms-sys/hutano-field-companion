@@ -303,6 +303,12 @@ safety_privacy.encounters_id.79c51af2,safety_privacy,· matched synthetic exampl
 ui.encounters_id.7591dae2,ui,Missing documentation ({count}),,,src/routes/encounters.$id.tsx · message string · placeholders: {count},Keep placeholders exactly; reorder words around them if natural.
 safety_privacy.encounters_id.b6cac8da,safety_privacy,"Documentation completeness only — not clinical advice. If information was not recorded, mark it as such.",,"Izvi ndezvekuzadzisa zvinyorwa chete, hazvisi zano rekurapa. Kana ruzivo rusina kunyorwa, makai kudaro.",src/routes/encounters.$id.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 ui.encounters_id.fd3d0f9c,ui,All fields filled or acknowledged.,,Zvikamu zvese zvazadzwa kana kubvumwa.,src/routes/encounters.$id.tsx · message string,"[review r3: adopted; user-supplied proposal, not clinician validated]"
+ui.encounters_id.74285313,ui,Saved on this device · {time},,,src/routes/encounters.$id.tsx · message string · placeholders: {time},Keep placeholders exactly; reorder words around them if natural.
+ui.encounters_id.29267269,ui,Unsaved changes,,Shanduko dzisati dzachengetwa,src/routes/encounters.$id.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
+review_states.encounters_id.840ff6a1,review_states,Before verifying:,,,src/routes/encounters.$id.tsx · message string,
+review_states.encounters_id.2db89dbd,review_states,{count} suggestion(s) to accept or edit.,,,src/routes/encounters.$id.tsx · message string · placeholders: {count},Keep placeholders exactly; reorder words around them if natural.
+review_states.encounters_id.9925ee3c,review_states,not recorded,,hazvina kunyorwa,src/routes/encounters.$id.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
+ui.encounters_id.56a2285c,ui,Saving…,,Zviri kuchengetwa…,src/routes/encounters.$id.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 ui.encounters_id.4328aa89,ui,Delete encounter,,,src/routes/encounters.$id.tsx · message string,
 sync.encounters_id.5dc6a493,sync,Removes it from this device. It has not been uploaded.,,,src/routes/encounters.$id.tsx · message string,
 ui.encounters_id.ab4c1e5a,ui,The deletion is kept in the device history.,,,src/routes/encounters.$id.tsx · message string,
@@ -311,12 +317,6 @@ error.encounters_id.2e8aa616,error,This cannot be undone on this device. Export 
 ui.encounters_id.f9e7ec5e,ui,"Reason (optional, e.g. duplicate entry)",,,src/routes/encounters.$id.tsx · message string,
 ui.encounters_id.77dfd213,ui,Cancel,,,src/routes/encounters.$id.tsx · message string,
 ui.encounters_id.f6fdbe48,ui,Delete,,,src/routes/encounters.$id.tsx · message string,
-ui.encounters_id.74285313,ui,Saved on this device · {time},,,src/routes/encounters.$id.tsx · message string · placeholders: {time},Keep placeholders exactly; reorder words around them if natural.
-ui.encounters_id.29267269,ui,Unsaved changes,,Shanduko dzisati dzachengetwa,src/routes/encounters.$id.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
-review_states.encounters_id.840ff6a1,review_states,Before verifying:,,,src/routes/encounters.$id.tsx · message string,
-review_states.encounters_id.2db89dbd,review_states,{count} suggestion(s) to accept or edit.,,,src/routes/encounters.$id.tsx · message string · placeholders: {count},Keep placeholders exactly; reorder words around them if natural.
-review_states.encounters_id.9925ee3c,review_states,not recorded,,hazvina kunyorwa,src/routes/encounters.$id.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
-ui.encounters_id.56a2285c,ui,Saving…,,Zviri kuchengetwa…,src/routes/encounters.$id.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 ui.encounters_id.6da13add,ui,Source,,,src/routes/encounters.$id.tsx · message string,
 ui.encounters_id.398cd27d,ui,"rule, not AI",,"mutemo, kwete AI",src/routes/encounters.$id.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 offline_ai_install.encounters_id.d10a6ccb,offline_ai_install,on-device AI,,AI iri pamudziyo,src/routes/encounters.$id.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
