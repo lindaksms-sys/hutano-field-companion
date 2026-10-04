@@ -129,7 +129,7 @@ describe("install robustness", () => {
     vi.stubGlobal("caches", { open: async () => ({ match: async () => undefined, keys: async () => [] }), delete: async () => true });
     // @ts-expect-error test window
     globalThis.window ??= globalThis;
-    (globalThis as unknown as { window: Record<string, unknown> }).window.caches = (globalThis as unknown as { caches: unknown }).caches;
+    (globalThis as unknown as { window: Record<string, unknown> }).window["caches"] = (globalThis as unknown as { caches: unknown }).caches;
   };
   it("cancel during download settles the install and leaves a real state (not stuck)", async () => {
     stubBrowser();
