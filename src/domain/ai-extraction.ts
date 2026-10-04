@@ -273,3 +273,28 @@ export function toExtractionResult(
     ai: { ...meta, rejectedFields: v.rejected },
   };
 }
+
+/** Shona/mixed warning shown on every hybrid result for those notes. */
+export const SHONA_WARNING =
+  "Shona: model sentence choices are unvalidated and were often wrong in testing; rules use a draft cue list. Check every field against the note.";
+
+/** Combine rule suggestions (structured fields) with type-checked model selections (narrative fields). */
+export function combineHybrid(
+  raw: string,
+  narrative: string,
+  segs: Segment[],
+  language: "sn" | "en" | "mixed",
+  rules: Partial<Record<FieldKey, Suggestion>>,
+  meta: Omit<NonNullable<ExtractionResult["ai"]>, "rejectedFields" | "ruleFields" | "modelFields" | "warning">,
+): ExtractionResult {
+  const m = checkNarrativeSelections(raw, narrative, segs, rules);
+  const suggestions = { ...rules, ...m.suggestions };
+  const r = toExtractionResult({ suggestions, rejected: m.rejected }, meta);
+  r.ai = {
+    ...r.ai!,
+    ruleFields: Object.keys(rules) as FieldKey[],
+    modelFields: Object.keys(m.suggestions) as FieldKey[],
+    ...(language !== "en" ? { warning: SHONA_WARNING } : {}),
+  };
+  return r;
+}

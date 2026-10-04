@@ -3,10 +3,11 @@
 import {
   AiExtractionError,
   buildMessages,
+  combineHybrid,
   segmentNarrative,
-  toExtractionResult,
-  validateModelOutput,
 } from "@/domain/ai-extraction";
+import { runRules } from "@/domain/rules";
+import type { InputLanguage } from "@/domain/types";
 import type { ExtractionResult } from "@/domain/extraction";
 import {
   AI_MODEL,
@@ -189,15 +190,17 @@ export interface AiRun {
 }
 
 /** Run on-device extraction. Rejects with a human-readable reason on any failure (fail closed). */
-export function runOnDeviceExtraction(narrative: string): AiRun {
+export function runOnDeviceExtraction(narrative: string, language: InputLanguage = "mixed"): AiRun {
   let cancel = () => {};
   const promise = new Promise<ExtractionResult>((resolve, reject) => {
     if (state.kind !== "ready") return reject(new AiExtractionError("On-device AI is not installed. Install it in Settings."));
     const manifest = state.manifest;
     let segs;
     let messages;
+    let rules: ReturnType<typeof runRules>;
     try {
       segs = segmentNarrative(narrative);
+      rules = runRules(segs, narrative); // deterministic, not AI
       messages = buildMessages(segs);
     } catch (e) {
       return reject(e);
@@ -239,9 +242,8 @@ export function runOnDeviceExtraction(narrative: string): AiRun {
       } else if (m.type === "generated" && m.id === id) {
         finish(() => {
           try {
-            const v = validateModelOutput(m.text, narrative, segs);
             resolve(
-              toExtractionResult(v, {
+              combineHybrid(m.text, narrative, segs, language, rules, {
                 modelId: manifest.modelId,
                 modelRevision: manifest.revision,
                 backend: manifest.backend,

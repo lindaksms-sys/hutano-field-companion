@@ -28,7 +28,7 @@ type Phase = "idle" | "saving" | "extracting" | "ai";
 const CHOICES: { id: AdapterChoice; label: string; note: string }[] = [
   { id: "manual", label: "Manual", note: "Fill every field yourself." },
   { id: "demo", label: "Demo (not AI)", note: "Only exact synthetic examples and literal codes/dates." },
-  { id: "ondevice", label: "On-device AI (experimental)", note: "Runs on this device. Suggests whole sentences for you to check. Shona not validated." },
+  { id: "ondevice", label: "On-device AI (experimental)", note: "Runs on this device. Rules fill code, age, date, place and duration only when written plainly; the AI suggests whole sentences. Shona not validated." },
 ];
 
 function NewEncounter() {
@@ -60,7 +60,7 @@ function NewEncounter() {
     // On-device AI: draft is saved first; result applies only to this exact revision/account.
     setPhase("ai");
     const guard = guardFor(rec);
-    const r = runOnDeviceExtraction(text);
+    const r = runOnDeviceExtraction(text, lang);
     cancelRef.current = r.cancel;
     try {
       const res = await r.promise;
