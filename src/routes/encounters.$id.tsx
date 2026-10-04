@@ -210,7 +210,7 @@ function Review() {
         </div>
       </div>
 
-      {!locked && <section className="z-10 space-y-3 md:sticky md:bottom-4 rounded-xl border border-border bg-card p-4 shadow-lg md:bottom-4">
+      {!locked && <section className="z-10 space-y-3 md:sticky md:bottom-4 rounded-xl border border-border bg-card p-4 shadow-lg">
         {save.kind === "error" && <p role="alert" className="text-sm font-bold text-destructive">{save.msg}</p>}
         {save.kind === "saved" && !dirty && <p className="text-sm font-semibold text-success-foreground">{tf("Saved on this device · {time}", { time: new Date(save.at).toLocaleTimeString() })}</p>}
         {dirty && <p className="text-sm font-semibold text-pending-foreground">{tl("Unsaved changes")}</p>}
