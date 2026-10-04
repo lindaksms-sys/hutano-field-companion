@@ -167,6 +167,10 @@ ui.EncounterHistory.85bfb518,ui,Rev {revision},,,src/components/EncounterHistory
 ui.EncounterHistory.eda3bdc4,ui,Changed:,,,src/components/EncounterHistory.tsx · message string,
 review_states.EncounterHistory.5e5726f3,review_states,Verification removed — needs review again,,,src/components/EncounterHistory.tsx · message string,
 ui.EncounterHistory.f147508d,ui,Reason: {reason},,,src/components/EncounterHistory.tsx · message string · placeholders: {reason},Keep placeholders exactly; reorder words around them if natural.
+ui.InstallApp.a11dbc0f,ui,(display-mode: standalone),,,src/components/InstallApp.tsx · message string,
+offline_ai_install.InstallApp.77517e55,offline_ai_install,"Install Hutano: tap Share, then Add to Home Screen.",,,src/components/InstallApp.tsx · message string,
+offline_ai_install.InstallApp.75053b0a,offline_ai_install,"Install Hutano on this phone to open it like an app, also offline.",,,src/components/InstallApp.tsx · message string,
+offline_ai_install.InstallApp.e5f79aa1,offline_ai_install,Install app,,,src/components/InstallApp.tsx · message string,
 safety_privacy.StorageErrorPanel.fa2323c3,safety_privacy,Hutano storage diagnostic (no patient data),,Mashoko ekuongorora dambudziko rekuchengetera reHutano (hapana ruzivo rwevarwere),src/components/StorageErrorPanel.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 ui.StorageErrorPanel.035257ef,ui,· mobile,,· nharembozha,src/components/StorageErrorPanel.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 ui.StorageErrorPanel.1604a818,ui,not granted,,hazvina kubvumidzwa,src/components/StorageErrorPanel.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
