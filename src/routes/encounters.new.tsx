@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { FIXTURES } from "@/domain/fixtures";
@@ -42,6 +42,10 @@ function NewEncounter() {
   const [savedId, setSavedId] = useState<string | null>(null);
   const [choice, setChoice] = useState<AdapterChoice>("manual");
   const ai = useAiState();
+  const autoPicked = useRef(false);
+  useEffect(() => {
+    if (!autoPicked.current && ai.kind === "ready") { autoPicked.current = true; setChoice("ondevice"); }
+  }, [ai.kind]);
   const cancelRef = useRef<(() => void) | null>(null);
 
   async function run() {

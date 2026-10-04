@@ -67,7 +67,7 @@ function SettingsPage() {
         <Row k={tl("Backend")} v={<StatusPill tone={cfg.configured ? "success" : "pending"}>{cfg.configured ? tl("Configured (external Supabase)") : tl("Not configured")}</StatusPill>} />
         <Row k={tl("Account")} v={<StatusPill tone={user ? "success" : "pending"}>{user ? tl("Signed in") : tl("Not signed in")}</StatusPill>} />
         <Row k={tl("Cloud sync")} v={tl("Manual / on reconnect, app must be open")} />
-        <Row k={tl("Extraction")} v={<StatusPill tone="pending">{demoAdapter.label}</StatusPill>} />
+        <Row k={tl("Extraction")} v={ai.kind === "ready" ? <StatusPill tone="success">{tl("on-device AI")}</StatusPill> : <StatusPill tone="pending">{demoAdapter.label}</StatusPill>} />
         <Row k={tl("On-device AI (experimental)")} v={<StatusPill tone={ai.kind === "ready" ? "success" : "pending"}>{ai.kind === "ready" ? `${tl("Installed")} · ${ai.manifest.backend}` : ai.kind === "unsupported" ? tl("Not supported here") : tl("Not installed")}</StatusPill>} />
         <Row k={tl("Offline app (after first online load)")} v={
           offline.kind === "ready" ? <StatusPill tone="success">{tl("Ready")} · {offline.pages} {tl("pages cached")}{offline.updateWaiting ? <> {tl("· update after closing tabs")}</> : ""}</StatusPill>
