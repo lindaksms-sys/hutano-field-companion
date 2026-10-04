@@ -39,7 +39,7 @@ export interface AiDiagnostic {
 export type AiState =
   | { kind: "checking" }
   | { kind: "unsupported"; reason: string }
-  | { kind: "not_downloaded"; backend: AiBackend; gpuAvailable: boolean; estimateBytes: number }
+  | { kind: "not_downloaded"; backend: AiBackend; gpuAvailable: boolean; estimateBytes: number; cachedFiles?: AiBackend | null }
   | { kind: "downloading"; backend: AiBackend; loaded: number; total: number; file: string }
   | { kind: "initializing"; backend: AiBackend; phase: "initializing" | "verifying" }
   | { kind: "ready"; manifest: AiInstallManifest }
@@ -151,6 +151,22 @@ export async function detectBackend(): Promise<{ backend: AiBackend | null; reas
   return { backend: pref === "webgpu" && (await detectGpu()) ? "webgpu" : "wasm" };
 }
 
+/** Which pinned files are actually present in the dedicated cache (ignores optional extras). */
+function requiredPresent(keys: string[], backend: AiBackend): boolean {
+  const rev = AI_MODEL.revision;
+  const need = [...AI_REQUIRED_FILES, AI_VARIANTS[backend].file];
+  const filesOk = need.every((f) => keys.some((k) => k.includes(AI_MODEL.id) && k.includes(rev) && k.endsWith(`/${f}`)));
+  return filesOk && keys.some((k) => /ort-wasm[^/]*\.wasm$/.test(k)) && keys.some((k) => /ort-wasm[^/]*\.mjs$/.test(k));
+}
+
+/** Backend whose files are fully cached without an install record (e.g. record lost), or null. */
+async function cachedWithoutManifest(): Promise<AiBackend | null> {
+  const keys = (await (await caches.open(AI_MODEL.cacheName)).keys()).map((r) => r.url);
+  if (requiredPresent(keys, "wasm")) return "wasm";
+  if (requiredPresent(keys, "webgpu")) return "webgpu";
+  return null;
+}
+
 async function readManifest(): Promise<AiInstallManifest | null> {
   const cache = await caches.open(AI_MODEL.cacheName);
   const res = await cache.match(new URL(AI_MODEL.manifestKey, location.origin).href);
@@ -158,11 +174,10 @@ async function readManifest(): Promise<AiInstallManifest | null> {
   const m = (await res.json()) as AiInstallManifest;
   if (m.modelId !== AI_MODEL.id || m.revision !== AI_MODEL.revision) return null;
   if (m.smokeParsed !== true) return null; // installs from before strict verification must be redone
-  // Every recorded file must still be present (browser may have evicted some).
-  const keys = new Set((await cache.keys()).map((r) => r.url));
-  if (!m.cachedKeys.every((k) => keys.has(k))) return null;
-  const need = [...AI_REQUIRED_FILES, AI_VARIANTS[m.backend].file];
-  if (!need.every((f) => m.cachedKeys.some((k) => k.endsWith(`/${f}`)))) return null;
+  // The files the model actually needs must still be present (the browser may evict storage);
+  // optional extras recorded at install time are not required.
+  const keys = (await cache.keys()).map((r) => r.url);
+  if (!requiredPresent(keys, m.backend)) return null;
   return m;
 }
 
@@ -178,7 +193,11 @@ export async function refreshAiState(force = false) {
   try {
     const m = await readManifest();
     // A valid install keeps its own backend, whatever the current preference.
-    set(m ? { kind: "ready", manifest: m } : { kind: "not_downloaded", backend, gpuAvailable, estimateBytes: estimateBytes(backend) });
+    if (m) return set({ kind: "ready", manifest: m });
+    // Files kept but install record missing: offer a re-check that reads from cache (no download).
+    const cachedFiles = await cachedWithoutManifest();
+    const b = cachedFiles ?? backend;
+    set({ kind: "not_downloaded", backend: b, gpuAvailable, estimateBytes: estimateBytes(b), cachedFiles });
   } catch (e) {
     set({ kind: "error", message: `Could not read model storage: ${sanitize((e as Error)?.message ?? String(e))}`, backend });
   }
@@ -242,6 +261,7 @@ export function diagnosticText(d: AiDiagnostic): string {
     `Error: ${d.message}`,
     `GPU detected: ${d.gpu}`,
     `Browser: ${d.browser}`,
+    `Site: ${typeof location !== "undefined" ? location.host : "-"}`,
     `Time: ${d.time}`,
   ].join("\n");
 }
@@ -264,8 +284,15 @@ export async function installModel(chosen?: AiBackend) {
   if (p) return set({ kind: "unsupported", reason: p });
   let backend: AiBackend = chosen ?? getBackendPreference();
   if (backend === "webgpu" && !(await detectGpu())) backend = "wasm";
+  // Ask the browser to keep this site's storage so the model isn't evicted between visits.
+  try {
+    await navigator.storage?.persist?.();
+  } catch {
+    /* not supported */
+  }
+  const alreadyCached = (await cachedWithoutManifest().catch(() => null)) === backend;
   const { free } = await storageHeadroom();
-  if (free !== null && free < estimateBytes(backend) * 1.1) {
+  if (!alreadyCached && free !== null && free < estimateBytes(backend) * 1.1) {
     const message = `Not enough browser storage: about ${Math.round(free / 1e6)} MB free, about ${Math.round(estimateBytes(backend) / 1e6)} MB needed.`;
     return set({ kind: "error", backend, message, diag: makeDiagnostic(backend, "start", message) });
   }
