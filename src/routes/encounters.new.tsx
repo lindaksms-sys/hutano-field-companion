@@ -10,6 +10,7 @@ import { runOnDeviceExtraction } from "@/lib/ai-model";
 import { useAiState } from "@/lib/use-ai";
 import type { InputLanguage } from "@/domain/types";
 import { LANG_LABELS } from "@/lib/labels";
+import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/encounters/new")({
   head: () => ({
@@ -32,6 +33,7 @@ const CHOICES: { id: AdapterChoice; label: string; note: string }[] = [
 ];
 
 function NewEncounter() {
+  const { tl, tf } = useI18n();
   const nav = useNavigate();
   const [text, setText] = useState("");
   const [lang, setLang] = useState<InputLanguage>("sn");
@@ -51,7 +53,7 @@ function NewEncounter() {
       setSavedId(rec.id);
     } catch (e) {
       setPhase("idle");
-      setError(`Not saved. Local storage write failed: ${(e as Error).message}`);
+      setError(tf("Not saved. Local storage write failed: {errorMessage}", { errorMessage: (e as Error).message }));
       return;
     }
     const id = rec.id;
@@ -67,7 +69,7 @@ function NewEncounter() {
       await applyExtraction(id, res, guard);
     } catch (e) {
       const reason = (e as Error).message;
-      setError(`Draft saved. On-device AI gave no suggestions: ${reason} Continue with manual review.`);
+      setError(tf("Draft saved. On-device AI gave no suggestions: {reason} Continue with manual review.", { reason }));
       await recordExtractionFailure(id, { adapterId: AI_ADAPTER_ID, adapterLabel: AI_ADAPTER_LABEL, isAI: true, failure: reason }, guard).catch(() => {});
     } finally {
       cancelRef.current = null;
@@ -83,7 +85,7 @@ function NewEncounter() {
         const res = await demoAdapter.extract(text, lang);
         await applyExtraction(id, res);
       } catch (e) {
-        setError(`Draft saved, but extraction failed: ${(e as Error).message}`);
+        setError(tf("Draft saved, but extraction failed: {errorMessage}", { errorMessage: (e as Error).message }));
       }
     }
     setPhase("idle");
@@ -92,10 +94,10 @@ function NewEncounter() {
 
   return (
     <div className="mx-auto max-w-2xl space-y-5">
-      <h1 className="text-2xl font-bold">New encounter</h1>
+      <h1 className="text-2xl font-bold">{tl("New encounter")}</h1>
 
       <fieldset className="space-y-2">
-        <legend className="text-sm font-bold">Narrative language</legend>
+        <legend className="text-sm font-bold">{tl("Narrative language")}</legend>
         <div className="grid grid-cols-3 gap-2">
           {(["sn", "en", "mixed"] as const).map((l) => (
             <button
@@ -105,7 +107,7 @@ function NewEncounter() {
               aria-pressed={lang === l}
               className={`min-h-12 rounded-lg border text-sm font-bold ${lang === l ? "border-primary bg-primary text-primary-foreground" : "border-input bg-card"}`}
             >
-              {LANG_LABELS[l]}
+              {tl(LANG_LABELS[l])}
             </button>
           ))}
         </div>
@@ -113,7 +115,7 @@ function NewEncounter() {
 
       <div className="space-y-2">
         <label htmlFor="narrative" className="text-sm font-bold">
-          What happened during the visit?
+          {tl("What happened during the visit?")}
         </label>
         <Textarea
           id="narrative"
@@ -121,13 +123,13 @@ function NewEncounter() {
           onChange={(e) => setText(e.target.value)}
           rows={8}
           className="bg-card text-base"
-          placeholder="Use synthetic data only. Do not enter real names or identifiers."
+          placeholder={tl("Use synthetic data only. Do not enter real names or identifiers.")}
         />
-        <p className="text-xs text-muted-foreground">Original text is kept exactly as typed.</p>
+        <p className="text-xs text-muted-foreground">{tl("Original text is kept exactly as typed.")}</p>
       </div>
 
       <div className="rounded-xl border border-dashed border-border p-4">
-        <p className="text-sm font-bold">Synthetic examples (fictional, for demo)</p>
+        <p className="text-sm font-bold">{tl("Synthetic examples (fictional, for demo)")}</p>
         <div className="mt-2 flex flex-wrap gap-2">
           {FIXTURES.map((f) => (
             <Button
@@ -153,7 +155,7 @@ function NewEncounter() {
       )}
 
       <fieldset className="space-y-2">
-        <legend className="text-sm font-bold">Extraction</legend>
+        <legend className="text-sm font-bold">{tl("Extraction")}</legend>
         <div className="grid gap-2 sm:grid-cols-3">
           {CHOICES.map((c) => {
             const disabled = c.id === "ondevice" && ai.kind !== "ready";
@@ -166,29 +168,29 @@ function NewEncounter() {
                 aria-pressed={choice === c.id}
                 className={`min-h-14 rounded-lg border p-3 text-left text-sm disabled:opacity-50 ${choice === c.id ? "border-primary bg-primary text-primary-foreground" : "border-input bg-card"}`}
               >
-                <span className="block font-bold">{c.label}</span>
-                <span className="block text-xs opacity-90">{c.note}</span>
+                <span className="block font-bold">{tl(c.label)}</span>
+                <span className="block text-xs opacity-90">{tl(c.note)}</span>
               </button>
             );
           })}
         </div>
         {ai.kind !== "ready" && (
           <p className="text-xs text-muted-foreground">
-            On-device AI is not installed on this device.{" "}
-            <Link to="/settings" className="font-semibold text-primary underline">Install it in Settings</Link> (large download, explicit step).
+            {tl("On-device AI is not installed on this device.")}{" "}
+            <Link to="/settings" className="font-semibold text-primary underline">{tl("Install it in Settings")}</Link> {tl("(large download, explicit step).")}
           </p>
         )}
       </fieldset>
 
       <div className="space-y-2">
         <Button size="lg" className="h-14 w-full text-base" disabled={!text.trim() || phase !== "idle" || !!savedId} onClick={run}>
-          {phase === "saving" ? "Saving draft…" : phase === "extracting" ? "Draft saved · demo extraction…" : phase === "ai" ? "Draft saved · on-device AI running…" : choice === "manual" ? "Save draft & fill in manually" : choice === "demo" ? "Save draft & run demo extraction" : "Save draft & run on-device AI"}
+          {phase === "saving" ? tl("Saving draft…") : phase === "extracting" ? tl("Draft saved · demo extraction…") : phase === "ai" ? tl("Draft saved · on-device AI running…") : choice === "manual" ? tl("Save draft & fill in manually") : choice === "demo" ? tl("Save draft & run demo extraction") : tl("Save draft & run on-device AI")}
         </Button>
         {choice === "demo" && <p className="text-center text-xs font-semibold text-pending-foreground">{demoAdapter.label}.</p>}
         {phase === "ai" && (
           <div className="space-y-2 rounded-lg border border-pending-border bg-pending/40 p-3 text-sm">
-            <p>Your draft is saved. The model is reading it on this device; this can take a minute or more. You can keep it running or stop it and fill in fields yourself.</p>
-            <Button variant="outline" className="h-11 w-full" onClick={() => cancelRef.current?.()}>Stop AI and review manually</Button>
+            <p>{tl("Your draft is saved. The model is reading it on this device; this can take a minute or more. You can keep it running or stop it and fill in fields yourself.")}</p>
+            <Button variant="outline" className="h-11 w-full" onClick={() => cancelRef.current?.()}>{tl("Stop AI and review manually")}</Button>
           </div>
         )}
       </div>

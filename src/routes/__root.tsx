@@ -19,6 +19,7 @@ import { AuthProvider } from "../lib/auth";
 import { runSyncNow } from "../lib/sync-runner";
 
 function NotFoundComponent() {
+  // Rendered as a route boundary, outside I18nProvider — kept in English.
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
@@ -41,6 +42,7 @@ function NotFoundComponent() {
 }
 
 function ErrorComponent({ error, reset }: ErrorComponentProps) {
+  // Rendered as a route boundary, outside I18nProvider — kept in English.
   console.error(error);
   const router = useRouter();
   useEffect(() => {

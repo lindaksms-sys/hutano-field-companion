@@ -83,6 +83,8 @@ def ph_name(expr: str) -> str:
 CODEY = re.compile(r";|=>|useState|Promise|const |\|\||&&|\s=\s|\]\+|\(\)|\)\.|typeof |\bvoid\b|null\)")
 def user_facing(s: str) -> bool:
     s = s.strip()
+    if ": string" in s or "Record<" in s:
+        return False  # TypeScript type annotations
     if s.startswith((":", "width=")) or "===" in s or s in ("Linda Kisimisi",):
         return False
     if CODEY.search(s) or re.match(r"^[A-Z]{2,5}-\d+$", s):

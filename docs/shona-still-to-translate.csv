@@ -1,0 +1,43 @@
+english,where_it_appears,your_shona,notes
+to sync.,"Header, after the 'Sign in' link: 'Sign in to sync. Local only until then.'",,
+until then.,"Header, end of the same sentence",,
+Signed in,"Header, before the email",,
+Could not read local storage: {errorMessage},Encounter page error,,Keep {placeholders} exactly
+Rev {revision},Record revision number,,Keep {placeholders} exactly
+Captured without an account. It will not sync unless you adopt it into {email}.,Encounter page banner,,Keep {placeholders} exactly
+Verified {date}. Any edit will remove verification and require review again.,Encounter page banner,,Keep {placeholders} exactly
+Missing documentation ({count}),Encounter page panel title,,Keep {placeholders} exactly
+Saved on this device · {time},Encounter page save status,,Keep {placeholders} exactly
+Before verifying:,Encounter page checklist title,,
+{count} suggestion(s) to accept or edit.,Encounter page checklist item,,Keep {placeholders} exactly
+Source,Label above the exact source text of a suggestion,,
+Storage error: {error},Encounters list error,,Keep {placeholders} exactly
+no example matched; fill fields manually,Demo extraction result,,
+On-device AI is not installed on this device.,New encounter page,,
+"(large download, explicit step).","New encounter page, after 'Install it in Settings'",,
+Your draft is saved. The model is reading it on this device; this can take a minute or more. You can keep it running or stop it and fill in fields yourself.,New encounter page while AI runs,,
+"Runs on this device. Rules fill code, age, date, place and duration only when written plainly; the AI suggests whole sentences. Shona not validated.","New encounter, On-device AI choice",,
+Ready,Settings status,,
+pages cached,"Settings, after a number: 'Ready · 29 pages cached'",,
+Off here,Settings status,,
+Saved on this device; sync needs internet,Settings offline status,,
+Deleted {n} record(s).,"Settings, after clearing demo data",,Keep {placeholders} exactly
+Not supported: {reason},AI panel,,Keep {placeholders} exactly
+Downloading {loaded} / {total},AI panel progress,,Keep {placeholders} exactly
+Manual capture still works.,"AI panel, after an error",,
+Experimental. Suggests whole sentences from your note for each field; you check and accept each one. Never diagnoses or advises.,AI panel intro,,
+Shona ability is not validated. Original text is always kept as written; nothing is translated.,AI panel,,
+Needs a recent desktop or high-end phone with about 1.5 GB free memory. Slow devices may take minutes per note or fail; manual capture always works.,AI panel device limits,,
+Download for this device ({backend}): about {size} (from the model's published file sizes).,AI panel,,Keep {placeholders} exactly
+Browser storage free: about {size}.,AI panel,,Keep {placeholders} exactly
+Use Wi-Fi.,AI panel,,
+Download about {size} ({mode}) and store it in this browser? Nothing from your notes is used for this step.,AI panel confirm,,Keep {placeholders} exactly
+Installed · {backend},AI panel status,,Keep {placeholders} exactly
+Browser message: {error},Storage help box,,Keep {placeholders} exactly
+Open the app directly in its own tab (not inside a preview or another page).,Storage help box,,
+Account changed during sync; stopped without touching the new account's records.,Sync page message,,
+Unowned demo records on this device ({count}),Sync page section title,,Keep {placeholders} exactly
+These were captured without an account. They never sync unless you explicitly adopt them into the signed-in account. {count} verified.,Sync page,,Keep {placeholders} exactly
+Each verified revision is uploaded once as an immutable snapshot. Revisions from other devices are kept on the server; full two-way conflict resolution is not implemented and server records are not downloaded to this device yet.,Sync page explanation,,
+Server acknowledged {sent}. {remaining} still queued,Sync result (no full stop version),,Keep {placeholders} exactly
+Page not found,404 page (shown outside the language switch; stays English for now),,
