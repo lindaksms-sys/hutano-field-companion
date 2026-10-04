@@ -387,6 +387,7 @@ ui.settings.848d80ca,ui,Not signed in,,Hamuna kupinda muakaundi,src/routes/setti
 sync.settings.557298f4,sync,Cloud sync,,Kutumira zvinyorwa kuseva,src/routes/settings.tsx · message string,"[review r3: adopted; user-supplied proposal, not clinician validated]"
 ui.settings.6792ff5a,ui,"Manual / on reconnect, app must be open",,"Nemaoko / pakudzoka kweindaneti, chirongwa chinofanira kunge chakavhurwa",src/routes/settings.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 ui.settings.2552a425,ui,Extraction,,Kutora ruzivo kubva muzvinyorwa,src/routes/settings.tsx · message string,"[review r3: adopted; user-supplied proposal, not clinician validated]"
+offline_ai_install.settings.d10a6ccb,offline_ai_install,on-device AI,,,src/routes/settings.tsx · message string,
 offline_ai_install.settings.b8eb763a,offline_ai_install,On-device AI (experimental),,AI iri pamudziyo (zvekuyedza),src/routes/settings.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 offline_ai_install.settings.7bb4405c,offline_ai_install,Installed,,,src/routes/settings.tsx · message string,
 ui.settings.dc4468ce,ui,Not supported here,,Hazvitsigirwi pano,src/routes/settings.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
