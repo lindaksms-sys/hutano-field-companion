@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,7 +6,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { StatusPill } from "@/components/StatusPill";
 import { useAuth } from "@/lib/auth";
-import { adoptRecord, getEncounter, saveFields, verificationBlockers, verify, missingFields } from "@/domain/repository";
+import { EncounterHistory } from "@/components/EncounterHistory";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
+import { adoptRecord, deleteEncounter, getEncounter, saveFields, verificationBlockers, verify, missingFields } from "@/domain/repository";
 import { FIELD_KEYS, type EncounterRecord, type FieldKey, type FieldValue } from "@/domain/types";
 import { useI18n } from "@/lib/i18n";
 import { FIELD_LABELS, LANG_LABELS, REVIEW_LABELS, STATE_LABELS, SYNC_LABELS } from "@/lib/labels";
@@ -39,10 +41,15 @@ function Review() {
   const [focus, setFocus] = useState<FieldKey | null>(null);
   const [loadErr, setLoadErr] = useState<string | null>(null);
   const { user } = useAuth();
+  const [editing, setEditing] = useState(false);
+  const [delReason, setDelReason] = useState("");
+  const [deleting, setDeleting] = useState(false);
+  const navigate = useNavigate();
 
   const load = (r: EncounterRecord | undefined) => {
     setRec(r ?? null);
     if (r) {
+      if (r.reviewStatus === "verified") setEditing(false);
       setFields(structuredClone(r.fields));
       setNarrative(r.rawNarrative);
       setDirty(false);
@@ -97,6 +104,18 @@ function Review() {
     }
   }
 
+  async function doDelete() {
+    setDeleting(true);
+    try {
+      await deleteEncounter(id, delReason);
+      navigate({ to: "/encounters" });
+    } catch (e) {
+      setDeleting(false);
+      setSave({ kind: "error", msg: tf("Delete failed: {errorMessage}", { errorMessage: (e as Error).message }) });
+    }
+  }
+
+  const locked = rec.reviewStatus === "verified" && !editing;
   const missing = missingFields(fields);
   const highlight = focus ? fields[focus].source : null;
 
@@ -118,9 +137,11 @@ function Review() {
         </div>
       )}
       {rec.reviewStatus === "verified" && (
-        <p className="rounded-lg bg-success p-3 text-sm font-semibold text-success-foreground">
-          {tf("Verified {date}. Any edit will remove verification and require review again.", { date: new Date(rec.verifiedAt!).toLocaleString() })}
-        </p>
+        <div className="flex flex-wrap items-center gap-3 rounded-lg bg-success p-3 text-sm font-semibold text-success-foreground">
+          <span className="mr-auto">{tf("Verified {date}. Any edit will remove verification and require review again.", { date: new Date(rec.verifiedAt!).toLocaleString() })}</span>
+          {!editing && <Button variant="outline" className="h-11 bg-card text-foreground" onClick={() => setEditing(true)}>{tl("Edit record")}</Button>}
+          {editing && !dirty && <Button variant="outline" className="h-11 bg-card text-foreground" onClick={() => setEditing(false)}>{tl("Stop editing")}</Button>}
+        </div>
       )}
 
       <div className="grid gap-5 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
@@ -133,7 +154,7 @@ function Review() {
             <p className="mt-2 whitespace-pre-wrap text-base leading-relaxed">
               <Highlighted text={rec.rawNarrative} part={highlight} />
             </p>
-            <details className="mt-3">
+            {!locked && <details className="mt-3">
               <summary className="cursor-pointer text-sm font-semibold text-primary">{tl("Edit narrative")}</summary>
               <Textarea
                 className="mt-2 bg-background"
@@ -145,7 +166,7 @@ function Review() {
                   setConfirmed(false);
                 }}
               />
-            </details>
+            </details>}
             <p className="mt-3 text-xs font-semibold text-pending-foreground">
               {!rec.extraction
                 ? tl("No extraction run — manual entry.")
@@ -184,12 +205,40 @@ function Review() {
 
         <div className="space-y-3">
           {FIELD_KEYS.map((k) => (
-            <FieldEditor key={k} k={k} f={fields[k]} onChange={(p) => update(k, p)} onFocus={() => setFocus(k)} />
+            <FieldEditor key={k} k={k} f={fields[k]} locked={locked} onChange={(p) => update(k, p)} onFocus={() => setFocus(k)} />
           ))}
+          <EncounterHistory encounterId={rec.id} refreshKey={`${rec.localRevision}-${rec.updatedAt}-${rec.syncStatus}`} />
+          <div className="rounded-xl border border-destructive/40 bg-card p-4">
+            <h2 className="font-bold">{tl("Delete encounter")}</h2>
+            <p className="mt-1 text-xs text-muted-foreground">
+              {rec.serverRevision !== null
+                ? tl("Removes it from this device. Copies already uploaded stay on the server (uploads are never changed or deleted).")
+                : tl("Removes it from this device. It has not been uploaded.")}{" "}
+              {tl("The deletion is kept in the device history.")}
+            </p>
+            <AlertDialog onOpenChange={(o) => { if (!o) setDelReason(""); }}>
+              <AlertDialogTrigger asChild>
+                <Button variant="destructive" className="mt-3 h-12 w-full sm:w-auto">{tl("Delete encounter")}</Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>{tl("Delete this encounter?")}</AlertDialogTitle>
+                  <AlertDialogDescription>{tl("This cannot be undone on this device. Export first if you need a copy.")}</AlertDialogDescription>
+                </AlertDialogHeader>
+                <Input className="min-h-11" placeholder={tl("Reason (optional, e.g. duplicate entry)")} value={delReason} maxLength={200} onChange={(e) => setDelReason(e.target.value)} />
+                <AlertDialogFooter>
+                  <AlertDialogCancel className="h-11">{tl("Cancel")}</AlertDialogCancel>
+                  <AlertDialogAction className="h-11 bg-destructive text-destructive-foreground hover:bg-destructive/90" disabled={deleting} onClick={(e) => { e.preventDefault(); void doDelete(); }}>
+                    {tl("Delete")}
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          </div>
         </div>
       </div>
 
-      <section className="sticky bottom-16 z-10 space-y-3 rounded-xl border border-border bg-card p-4 shadow-lg md:bottom-4">
+      {!locked && <section className="sticky bottom-16 z-10 space-y-3 rounded-xl border border-border bg-card p-4 shadow-lg md:bottom-4">
         {save.kind === "error" && <p role="alert" className="text-sm font-bold text-destructive">{save.msg}</p>}
         {save.kind === "saved" && !dirty && <p className="text-sm font-semibold text-success-foreground">{tf("Saved on this device · {time}", { time: new Date(save.at).toLocaleTimeString() })}</p>}
         {dirty && <p className="text-sm font-semibold text-pending-foreground">{tl("Unsaved changes")}</p>}
@@ -212,7 +261,7 @@ function Review() {
             {tl("Verify record")}
           </Button>
         </div>
-      </section>
+      </section>}
     </div>
   );
 }
@@ -229,7 +278,7 @@ function Highlighted({ text, part }: { text: string; part: string | null }) {
   );
 }
 
-function FieldEditor({ k, f, onChange, onFocus }: { k: FieldKey; f: FieldValue; onChange: (p: Partial<FieldValue>) => void; onFocus: () => void }) {
+function FieldEditor({ k, f, locked, onChange, onFocus }: { k: FieldKey; f: FieldValue; locked: boolean; onChange: (p: Partial<FieldValue>) => void; onFocus: () => void }) {
   const { tl } = useI18n();
   const notRec = f.state === "not_recorded";
   const tone = f.state === "pending" ? "pending" : f.state === "accepted" || f.state === "edited" ? "success" : "neutral";
@@ -250,6 +299,7 @@ function FieldEditor({ k, f, onChange, onFocus }: { k: FieldKey; f: FieldValue; 
           id={`in-${k}`}
           className="mt-2 min-h-11 bg-background text-base"
           type={k === "encounterDate" ? "date" : undefined}
+          readOnly={locked}
           value={f.value ?? ""}
           placeholder={tl("Unknown — leave empty if not stated")}
           onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -263,10 +313,11 @@ function FieldEditor({ k, f, onChange, onFocus }: { k: FieldKey; f: FieldValue; 
           className="mt-2 min-h-11 bg-background"
           placeholder={tl("Reason (e.g. not stated by client)")}
           value={f.notRecordedReason ?? ""}
+          readOnly={locked}
           onChange={(e) => onChange({ notRecordedReason: e.target.value })}
         />
       )}
-      <div className="mt-3 flex flex-wrap gap-2">
+      {!locked && <div className="mt-3 flex flex-wrap gap-2">
         {f.state === "pending" && (
           <Button size="sm" className="h-10" onClick={() => onChange({ state: "accepted" })}>{tl("Accept suggestion")}</Button>
         )}
@@ -279,7 +330,7 @@ function FieldEditor({ k, f, onChange, onFocus }: { k: FieldKey; f: FieldValue; 
             {tl("Enter a value instead")}
           </Button>
         )}
-      </div>
+      </div>}
     </div>
   );
 }
