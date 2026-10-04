@@ -26,7 +26,7 @@ describe("segmentation", () => {
 describe("validator", () => {
   it("rebuilds whole sentences and preserves Shona negation", () => {
     const v = validateModelOutput('{"patientCode":1,"concern":3,"observations":4,"followUp":5}', NOTE, segs());
-    expect(v.suggestions.patientCode).toEqual({ value: "SYN-0042", source: "Mwana SYN-0042 ane makore 4." });
+    expect(v.suggestions.patientCode).toMatchObject({ value: "SYN-0042", source: "Mwana SYN-0042 ane makore 4.", by: "model" });
     expect(v.suggestions.observations!.value).toBe("Hapana fivha.");
     expect(v.suggestions.concern!.value).toBe("Amai vanoti ane chikosoro kwemazuva matatu.");
     for (const s of Object.values(v.suggestions)) expect(NOTE.includes(s!.source)).toBe(true);
