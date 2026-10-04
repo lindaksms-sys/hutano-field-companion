@@ -1,4 +1,5 @@
 import { getDB, inFlight } from "./db";
+import { writeAudit } from "./repository";
 import { getCurrentUserId, getEpoch } from "./session";
 import type { OutboxEntry, RevisionPayload } from "./types";
 
