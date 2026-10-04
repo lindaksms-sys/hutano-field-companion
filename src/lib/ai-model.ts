@@ -92,6 +92,7 @@ async function readManifest(): Promise<AiInstallManifest | null> {
   if (!res) return null;
   const m = (await res.json()) as AiInstallManifest;
   if (m.modelId !== AI_MODEL.id || m.revision !== AI_MODEL.revision) return null;
+  if (m.smokeParsed !== true) return null; // installs from before strict verification must be redone
   // Every recorded file must still be present (browser may have evicted some).
   const keys = new Set((await cache.keys()).map((r) => r.url));
   if (!m.cachedKeys.every((k) => keys.has(k))) return null;

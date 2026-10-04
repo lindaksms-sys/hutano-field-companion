@@ -64,9 +64,7 @@ function single(hits: Hit[], narrative: string): Suggestion | null {
 
 /** Text in the same clause before the match (for "mother, 30 years" style other-person checks). */
 function clauseBefore(seg: Segment, idx: number) {
-  const before = seg.text.slice(0, idx);
-  const cut = Math.max(before.lastIndexOf(","), before.lastIndexOf(" and "), before.lastIndexOf(" asi "), before.lastIndexOf(" uye "));
-  return cut >= 0 ? before.slice(cut) : before;
+  return seg.text.slice(Math.max(0, idx - 30), idx);
 }
 
 export function rulePatientCode(segs: Segment[], narrative: string) {
@@ -77,7 +75,7 @@ export function ruleAge(segs: Segment[], narrative: string) {
   const notOther = (m: RegExpExecArray, seg: Segment) => !OTHER_PERSON.test(clauseBefore(seg, m.index) + m[0]);
   const hits = [
     // "4 years old", "18 months old", "4-year-old", "4 yrs old"
-    ...scan(segs, /\b(\d{1,3}(?:\.\d)?)[- ](years?|yrs?|months?|weeks?)[- ]old\b/i, (m) => ({ text: m[0].replace(/[- ]old$/i, ""), idx: 0 }), notOther),
+    ...scan(segs, /\b(\d{1,3}(?:\.\d)?)[- ](years?|yrs?|months?|weeks?)[- ]old\b/i, (m) => ({ text: m[0], idx: 0 }), notOther),
     // "aged 4 years", "age 34", "age: 2 years"
     ...scan(segs, /\bage[d]?\s*:?\s*(\d{1,3}(?:\s*(?:years?|yrs?|months?|weeks?))?)\b/i, (m) => ({ text: m[1]!, idx: m[0].indexOf(m[1]!) }), notOther),
     // "34 y/o", "34yo"
@@ -109,13 +107,13 @@ export function ruleLocation(segs: Segment[], narrative: string) {
   const okPlace = (t: string) => !NOT_PLACE.test(t) && !/\d{4}/.test(t);
   const hits = [
     // "Village: Chikore", "Ward: Mutasa", "Location - Nyanga"
-    ...scan(segs, new RegExp(`\\b(?:village|ward|location|musha|dunhu)\\s*[:-]\\s*${place}`, "i"), (m) => (okPlace(m[1]!) ? { text: m[1]!, idx: m[0].lastIndexOf(m[1]!) } : null)),
+    ...scan(segs, new RegExp(`\\b(?:[Vv]illage|[Ww]ard|[Ll]ocation|[Mm]usha|[Dd]unhu)\\s*[:-]\\s*${place}`), (m) => (okPlace(m[1]!) ? { text: m[1]!, idx: m[0].lastIndexOf(m[1]!) } : null)),
     // "Ward 12"
     ...scan(segs, /\bWard\s+\d{1,3}\b/, (m) => ({ text: m[0], idx: 0 })),
     // "Chikore village", "Mutasa ward"
     ...scan(segs, new RegExp(`${place}\\s+(?:village|ward)\\b`), (m) => (okPlace(m[1]!) && !/^(The|In|At|From|Of)$/.test(m[1]!) ? { text: m[0], idx: 0 } : null)),
     // "lives in Mutasa", "from Chikore" (English); "Anogara Mutasa", "anogara kuMutasa" (draft Shona)
-    ...scan(segs, new RegExp(`\\b(?:lives in|lives at|resides in|${SHONA_CUES.livesIn.join("|")})\\s+(?:ku|mu|kwa)?${place}`, "i"), (m) => (okPlace(m[1]!) && !/\s(village|ward)$/i.test(m[1]!) ? { text: m[1]!, idx: m[0].lastIndexOf(m[1]!) } : null), (m, seg) => !OTHER_PERSON.test(clauseBefore(seg, m.index))),
+    ...scan(segs, new RegExp(`\\b(?:[Ll]ives in|[Ll]ives at|[Rr]esides in|[Ff]rom|${SHONA_CUES.livesIn.map((w) => `[${w[0]!.toUpperCase()}${w[0]}]${w.slice(1)}`).join("|")})\\s+(?:ku|mu|kwa)?${place}`), (m) => (okPlace(m[1]!) && !/\s(village|ward)$/i.test(m[1]!) ? { text: m[1]!, idx: m[0].lastIndexOf(m[1]!) } : null), (m, seg) => !OTHER_PERSON.test(clauseBefore(seg, m.index))),
   ];
   // "Chikore village" and "Chikore" for the same place: keep the longer labelled form.
   const merged = hits.filter((h) => !hits.some((o) => o !== h && o.value.length > h.value.length && o.value.toLowerCase().includes(h.value.toLowerCase())));
@@ -124,7 +122,7 @@ export function ruleLocation(segs: Segment[], narrative: string) {
 
 export function ruleDuration(segs: Segment[], narrative: string) {
   const notFollow = (_m: RegExpExecArray, seg: Segment) => !FOLLOWUP.test(seg.text);
-  const notOther = (m: RegExpExecArray, seg: Segment) => !/\b(mother|father|amai|baba)\b.*\b(also|too|has had)\b/i.test(clauseBefore(seg, m.index));
+  const notOther = (m: RegExpExecArray, seg: Segment) => !/\b(mother|father|amai|baba)\b.*\b(also|too)\b/i.test(clauseBefore(seg, m.index));
   const keep = (m: RegExpExecArray, s: Segment) => notFollow(m, s) && notOther(m, s);
   const hits = [
     // "for 3 days", "for the past two weeks", "for a week"
