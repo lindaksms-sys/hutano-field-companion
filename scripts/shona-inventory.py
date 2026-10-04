@@ -114,12 +114,11 @@ for p in UI_FILES:
         if re.search(r"(new RegExp|\.test|\.match|\.replace|\.split|\.includes|\.startsWith|\.endsWith|getItem|setItem|querySelector|addEventListener|\.get|\.has)\(\s*$", pre):
             continue
         found.append((s, "message string"))
-    for m in re.finditer(r"`([^`]*[A-Za-z][^`]*)`", code_nc):
-        s = m.group(1)
-        if "${" in s and re.search(r"[A-Za-z]{3,} [A-Za-z]{3,}", re.sub(r"\$\{[^}]*\}", "", s)):
-            found.append((re.sub(r"\$\{([^}]*)\}", lambda x: "{" + ph_name(x.group(1)) + "}", s), "template (dynamic)"))
+    # Template literals are NOT scanned: full templates are hand-written in MANUAL_TEMPLATES below.
     for text, kind in found:
         text = text.replace("\\n", " ").strip()
+        if text in SPLIT_FRAGMENTS:
+            continue
         if not user_facing(text):
             continue
         if rel == "src/domain/fixtures.ts" and not text.endswith("example"):
@@ -210,6 +209,50 @@ for split in ("dev", "heldout"):
                 "FROZEN benchmark original. Proposed rewording goes into a NEW versioned file; existing metrics are never silently changed.")
 
 # Priority batch 1: core workflow + meanings/cues. Marked in notes and sorted first.
+# Hand-written full messages (named placeholders). Replaces regex-captured templates and split JSX fragments.
+SPLIT_FRAGMENTS = {"Account created for",
+    ". Open the confirmation link sent to that address, then sign in here. You can keep capturing offline meanwhile.",
+    "Signed in as"}
+PH = "Keep {placeholders} exactly; reorder words around them if natural."
+MANUAL_TEMPLATES = [
+ ("manual.auth.account_created", "auth", "Account created for {email}. Open the confirmation link sent to that address, then sign in here. You can keep capturing offline meanwhile.", "src/routes/auth.tsx · sign-up confirmation · {email} = address typed by the user", "[P1] " + PH),
+ ("manual.auth.signed_in_as", "auth", "Signed in as {email}", "src/routes/auth.tsx · account card · {email} shown on its own line below this label", PH),
+ ("manual.ai.storage_read_failed", "offline_ai_install", "Could not read model storage: {errorMessage}", "src/lib/ai-model.ts · {errorMessage} = raw browser error (not translated)", PH),
+ ("manual.ai.diag_ram", "offline_ai_install", "~{gb} GB RAM reported", "src/lib/ai-model.ts · diagnostic text · {gb} = number", PH),
+ ("manual.ai.diag_mobile", "offline_ai_install", "mobile", "src/lib/ai-model.ts · diagnostic text, device type", "Usually left in English inside copied diagnostics."),
+ ("manual.ai.gpu_status", "offline_ai_install", "GPU: {status}", "src/lib/ai-model.ts · diagnostic · {status} = one of: available / not available / unknown (rows manual.ai.gpu_*)", PH),
+ ("manual.ai.gpu_available", "offline_ai_install", "available", "value for {status} in GPU: {status}", ""),
+ ("manual.ai.gpu_not_available", "offline_ai_install", "not available", "value for {status} in GPU: {status}", ""),
+ ("manual.ai.gpu_unknown", "offline_ai_install", "unknown", "value for {status} in GPU: {status}", ""),
+ ("manual.ai.not_enough_storage", "offline_ai_install", "Not enough browser storage: about {freeMb} MB free, about {neededMb} MB needed.", "src/lib/ai-model.ts · before download · {freeMb}, {neededMb} = numbers", "[P1] " + PH),
+ ("manual.ai.worker_start_failed", "error", "Could not start the AI worker: {errorMessage}", "src/lib/ai-model.ts · {errorMessage} = raw browser error", PH),
+ ("manual.ai.download_stalled", "error", "No download progress for {seconds} s (stalled).", "src/lib/ai-model.ts · watchdog · {seconds} = number", PH),
+ ("manual.ai.stage_timeout", "error", "Timed out after {seconds} s during {stage}.", "src/lib/ai-model.ts · watchdog · {stage} = technical step name (download/initialize/verify), stays English", PH),
+ ("manual.ai.worker_error", "error", "Worker error: {errorMessage}", "src/lib/ai-model.ts · {errorMessage} = raw error, or the fallback row manual.ai.worker_crashed", PH),
+ ("manual.ai.worker_crashed", "error", "worker crashed or failed to load", "fallback value for {errorMessage} in Worker error", ""),
+ ("manual.review.not_verified", "review_states", "Not verified: {errorMessage}", "src/routes/encounters.$id.tsx · verify failed · {errorMessage} = raw storage error", PH),
+ ("manual.review.adopt_failed", "error", "Adopt failed: {errorMessage}", "src/routes/encounters.$id.tsx and src/routes/sync.tsx", PH),
+ ("manual.review.extraction_none", "review_states", "{adapterLabel} · no suggestions ({failureReason}) — fill fields manually", "src/routes/encounters.$id.tsx · {adapterLabel} = Manual / Demo extraction — not AI / On-device AI (experimental); {failureReason} = app reason text", PH),
+ ("manual.review.extraction_summary", "review_states", "{adapterLabel} · {modelId} ({backend}/{dtype}) · {seconds} s · rules: {ruleCount} field(s), AI: {aiCount} field(s) · check each against the note", "src/routes/encounters.$id.tsx · AI provenance line · {modelId}/{backend}/{dtype} technical, stay English. Optional suffixes follow: manual.review.summary_warning, manual.review.summary_discarded", PH),
+ ("manual.review.summary_warning", "review_states", " · {warning}", "optional suffix · {warning} = Shona/mixed warning text (separate row)", PH),
+ ("manual.review.summary_discarded", "review_states", " · {count} invalid selection(s) discarded", "optional suffix of extraction summary", PH),
+ ("manual.review.fields_empty", "review_states", "{count} field(s) empty — fill or mark \"not recorded\".", "src/routes/encounters.$id.tsx · verify blocker", "[P1] " + PH),
+ ("manual.review.no_reason", "review_states", "{count} \"not recorded\" without reason.", "src/routes/encounters.$id.tsx · verify blocker", "[P1] " + PH),
+ ("manual.new.write_failed", "error", "Not saved. Local storage write failed: {errorMessage}", "src/routes/encounters.new.tsx · {errorMessage} = raw storage error", "[P1] " + PH),
+ ("manual.new.ai_no_suggestions", "offline_ai_install", "Draft saved. On-device AI gave no suggestions: {reason} Continue with manual review.", "src/routes/encounters.new.tsx · {reason} = app reason sentence (timeout/cancel/invalid output)", PH),
+ ("manual.new.extraction_failed", "error", "Draft saved, but extraction failed: {errorMessage}", "src/routes/encounters.new.tsx", PH),
+ ("manual.settings.export_failed", "error", "Export failed: {errorMessage}", "src/routes/settings.tsx", PH),
+ ("manual.settings.delete_failed", "error", "Delete failed: {errorMessage}", "src/routes/settings.tsx", PH),
+ ("manual.sync.offline", "sync", "Offline — {sent} sent, {remaining} kept in queue.", "src/routes/sync.tsx · result · numbers", PH),
+ ("manual.sync.auth_paused", "sync", "Paused: sign-in required ({errorMessage}). {remaining} kept in queue; retries after sign-in.", "src/routes/sync.tsx · {errorMessage} = raw sign-in service error", PH),
+ ("manual.sync.done", "sync", "Server acknowledged {sent}. {remaining} still queued.", "src/routes/sync.tsx · result · optional parts inserted before the final full stop: manual.sync.done_rejected, manual.sync.done_last_error", "[P1] " + PH),
+ ("manual.sync.done_rejected", "sync", ", {rejected} rejected", "optional insert in manual.sync.done", PH),
+ ("manual.sync.done_last_error", "sync", " — last error: {errorMessage}", "optional insert in manual.sync.done · {errorMessage} raw", PH),
+]
+for k, cat, en, ctx, notes in MANUAL_TEMPLATES:
+    rows.append({"key": k, "category": cat, "english_source_meaning": en, "current_shona_draft": "",
+                 "reviewer_proposed_shona": "", "context_placeholders": "hand-written full template · " + ctx, "notes": notes})
+
 P1_TEXT = {
     "Patient code", "Age (with units if stated)", "Village / ward", "Encounter date", "Reported concern", "Stated duration",
     "Worker-recorded observations", "Follow-up notes (worker-entered)", "Empty", "Suggestion pending", "Accepted",
