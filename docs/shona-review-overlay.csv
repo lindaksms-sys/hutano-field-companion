@@ -5,11 +5,11 @@ ui.encounters_index.18817545,Zvakanyorwa,adopted,"user-supplied proposal, not cl
 i18n_core.i18n.c7f73bb5,Zvirongwa,adopted,"user-supplied proposal, not clinician validated",Shown in the Shona interface (navigation).,r1
 ui.settings.c7f73bb5,Zvirongwa,adopted,"user-supplied proposal, not clinician validated",Shown in the Shona interface (navigation).,r1
 i18n_core.i18n.5b9f7c68,Paindaneti,adopted,"user-supplied proposal, not clinician validated",Shown in the Shona interface.,r1
-i18n_core.i18n.e01fa717,Hapana interneti,adopted,"user-supplied proposal, not clinician validated",Shown in the Shona interface. Sync-page 'Offline' row not changed (different context).,r1
+i18n_core.i18n.e01fa717,Hapana indaneti,adopted,"user-supplied proposal, not clinician validated",,r2
 i18n_core.i18n.dd2a3056,Pamudziyo uyu chete,adopted,"user-supplied proposal, not clinician validated",Device-neutral (app also runs on computers).,r1
 i18n_core.i18n.02fd3586,Ichi chigadzirwa chekuyedza chinoshandisa data rekufungidzira chete. Musaisa ruzivo rwechokwadi rwevarwere.,adopted,"user-supplied proposal, not clinician validated",Shown in the Shona interface.,r1
-i18n_core.i18n.57d05f4f,Nyora kushanya kutsva,provisional,"user-supplied proposal, not clinician validated",Shown (replaces older draft) but 'encounter' wording is provisional.,r1
-ui.encounters_new.57d05f4f,Nyora kushanya kutsva,provisional,"user-supplied proposal, not clinician validated",Shown (replaces older draft) but 'encounter' wording is provisional.,r1
+i18n_core.i18n.57d05f4f,Kushanya kutsva,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.encounters_new.57d05f4f,Kushanya kutsva,adopted,"user-supplied proposal, not clinician validated",,r2
 ui.labels.1c3416f3,Kodhi yemurwere,adopted,"user-supplied proposal, not clinician validated",,r1
 ui.labels.59d5b8d7,Zuva rekushanya,adopted,"user-supplied proposal, not clinician validated",Encounter date = patient visit date.,r1
 ui.labels.18293422,Dambudziko rataurwa,adopted,"user-supplied proposal, not clinician validated",,r1
@@ -31,22 +31,22 @@ review_states.encounters_index.aed3b8c6,Rasimbiswa,adopted,"user-supplied propos
 review_states.index.aed3b8c6,Rasimbiswa,adopted,"user-supplied proposal, not clinician validated",,r1
 review_states.labels.abb1a096,Zano richiri kumirira kuongororwa,adopted,"user-supplied proposal, not clinician validated",,r1
 review_states.labels.61a0572c,Ragamuchirwa,adopted,"user-supplied proposal, not clinician validated",,r1
-review_states.labels.ad5d0d0b,Ragadziridzwa nemushandi,adopted,"user-supplied proposal, not clinician validated",,r1
+review_states.labels.ad5d0d0b,Ragadziridzwa nemushandi wehutano,adopted,"user-supplied proposal, not clinician validated",,r2
 review_states.labels.305cc364,Hazvina kunyorwa,adopted,"user-supplied proposal, not clinician validated",,r1
-ui.labels.9678cbce,Musha / Wadhi,provisional,"user-supplied proposal, not clinician validated",Musha (village) adopted; ward unresolved: 'Wadhi' or keep 'Ward'. Label stays English until decided.,r1
-ui.labels.7aef0776,"Zera, riine zviyero kana zvataurwa",provisional,"user-supplied proposal, not clinician validated",Needs clarity on age units (years/months). Stays English.,r1
+ui.labels.9678cbce,Musha / Ward,provisional,"user-supplied proposal, not clinician validated",Ward kept as official administrative label. Needs native Shona VHW validation,r2
+ui.labels.7aef0776,Zera rine zviyero kana zvataurwa,provisional,"user-supplied proposal, not clinician validated",Needs native Shona VHW validation,r2
 ui.labels.8e8ac3cc,Nguva yataurwa,provisional,"user-supplied proposal, not clinician validated",May be too vague. Stays English.,r1
-ui.labels.efc70c54,Zvinyorwa zvekutevera,provisional,"user-supplied proposal, not clinician validated",Possibly vague; alternatives kuongororazve / kudzoka kuzoona depend on the task. Stays English.,r1
+ui.labels.efc70c54,Zvinyorwa zvekutevera (zvanyorwa nemushandi),provisional,"user-supplied proposal, not clinician validated",Needs native Shona VHW validation,r2
 auth.AppShell.ada2e9e9,Pinda muakaundi,provisional,"user-supplied proposal, not clinician validated",Stays English.,r1
 auth.auth.ada2e9e9,Pinda muakaundi,provisional,"user-supplied proposal, not clinician validated",Stays English.,r1
 auth.auth.dc1649a1,Buda muakaundi,provisional,"user-supplied proposal, not clinician validated",Stays English.,r1
-meaning_distinction.concepts.ea68bcba,Hapana fivha,adopted,"user-supplied proposal, not clinician validated",Preserves absence but does NOT establish a measured or worker-observed finding; source cues decide report vs observation.,r1
-cue_dictionary.checks.79b8f83e,musoro (head); headache = kurwadziwa nemusoro,adopted,"user-supplied proposal, not clinician validated",Bare 'musoro' removed from problem cues.,r1
-cue_dictionary.checks.f47c8864,kurwadziwa nemusoro = headache,adopted,"user-supplied proposal, not clinician validated",Added as problem cue.,r1
-cue_dictionary.checks.9a6502ad,zvinorwadza / ari kurwadziwa (contextual),provisional,"user-supplied proposal, not clinician validated",Not a universal 'it hurts'; removed from problem cues.,r1
-cue_dictionary.rules.21765f95,mukadzi = woman OR wife,adopted,"user-supplied proposal, not clinician validated",No longer an unconditional other-person blocker; needs explicit relationship (e.g. mukadzi wake) or abstains with several people.,r1
-cue_dictionary.rules.cb7d67bd,murume = man OR husband,adopted,"user-supplied proposal, not clinician validated",As mukadzi.,r1
-cue_dictionary.checks.96299e23,tichaona (ambiguous alone),adopted,"user-supplied proposal, not clinician validated",Removed from follow-up cues; tichadzoka kuzoona / tichaongorora with context instead.,r1
+meaning_distinction.concepts.ea68bcba,"Zvakaongororwa zvikashaikwa, semuenzaniso 'Hapana fivha'",provisional,"user-supplied proposal, not clinician validated",Needs native Shona VHW validation,r2
+cue_dictionary.checks.79b8f83e,musoro,adopted,"user-supplied proposal, not clinician validated","musoro alone = head, not headache; headache = kurwadziwa nemusoro.",r2
+cue_dictionary.checks.f47c8864,kurwadziwa nemusoro,provisional,"user-supplied proposal, not clinician validated",Needs native Shona VHW validation,r2
+cue_dictionary.checks.9a6502ad,ari kurwadziwa,provisional,"user-supplied proposal, not clinician validated",anorwadza is context-dependent and not a safe 'it hurts' in isolation; ari kurwadziwa = is in pain. Needs native Shona VHW validation,r2
+cue_dictionary.rules.21765f95,mukadzi,provisional,"user-supplied proposal, not clinician validated",Ambiguous relationship or sex term. Parser should not infer relationship without context.,r2
+cue_dictionary.rules.cb7d67bd,murume,provisional,"user-supplied proposal, not clinician validated",Ambiguous relationship or sex term. Parser should not infer relationship without context.,r2
+cue_dictionary.checks.96299e23,tichaona,provisional,"user-supplied proposal, not clinician validated",Too vague alone to count as a follow-up plan. Needs native Shona VHW validation,r2
 cue_dictionary.rules.ab1c1f65,kwemwedzi,question,"user-supplied proposal, not clinician validated",Reviewer line compared 'kwemwedzi' with an identical 'kwemwedzi' (likely typo). No change made; please clarify the intended distinction.,r1
 cue_dictionary.rules.5116e406,amai,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
 cue_dictionary.rules.32c8bbff,baba,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
@@ -76,7 +76,7 @@ cue_dictionary.rules.b05137c7,kwemazuva,adopted,"user-supplied proposal, not cli
 cue_dictionary.rules.64a9d883,kwemavhiki,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
 cue_dictionary.rules.aea439aa,kwemakore,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
 cue_dictionary.rules.105d529a,makore,adopted,"user-supplied proposal, not clinician validated",Kept.,r1
-cue_dictionary.rules.45b27768,kwevhiki,adopted,"user-supplied proposal, not clinician validated",Added in round 1.,r1
+cue_dictionary.rules.45b27768,kwevhiki rimwe,adopted,"user-supplied proposal, not clinician validated",,r2
 cue_dictionary.rules.ee0a94b5,vhiki rinouya,adopted,"user-supplied proposal, not clinician validated",Added in round 1.,r1
 cue_dictionary.rules.f7108a89,mbuya,adopted,"user-supplied proposal, not clinician validated",Added in round 1.,r1
 cue_dictionary.rules.6680781f,muchengeti,adopted,"user-supplied proposal, not clinician validated",Added in round 1.,r1
@@ -97,3 +97,378 @@ term.dizziness,dzungu / kutenderera musoro,provisional,"user-supplied proposal, 
 term.kuzvimba,kuzvimba (swelling),provisional,"user-supplied proposal, not clinician validated",Proposed; not added to rules.,r1
 term.carer_reports,amai vanoti / baba vanoti / mbuya vanoti / muchengeti anoti,adopted,"user-supplied proposal, not clinician validated",Carer report cues.,r1
 term.vague_none,Hapana chakaonekwa,adopted,"user-supplied proposal, not clinician validated",Vague; never turned into a specific negative finding.,r1
+ui.labels.dbcd4aa6,Pamudziyo uyu chete,adopted,"user-supplied proposal, not clinician validated",,r2
+sync.labels.74cbfca3,"Rasimbiswa, rakamirira kutumirwa",adopted,"user-supplied proposal, not clinician validated",,r2
+sync.labels.b2ef6af6,Zvatumiraniswa,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.encounters_id.222de262,Rondedzero yekutanga,adopted,"user-supplied proposal, not clinician validated",,r2
+auth.encounters_id.39cce9de,Ndaongorora munda wega wega ndichienzanisa nerondedzero yekutanga uye ndinosimbisa kuti gwaro iri nderechokwadi.,adopted,"user-supplied proposal, not clinician validated",,r2
+review_states.encounters_id.43c7eed2,Simbisa gwaro,adopted,"user-supplied proposal, not clinician validated",,r2
+review_states.encounters_id.b9ba38cf,Gamuchira zano,adopted,"user-supplied proposal, not clinician validated",,r2
+review_states.encounters_id.98f6f045,Maka kuti hazvina kunyorwa,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.encounters_id.0672523d,"Hazvizivikanwi, siya pasina kana zvisina kutaurwa",adopted,"user-supplied proposal, not clinician validated",,r2
+ui.encounters_id.c6404149,"Chikonzero (semuenzaniso, hachina kutaurwa nemutengi)",adopted,"user-supplied proposal, not clinician validated",,r2
+ui.encounters_new.1c9d6cd1,Chii chakaitika panguva yekushanya?,adopted,"user-supplied proposal, not clinician validated",,r2
+safety_privacy.encounters_new.b47630da,Shandisa data rekufungidzira chete. Musaisa mazita echokwadi kana zvitupa zvevanhu.,adopted,"user-supplied proposal, not clinician validated",,r2
+review_states.encounters_new.f03ecc61,"Chengetedza gwaro risati rapera, zadzisa nemaoko",adopted,"user-supplied proposal, not clinician validated",,r2
+sync.sync.2b7d938e,Tumiranisai zvino,adopted,"user-supplied proposal, not clinician validated",,r2
+i18n_core.i18n.905f6309,Tumiranisa,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.rules.35992aad,anogara ku[nzvimbo],adopted,"user-supplied proposal, not clinician validated","Use anogara ku[place], not anogara [place].",r2
+cue_dictionary.rules.20d82ccd,kwevhiki rimwe,provisional,"user-supplied proposal, not clinician validated",kwesvondo not preferred; use kwevhiki rimwe (one week) / kwemavhiki (weeks). Needs native Shona VHW validation,r2
+cue_dictionary.rules.148f98eb,mwedzi,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.checks.5b85e8bf,hapana,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.checks.3956b035,hakuna,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.checks.cac047ee,musha,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.checks.28ab6a25,dunhu,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.checks.0e93069c,mwana,adopted,"user-supplied proposal, not clinician validated",,r2
+meaning_distinction.concepts.a2f9ad19,Hazvizivikanwi kana hazvina kutaurwa: gwaro harina kuzvitaura (munda wakasiyiwa usina chinhu),provisional,"user-supplied proposal, not clinician validated",Needs native Shona VHW validation,r2
+meaning_distinction.concepts.cf267697,"Hazvina kunyorwa: mushandi wehutano anosimbisa kuti hazvina kunyorwa, achipa chikonzero",provisional,"user-supplied proposal, not clinician validated",Needs native Shona VHW validation,r2
+meaning_distinction.concepts.0c01dc8d,Murwere (munhu ari kuonekwa),adopted,"user-supplied proposal, not clinician validated",,r2
+meaning_distinction.concepts.9511673a,Muchengeti (anotaura panzvimbo yemurwere),provisional,"user-supplied proposal, not clinician validated",Needs native Shona VHW validation,r2
+meaning_distinction.concepts.dfe9f090,Mushandi wehutano / VHW (munhu ari kunyora gwaro),adopted,"user-supplied proposal, not clinician validated",,r2
+meaning_distinction.concepts.9c9f742a,"Zera remurwere (semuenzaniso, ane makore 4)",provisional,"user-supplied proposal, not clinician validated",Needs native Shona VHW validation,r2
+meaning_distinction.concepts.8269c9a6,"Nguva yadambudziko (semuenzaniso, kwemazuva matatu)",provisional,"user-supplied proposal, not clinician validated",Needs native Shona VHW validation,r2
+meaning_distinction.concepts.a6b2c472,Mukadzi: zvinogona kureva munhukadzi kana mudzimai,provisional,"user-supplied proposal, not clinician validated",Ambiguous relationship or sex term. Parser should not infer relationship without context.,r2
+meaning_distinction.concepts.47add077,Murume: zvinogona kureva munhurume kana murume akaroora,provisional,"user-supplied proposal, not clinician validated",Ambiguous relationship or sex term. Parser should not infer relationship without context.,r2
+meaning_distinction.concepts.c1cb7c45,Ehe / hongu,adopted,"user-supplied proposal, not clinician validated",,r2
+meaning_distinction.concepts.ca5c31fa,Kwete / hapana / haana,adopted,"user-supplied proposal, not clinician validated",,r2
+meaning_distinction.concepts.e79f5b70,Nhasi / nezuro / mangwana / svondo rinouya / svondo rapfuura,adopted,"user-supplied proposal, not clinician validated",,r2
+meaning_distinction.concepts.7028edbc,Anogara ku- / anobva ku- / ku- (musha),adopted,"user-supplied proposal, not clinician validated",,r2
+meaning_distinction.concepts.f944fa95,Musha / Ward sezvazvakanyorwa mugwaro,adopted,"user-supplied proposal, not clinician validated",,r2
+meaning_distinction.concepts.9ba58b11,Dambudziko rataurwa nemurwere kana muchengeti,provisional,"user-supplied proposal, not clinician validated",Needs native Shona VHW validation,r2
+meaning_distinction.concepts.d759610e,Zvakaonekwa kana kuyerwa nemushandi wehutano,provisional,"user-supplied proposal, not clinician validated",Needs native Shona VHW validation,r2
+meaning_distinction.concepts.66b734bf,Hurongwa hwekutevera hwakanyorwa nemushandi wehutano (kwete zano),provisional,"user-supplied proposal, not clinician validated",Needs native Shona VHW validation,r2
+manual.auth.account_created,"Akaundi yagadzirwa ye {email}. Vhurai link yekusimbisa yatumirwa kukero iyoyo, mozopinda muakaundi pano. Munogona kuramba muchinyora musina indaneti panguva iyi.",adopted,"user-supplied proposal, not clinician validated",,r2
+manual.ai.not_enough_storage,"Nzvimbo yekuchengetera mubhurawuzha haina kukwana: pane inenge {freeMb} MB yakasara, panodiwa inenge {neededMb} MB.",adopted,"user-supplied proposal, not clinician validated",,r2
+manual.review.fields_empty,Pane minda {count} isina kuzadzwa. Zadzisai kana mumake kuti hazvina kunyorwa.,adopted,"user-supplied proposal, not clinician validated",,r2
+manual.review.no_reason,"Pane {count} zvakamakwa kuti ""hazvina kunyorwa"" pasina chikonzero.",adopted,"user-supplied proposal, not clinician validated",,r2
+manual.new.write_failed,Hazvina kuchengetwa. Kuchengeta mashoko pamudziyo kwatadza: {errorMessage},adopted,"user-supplied proposal, not clinician validated",,r2
+manual.sync.done,Server yagamuchira {sent}. {remaining} zvichakamirira kutumirwa.,adopted,"user-supplied proposal, not clinician validated",,r2
+manual.ai.next_step.network,Ongororai Wi-Fi moedzazve; mafaera akatodhawunirodhwa anochengetwa.,adopted,"user-supplied proposal, not clinician validated",,r2
+manual.ai.next_step.cache,"Edzazve. Kana zvikadzokororwa, bvisai mafaera emodheru modhawunirodha zvakare.",adopted,"user-supplied proposal, not clinician validated",,r2
+manual.ai.next_step.quota,"Bvisai zvimwe zvinhu panzvimbo yekuchengetera yefoni kana data rebhurawuzha, moedzazve.",adopted,"user-supplied proposal, not clinician validated",,r2
+manual.ai.next_step.worker,"Vhurai peji patsva moedzazve. Kana zvikadzokororwa, bhurawuzha iri ringasazvitsigira.",adopted,"user-supplied proposal, not clinician validated",,r2
+manual.ai.next_step.model_init,"Mudziyo hauna kukwanisa kutanga modheru. Edzai Compatibility / CPU, vharai mamwe maapp, moedzazve.",adopted,"user-supplied proposal, not clinician validated",,r2
+manual.ai.next_step.verification,"Modheru yavhurika asi yatadza muedzo wayo. Edzazve; kana zvikadzokororwa, bvisai mafaera emodheru modhawunirodha zvakare.",adopted,"user-supplied proposal, not clinician validated",,r2
+manual.ai.next_step.timeout,Zvamira kufambira mberi. Edzazve paWi-Fi yakagadzikana; mafaera akadhawunirodhwa anochengetwa.,adopted,"user-supplied proposal, not clinician validated",,r2
+manual.ai.next_step.unknown,"Edzazve. Kana zvikadzokororwa, kopai mashoko ekuongorora dambudziko mozvigovera.",adopted,"user-supplied proposal, not clinician validated",,r2
+ui.AiModelPanel.bae7d5be,Mamiriro,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.AiModelPanel.820d6004,Zviri kuongororwa…,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.AiModelPanel.5fe04f57,Hazvina kudhawunirodhwa,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.AiModelPanel.5cb83ffb,"Yagadzirira, yaiswa uye yaedzwa",adopted,"user-supplied proposal, not clinician validated",,r2
+error.AiModelPanel.7f2f6a15,Kukanganisa,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.AiModelPanel.a7b93d21,Nzira,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.AiModelPanel.c3858280,Nzira yasarudzwa chete ndiyo inodhawunirodhwa. Kuchinja gare gare kunoreva kudhawunirodha kwakasiyana. Hazvisati zvaedzwa pafoni ipi neipi.,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.AiModelPanel.b9fcf5ea,Inoshanda pamudziyo uyu chete. Zvinyorwa hazvitumirwi kune imwe nzvimbo kuti zvishandiswe neAI.,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.AiModelPanel.b621e124,"Hongu, dhawunirodha",adopted,"user-supplied proposal, not clinician validated",,r2
+ui.AiModelPanel.e4571490,Kwete parizvino,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.AiModelPanel.96b22692,Bvisa mafaera emodheru,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.AiModelPanel.477fd428,Kubvisa kunodzima mafaera emodheru chete. Zvinyorwa zvenyu zvekushanya hazvibatwi.,adopted,"user-supplied proposal, not clinician validated",,r2
+safety_privacy.AiModelPanel.3af2279f,Mashoko ekuongorora dambudziko,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.AiModelPanel.68c2cc7f,Modheru,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.AiModelPanel.3beb9ad4,Shanduro,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.AiModelPanel.3229609e,Rezinesi,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.AiModelPanel.b8100f5b,Raibhurari,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.AiModelPanel.c4740e4c,Runtime,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.AiModelPanel.1bc3d368,Mhando,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.AiModelPanel.7bb4405c,Zvaiswa,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.AiModelPanel.b169be96,Zvakachengetwa,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.AiModelPanel.b64f4523,Muedzo,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.AiModelPanel.3b74a24f,Kuedza kushanda chaiko kwemodheru…,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.AiModelPanel.2daef193,Zviri kutangwa…,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.AiModelPanel.8e3df45a,Zvakopwa,adopted,"user-supplied proposal, not clinician validated",,r2
+safety_privacy.AiModelPanel.30035a3c,Kopa mashoko ekuongorora dambudziko (hapana ruzivo rwevarwere),adopted,"user-supplied proposal, not clinician validated",,r2
+ui.AiModelPanel.931a1645,Compatibility / CPU (yakaedzwa pabhurawuzha yekombiyuta),adopted,"user-supplied proposal, not clinician validated",,r2
+ui.AiModelPanel.a4311c57,Inononoka. Ndiyo chete nzira yaedzwa kusvika parizvino.,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.AiModelPanel.1265e4ba,GPU (zvekuyedza),adopted,"user-supplied proposal, not clinician validated",,r2
+ui.AiModelPanel.c598562f,Hapana GPU yakakodzera yawanikwa mubhurawuzha iri.,adopted,"user-supplied proposal, not clinician validated",,r2
+error.AiModelPanel.d13bf790,Hazvina kuedzwa. Zvinogona kutadza kana kupa mhinduro dzakasiyana.,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.AiModelPanel.6aaa821b,"WebGPU, q4f16",adopted,"user-supplied proposal, not clinician validated",,r2
+ui.AiModelPanel.3338369f,"WebAssembly, q8",adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.AiModelPanel.255673bf,Edzazve kudhawunirodha,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.AiModelPanel.b2ddc9d1,Dhawunirodha AI iri pamudziyo,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.AiModelPanel.654fd166,"GPU, zvekuyedza",adopted,"user-supplied proposal, not clinician validated",,r2
+ui.AiModelPanel.7eeb6130,Compatibility / CPU,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.AiModelPanel.686614bc,JSON yakanaka,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.AiModelPanel.2aaed4c1,"yashanda, asi mhinduro haisi JSON",adopted,"user-supplied proposal, not clinician validated",,r2
+ui.AppShell.e525a0da,Hutano,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.AppShell.9407e9ca,Mutauro wechirongwa,adopted,"user-supplied proposal, not clinician validated",,r2
+auth.AppShell.85dfa32c,Akaundi,adopted,"user-supplied proposal, not clinician validated",,r2
+safety_privacy.EncounterCard.76ecec7c,Zvekufungidzira,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.EncounterCard.ce5a2f9e,Gwaro remuenzaniso risina muridzi,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.EncounterCard.47c8ff7e,Hapana kodhi yemurwere,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.EncounterCard.d059a91a,(rondedzero isina chinhu),adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.StorageErrorPanel.ddcce9d1,"Bhurawuzha iri rarambidza kuvhura nzvimbo yekuchengetera pamudziyo, saka zvinyorwa hazvigoni kuchengetwa pano parizvino.",adopted,"user-supplied proposal, not clinician validated",,r2
+ui.StorageErrorPanel.68369dde,"Edzai, muchirongwa ichi:",adopted,"user-supplied proposal, not clinician validated",,r2
+ui.StorageErrorPanel.bc2d2ac7,"Vharai mapeji ese eHutano, mozovhura rimwe zvakare.",adopted,"user-supplied proposal, not clinician validated",,r2
+ui.StorageErrorPanel.2469d9a2,Budai mu private/incognito mode uye ongororai kuti mudziyo une nzvimbo yakasara.,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.StorageErrorPanel.ef3c6378,Nzira yekupedzisira: dzimai data resaiti iyi muzvirongwa zvebhurawuzha. Izvi zvinodzima zvinyorwa zvakachengetwa mubhurawuzha iri.,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.StorageErrorPanel.7ccfee45,Hutano haimbodzima zvinyorwa zvenyu yoga.,adopted,"user-supplied proposal, not clinician validated",,r2
+safety_privacy.StorageErrorPanel.30035a3c,Kopa mashoko ekuongorora dambudziko (hapana ruzivo rwevarwere),adopted,"user-supplied proposal, not clinician validated",,r2
+safety_privacy.StorageErrorPanel.fa2323c3,Mashoko ekuongorora dambudziko rekuchengetera reHutano (hapana ruzivo rwevarwere),adopted,"user-supplied proposal, not clinician validated",,r2
+ui.StorageErrorPanel.035257ef,· nharembozha,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.StorageErrorPanel.1604a818,hazvina kubvumidzwa,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.StorageErrorPanel.2310131b,Zviri kuedzwazve…,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.StorageErrorPanel.9f5cd8a2,Edzazve,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.StorageErrorPanel.dd2ce2e2,Zvakopwa.,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.ai-extraction.76d2130a,Rondedzero haina chinhu.,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.ai-extraction.7a78d335,Hapana mitsara yawanikwa.,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.ai-extraction.e60be7ce,Modheru haina kudzosa mashoko.,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.ai-extraction.08bbfb45,Mhinduro yemodheru yakarebesa.,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.ai-extraction.8cb3da0c,Mhinduro yemodheru yanga isiri JSON object imwe chete.,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.ai-extraction.da6b4b16,Mhinduro yemodheru yanga isiri JSON yakanaka.,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.ai-extraction.d5dba825,Mhinduro yemodheru yanga isiri JSON object.,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.ai-extraction.9de98059,Mhinduro yemodheru yanga ine makiyi asingatarisirwi.,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.ai-extraction.a005b5c8,AI iri pamudziyo + mitemo (zvekuyedza),adopted,"user-supplied proposal, not clinician validated",,r2
+ui.extraction.95293a31,Kuratidzira kwekubvisa mashoko — kwete AI,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.extraction.b6b19aa9,Kubvisa mashoko neAI (hazvina kurongwa),adopted,"user-supplied proposal, not clinician validated",,r2
+ui.extraction.9bb79157,Kubvisa mashoko neAI hakuna kurongwa muchigadzirwa chekuyedza ichi.,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.fixtures.b12ddd70,Muenzaniso weChirungu,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.fixtures.46e11b38,Muenzaniso weChiShona,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.fixtures.c73f2094,Muenzaniso wakasanganiswa ChiShona/Chirungu,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.repository.b34c7106,Gwaro harina kuwanikwa,adopted,"user-supplied proposal, not clinician validated",,r2
+auth.repository.762bfef5,Kusimbiswa nemunhu hakuna kusimbiswa,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.repository.7b11e226,Gwaro rine minda isati yagadziriswa,adopted,"user-supplied proposal, not clinician validated",,r2
+auth.repository.2e28a387,Pindai muakaundi kuti mutore zvinyorwa,adopted,"user-supplied proposal, not clinician validated",,r2
+auth.repository.cf06026b,Gwaro rine akaundi yaro kare,adopted,"user-supplied proposal, not clinician validated",,r2
+sync.sync.5a93c019,Kopi iri pa server yakasiyana negwaro riri pamudziyo,adopted,"user-supplied proposal, not clinician validated",,r2
+sync.sync.75a066aa,Shanduro inopesana yatovepo pa server,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.ai-model.5f239122,hazviwanikwe,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.ai-model.11429841,Web Workers hazviwanikwe,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.ai-model.3b360d90,Cache storage hazviwanikwe,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.ai-model.d90f2aa5,WebAssembly hazviwanikwe,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.ai-model.035257ef,· nharembozha,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.ai-model.c0d188ff,Mashoko ekuongorora dambudziko rekuisa AI iri pamudziyo reHutano (hapana ruzivo rwevarwere),adopted,"user-supplied proposal, not clinician validated",,r2
+ui.ai-model.112f87c0,GPU (zvekuyedza) q4f16,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.ai-model.d554c97c,Compatibility / CPU q8,adopted,"user-supplied proposal, not clinician validated",,r2
+error.ai-model.1e314edb,mushandi weAI aputsika kana atadza kuvhurika,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.ai-model.0d9c98d4,AI iri pamudziyo haina kuiswa. Iisei muZvirongwa.,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.ai-model.0de508a3,Nguva yapera paAI iri pamudziyo.,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.ai-model.d3e4142f,Zvakanzurwa.,adopted,"user-supplied proposal, not clinician validated",,r2
+error.ai-model.af6321ca,kukanganisa kusingazivikanwi,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.ai-model.321445ed,Mhinduro yemodheru yarambwa.,adopted,"user-supplied proposal, not clinician validated",,r2
+auth.auth.6decfd85,useAuth outside AuthProvider,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.error-page.e2a25e6f,Peji iri harina kuvhurika,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.error-page.c8accfd7,Pane chakakanganisika kudivi redu. Munogona kuvhura peji patsva kana kudzokera kumusha.,adopted,"user-supplied proposal, not clinician validated",,r2
+error.hooks.7f2f6a15,Kukanganisa,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.hooks.0f6a9acd,Kuchengetwa kwemashoko pamudziyo hakuwanikwe,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.labels.5b84cc8c,ChiShona,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.labels.649df08a,Chirungu,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.labels.c0dcb865,Zvakasanganiswa,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.pwa.1016b03c,Development build,adopted,"user-supplied proposal, not clinician validated",,r2
+review_states.pwa.62201762,Zviri kushanda mukati mepreview frame,adopted,"user-supplied proposal, not clinician validated",,r2
+review_states.pwa.77101611,Lovable preview,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.pwa.63828d4c,Zvadzimwa ne ?sw=off,adopted,"user-supplied proposal, not clinician validated",,r2
+error.pwa.28a23f4a,Kunyoresa service worker kwatadza,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.__root.bc3023b3,Peji harina kuwanikwa,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.__root.a27cb1c3,Peji ramuri kutsvaga haripo kana kuti rakatamiswa.,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.__root.e2a25e6f,Peji iri harina kuvhurika,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.__root.c8accfd7,Pane chakakanganisika kudivi redu. Munogona kuvhura peji patsva kana kudzokera kumusha.,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.__root.e525a0da,Hutano,adopted,"user-supplied proposal, not clinician validated",,r2
+auth.auth.d9e59da6,Akaundi iri kuongororwa…,adopted,"user-supplied proposal, not clinician validated",,r2
+auth.auth.85dfa32c,Akaundi,adopted,"user-supplied proposal, not clinician validated",,r2
+auth.auth.fef111ce,Kubuda kunovanza zvinyorwa zveakaundi iyi pamudziyo uyu. Zvinoramba zvakachengetwa pamudziyo kusvika zvadzimwa.,adopted,"user-supplied proposal, not clinician validated",,r2
+auth.auth.28840297,Enda kuKutumiranisa,adopted,"user-supplied proposal, not clinician validated",,r2
+auth.auth.10cd6cd2,Simbisai imeyili yenyu,adopted,"user-supplied proposal, not clinician validated",,r2
+auth.auth.4da82167,Dzokera kunopinda muakaundi,adopted,"user-supplied proposal, not clinician validated",,r2
+auth.auth.84b04ea2,Hazvimanikidzwe. Zvinodiwa chete pakutumiranisa negore zvinyorwa zvekufungidzira zvakasimbiswa. Kunyora musina indaneti kunoshanda pasina akaundi.,adopted,"user-supplied proposal, not clinician validated",,r2
+auth.auth.84add5b2,Imeyili,adopted,"user-supplied proposal, not clinician validated",,r2
+auth.auth.8be3c943,Pasiwedhi,adopted,"user-supplied proposal, not clinician validated",,r2
+auth.auth.52feab90,Akaundi — Hutano,adopted,"user-supplied proposal, not clinician validated",,r2
+auth.auth.af60cc83,Pindai muakaundi kuti mutumiranise zvinyorwa zvekufungidzira zvakasimbiswa. Hazvimanikidzwe pakunyora musina indaneti.,adopted,"user-supplied proposal, not clinician validated",,r2
+auth.auth.d677ae50,Akaundi isingamanikidzwe yekutumiranisa negore zvinyorwa zvekufungidzira zvakasimbiswa.,adopted,"user-supplied proposal, not clinician validated",,r2
+auth.auth.aaf37447,Gadzira akaundi,adopted,"user-supplied proposal, not clinician validated",,r2
+auth.auth.5afeca73,Mirai…,adopted,"user-supplied proposal, not clinician validated",,r2
+auth.auth.aeb519ea,Hamuna akaundi? Gadzirai imwe,adopted,"user-supplied proposal, not clinician validated",,r2
+auth.auth.64d8814b,Mune akaundi? Pindai,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.encounters_id.33ce4174,Zviri kuvhurwa…,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.encounters_id.8d74b2d8,Gwaro harina kuwanikwa pamudziyo uyu.,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.encounters_id.63fb6b19,Dzokera kuzvakanyorwa,adopted,"user-supplied proposal, not clinician validated",,r2
+review_states.encounters_id.641bb431,Ongorora kushanya,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.encounters_id.ce5a2f9e,Gwaro remuenzaniso risina muridzi,adopted,"user-supplied proposal, not clinician validated",,r2
+auth.encounters_id.b0df8ae9,Isa muakaundi yangu,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.encounters_id.19ae22ef,Gadzirisa rondedzero,adopted,"user-supplied proposal, not clinician validated",,r2
+safety_privacy.encounters_id.b6cac8da,"Izvi ndezvekuzadzisa zvinyorwa chete, hazvisi zano rekurapa. Kana ruzivo rusina kunyorwa, makai kudaro.",adopted,"user-supplied proposal, not clinician validated",,r2
+ui.encounters_id.fd3d0f9c,Minda yese yazadzwa kana kubvumwa.,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.encounters_id.29267269,Shanduko dzisati dzachengetwa,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.encounters_id.fcd079cb,Pinza mashoko panzvimbo pacho,adopted,"user-supplied proposal, not clinician validated",,r2
+review_states.encounters_id.c2f30587,Ongorora kushanya — Hutano,adopted,"user-supplied proposal, not clinician validated",,r2
+review_states.encounters_id.032f9df7,Ongororai minda yakurudzirwa muchienzanisa nerondedzero yekutanga mozosimbisa.,adopted,"user-supplied proposal, not clinician validated",,r2
+review_states.encounters_id.217b5228,Kuongororwa nekusimbiswa nemunhu kwegwaro rekushanya.,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.encounters_id.55fa4a86,Hapana kubvisa mashoko kwaitwa — kupinza nemaoko.,adopted,"user-supplied proposal, not clinician validated",,r2
+safety_privacy.encounters_id.79c51af2,· yaenderana nemuenzaniso wekufungidzira,adopted,"user-supplied proposal, not clinician validated",,r2
+review_states.encounters_id.9925ee3c,hazvina kunyorwa,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.encounters_id.56a2285c,Zviri kuchengetwa…,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.encounters_id.398cd27d,"mutemo, kwete AI",adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.encounters_id.d10a6ccb,AI iri pamudziyo,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.encounters_id.da04aeef,muenzaniso wekuratidzira,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.encounters_index.6403f2b7,Itsva,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.encounters_index.7f420221,Hapana chinhu pano.,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.encounters_index.4ef54e3c,Zvakanyorwa — Hutano,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.encounters_index.9c69eb3a,Zvinyorwa zvekushanya zvakachengetwa pamudziyo uyu.,adopted,"user-supplied proposal, not clinician validated",,r2
+review_states.encounters_index.6a1505e3,"Magwaro asati apera, zvinyorwa zvinoda kuongororwa nezvakasimbiswa.",adopted,"user-supplied proposal, not clinician validated",,r2
+ui.encounters_index.6a720856,Zvose,adopted,"user-supplied proposal, not clinician validated",,r2
+review_states.encounters_index.22a31d86,Magwaro asati apera,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.encounters_new.a32b00c0,Mutauro werondedzero,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.encounters_new.6d242a2d,Mashoko ekutanga anochengetwa sezvaanyorwa.,adopted,"user-supplied proposal, not clinician validated",,r2
+safety_privacy.encounters_new.af257d0b,"Mienzaniso yekufungidzira (haisi yevanhu chaivo, ndeyekuratidzira chete)",adopted,"user-supplied proposal, not clinician validated",,r2
+ui.encounters_new.2552a425,Kubvisa mashoko,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.encounters_new.92229bc1,Iisei muZvirongwa,adopted,"user-supplied proposal, not clinician validated",,r2
+review_states.encounters_new.03301103,Mira AI moongorora nemaoko,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.encounters_new.c8728bf0,Kushanya kutsva — Hutano,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.encounters_new.4e836fdc,Nemaoko,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.encounters_new.2d8927e4,Kuratidzira (kwete AI),adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.encounters_new.b8eb763a,AI iri pamudziyo (zvekuyedza),adopted,"user-supplied proposal, not clinician validated",,r2
+ui.encounters_new.878a3494,Zadzisai munda wega wega imi pachenyu.,adopted,"user-supplied proposal, not clinician validated",,r2
+safety_privacy.encounters_new.1387add8,Mienzaniso yekufungidzira chaiyo chete nemakodhi/mazuva akanyorwa zvakajeka.,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.encounters_new.f8664e0f,"Nyorai rondedzero yekushanya muChiShona, Chirungu kana zvakasanganiswa.",adopted,"user-supplied proposal, not clinician validated",,r2
+review_states.encounters_new.e67ac830,Gwaro riri kuchengetwa…,adopted,"user-supplied proposal, not clinician validated",,r2
+review_states.encounters_new.b473221e,Gwaro rachengetwa · kuratidzira kwekubvisa mashoko…,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.encounters_new.11766136,Gwaro rachengetwa · AI iri pamudziyo iri kushanda…,adopted,"user-supplied proposal, not clinician validated",,r2
+review_states.encounters_new.60f9157d,Chengetedza gwaro uye ita kuratidzira kwekubvisa mashoko,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.encounters_new.58ddf9b0,Chengetedza gwaro uye shandisa AI iri pamudziyo,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.index.888c6d4a,Mhoroi. Nyorai kushanya.,adopted,"user-supplied proposal, not clinician validated",,r2
+review_states.index.e545f3c8,"Nyorai kushanya muChiShona, Chirungu kana zvose. Zvinotanga kuchengetwa pamudziyo uyu. Imi munoongorora nekusimbisa munda wega wega — Hutano haiite sarudzo dzekurapa.",adopted,"user-supplied proposal, not clinician validated",,r2
+ui.index.76eec760,Zvichangoburwa,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.index.3a347eb3,Hapana zvakanyorwa pamudziyo uyu parizvino.,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.index.67b5df69,Hutano — Mubatsiri wemunda weVashandi Vehutano Vemumusha,provisional,"user-supplied proposal, not clinician validated",Needs native Shona VHW validation,r2
+offline_ai_install.index.19185bce,"Kunyora zvekushanya kunoshanda musina indaneti, nekuongororwa nemunhu. Chigadzirwa chekuyedza, data rekufungidzira chete.",adopted,"user-supplied proposal, not clinician validated",,r2
+ui.index.021224c6,Hutano — Mubatsiri wemunda weVHW,adopted,"user-supplied proposal, not clinician validated",,r2
+review_states.index.99f2d194,"Nyorai zvekushanya muChiShona/Chirungu, ongororai, mosimbisa pamudziyo.",adopted,"user-supplied proposal, not clinician validated",,r2
+review_states.index.22a31d86,Magwaro asati apera,adopted,"user-supplied proposal, not clinician validated",,r2
+review_states.index.201a4493,Zvinoda kuongororwa,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.settings.3b4dfc97,Zviri kushanda,adopted,"user-supplied proposal, not clinician validated",,r2
+error.settings.09fef5d8,Zvatadza,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.settings.43b11ec4,Zvabvumidzwa,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.settings.2c577619,Hazvina kubvumidzwa — bhurawuzha ringadzima data,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.settings.2a135131,Zviri kugadzirwa — hazvisati zvagadzirira,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.settings.5eca817b,Hazvitsigirwi nebhurawuzha iri,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.settings.7b856771,Kumbira kuchengetwa kwechigarire,adopted,"user-supplied proposal, not clinician validated",,r2
+review_states.settings.8505326b,"Shanduro dzeChiShona dzichiri magwaro asati apera, dzakamirira kusimbiswa nevatauri veChiShona.",adopted,"user-supplied proposal, not clinician validated",,r2
+safety_privacy.settings.88f3af40,Tumira kunze zvinyorwa zvekufungidzira (JSON),adopted,"user-supplied proposal, not clinician validated",,r2
+ui.settings.088574aa,Dzima data remuenzaniso,adopted,"user-supplied proposal, not clinician validated",,r2
+safety_privacy.settings.00698334,Dzima zvinyorwa zvese zvekufungidzira?,adopted,"user-supplied proposal, not clinician validated",,r2
+error.settings.b8757962,Izvi zvinobvisa zvachose gwaro rega rega remuenzaniso pamudziyo uyu. Hazvigoni kudzoserwa.,adopted,"user-supplied proposal, not clinician validated",,r2
+safety_privacy.settings.c068dcf8,Kuvanzika: zvinyorwa zviri pamudziyo hazvina kuvharirwa mubhurawuzha iri. Ani nani anowana mudziyo uyu wakavhurwa nebhurawuzha iyi anogona kuzviverenga. Musashandisa midziyo inoshandiswa nevamwe.,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.settings.d27e5c7e,Zvirongwa — Hutano,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.settings.6dc1222c,Kugadzirira,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.settings.5dc06a98,Kubvisa mashoko neAI iri pamudziyo (zvekuyedza),adopted,"user-supplied proposal, not clinician validated",,r2
+ui.settings.9407e9ca,Mutauro wechirongwa,adopted,"user-supplied proposal, not clinician validated",,r2
+safety_privacy.settings.8cdecd21,Data remuenzaniso rekufungidzira,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.settings.bd1f50da,Mamiriro ekugadzirira echokwadi nekutarisira data remuenzaniso.,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.settings.5e1f0c25,Kuchengetwa kwemashoko pamudziyo (IndexedDB),adopted,"user-supplied proposal, not clinician validated",,r2
+ui.settings.820d6004,Zviri kuongororwa…,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.settings.477c5215,Kuchengetwa kwechigarire,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.settings.fb52c13a,Hazvitsigirwi,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.settings.71145d55,Nzvimbo yashandiswa / yakapihwa,adopted,"user-supplied proposal, not clinician validated",,r2
+sync.settings.e758ca64,Backend,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.settings.ab8e46df,Zvarongwa (Supabase yekunze),adopted,"user-supplied proposal, not clinician validated",,r2
+ui.settings.811931bb,Hazvina kurongwa,adopted,"user-supplied proposal, not clinician validated",,r2
+auth.settings.85dfa32c,Akaundi,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.settings.1b6c524f,Mapinda muakaundi,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.settings.848d80ca,Hamuna kupinda muakaundi,adopted,"user-supplied proposal, not clinician validated",,r2
+sync.settings.557298f4,Kutumiranisa negore,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.settings.6792ff5a,"Nemaoko / pakudzoka kweindaneti, chirongwa chinofanira kunge chakavhurwa",adopted,"user-supplied proposal, not clinician validated",,r2
+ui.settings.2552a425,Kubvisa mashoko,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.settings.b8eb763a,AI iri pamudziyo (zvekuyedza),adopted,"user-supplied proposal, not clinician validated",,r2
+ui.settings.dc4468ce,Hazvitsigirwi pano,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.settings.1aab9f18,Hazvina kuiswa,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.settings.c4b4f49c,Chirongwa chisina indaneti (mushure mekuvhura kwekutanga paindaneti),adopted,"user-supplied proposal, not clinician validated",,r2
+ui.settings.a3ef14cd,· gadziridza mushure mekuvhara mapeji,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.settings.a65505df,Kunyora musina indaneti,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.settings.d118e233,AI isina indaneti,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.settings.9873117f,Inoshanda musina indaneti pamudziyo uyu kana yaiswa,adopted,"user-supplied proposal, not clinician validated",,r2
+offline_ai_install.settings.c7c904a3,Tangai maisa modheru iri pazasi,adopted,"user-supplied proposal, not clinician validated",,r2
+ui.settings.649df08a,Chirungu,adopted,"user-supplied proposal, not clinician validated",,r2
+review_states.settings.7de466df,ChiShona (gwaro risati rapera),adopted,"user-supplied proposal, not clinician validated",,r2
+sync.sync.905f6309,Tumiranisa,adopted,"user-supplied proposal, not clinician validated",,r2
+sync.sync.848d80ca,Hamuna kupinda muakaundi,adopted,"user-supplied proposal, not clinician validated",,r2
+auth.sync.75dce38d,Pindai muakaundi kuti mutumiranise,adopted,"user-supplied proposal, not clinician validated",,r2
+sync.sync.3937d844,Tora,adopted,"user-supplied proposal, not clinician validated",,r2
+auth.sync.9396d3e4,"Kutumiranisa kunoitika chete kana chirongwa chakavhurwa: pamunodzvanya Tumiranisai zvino, pamudziyo unodzoka paindaneti, kana mushure mekupinda muakaundi. Hapana kutumiranisa kunoitika chirongwa chakavharwa.",adopted,"user-supplied proposal, not clinician validated",,r2
+sync.sync.51dcf13a,Tumiranisa — Hutano,adopted,"user-supplied proposal, not clinician validated",,r2
+sync.sync.e9edcebc,Tumirai kopi dzakasimbiswa dzezvinyorwa zvekufungidzira kubackend yeHutano.,adopted,"user-supplied proposal, not clinician validated",,r2
+sync.sync.7717cdba,Kuchengeta wozotumira zvinyorwa zvekufungidzira zvakasimbiswa.,adopted,"user-supplied proposal, not clinician validated",,r2
+sync.sync.9e4c4ef2,Kutumiranisa kwatotanga kare.,adopted,"user-supplied proposal, not clinician validated",,r2
+auth.sync.12c3798c,Pindai muakaundi kuti mutumiranise. Hapana chatumirwa.,adopted,"user-supplied proposal, not clinician validated",,r2
+sync.sync.e758ca64,Backend,adopted,"user-supplied proposal, not clinician validated",,r2
+sync.sync.668c5fff,Zvarongwa,adopted,"user-supplied proposal, not clinician validated",,r2
+sync.sync.811931bb,Hazvina kurongwa,adopted,"user-supplied proposal, not clinician validated",,r2
+auth.sync.85dfa32c,Akaundi,adopted,"user-supplied proposal, not clinician validated",,r2
+sync.sync.5616b35d,Kubatana kwemudziyo neindaneti,adopted,"user-supplied proposal, not clinician validated",,r2
+sync.sync.c3e839df,Paindaneti,adopted,"user-supplied proposal, not clinician validated",,r2
+sync.sync.e01fa717,Hapana indaneti,adopted,"user-supplied proposal, not clinician validated",,r2
+auth.sync.612d4df9,Kopi dzakasimbiswa dzakamirira kutumirwa (akaundi iyi),adopted,"user-supplied proposal, not clinician validated",,r2
+sync.sync.4b18be23,Magwaro asati apera / ari kuongororwa (haambotumirwi),adopted,"user-supplied proposal, not clinician validated",,r2
+sync.sync.873ea036,Kugamuchira kwekupedzisira kweserver,adopted,"user-supplied proposal, not clinician validated",,r2
+sync.sync.80c3052d,Hazvisati zvaitika,adopted,"user-supplied proposal, not clinician validated",,r2
+sync.sync.221ca630,Zviri kutumiraniswa…,adopted,"user-supplied proposal, not clinician validated",,r2
+sync.sync.9e150652,Hapana indaneti — zvakamirira zvachengetwa,adopted,"user-supplied proposal, not clinician validated",,r2
+sync.sync.47c8ff7e,Hapana kodhi yemurwere,adopted,"user-supplied proposal, not clinician validated",,r2
+auth.sync.cd994d55,Zvaiswa muakaundi yenyu.,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.rules.65fddc67,achadzoka,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.rules.ea39210a,ambuya,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.rules.23ba3d1e,anobva,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.rules.737f52fc,babamunini,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.rules.2e7d9108,dzoka,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.rules.dd356244,gumi,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.rules.4198ecdb,hanzvadzi,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.rules.1b54507c,kwemavhiki,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.rules.cc6e99d3,kwenguva,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.rules.9f8f7eec,mana,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.rules.a00bbe56,manomwe,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.rules.b4ddce18,mapfumbamwe,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.rules.d479fa0e,masere,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.rules.4db2c1df,mashanu,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.rules.bec9703f,matanhatu,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.rules.b802f384,matatu,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.rules.ad782ecd,maviri,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.rules.1b8dd803,mbiri,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.rules.143307d6,mukadzi wake,provisional,"user-supplied proposal, not clinician validated",Ambiguous relationship or sex term. Parser should not infer relationship without context.,r2
+cue_dictionary.rules.b39780bf,mukoma,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.rules.264f68da,mumwe,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.rules.fe05bcdc,rimwe,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.rules.54119c36,sekuru,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.rules.3b2f8f61,tete,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.checks.99c696c6,vakati,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.checks.7cb8b7a0,anochema,provisional,"user-supplied proposal, not clinician validated",anochema means 'cries'; it does not reliably mean 'complains of'. Needs native Shona VHW validation,r2
+cue_dictionary.checks.ba4159b2,anonyunyuta,provisional,"user-supplied proposal, not clinician validated",Needs native Shona VHW validation,r2
+cue_dictionary.checks.de1e8dda,ari kunzwa,provisional,"user-supplied proposal, not clinician validated",Needs native Shona VHW validation,r2
+cue_dictionary.checks.ab452a3a,haana,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.checks.4fd24de2,rinouya,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.checks.90e3dcc9,kurwara,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.checks.8f1e4e0f,ari kurwara,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.checks.4582cd02,rwadzo,provisional,"user-supplied proposal, not clinician validated",Needs native Shona VHW validation,r2
+cue_dictionary.checks.6bed5ef3,kurwadza,provisional,"user-supplied proposal, not clinician validated",Needs native Shona VHW validation,r2
+cue_dictionary.checks.b41c77f8,kubva nezuro,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.checks.f2d875b4,akazvarwa,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.checks.15e2183e,zuva,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.checks.ceac9b04,mukomana,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.checks.25b732b3,musikana,adopted,"user-supplied proposal, not clinician validated",,r2
+cue_dictionary.checks.0afbc51b,kuMutasa,adopted,"user-supplied proposal, not clinician validated",,r2
+manual.auth.signed_in_as,Mapinda se {email},adopted,"user-supplied proposal, not clinician validated",,r2
+manual.ai.storage_read_failed,Hatina kukwanisa kuverenga nzvimbo yekuchengetera modheru: {errorMessage},adopted,"user-supplied proposal, not clinician validated",,r2
+manual.ai.diag_ram,~{gb} GB RAM yataurwa,adopted,"user-supplied proposal, not clinician validated",,r2
+manual.ai.diag_mobile,mobile,adopted,"user-supplied proposal, not clinician validated",,r2
+manual.ai.gpu_status,GPU: {status},adopted,"user-supplied proposal, not clinician validated",,r2
+manual.ai.gpu_available,zviripo,adopted,"user-supplied proposal, not clinician validated",,r2
+manual.ai.gpu_not_available,hazviwanikwe,adopted,"user-supplied proposal, not clinician validated",,r2
+manual.ai.gpu_unknown,hazvizivikanwi,adopted,"user-supplied proposal, not clinician validated",,r2
+manual.ai.worker_start_failed,Hatina kukwanisa kutanga mushandi weAI: {errorMessage},adopted,"user-supplied proposal, not clinician validated",,r2
+manual.ai.download_stalled,Hapana kufambira mberi kwekudhawunirodha kwemasekonzi {seconds} (zvamira).,adopted,"user-supplied proposal, not clinician validated",,r2
+manual.ai.stage_timeout,Nguva yapera mushure memasekonzi {seconds} panguva ye{stage}.,adopted,"user-supplied proposal, not clinician validated",,r2
+manual.ai.worker_error,Kukanganisa kwemushandi weAI: {errorMessage},adopted,"user-supplied proposal, not clinician validated",,r2
+manual.ai.worker_crashed,mushandi weAI aputsika kana atadza kuvhurika,adopted,"user-supplied proposal, not clinician validated",,r2
+manual.review.not_verified,Hazvina kusimbiswa: {errorMessage},adopted,"user-supplied proposal, not clinician validated",,r2
+manual.review.adopt_failed,Kutora kwatadza: {errorMessage},adopted,"user-supplied proposal, not clinician validated",,r2
+manual.review.extraction_none,{adapterLabel} · hapana mazano ({failureReason}) — zadzisai minda nemaoko,adopted,"user-supplied proposal, not clinician validated",,r2
+manual.review.extraction_summary,"{adapterLabel} · {modelId} ({backend}/{dtype}) · {seconds} s · mitemo: minda {ruleCount}, AI: minda {aiCount} · ongororai chimwe nechimwe muchienzanisa negwaro",adopted,"user-supplied proposal, not clinician validated",,r2
+manual.review.summary_warning, · {warning},adopted,"user-supplied proposal, not clinician validated",,r2
+manual.review.summary_discarded, · sarudzo {count} dzisina kukodzera dzaraswa,adopted,"user-supplied proposal, not clinician validated",,r2
+manual.new.ai_no_suggestions,Gwaro rachengetwa. AI iri pamudziyo haina kupa mazano: {reason} Enderera mberi nekuongorora nemaoko.,adopted,"user-supplied proposal, not clinician validated",,r2
+manual.new.extraction_failed,"Gwaro rachengetwa, asi kubvisa mashoko kwatadza: {errorMessage}",adopted,"user-supplied proposal, not clinician validated",,r2
+manual.settings.export_failed,Kutumira kunze kwatadza: {errorMessage},adopted,"user-supplied proposal, not clinician validated",,r2
+manual.settings.delete_failed,Kudzima kwatadza: {errorMessage},adopted,"user-supplied proposal, not clinician validated",,r2
+manual.sync.offline,"Hapana indaneti — {sent} zvatumirwa, {remaining} zvachengetwa zvakamirira.",adopted,"user-supplied proposal, not clinician validated",,r2
+manual.sync.auth_paused,Zvamiswa: munofanira kupinda muakaundi ({errorMessage}). {remaining} zvachengetwa zvakamirira; zvichaedzwazve mushure mekupinda.,adopted,"user-supplied proposal, not clinician validated",,r2
+manual.sync.done_rejected,", {rejected} zvarambwa",adopted,"user-supplied proposal, not clinician validated",,r2
+manual.sync.done_last_error, — kukanganisa kwekupedzisira: {errorMessage},adopted,"user-supplied proposal, not clinician validated",,r2
