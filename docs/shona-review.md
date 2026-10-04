@@ -2,6 +2,8 @@
 
 Thank you for reviewing Hutano's Shona. Everything here is **synthetic**. Please never add real patient notes, names or places tied to real people.
 
+> Round 1 review: see [shona-review-round1.md](shona-review-round1.md). Reviewer text is stored in `docs/shona-review-overlay.csv` (keyed by `key`) and merged on every regeneration.
+
 ## What we're asking for
 - **Natural wording a rural Village Health Worker would actually use or write.** Not textbook Shona, and not medical advice.
 - **Common spellings and code-switch variants**, e.g. `kwemazuva matatu` / `kwemazuva 3` / `for 3 days`, `fivha` / `fever`, `ku-` / `mu-` place prefixes.
@@ -47,7 +49,7 @@ Then continue with the full inventory.
 - `synthetic_example_demo` rows are the in-app demo examples (`src/domain/fixtures.ts`). Rewording them also means updating their exact field mappings.
 
 ## Inventory summary (generated)
-- **464 rows** total: ui 141, cue_dictionary 81, offline_ai_install 48, review_states 40, auth 35, sync 31, error 25, meaning_distinction 18, out_of_scope_model_prompt 17, safety_privacy 13, i18n_core 9, synthetic examples 11 (demo 2, dev 3, held-out 6). **98 rows are `[P1]`**: the original 84 first-batch rows (all kept) plus 6 core full-sentence messages and 8 error-advice messages.
+- **478 rows** total (round 1 added new cue words; 90 rows now carry reviewer text). Earlier breakdown before round 1: ui 141, cue_dictionary 81, offline_ai_install 48, review_states 40, auth 35, sync 31, error 25, meaning_distinction 18, out_of_scope_model_prompt 17, safety_privacy 13, i18n_core 9, synthetic examples 11 (demo 2, dev 3, held-out 6). **98 rows are `[P1]`**: the original 84 first-batch rows (all kept) plus 6 core full-sentence messages and 8 error-advice messages.
 - Some English strings repeat in different places (e.g. "Verified" on several screens). Each place has its own row because the context can need different wording.
 
 ## Messages with values (hand-written, complete)
@@ -63,4 +65,4 @@ Then continue with the full inventory.
 ## Known remaining limits
 - **Text built at runtime** from short labels (field names, status words) reuses their own rows.
 - Single-quoted strings in code aren't scanned (none are user-facing today). Technical labels (WebGPU, q8, JSON, Supabase, IndexedDB) are included but usually stay in English.
-- The Shona interface currently translates only the 9 `i18n_core` strings. Wiring the rest into the language switch is a follow-up once your translations arrive.
+- The Shona interface shows the 9 `i18n_core` strings plus the round-1 adopted field/state/button terms (see round-1 report). Wiring the rest into the language switch is a follow-up once your translations arrive.
