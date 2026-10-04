@@ -20,7 +20,7 @@ export const SN_STRINGS: Record<string, string> = {
   "Adopted into your account.": "Zvaiswa muakaundi yenyu.",
   "Age (with units if stated)": "Zera (makore kana mwedzi, kana zvataurwa)",
   "All": "Zvose",
-  "All fields filled or acknowledged.": "Minda yese yazadzwa kana kubvumwa.",
+  "All fields filled or acknowledged.": "Zvikamu zvese zvazadzwa kana kubvumwa.",
   "Back to encounters": "Dzokerai kuzvakanyorwa",
   "Back to sign in": "Dzokerai kunopinda muakaundi",
   "Backend": "Backend",

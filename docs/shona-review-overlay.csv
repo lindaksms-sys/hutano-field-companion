@@ -288,7 +288,7 @@ ui.encounters_id.ce5a2f9e,Gwaro remuenzaniso risina muridzi,adopted,"user-suppli
 auth.encounters_id.b0df8ae9,Isai muakaundi yangu,adopted,"user-supplied proposal, not clinician validated",,r3,yes
 ui.encounters_id.19ae22ef,Gadzirisai rondedzero,adopted,"user-supplied proposal, not clinician validated",,r3,yes
 safety_privacy.encounters_id.b6cac8da,"Izvi ndezvekuzadzisa zvinyorwa chete, hazvisi zano rekurapa. Kana ruzivo rusina kunyorwa, makai kudaro.",adopted,"user-supplied proposal, not clinician validated",,r2,yes
-ui.encounters_id.fd3d0f9c,Minda yese yazadzwa kana kubvumwa.,adopted,"user-supplied proposal, not clinician validated",,r2,yes
+ui.encounters_id.fd3d0f9c,Zvikamu zvese zvazadzwa kana kubvumwa.,adopted,"user-supplied proposal, not clinician validated",,r3,yes
 ui.encounters_id.29267269,Shanduko dzisati dzachengetwa,adopted,"user-supplied proposal, not clinician validated",,r2,yes
 ui.encounters_id.fcd079cb,Pinza mashoko panzvimbo pacho,adopted,"user-supplied proposal, not clinician validated",,r2,yes
 review_states.encounters_id.c2f30587,Ongorora kushanya — Hutano,adopted,"user-supplied proposal, not clinician validated",,r2,yes
