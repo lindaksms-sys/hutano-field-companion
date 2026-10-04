@@ -32,7 +32,7 @@ const mb = (n: number | null) => (n == null ? "unknown" : `${(n / 1024 / 1024).t
 
 function SettingsPage() {
   const { status, requestPersist } = useStorageStatus();
-  const { lang, setLang } = useI18n();
+  const { lang, setLang, tl } = useI18n();
   const [msg, setMsg] = useState<string | null>(null);
   const cfg = supabaseConfig();
   const offline = useOfflineState();
@@ -109,7 +109,7 @@ function SettingsPage() {
                 <AlertDialogDescription>This permanently removes every demo record from this device. It cannot be undone.</AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogCancel>{tl("Cancel")}</AlertDialogCancel>
                 <AlertDialogAction
                   onClick={async () => {
                     try {

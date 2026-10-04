@@ -8,6 +8,7 @@ import { StatusPill } from "@/components/StatusPill";
 import { useAuth } from "@/lib/auth";
 import { adoptRecord, getEncounter, saveFields, verificationBlockers, verify, missingFields } from "@/domain/repository";
 import { FIELD_KEYS, type EncounterRecord, type FieldKey, type FieldValue } from "@/domain/types";
+import { useI18n } from "@/lib/i18n";
 import { FIELD_LABELS, LANG_LABELS, REVIEW_LABELS, STATE_LABELS, SYNC_LABELS } from "@/lib/labels";
 
 export const Route = createFileRoute("/encounters/$id")({
@@ -27,6 +28,7 @@ const LONG: FieldKey[] = ["concern", "observations", "followUp"];
 type SaveState = { kind: "idle" } | { kind: "saving" } | { kind: "saved"; at: string } | { kind: "error"; msg: string };
 
 function Review() {
+  const { tl } = useI18n();
   const { id } = Route.useParams();
   const [rec, setRec] = useState<EncounterRecord | null | undefined>(undefined);
   const [fields, setFields] = useState<Record<FieldKey, FieldValue> | null>(null);
@@ -102,7 +104,7 @@ function Review() {
     <div className="space-y-5">
       <div className="flex flex-wrap items-center gap-2">
         <h1 className="mr-auto text-2xl font-bold">Review encounter</h1>
-        <StatusPill tone={rec.reviewStatus === "verified" ? "success" : "pending"}>{REVIEW_LABELS[rec.reviewStatus]}</StatusPill>
+        <StatusPill tone={rec.reviewStatus === "verified" ? "success" : "pending"}>{tl(REVIEW_LABELS[rec.reviewStatus])}</StatusPill>
         <StatusPill>{SYNC_LABELS[rec.syncStatus]}</StatusPill>
         <StatusPill>Rev {rec.localRevision}</StatusPill>
         {rec.ownerId === null && <StatusPill tone="pending">Unowned demo</StatusPill>}
@@ -164,7 +166,7 @@ function Review() {
               <ul className="mt-2 space-y-1">
                 {missing.map((k) => (
                   <li key={k}>
-                    <a href={`#f-${k}`} className="text-sm font-semibold underline">{FIELD_LABELS[k]}</a>
+                    <a href={`#f-${k}`} className="text-sm font-semibold underline">{tl(FIELD_LABELS[k])}</a>
                   </li>
                 ))}
               </ul>
@@ -196,7 +198,7 @@ function Review() {
         </label>
         <div className="grid gap-2 sm:grid-cols-2">
           <Button variant="outline" size="lg" className="h-12" disabled={!dirty || save.kind === "saving"} onClick={persist}>
-            {save.kind === "saving" ? "Saving…" : "Save changes"}
+            {save.kind === "saving" ? "Saving…" : tl("Save changes")}
           </Button>
           <Button size="lg" className="h-12" disabled={!blockers.ok || !confirmed || save.kind === "saving"} onClick={doVerify}>
             Verify record
@@ -220,14 +222,15 @@ function Highlighted({ text, part }: { text: string; part: string | null }) {
 }
 
 function FieldEditor({ k, f, onChange, onFocus }: { k: FieldKey; f: FieldValue; onChange: (p: Partial<FieldValue>) => void; onFocus: () => void }) {
+  const { tl } = useI18n();
   const notRec = f.state === "not_recorded";
   const tone = f.state === "pending" ? "pending" : f.state === "accepted" || f.state === "edited" ? "success" : "neutral";
   const Comp = LONG.includes(k) ? Textarea : Input;
   return (
     <div id={`f-${k}`} onFocus={onFocus} className={`rounded-xl border bg-card p-4 ${f.state === "pending" ? "border-pending-border" : "border-border"}`}>
       <div className="flex flex-wrap items-center gap-2">
-        <label htmlFor={`in-${k}`} className="mr-auto font-bold">{FIELD_LABELS[k]}</label>
-        <StatusPill tone={tone}>{STATE_LABELS[f.state]}</StatusPill>
+        <label htmlFor={`in-${k}`} className="mr-auto font-bold">{tl(FIELD_LABELS[k])}</label>
+        <StatusPill tone={tone}>{tl(STATE_LABELS[f.state])}</StatusPill>
       </div>
       {f.source && (
         <p className="mt-2 text-sm text-muted-foreground">
