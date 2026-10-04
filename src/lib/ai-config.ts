@@ -71,6 +71,6 @@ export function checkSmokeOutput(text: unknown): { ok: boolean; reason: string }
   if (!o || typeof o !== "object" || Array.isArray(o)) return { ok: false, reason: "not a JSON object" };
   const keys = Object.keys(o);
   if (keys.length !== 1 || keys[0] !== "patientCode") return { ok: false, reason: "unexpected keys" };
-  if ((o as Record<string, unknown>).patientCode !== 1) return { ok: false, reason: "wrong answer" };
+  if ((o as Record<string, unknown>)["patientCode"] !== 1) return { ok: false, reason: "wrong answer" };
   return { ok: true, reason: "ok" };
 }
