@@ -33,15 +33,15 @@ safety_privacy.encounters_new.b47630da,safety_privacy,Use synthetic data only. D
 review_states.encounters_new.f03ecc61,review_states,Save draft & fill in manually,,,src/routes/encounters.new.tsx · message string,[P1]
 review_states.index.aed3b8c6,review_states,Verified,,,src/routes/index.tsx · message string,[P1]
 sync.sync.2b7d938e,sync,Sync now,,,src/routes/sync.tsx · message string,[P1]
-i18n_core.i18n.70f8bb9a,i18n_core,Home,Kumba,,src/lib/i18n.tsx key home,[P1] Existing DRAFT Shona; confirm or replace.
+i18n_core.i18n.70f8bb9a,i18n_core,Home,Kumusha,,src/lib/i18n.tsx key home,[P1] Existing DRAFT Shona; confirm or replace.
 i18n_core.i18n.18817545,i18n_core,Encounters,Zvakanyorwa,,src/lib/i18n.tsx key encounters,[P1] Existing DRAFT Shona; confirm or replace.
 i18n_core.i18n.905f6309,i18n_core,Sync,Kutumira,,src/lib/i18n.tsx key sync,[P1] Existing DRAFT Shona; confirm or replace.
 i18n_core.i18n.c7f73bb5,i18n_core,Settings,Zvirongwa,,src/lib/i18n.tsx key settings,[P1] Existing DRAFT Shona; confirm or replace.
-i18n_core.i18n.57d05f4f,i18n_core,New encounter,Kunyora kutsva,,src/lib/i18n.tsx key newEncounter,[P1] Existing DRAFT Shona; confirm or replace.
+i18n_core.i18n.57d05f4f,i18n_core,New encounter,Nyora kushanya kutsva,,src/lib/i18n.tsx key newEncounter,[P1] Existing DRAFT Shona; confirm or replace.
 i18n_core.i18n.5b9f7c68,i18n_core,Device online,Paindaneti,,src/lib/i18n.tsx key online,[P1] Existing DRAFT Shona; confirm or replace.
-i18n_core.i18n.e01fa717,i18n_core,Offline,Hapana indaneti,,src/lib/i18n.tsx key offline,[P1] Existing DRAFT Shona; confirm or replace.
-i18n_core.i18n.dd2a3056,i18n_core,Local only,Pafoni chete,,src/lib/i18n.tsx key localOnly,[P1] Existing DRAFT Shona; confirm or replace.
-i18n_core.i18n.02fd3586,i18n_core,Prototype — synthetic demo data only. Do not enter real patient information.,Muedzo — data yekuedza chete. Musaisa ruzivo rwechokwadi rwevarwere.,,src/lib/i18n.tsx key prototype,[P1] Existing DRAFT Shona; confirm or replace.
+i18n_core.i18n.e01fa717,i18n_core,Offline,Hapana interneti,,src/lib/i18n.tsx key offline,[P1] Existing DRAFT Shona; confirm or replace.
+i18n_core.i18n.dd2a3056,i18n_core,Local only,Pamudziyo uyu chete,,src/lib/i18n.tsx key localOnly,[P1] Existing DRAFT Shona; confirm or replace.
+i18n_core.i18n.02fd3586,i18n_core,Prototype — synthetic demo data only. Do not enter real patient information.,Ichi chigadzirwa chekuyedza chinoshandisa data rekufungidzira chete. Musaisa ruzivo rwechokwadi rwevarwere.,,src/lib/i18n.tsx key prototype,[P1] Existing DRAFT Shona; confirm or replace.
 cue_dictionary.rules.5116e406,cue_dictionary,mother,amai,,src/domain/rules.ts SHONA_CUES (draft),[P1] Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.35992aad,cue_dictionary,lives (at/in),anogara,,src/domain/rules.ts SHONA_CUES (draft),[P1] Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.32c8bbff,cue_dictionary,father,baba,,src/domain/rules.ts SHONA_CUES (draft),[P1] Give common spellings/variants and whether the meaning is right in rural VHW notes.
@@ -49,8 +49,8 @@ cue_dictionary.rules.aea439aa,cue_dictionary,"for … years (duration, NOT age)"
 cue_dictionary.rules.b05137c7,cue_dictionary,for … days (duration),kwemazuva,,src/domain/rules.ts SHONA_CUES (draft),[P1] Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.20d82ccd,cue_dictionary,for … week,kwesvondo,,src/domain/rules.ts SHONA_CUES (draft),[P1] Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.105d529a,cue_dictionary,years (age: 'ane makore 4' = is 4 years old),makore,,src/domain/rules.ts SHONA_CUES (draft),[P1] Give common spellings/variants and whether the meaning is right in rural VHW notes.
-cue_dictionary.rules.4ad55fa9,cue_dictionary,woman OR wife (ambiguous; currently treated as another person -> over-abstains),mukadzi,,src/domain/rules.ts SHONA_CUES (draft),[P1] Give common spellings/variants and whether the meaning is right in rural VHW notes.
-cue_dictionary.rules.27f71525,cue_dictionary,man OR husband (ambiguous; currently treated as another person -> over-abstains),murume,,src/domain/rules.ts SHONA_CUES (draft),[P1] Give common spellings/variants and whether the meaning is right in rural VHW notes.
+cue_dictionary.rules.21765f95,cue_dictionary,"woman OR wife (ambiguous; another person only with an explicit relationship word, else abstain)",mukadzi,,src/domain/rules.ts SHONA_CUES (draft),[P1] Give common spellings/variants and whether the meaning is right in rural VHW notes.
+cue_dictionary.rules.cb7d67bd,cue_dictionary,"man OR husband (ambiguous; another person only with an explicit relationship word, else abstain)",murume,,src/domain/rules.ts SHONA_CUES (draft),[P1] Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.148f98eb,cue_dictionary,months (age in months),mwedzi,,src/domain/rules.ts SHONA_CUES (draft),[P1] Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.07c6ed58,cue_dictionary,I will come back (worker follow-up),ndichadzoka,,src/domain/rules.ts SHONA_CUES (draft),[P1] Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.checks.e8da026b,cue_dictionary,they say (respectful; carer reports),vanoti,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"[P1] Used only to filter/abstain, never to create values. Add variants and correct meaning."
@@ -107,7 +107,6 @@ offline_ai_install.AiModelPanel.c3858280,offline_ai_install,Only the chosen mode
 ui.AiModelPanel.b9fcf5ea,ui,Runs only on this device. Notes are never sent anywhere for AI.,,,src/components/AiModelPanel.tsx · JSX text,
 offline_ai_install.AiModelPanel.b621e124,offline_ai_install,"Yes, download",,,src/components/AiModelPanel.tsx · JSX text,
 ui.AiModelPanel.e4571490,ui,Not now,,,src/components/AiModelPanel.tsx · JSX text,
-ui.AiModelPanel.77dfd213,ui,Cancel,,,src/components/AiModelPanel.tsx · JSX text,
 offline_ai_install.AiModelPanel.96b22692,offline_ai_install,Remove model files,,,src/components/AiModelPanel.tsx · JSX text,
 offline_ai_install.AiModelPanel.477fd428,offline_ai_install,Removing deletes only the model files. Your encounter records are not touched.,,,src/components/AiModelPanel.tsx · JSX text,
 safety_privacy.AiModelPanel.3af2279f,safety_privacy,Diagnostics,,,src/components/AiModelPanel.tsx · JSX text,
@@ -135,6 +134,7 @@ offline_ai_install.AiModelPanel.255673bf,offline_ai_install,Retry download,,,src
 offline_ai_install.AiModelPanel.b2ddc9d1,offline_ai_install,Download on-device AI,,,src/components/AiModelPanel.tsx · message string,
 ui.AiModelPanel.654fd166,ui,"GPU, experimental",,,src/components/AiModelPanel.tsx · message string,
 ui.AiModelPanel.7eeb6130,ui,Compatibility / CPU,,,src/components/AiModelPanel.tsx · message string,
+ui.AiModelPanel.77dfd213,ui,Cancel,,,src/components/AiModelPanel.tsx · message string,
 ui.AiModelPanel.686614bc,ui,valid JSON,,,src/components/AiModelPanel.tsx · message string,
 ui.AiModelPanel.2aaed4c1,ui,"ran, output not JSON",,,src/components/AiModelPanel.tsx · message string,
 ui.AppShell.e525a0da,ui,Hutano,,,src/components/AppShell.tsx · JSX text,
@@ -308,8 +308,6 @@ safety_privacy.settings.88f3af40,safety_privacy,Export synthetic records (JSON),
 ui.settings.088574aa,ui,Clear demo data,,,src/routes/settings.tsx · JSX text,
 safety_privacy.settings.00698334,safety_privacy,Delete all synthetic records?,,,src/routes/settings.tsx · JSX text,
 error.settings.b8757962,error,This permanently removes every demo record from this device. It cannot be undone.,,,src/routes/settings.tsx · JSX text,
-ui.settings.77dfd213,ui,Cancel,,,src/routes/settings.tsx · JSX text,
-ui.settings.f6fdbe48,ui,Delete,,,src/routes/settings.tsx · JSX text,
 safety_privacy.settings.c068dcf8,safety_privacy,Privacy: local records are unencrypted in this browser. Anyone with access to this unlocked device and browser profile can read them. Avoid shared devices.,,,src/routes/settings.tsx · JSX text,
 ui.settings.d27e5c7e,ui,Settings — Hutano,,,src/routes/settings.tsx · title attribute,
 ui.settings.6dc1222c,ui,Readiness,,,src/routes/settings.tsx · title attribute,
@@ -342,6 +340,8 @@ offline_ai_install.settings.9873117f,offline_ai_install,Works offline on this de
 offline_ai_install.settings.c7c904a3,offline_ai_install,Install the model below first,,,src/routes/settings.tsx · message string,
 ui.settings.649df08a,ui,English,,,src/routes/settings.tsx · message string,
 review_states.settings.7de466df,review_states,Shona (draft),,,src/routes/settings.tsx · message string,
+ui.settings.77dfd213,ui,Cancel,,,src/routes/settings.tsx · message string,
+ui.settings.f6fdbe48,ui,Delete,,,src/routes/settings.tsx · message string,
 sync.sync.905f6309,sync,Sync,,,src/routes/sync.tsx · JSX text,
 sync.sync.848d80ca,sync,Not signed in,,,src/routes/sync.tsx · JSX text,
 auth.sync.75dce38d,auth,Sign in to sync,,,src/routes/sync.tsx · JSX text,
@@ -386,12 +386,17 @@ cue_dictionary.rules.bec9703f,cue_dictionary,six,matanhatu,,src/domain/rules.ts 
 cue_dictionary.rules.b802f384,cue_dictionary,three,matatu,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.ad782ecd,cue_dictionary,two,maviri,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.1b8dd803,cue_dictionary,two (other class),mbiri,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
+cue_dictionary.rules.6680781f,cue_dictionary,carer / caregiver,muchengeti,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
+cue_dictionary.rules.143307d6,cue_dictionary,mukadzi wake,mukadzi wake,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.b39780bf,cue_dictionary,older sibling,mukoma,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.264f68da,cue_dictionary,one (other noun class),mumwe,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
+cue_dictionary.rules.59e1091b,cue_dictionary,I will return to (worker follow-up),ndichadzokera,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
+cue_dictionary.rules.3dacdecd,cue_dictionary,I will come again (worker follow-up),ndichauya zvakare,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.fe05bcdc,cue_dictionary,one,rimwe,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.54119c36,cue_dictionary,grandfather / maternal uncle,sekuru,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.f3619af6,cue_dictionary,next week,svondo rinouya,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.3b2f8f61,cue_dictionary,paternal aunt,tete,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
+cue_dictionary.rules.e48a19fa,cue_dictionary,we will come back (worker follow-up),tichadzoka,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.checks.e0b1f9c8,cue_dictionary,he/she said,akati,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.99c696c6,cue_dictionary,they said (respectful),vakati,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.7cb8b7a0,cue_dictionary,complains / cries of,anochema,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
@@ -400,20 +405,25 @@ cue_dictionary.checks.de1e8dda,cue_dictionary,is feeling,ari kunzwa,,src/domain/
 cue_dictionary.checks.dfa10ccc,cue_dictionary,I looked at/checked,ndakatarisa,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.96c04d30,cue_dictionary,I have measured,ndayera,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.ce181186,cue_dictionary,I measured,ndakayera,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
+cue_dictionary.checks.3a8376a5,cue_dictionary,I noticed (worker observation),ndakacherechedza,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
+cue_dictionary.checks.c1786136,cue_dictionary,I examined/checked (worker observation),ndakaongorora,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
+cue_dictionary.checks.a97bcff1,cue_dictionary,he/she was saying (report; role must be explicit),anenge achiti,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
+cue_dictionary.checks.f391d016,cue_dictionary,"we will check/examine (worker follow-up, context)",tichaongorora,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.ab452a3a,cue_dictionary,he/she does not have (negation),haana,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.56908a81,cue_dictionary,I will come,ndichauya,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.f243b454,cue_dictionary,I will return to,ndichadzokera,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.4fd24de2,cue_dictionary,coming/next,rinouya,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
-cue_dictionary.checks.b1e2b4bd,cue_dictionary,we will see (follow-up),tichaona,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
+cue_dictionary.checks.96299e23,cue_dictionary,we will see (too vague alone; not a follow-up cue),tichaona,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.90e3dcc9,cue_dictionary,to be sick,kurwara,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.8f1e4e0f,cue_dictionary,is sick,ari kurwara,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.4582cd02,cue_dictionary,pain,rwadzo,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.6bed5ef3,cue_dictionary,to hurt,kurwadza,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
-cue_dictionary.checks.2b26da55,cue_dictionary,it hurts,anorwadza,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
+cue_dictionary.checks.9a6502ad,cue_dictionary,hurts (not a universal 'it hurts'; no longer a problem cue),anorwadza,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.1b9bcbed,cue_dictionary,cough,chikosoro,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.58a8660f,cue_dictionary,diarrhoea,manyoka,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.e2f347fb,cue_dictionary,fever,fivha,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
-cue_dictionary.checks.554635cb,cue_dictionary,head / headache,musoro,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
+cue_dictionary.checks.79b8f83e,cue_dictionary,head (alone NOT a headache cue),musoro,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
+cue_dictionary.checks.f47c8864,cue_dictionary,being in pain (kurwadziwa nemusoro = headache),kurwadziwa,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.da0bb9ae,cue_dictionary,cold / runny nose,dzihwa,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.54caab2e,cue_dictionary,vomiting,kurutsa,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
 cue_dictionary.checks.aabf47b1,cue_dictionary,does not eat,haadyi,,src/domain/rules.ts / ai-extraction.ts cue regex (draft),"Used only to filter/abstain, never to create values. Add variants and correct meaning."
