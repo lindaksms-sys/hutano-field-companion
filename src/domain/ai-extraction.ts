@@ -206,6 +206,8 @@ export function validateModelOutput(
 // ---- Deterministic field-type checks for model-selected narrative sentences (hybrid v2) ----
 const REPORT_CUE = /\b(says?|said|reports?|reported|complains?|complained|told|states|tells|vanoti|anoti|akati|vakati|anochema|anonyunyuta|ari kunzwa)\b/i;
 const OBS_CUE = /\b(observed|noted|checked|measured|saw|seen|examined|temp(?:erature)?|MUAC|weight|pulse|ndaona|ndakaona|ndakatarisa|ndayera|ndakayera)\b|\d+\.\d/i;
+/** Small documented problem-word list (English + draft Shona) used only to filter concern selections, never to create values. */
+const PROBLEM_CUE = /\b(pain|painful|ache|aches|hurts?|sore|cough|coughing|fever|rash|diarrh\w*|vomit\w*|tired\w*|weak|itch\w*|swelling|bleeding|not eating|sick|ill|kurwara|ari kurwara|rwadzo|kurwadza|anorwadza|chikosoro|manyoka|fivha|musoro|dzihwa|kurutsa|haadyi|haarari)\b/i;
 const NEG_LEAD = /^(no|not|hapana|hakuna|haana)\b/i;
 const PLAN_CUE = /\b(return|review|revisit|come back|visit again|follow[- ]?up|next|will|plan|refer|ndichadzoka|achadzoka|ndichauya|ndichadzokera|rinouya|tichaona|dzoka)\b/i;
 const STRUCT_WORDS = new Set(["date", "village", "ward", "age", "aged", "years", "year", "old", "months", "patient", "child", "seen", "visit", "visited", "today", "mwana", "makore", "anogara", "location", "code", "name", "female", "male", "boy", "girl", "dunhu", "musha", "zuva", "baba", "amai", "mukomana", "musikana", "mukadzi", "murume", "date"]);
@@ -245,8 +247,10 @@ export function checkNarrativeSelections(
       while (chosen.length > 1 && NEG_LEAD.test(chosen[0]!.text) && !REPORT_CUE.test(chosen[0]!.text)) chosen = chosen.slice(1);
       if (chosen.length === 1 && NEG_LEAD.test(chosen[0]!.text) && !REPORT_CUE.test(chosen[0]!.text)) chosen = [];
       chosen = chosen.filter((g) => !(OBS_CUE.test(g.text) && !REPORT_CUE.test(g.text)));
+      chosen = chosen.filter((g) => REPORT_CUE.test(g.text) || PROBLEM_CUE.test(g.text));
     }
-    if (k === "observations") chosen = chosen.filter((g) => !(REPORT_CUE.test(g.text) && !OBS_CUE.test(g.text)));
+    if (k === "observations")
+      chosen = chosen.filter((g) => !(REPORT_CUE.test(g.text) && !OBS_CUE.test(g.text)) && !(PLAN_CUE.test(g.text) && !OBS_CUE.test(g.text)));
     if (k === "followUp") chosen = chosen.filter((g) => PLAN_CUE.test(g.text));
     chosen = chosen.filter((g) => !structuralOnly(g, ruleValues));
     // must still be one contiguous run of whole sentences

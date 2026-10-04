@@ -2,7 +2,7 @@
  "model": "onnx-community/Qwen3-0.6B-ONNX",
  "revision": "da1453100cf3ff33ef56d17983fc7a8648706db6",
  "runtime": "onnxruntime-node cpu q8",
- "ranAt": "2026-10-04T04:36:41.769Z",
+ "ranAt": "2026-10-04T04:38:33.786Z",
  "tallies": {
   "rules": {
    "en|patientCode": {
@@ -594,10 +594,10 @@
     "goldPos": 2
    },
    "en|ALL": {
-    "tp": 9,
-    "fp": 2,
-    "fn": 2,
-    "ca": 12,
+    "tp": 10,
+    "fp": 0,
+    "fn": 1,
+    "ca": 13,
     "goldNull": 13,
     "goldPos": 11
    },
@@ -627,9 +627,9 @@
    },
    "en|concern": {
     "tp": 1,
-    "fp": 1,
+    "fp": 0,
     "fn": 0,
-    "ca": 1,
+    "ca": 2,
     "goldNull": 2,
     "goldPos": 1
    },
@@ -642,9 +642,9 @@
     "goldPos": 1
    },
    "en|observations": {
-    "tp": 1,
-    "fp": 1,
-    "fn": 1,
+    "tp": 2,
+    "fp": 0,
+    "fn": 0,
     "ca": 1,
     "goldNull": 1,
     "goldPos": 2
@@ -666,10 +666,10 @@
     "goldPos": 5
    },
    "ALL|ALL": {
-    "tp": 23,
-    "fp": 2,
-    "fn": 6,
-    "ca": 18,
+    "tp": 24,
+    "fp": 0,
+    "fn": 5,
+    "ca": 19,
     "goldNull": 19,
     "goldPos": 29
    },
@@ -699,9 +699,9 @@
    },
    "ALL|concern": {
     "tp": 3,
-    "fp": 1,
+    "fp": 0,
     "fn": 1,
-    "ca": 1,
+    "ca": 2,
     "goldNull": 2,
     "goldPos": 4
    },
@@ -714,9 +714,9 @@
     "goldPos": 4
    },
    "ALL|observations": {
-    "tp": 3,
-    "fp": 1,
-    "fn": 2,
+    "tp": 4,
+    "fp": 0,
+    "fn": 1,
     "ca": 1,
     "goldNull": 1,
     "goldPos": 5
@@ -877,20 +877,20 @@
  },
  "latencyMs": {
   "baseline": [
-   14533.628382,
-   9431.598666000002,
-   9980.558286,
-   12002.214097999997,
-   9839.503286000006,
-   12549.559377000012
+   14577.837249,
+   8547.253799000002,
+   11581.053094000003,
+   11320.172017000004,
+   9001.006427,
+   11454.856893000004
   ],
   "hybrid": [
-   4987.779143,
-   5562.100186999996,
-   4179.493439999998,
-   6203.441251000004,
-   4990.556211000003,
-   4435.472295
+   5045.761351000001,
+   4893.755057000002,
+   4667.7410420000015,
+   5608.804156999999,
+   4150.284805999996,
+   4043.6820309999894
   ]
  },
  "cases": [
@@ -973,7 +973,7 @@
      "by": "model"
     },
     "observations": {
-     "value": "Throat looked red. Will check again in 3 days.",
+     "value": "Throat looked red.",
      "by": "model"
     }
    }
@@ -1045,12 +1045,7 @@
    "hybridRaw": "{\"concern\": 1, \"observations\": [], \"followUp\": null}",
    "rules": {},
    "baseline": {},
-   "hybrid": {
-    "concern": {
-     "value": "Delivered stock of ORS sachets to the health post.",
-     "by": "model"
-    }
-   }
+   "hybrid": {}
   },
   {
    "id": "D4",
