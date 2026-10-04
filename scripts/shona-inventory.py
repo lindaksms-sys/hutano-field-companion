@@ -67,8 +67,17 @@ def ui_category(path: str, text: str) -> str:
     return "ui"
 
 
+STOP_IDS = {"Math", "round", "String", "e", "as", "Error", "message", "toFixed", "length", "slice", "join", "n", "x", "d", "rec", "extraction", "ai", "manifest", "s", "m", "r", "Number", "new", "Date", "toLocaleString", "null", "undefined", "String", "ms", "1000", "1e6"}
+def ph_name(expr: str) -> str:
+    ids = [t for t in re.findall(r"[A-Za-z_][A-Za-z0-9_]*", expr) if t not in STOP_IDS]
+    return ids[-1] if ids else "value"
+
+
+CODEY = re.compile(r";|=>|useState|Promise|const |\|\||&&|\s=\s|\]\+|\(\)|\)\.|typeof |\bvoid\b|null\)")
 def user_facing(s: str) -> bool:
     s = s.strip()
+    if CODEY.search(s) or re.match(r"^[A-Z]{2,5}-\d+$", s):
+        return False
     if len(s) < 2 or not re.search(r"[A-Za-z]{2}", s) or NON_UI.match(s):
         return False
     if re.search(r"\b(?:bg|text|border|rounded|flex|grid|px|py|mt|mb|gap|h|w|min|max|sm|md|lg)-", s):
@@ -95,8 +104,8 @@ for p in UI_FILES:
         for m in re.finditer(rf'\b{re.escape(a)}[=:]\s*"([^"]+)"', code_nc):
             found.append((m.group(1), f"{a} attribute"))
     # quoted strings ("..." and '...') and template literals
-    for m in re.finditer(r'"((?:[^"\\\n]|\\.)*)"|\'((?:[^\'\\\n]|\\.)*)\'', code_nc):
-        s = m.group(1) if m.group(1) is not None else m.group(2)
+    for m in re.finditer(r'"((?:[^"\\\n]|\\.)*)"', code_nc):  # double-quoted only (avoids apostrophes)
+        s = m.group(1)
         pre = code_nc[max(0, m.start() - 40):m.start()]
         if re.search(r"(className|class|from|import|key|type|id|name|role|tone|variant|size|href|to|rel|lang|property|content: \"width)\s*[=:]\s*\(?$", pre):
             continue
@@ -106,16 +115,16 @@ for p in UI_FILES:
     for m in re.finditer(r"`([^`]*[A-Za-z][^`]*)`", code_nc):
         s = m.group(1)
         if "${" in s and re.search(r"[A-Za-z]{3,} [A-Za-z]{3,}", re.sub(r"\$\{[^}]*\}", "", s)):
-            found.append((re.sub(r"\$\{([^}]*)\}", lambda x: "{" + re.sub(r"[^A-Za-z0-9_.]", "", x.group(1))[:30] + "}", s), "template (dynamic)"))
+            found.append((re.sub(r"\$\{([^}]*)\}", lambda x: "{" + ph_name(x.group(1)) + "}", s), "template (dynamic)"))
     for text, kind in found:
         text = text.replace("\\n", " ").strip()
         if not user_facing(text):
             continue
-        if rel == "src/domain/fixtures.ts" and kind == "message string" and "SYNTHETIC DEMO" in text:
-            continue  # narratives handled in examples section
+        if rel == "src/domain/fixtures.ts" and not text.endswith("example"):
+            continue  # narratives/mappings handled in the examples section; only titles are UI
         if rel == "src/domain/ai-extraction.ts" and kind != "message string":
             continue
-        if rel == "src/domain/ai-extraction.ts" and re.search(r"segment|sentence number|JSON|Reply|Example|You (point|label|never)|Fields:|- \w+:", text):
+        if rel == "src/domain/ai-extraction.ts" and not (re.search(r"too long|empty|No sentences|Too many|Model (returned|output)|Shona:|On-device AI", text)):
             add("out_of_scope_model_prompt", src, text, ctx=f"{rel} · model prompt", notes="Model prompt text. NOT for translation (changing it changes evaluated behaviour).")
             continue
         ph = ", ".join(sorted(set(re.findall(r"\{[A-Za-z0-9_.]+\}", text))))
