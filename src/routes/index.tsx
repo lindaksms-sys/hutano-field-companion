@@ -26,7 +26,7 @@ function Home() {
   return (
     <div className="space-y-6">
       <section className="rounded-2xl bg-primary p-6 text-primary-foreground">
-        <h1 className="text-2xl font-bold">{tl("Mhoroi. Record an encounter.")}</h1>
+        <h1 className="text-2xl font-bold">{tl("Hello. Record an encounter.")}</h1>
         <p className="mt-1 max-w-prose text-sm opacity-90">
           {tl("Type the visit in Shona, English or both. It is saved on this device first. You review and verify every field — Hutano makes no clinical decisions.")}
         </p>
