@@ -119,8 +119,11 @@ export function buildMessages(segs: Segment[]) {
     "- observations: sentences where the health worker states what they SAW, CHECKED or MEASURED, including findings that are absent (no fever, hapana fivha).",
     "- followUp: a sentence where the health worker writes their own plan to return or review. Not advice.",
     "Use a number, a list of consecutive numbers, or null when the note does not say it. Do not guess.",
-    "Example note:\n[1] Patient SYN-0100, 30 years old.\n[2] She says her back hurts.\n[3] I saw no swelling.\n[4] Will visit again on Friday.",
-    'Example answer: {"concern":2,"observations":3,"followUp":4}',
+    "Example A:\n[1] Patient SYN-0100.\n[2] Age 30 years.\n[3] Village: Tsanzaguru.\n[4] She says her back hurts.\n[5] I saw no swelling.\n[6] Skin looked dry.",
+    'Answer A: {"concern":4,"observations":[5,6],"followUp":null}',
+    "Example B:\n[1] Mwana SYN-0200 ane makore 3.\n[2] Ndakatarisa ganda rakanaka.\n[3] Mbuya vanoti haarari.\n[4] Ndichauya Muvhuro.",
+    'Answer B: {"concern":3,"observations":2,"followUp":4}',
+    "Read the actual note carefully; its numbers will differ from the examples.",
     'Reply with one JSON object only with keys "concern","observations","followUp".',
   ].join("\n");
   const user = segs.map((s) => `[${s.n}] ${s.withheld ? "(withheld)" : s.text}`).join("\n");
@@ -205,7 +208,7 @@ const REPORT_CUE = /\b(says?|said|reports?|reported|complains?|complained|told|s
 const OBS_CUE = /\b(observed|noted|checked|measured|saw|seen|examined|temp(?:erature)?|MUAC|weight|pulse|ndaona|ndakaona|ndakatarisa|ndayera|ndakayera)\b|\d+\.\d/i;
 const NEG_LEAD = /^(no|not|hapana|hakuna|haana)\b/i;
 const PLAN_CUE = /\b(return|review|revisit|come back|visit again|follow[- ]?up|next|will|plan|refer|ndichadzoka|achadzoka|ndichauya|ndichadzokera|rinouya|tichaona|dzoka)\b/i;
-const STRUCT_WORDS = new Set(["date", "village", "ward", "age", "aged", "years", "year", "old", "months", "patient", "child", "seen", "visit", "visited", "today", "mwana", "makore", "anogara", "location", "code", "name", "female", "male", "boy", "girl"]);
+const STRUCT_WORDS = new Set(["date", "village", "ward", "age", "aged", "years", "year", "old", "months", "patient", "child", "seen", "visit", "visited", "today", "mwana", "makore", "anogara", "location", "code", "name", "female", "male", "boy", "girl", "dunhu", "musha", "zuva", "baba", "amai", "mukomana", "musikana", "mukadzi", "murume", "date"]);
 
 /** True when a sentence carries only structured data already covered by rules (code/date/age/place). */
 function structuralOnly(seg: Segment, ruleValues: string[]) {
