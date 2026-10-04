@@ -91,11 +91,11 @@ function SettingsPage() {
         <div className="flex gap-2 p-4">
           {(["en", "sn"] as const).map((l) => (
             <Button key={l} variant={lang === l ? "default" : "outline"} className="h-11" onClick={() => setLang(l)}>
-              {l === "en" ? tl("English") : tl("Shona (draft)")}
+              {l === "en" ? tl("English") : tl("Shona")}
             </Button>
           ))}
         </div>
-        <p className="px-4 pb-4 text-xs text-muted-foreground">{tl("Shona translations are drafts awaiting native-speaker validation.")}</p>
+        <p className="px-4 pb-4 text-xs text-muted-foreground">{tl("Shona interface approved by the project's Shona reviewer.")}</p>
       </Section>
 
       <Section title={tl("Synthetic demo data")}>

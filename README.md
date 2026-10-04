@@ -93,7 +93,7 @@ Unknown values stay `null`. Verification requires: no pending suggestions, every
 - **Works now:** local capture, draft-before-extraction, demo extraction on fixtures (plus literal `SYN-####` codes and ISO dates), manual entry of all fields, missing-documentation panel, review/verify, invalidation on edit, persistence across reloads, JSON export, clear demo data, truthful status pages, installable manifest, production app-shell service worker (offline after first load).
 - **Also works:** email/password auth with confirmation state, per-account partitioning, explicit adopt, upload of verified synthetic snapshots.
 - **Experimental:** on-device AI extraction (see below).
-- **Not implemented:** cloud AI, background sync, downloading server records, two-way conflict resolution, encryption at rest, remote wipe, Shona UI validation.
+- **Not implemented:** cloud AI, background sync, downloading server records, two-way conflict resolution, encryption at rest, remote wipe.
 
 ## Privacy limitations
 
