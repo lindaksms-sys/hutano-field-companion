@@ -16,9 +16,12 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
+import { StorageErrorPanel } from "@/components/StorageErrorPanel";
+import { resetDBConnection } from "@/domain/db";
+
 function Home() {
   const { t } = useI18n();
-  const { records, error } = useEncounters();
+  const { records, error, reload } = useEncounters();
   const count = (s: string) => records?.filter((r) => r.reviewStatus === s).length ?? 0;
   return (
     <div className="space-y-6">
@@ -32,9 +35,7 @@ function Home() {
         </Button>
       </section>
       {error && (
-        <p role="alert" className="rounded-lg border border-destructive bg-destructive/10 p-3 text-sm font-semibold text-destructive">
-          Local storage failed: {error}. Records cannot be saved on this browser.
-        </p>
+        <StorageErrorPanel error={error} onRetry={async () => { resetDBConnection(); await reload(); }} />
       )}
       <section className="grid grid-cols-3 gap-3">
         {[

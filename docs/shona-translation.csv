@@ -145,6 +145,19 @@ safety_privacy.EncounterCard.76ecec7c,safety_privacy,Synthetic,,,src/components/
 ui.EncounterCard.ce5a2f9e,ui,Unowned demo,,,src/components/EncounterCard.tsx · JSX text,
 ui.EncounterCard.47c8ff7e,ui,No patient code,,,src/components/EncounterCard.tsx · message string,
 ui.EncounterCard.d059a91a,ui,(empty narrative),,,src/components/EncounterCard.tsx · message string,
+offline_ai_install.StorageErrorPanel.ddcce9d1,offline_ai_install,"This browser refused to open on-device storage, so records can't be saved here right now.",,,src/components/StorageErrorPanel.tsx · JSX text,
+ui.StorageErrorPanel.68369dde,ui,"Try, in order:",,,src/components/StorageErrorPanel.tsx · JSX text,
+ui.StorageErrorPanel.bc2d2ac7,ui,"Close every Hutano tab, then open one again.",,,src/components/StorageErrorPanel.tsx · JSX text,
+ui.StorageErrorPanel.2469d9a2,ui,Leave private/incognito mode and check the device has free storage.,,,src/components/StorageErrorPanel.tsx · JSX text,
+ui.StorageErrorPanel.ef3c6378,ui,Last resort: clear this site's data in browser settings. This deletes records saved in this browser.,,,src/components/StorageErrorPanel.tsx · JSX text,
+ui.StorageErrorPanel.7ccfee45,ui,Hutano never deletes your records automatically.,,,src/components/StorageErrorPanel.tsx · JSX text,
+safety_privacy.StorageErrorPanel.30035a3c,safety_privacy,Copy diagnostic (no patient data),,,src/components/StorageErrorPanel.tsx · JSX text,
+safety_privacy.StorageErrorPanel.fa2323c3,safety_privacy,Hutano storage diagnostic (no patient data),,,src/components/StorageErrorPanel.tsx · message string,
+ui.StorageErrorPanel.035257ef,ui,· mobile,,,src/components/StorageErrorPanel.tsx · message string,
+ui.StorageErrorPanel.1604a818,ui,not granted,,,src/components/StorageErrorPanel.tsx · message string,
+ui.StorageErrorPanel.2310131b,ui,Retrying…,,,src/components/StorageErrorPanel.tsx · message string,
+ui.StorageErrorPanel.9f5cd8a2,ui,Retry,,,src/components/StorageErrorPanel.tsx · message string,
+ui.StorageErrorPanel.dd2ce2e2,ui,Copied.,,,src/components/StorageErrorPanel.tsx · message string,
 ui.ai-extraction.76d2130a,ui,Narrative is empty.,,,src/domain/ai-extraction.ts · message string,
 ui.ai-extraction.7a78d335,ui,No sentences found.,,,src/domain/ai-extraction.ts · message string,
 out_of_scope_model_prompt.ai-extraction.0a8d2206,out_of_scope_model_prompt,the patient code written in the note (for example SYN-0042),,,src/domain/ai-extraction.ts · model prompt,Model prompt text. NOT for translation (changing it changes evaluated behaviour).
@@ -203,6 +216,7 @@ ui.error-page.e2a25e6f,ui,This page didn't load,,,src/lib/error-page.ts · JSX t
 ui.error-page.c8accfd7,ui,Something went wrong on our end. You can try refreshing or head back home.,,,src/lib/error-page.ts · JSX text,
 ui.error-page.042c862e,ui,Try again,,Edzazve,src/lib/error-page.ts · JSX text,"[review r1: adopted; user-supplied proposal, not clinician validated]"
 ui.error-page.8007defd,ui,Go home,,Enda kumusha,src/lib/error-page.ts · JSX text,"[review r1: adopted; user-supplied proposal, not clinician validated]"
+error.hooks.7f2f6a15,error,Error,,,src/lib/hooks.ts · message string,
 ui.hooks.0f6a9acd,ui,Local storage unavailable,,,src/lib/hooks.ts · message string,
 ui.labels.5b84cc8c,ui,Shona,,,src/lib/labels.ts · message string,
 ui.labels.649df08a,ui,English,,,src/lib/labels.ts · message string,

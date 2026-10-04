@@ -38,6 +38,23 @@ export function getDB(): HutanoDB {
   if (!instance) instance = new HutanoDB();
   return instance;
 }
+/** Close and drop the cached connection so the next getDB() reopens. Never deletes data. */
+export function resetDBConnection() {
+  try { instance?.close(); } catch { /* ignore */ }
+  instance = null;
+}
+
+/** Run a storage read; on failure reset the connection, wait, and retry once. */
+export async function withStorageRetry<T>(fn: () => Promise<T>, delayMs = 500): Promise<T> {
+  try {
+    return await fn();
+  } catch {
+    resetDBConnection();
+    await new Promise((r) => setTimeout(r, delayMs));
+    return fn();
+  }
+}
+
 /** Test hook. */
 export function setDB(db: HutanoDB | null) {
   instance = db;

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { listEncounters } from "@/domain/repository";
+import { withStorageRetry } from "@/domain/db";
 import { onUserChange } from "@/domain/session";
 import type { EncounterRecord } from "@/domain/types";
 import { onSyncChange } from "./sync-runner";
@@ -25,10 +26,11 @@ export function useEncounters() {
   const [error, setError] = useState<string | null>(null);
   const reload = useCallback(async () => {
     try {
-      setRecords(await listEncounters());
+      setRecords(await withStorageRetry(() => listEncounters()));
       setError(null);
     } catch (e) {
-      setError((e as Error).message || "Local storage unavailable");
+      const err = e as Error;
+      setError(`${err.name && err.name !== "Error" ? err.name + ": " : ""}${err.message || "Local storage unavailable"}`);
       setRecords([]);
     }
   }, []);
@@ -58,7 +60,7 @@ export function useStorageStatus() {
     let idb: StorageStatus["indexedDB"] = "ok";
     let error: string | null = null;
     try {
-      await listEncounters();
+      await withStorageRetry(() => listEncounters());
     } catch (e) {
       idb = "failed";
       error = (e as Error).message;
@@ -74,5 +76,5 @@ export function useStorageStatus() {
     if (navigator.storage?.persist) await navigator.storage.persist();
     await check();
   };
-  return { status: s, requestPersist };
+  return { status: s, requestPersist, recheck: check };
 }
