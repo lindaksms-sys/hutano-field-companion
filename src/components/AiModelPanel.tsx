@@ -16,6 +16,8 @@ export function AiModelPanel() {
   const [confirm, setConfirm] = useState(false);
   const [mode, setMode] = useState<AiBackend>("wasm");
   const [copied, setCopied] = useState(false);
+  const [host, setHost] = useState("");
+  useEffect(() => setHost(location.host), []);
   useEffect(() => setMode(getBackendPreference()), []);
   const gpuAvailable = ai.kind === "not_downloaded" ? ai.gpuAvailable : null;
   const cachedFiles = ai.kind === "not_downloaded" ? (ai.cachedFiles ?? null) : null;
@@ -81,7 +83,7 @@ export function AiModelPanel() {
         <li>Experimental. Suggests whole sentences from your note for each field; you check and accept each one. Never diagnoses or advises.</li>
         <li>Shona ability is not validated. Original text is always kept as written; nothing is translated.</li>
         <li>{tl("Runs only on this device. Notes are never sent anywhere for AI.")}</li>
-        <li>{tf("Installed per browser and web address: open Hutano at the same address ({host}) to reuse it. Private/incognito windows or clearing site data remove it.", { host: typeof location !== "undefined" ? location.host : "" })}</li>
+        <li>{tf("Installed per browser and web address: open Hutano at the same address ({host}) to reuse it. Private/incognito windows or clearing site data remove it.", { host })}</li>
         <li>Needs a recent desktop or high-end phone with about 1.5 GB free memory. Slow devices may take minutes per note or fail; manual capture always works.</li>
       </ul>
 
