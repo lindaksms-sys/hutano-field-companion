@@ -1,4 +1,5 @@
 key,category,english_source_meaning,current_shona_draft,reviewer_proposed_shona,context_placeholders,notes
+review_states.EncounterCard.305cc364,review_states,Not recorded,,,src/components/EncounterCard.tsx · message string,[P1]
 review_states.EncounterHistory.aed3b8c6,review_states,Verified,,,src/components/EncounterHistory.tsx · message string,[P1]
 ui.EncounterHistory.222de262,ui,Original narrative,,,src/components/EncounterHistory.tsx · message string,[P1]
 ui.labels.1c3416f3,ui,Patient code,,Kodhi yemurwere,src/lib/labels.ts · message string,"[P1] [review r1: adopted; user-supplied proposal, not clinician validated]"
@@ -153,6 +154,7 @@ ui.EncounterCard.47c8ff7e,ui,No patient code,,Hapana kodhi yemurwere,src/compone
 safety_privacy.EncounterCard.76ecec7c,safety_privacy,Synthetic,,Zvekufungidzira,src/components/EncounterCard.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 ui.EncounterCard.ce5a2f9e,ui,Unowned demo,,Gwaro remuenzaniso risina muridzi,src/components/EncounterCard.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
 ui.EncounterCard.d059a91a,ui,(empty narrative),,(rondedzero isina chinhu),src/components/EncounterCard.tsx · message string,"[review r2: adopted; user-supplied proposal, not clinician validated]"
+ui.EncounterCard.93f3184d,ui,Show fields,,,src/components/EncounterCard.tsx · message string,
 review_states.EncounterHistory.f51885e9,review_states,Draft created,,,src/components/EncounterHistory.tsx · message string,
 review_states.EncounterHistory.978e8c33,review_states,Edited,,,src/components/EncounterHistory.tsx · message string,
 ui.EncounterHistory.e1a08971,ui,Suggestions added,,,src/components/EncounterHistory.tsx · message string,
