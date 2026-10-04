@@ -8,6 +8,14 @@ Solo project by Linda Kisimisi — World Bank Small AI for Development (Health) 
 >
 > Hutano does not diagnose, prescribe, recommend treatment, classify urgency or make any clinical decision.
 
+## Demo access
+
+- Live site: https://hutano.creativehauz.space
+- Email: `info@creativehauz.space`
+- Password: `Demo1234!`
+
+Synthetic demo data only — never enter real patient information. Steps: open the live site → **Sign in** → enter the details above → capture and verify an encounter → open **Sync** to upload it. Records stay on the device where they were captured; the app does not download records from the server, so a new device starts empty.
+
 ## Flow
 
 Shona/English narrative → draft saved to IndexedDB → extraction adapter (swappable) →
