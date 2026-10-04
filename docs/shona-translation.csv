@@ -83,6 +83,20 @@ meaning_distinction.concepts.f944fa95,meaning_distinction,Village / ward labels 
 meaning_distinction.concepts.9ba58b11,meaning_distinction,Patient-reported problem (concern),,,Concept for parsers and UI wording,[P1] What the patient/carer says.
 meaning_distinction.concepts.d759610e,meaning_distinction,Worker-observed or measured finding (observation),,,Concept for parsers and UI wording,[P1] What the worker saw/measured.
 meaning_distinction.concepts.66b734bf,meaning_distinction,Explicit worker follow-up plan (not advice),,,Concept for parsers and UI wording,[P1] Only what the worker wrote they will do.
+manual.auth.account_created,auth,"Account created for {email}. Open the confirmation link sent to that address, then sign in here. You can keep capturing offline meanwhile.",,,hand-written full template · src/routes/auth.tsx · sign-up confirmation · {email} = address typed by the user,[P1] Keep {placeholders} exactly; reorder words around them if natural.
+manual.ai.not_enough_storage,offline_ai_install,"Not enough browser storage: about {freeMb} MB free, about {neededMb} MB needed.",,,"hand-written full template · src/lib/ai-model.ts · before download · {freeMb}, {neededMb} = numbers",[P1] Keep {placeholders} exactly; reorder words around them if natural.
+manual.review.fields_empty,review_states,"{count} field(s) empty — fill or mark ""not recorded"".",,,hand-written full template · src/routes/encounters.$id.tsx · verify blocker,[P1] Keep {placeholders} exactly; reorder words around them if natural.
+manual.review.no_reason,review_states,"{count} ""not recorded"" without reason.",,,hand-written full template · src/routes/encounters.$id.tsx · verify blocker,[P1] Keep {placeholders} exactly; reorder words around them if natural.
+manual.new.write_failed,error,Not saved. Local storage write failed: {errorMessage},,,hand-written full template · src/routes/encounters.new.tsx · {errorMessage} = raw storage error,[P1] Keep {placeholders} exactly; reorder words around them if natural.
+manual.sync.done,sync,Server acknowledged {sent}. {remaining} still queued.,,,"hand-written full template · src/routes/sync.tsx · result · optional parts inserted before the final full stop: manual.sync.done_rejected, manual.sync.done_last_error",[P1] Keep {placeholders} exactly; reorder words around them if natural.
+manual.ai.next_step.network,error,Check Wi-Fi and retry; files already downloaded are kept.,,,hand-written full template · src/lib/ai-model.ts NEXT_STEP · stable advice shown for error category 'network' — replaces raw third-party error text for the user,[P1] Stable category message; raw browser/library errors are shown only in the diagnostic and are not translated.
+manual.ai.next_step.cache,error,"Retry. If it repeats, Remove model files and download again.",,,hand-written full template · src/lib/ai-model.ts NEXT_STEP · stable advice shown for error category 'cache' — replaces raw third-party error text for the user,[P1] Stable category message; raw browser/library errors are shown only in the diagnostic and are not translated.
+manual.ai.next_step.quota,error,"Free up phone storage or browser site data, then retry.",,,hand-written full template · src/lib/ai-model.ts NEXT_STEP · stable advice shown for error category 'quota' — replaces raw third-party error text for the user,[P1] Stable category message; raw browser/library errors are shown only in the diagnostic and are not translated.
+manual.ai.next_step.worker,error,"Reload the page and retry. If it repeats, this browser may not support it.",,,hand-written full template · src/lib/ai-model.ts NEXT_STEP · stable advice shown for error category 'worker' — replaces raw third-party error text for the user,[P1] Stable category message; raw browser/library errors are shown only in the diagnostic and are not translated.
+manual.ai.next_step.model_init,error,"The device could not start the model. Try Compatibility / CPU mode, close other apps, then retry.",,,hand-written full template · src/lib/ai-model.ts NEXT_STEP · stable advice shown for error category 'model_init' — replaces raw third-party error text for the user,[P1] Stable category message; raw browser/library errors are shown only in the diagnostic and are not translated.
+manual.ai.next_step.verification,error,"The model loaded but failed its test. Retry; if it repeats, Remove model files and download again.",,,hand-written full template · src/lib/ai-model.ts NEXT_STEP · stable advice shown for error category 'verification' — replaces raw third-party error text for the user,[P1] Stable category message; raw browser/library errors are shown only in the diagnostic and are not translated.
+manual.ai.next_step.timeout,error,It stopped making progress. Retry on stable Wi-Fi; downloaded files are kept.,,,hand-written full template · src/lib/ai-model.ts NEXT_STEP · stable advice shown for error category 'timeout' — replaces raw third-party error text for the user,[P1] Stable category message; raw browser/library errors are shown only in the diagnostic and are not translated.
+manual.ai.next_step.unknown,error,"Retry. If it repeats, copy the diagnostic and share it.",,,hand-written full template · src/lib/ai-model.ts NEXT_STEP · stable advice shown for error category 'unknown' — replaces raw third-party error text for the user,[P1] Stable category message; raw browser/library errors are shown only in the diagnostic and are not translated.
 ui.AiModelPanel.bae7d5be,ui,Status,,,src/components/AiModelPanel.tsx · JSX text,
 ui.AiModelPanel.820d6004,ui,Checking…,,,src/components/AiModelPanel.tsx · JSX text,
 offline_ai_install.AiModelPanel.5fe04f57,offline_ai_install,Not downloaded,,,src/components/AiModelPanel.tsx · JSX text,
@@ -178,24 +192,12 @@ ui.ai-model.035257ef,ui,· mobile,,,src/lib/ai-model.ts · message string,
 offline_ai_install.ai-model.c0d188ff,offline_ai_install,Hutano on-device AI install diagnostic (no patient data),,,src/lib/ai-model.ts · message string,
 ui.ai-model.112f87c0,ui,GPU (experimental) q4f16,,,src/lib/ai-model.ts · message string,
 ui.ai-model.d554c97c,ui,Compatibility / CPU q8,,,src/lib/ai-model.ts · message string,
-offline_ai_install.ai-model.fc6c94e3,offline_ai_install,"Retry. If it repeats, Remove model files and download again.",,,src/lib/ai-model.ts · message string,
-ui.ai-model.2c768733,ui,"Free up phone storage or browser site data, then retry.",,,src/lib/ai-model.ts · message string,
-ui.ai-model.f8a6b290,ui,"Reload the page and retry. If it repeats, this browser may not support it.",,,src/lib/ai-model.ts · message string,
-offline_ai_install.ai-model.98115950,offline_ai_install,"The device could not start the model. Try Compatibility / CPU mode, close other apps, then retry.",,,src/lib/ai-model.ts · message string,
-safety_privacy.ai-model.51e250b4,safety_privacy,"Retry. If it repeats, copy the diagnostic and share it.",,,src/lib/ai-model.ts · message string,
 error.ai-model.1e314edb,error,worker crashed or failed to load,,,src/lib/ai-model.ts · message string,
 offline_ai_install.ai-model.0d9c98d4,offline_ai_install,On-device AI is not installed. Install it in Settings.,,,src/lib/ai-model.ts · message string,
 offline_ai_install.ai-model.0de508a3,offline_ai_install,On-device AI timed out.,,,src/lib/ai-model.ts · message string,
 ui.ai-model.d3e4142f,ui,Cancelled.,,,src/lib/ai-model.ts · message string,
 error.ai-model.af6321ca,error,unknown error,,,src/lib/ai-model.ts · message string,
 offline_ai_install.ai-model.321445ed,offline_ai_install,Model output rejected.,,,src/lib/ai-model.ts · message string,
-offline_ai_install.ai-model.87458635,offline_ai_install,Could not read model storage: {sanitize},,,src/lib/ai-model.ts · template (dynamic) · placeholders: {sanitize},Keep placeholders exactly; reorder words around them if natural.
-ui.ai-model.059b6563,ui,· ~{deviceMemory} GB RAM reported,,,src/lib/ai-model.ts · template (dynamic) · placeholders: {deviceMemory},Keep placeholders exactly; reorder words around them if natural.
-ui.ai-model.7c6c09e3,ui,GPU detected: {gpu},,,src/lib/ai-model.ts · template (dynamic) · placeholders: {gpu},Keep placeholders exactly; reorder words around them if natural.
-ui.ai-model.d930c68f,ui,"Not enough browser storage: about {e6} MB free, about {e6} MB needed.",,,src/lib/ai-model.ts · template (dynamic) · placeholders: {e6},Keep placeholders exactly; reorder words around them if natural.
-error.ai-model.7bdbeb2f,error,Could not start the AI worker: {value},,,src/lib/ai-model.ts · template (dynamic) · placeholders: {value},Keep placeholders exactly; reorder words around them if natural.
-error.ai-model.5349700f,error,Timed out after {value} s during {stage}.,,,"src/lib/ai-model.ts · template (dynamic) · placeholders: {stage}, {value}",Keep placeholders exactly; reorder words around them if natural.
-error.ai-model.04e528c6,error,Worker error: {load},,,src/lib/ai-model.ts · template (dynamic) · placeholders: {load},Keep placeholders exactly; reorder words around them if natural.
 auth.auth.6decfd85,auth,useAuth outside AuthProvider,,,src/lib/auth.tsx · message string,
 ui.error-page.e2a25e6f,ui,This page didn't load,,,src/lib/error-page.ts · JSX text,
 ui.error-page.c8accfd7,ui,Something went wrong on our end. You can try refreshing or head back home.,,,src/lib/error-page.ts · JSX text,
@@ -219,13 +221,10 @@ ui.__root.042c862e,ui,Try again,,,src/routes/__root.tsx · JSX text,
 ui.__root.e525a0da,ui,Hutano,,,src/routes/__root.tsx · title attribute,
 auth.auth.d9e59da6,auth,Checking account…,,,src/routes/auth.tsx · JSX text,
 auth.auth.85dfa32c,auth,Account,,,src/routes/auth.tsx · JSX text,
-auth.auth.a02107c3,auth,Signed in as,,,src/routes/auth.tsx · JSX text,
 auth.auth.dc1649a1,auth,Sign out,,,src/routes/auth.tsx · JSX text,
 auth.auth.fef111ce,auth,Signing out hides this account's records on this device. They stay stored locally until cleared.,,,src/routes/auth.tsx · JSX text,
 auth.auth.28840297,auth,Go to Sync,,,src/routes/auth.tsx · JSX text,
 auth.auth.10cd6cd2,auth,Confirm your email,,,src/routes/auth.tsx · JSX text,
-auth.auth.f2ae5ce8,auth,Account created for,,,src/routes/auth.tsx · JSX text,
-auth.auth.496f6e77,auth,". Open the confirmation link sent to that address, then sign in here. You can keep capturing offline meanwhile.",,,src/routes/auth.tsx · JSX text,
 auth.auth.4da82167,auth,Back to sign in,,,src/routes/auth.tsx · JSX text,
 auth.auth.84b04ea2,auth,Optional. Needed only for cloud sync of verified synthetic records. Offline capture works without an account.,,,src/routes/auth.tsx · JSX text,
 auth.auth.84add5b2,auth,Email,,,src/routes/auth.tsx · JSX text,
@@ -259,12 +258,6 @@ ui.encounters_id.56a2285c,ui,Saving…,,,src/routes/encounters.$id.tsx · messag
 ui.encounters_id.398cd27d,ui,"rule, not AI",,,src/routes/encounters.$id.tsx · message string,
 offline_ai_install.encounters_id.d10a6ccb,offline_ai_install,on-device AI,,,src/routes/encounters.$id.tsx · message string,
 ui.encounters_id.da04aeef,ui,demo example,,,src/routes/encounters.$id.tsx · message string,
-review_states.encounters_id.802da5d5,review_states,Not verified: {value},,,src/routes/encounters.$id.tsx · template (dynamic) · placeholders: {value},Keep placeholders exactly; reorder words around them if natural.
-error.encounters_id.b3866797,error,Adopt failed: {value},,,src/routes/encounters.$id.tsx · template (dynamic) · placeholders: {value},Keep placeholders exactly; reorder words around them if natural.
-error.encounters_id.67ee0392,error,{adapterLabel} · no suggestions ({failure}) — fill fields manually,,,"src/routes/encounters.$id.tsx · template (dynamic) · placeholders: {adapterLabel}, {failure}",Keep placeholders exactly; reorder words around them if natural.
-sync.encounters_id.341d2262,sync,"{adapterLabel} · {modelId} ({backend}/{dtype}) · {durationMs} s · rules: {ruleFields} field(s), AI: {modelFields} field(s) · check each against the note${rec.extraction.warning ?",,,"src/routes/encounters.$id.tsx · template (dynamic) · placeholders: {adapterLabel}, {backend}, {dtype}, {durationMs}, {modelFields}, {modelId}, {ruleFields}",Keep placeholders exactly; reorder words around them if natural.
-review_states.encounters_id.3be301a1,review_states,"{missing} field(s) empty — fill or mark ""not recorded"".",,,src/routes/encounters.$id.tsx · template (dynamic) · placeholders: {missing},Keep placeholders exactly; reorder words around them if natural.
-review_states.encounters_id.b58ababe,review_states,"{noReason} ""not recorded"" without reason.",,,src/routes/encounters.$id.tsx · template (dynamic) · placeholders: {noReason},Keep placeholders exactly; reorder words around them if natural.
 ui.encounters_index.18817545,ui,Encounters,,,src/routes/encounters.index.tsx · JSX text,
 ui.encounters_index.6403f2b7,ui,New,,,src/routes/encounters.index.tsx · JSX text,
 ui.encounters_index.7f420221,ui,Nothing here.,,,src/routes/encounters.index.tsx · JSX text,
@@ -292,9 +285,6 @@ review_states.encounters_new.b473221e,review_states,Draft saved · demo extracti
 offline_ai_install.encounters_new.11766136,offline_ai_install,Draft saved · on-device AI running…,,,src/routes/encounters.new.tsx · message string,
 review_states.encounters_new.60f9157d,review_states,Save draft & run demo extraction,,,src/routes/encounters.new.tsx · message string,
 offline_ai_install.encounters_new.58ddf9b0,offline_ai_install,Save draft & run on-device AI,,,src/routes/encounters.new.tsx · message string,
-error.encounters_new.d16e289e,error,Not saved. Local storage write failed: {value},,,src/routes/encounters.new.tsx · template (dynamic) · placeholders: {value},Keep placeholders exactly; reorder words around them if natural.
-offline_ai_install.encounters_new.e7b21a64,offline_ai_install,Draft saved. On-device AI gave no suggestions: {reason} Continue with manual review.,,,src/routes/encounters.new.tsx · template (dynamic) · placeholders: {reason},Keep placeholders exactly; reorder words around them if natural.
-error.encounters_new.fa8477e9,error,"Draft saved, but extraction failed: {value}",,,src/routes/encounters.new.tsx · template (dynamic) · placeholders: {value},Keep placeholders exactly; reorder words around them if natural.
 ui.index.888c6d4a,ui,Mhoroi. Record an encounter.,,,src/routes/index.tsx · JSX text,
 review_states.index.e545f3c8,review_states,"Type the visit in Shona, English or both. It is saved on this device first. You review and verify every field — Hutano makes no clinical decisions.",,,src/routes/index.tsx · JSX text,
 ui.index.76eec760,ui,Recent,,,src/routes/index.tsx · JSX text,
@@ -352,8 +342,6 @@ offline_ai_install.settings.9873117f,offline_ai_install,Works offline on this de
 offline_ai_install.settings.c7c904a3,offline_ai_install,Install the model below first,,,src/routes/settings.tsx · message string,
 ui.settings.649df08a,ui,English,,,src/routes/settings.tsx · message string,
 review_states.settings.7de466df,review_states,Shona (draft),,,src/routes/settings.tsx · message string,
-error.settings.e34fe6e8,error,Export failed: {value},,,src/routes/settings.tsx · template (dynamic) · placeholders: {value},Keep placeholders exactly; reorder words around them if natural.
-error.settings.11d8f1bd,error,Delete failed: {value},,,src/routes/settings.tsx · template (dynamic) · placeholders: {value},Keep placeholders exactly; reorder words around them if natural.
 sync.sync.905f6309,sync,Sync,,,src/routes/sync.tsx · JSX text,
 sync.sync.848d80ca,sync,Not signed in,,,src/routes/sync.tsx · JSX text,
 auth.sync.75dce38d,auth,Sign in to sync,,,src/routes/sync.tsx · JSX text,
@@ -379,7 +367,6 @@ sync.sync.221ca630,sync,Syncing…,,,src/routes/sync.tsx · message string,
 sync.sync.9e150652,sync,Offline — queue kept,,,src/routes/sync.tsx · message string,
 sync.sync.47c8ff7e,sync,No patient code,,,src/routes/sync.tsx · message string,
 auth.sync.cd994d55,auth,Adopted into your account.,,,src/routes/sync.tsx · message string,
-sync.sync.73957105,sync,Server acknowledged {sent}. {remaining} still queued${o.rejected ?,,,"src/routes/sync.tsx · template (dynamic) · placeholders: {remaining}, {sent}",Keep placeholders exactly; reorder words around them if natural.
 cue_dictionary.rules.65fddc67,cue_dictionary,he/she will come back,achadzoka,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.ea39210a,cue_dictionary,grandmother,ambuya,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
 cue_dictionary.rules.23ba3d1e,cue_dictionary,comes from,anobva,,src/domain/rules.ts SHONA_CUES (draft),Give common spellings/variants and whether the meaning is right in rural VHW notes.
@@ -449,3 +436,30 @@ synthetic_example_heldout.eval.78796b5e,synthetic_example_heldout,Mwana anonzi S
 synthetic_example_heldout.eval.74208e2d,synthetic_example_heldout,"SYN-2011 ane makore 40. Anoti ane rwadzo rwemudumbu kwemazuva matatu, asi pakadzoka akati kwemazuva mashanu. Ndayera tembiricha 36.8.","SYN-2011 ane makore 40. Anoti ane rwadzo rwemudumbu kwemazuva matatu, asi pakadzoka akati kwemazuva mashanu. Ndayera tembiricha 36.8.",,eval/cases.heldout.json H11 (sn) · conflicting durations -> duration null; decimal,FROZEN benchmark original. Proposed rewording goes into a NEW versioned file; existing metrics are never silently changed.
 synthetic_example_heldout.eval.0579b4a4,synthetic_example_heldout,"SYN-2012, 8 months old. Lives in Murehwa. Amai vanoti mwana ane rash for 3 days. I noted no swelling. Tichaona next week.","SYN-2012, 8 months old. Lives in Murehwa. Amai vanoti mwana ane rash for 3 days. I noted no swelling. Tichaona next week.",,eval/cases.heldout.json H12 (mixed) · code-switched; age in months,FROZEN benchmark original. Proposed rewording goes into a NEW versioned file; existing metrics are never silently changed.
 synthetic_example_heldout.eval.0ad939dd,synthetic_example_heldout,SYN-2013 seen 2026-05-06 in Gutu village. Mukadzi ane makore 25 anoti ane dzihwa for the past two weeks. MUAC 23.5 cm. Return 2026-05-13.,SYN-2013 seen 2026-05-06 in Gutu village. Mukadzi ane makore 25 anoti ane dzihwa for the past two weeks. MUAC 23.5 cm. Return 2026-05-13.,,eval/cases.heldout.json H13 (mixed) · return date must not be encounter date; decimal MUAC; patient described as 'mukadzi' (woman),FROZEN benchmark original. Proposed rewording goes into a NEW versioned file; existing metrics are never silently changed.
+manual.auth.signed_in_as,auth,Signed in as {email},,,hand-written full template · src/routes/auth.tsx · account card · {email} shown on its own line below this label,Keep {placeholders} exactly; reorder words around them if natural.
+manual.ai.storage_read_failed,offline_ai_install,Could not read model storage: {errorMessage},,,hand-written full template · src/lib/ai-model.ts · {errorMessage} = raw browser error (not translated),Keep {placeholders} exactly; reorder words around them if natural.
+manual.ai.diag_ram,offline_ai_install,~{gb} GB RAM reported,,,hand-written full template · src/lib/ai-model.ts · diagnostic text · {gb} = number,Keep {placeholders} exactly; reorder words around them if natural.
+manual.ai.diag_mobile,offline_ai_install,mobile,,,"hand-written full template · src/lib/ai-model.ts · diagnostic text, device type",Usually left in English inside copied diagnostics.
+manual.ai.gpu_status,offline_ai_install,GPU: {status},,,hand-written full template · src/lib/ai-model.ts · diagnostic · {status} = one of: available / not available / unknown (rows manual.ai.gpu_*),Keep {placeholders} exactly; reorder words around them if natural.
+manual.ai.gpu_available,offline_ai_install,available,,,hand-written full template · value for {status} in GPU: {status},
+manual.ai.gpu_not_available,offline_ai_install,not available,,,hand-written full template · value for {status} in GPU: {status},
+manual.ai.gpu_unknown,offline_ai_install,unknown,,,hand-written full template · value for {status} in GPU: {status},
+manual.ai.worker_start_failed,error,Could not start the AI worker: {errorMessage},,,hand-written full template · src/lib/ai-model.ts · {errorMessage} = raw browser error,Keep {placeholders} exactly; reorder words around them if natural.
+manual.ai.download_stalled,error,No download progress for {seconds} s (stalled).,,,hand-written full template · src/lib/ai-model.ts · watchdog · {seconds} = number,Keep {placeholders} exactly; reorder words around them if natural.
+manual.ai.stage_timeout,error,Timed out after {seconds} s during {stage}.,,,"hand-written full template · src/lib/ai-model.ts · watchdog · {stage} = technical step name (download/initialize/verify), stays English",Keep {placeholders} exactly; reorder words around them if natural.
+manual.ai.worker_error,error,Worker error: {errorMessage},,,"hand-written full template · src/lib/ai-model.ts · {errorMessage} = raw error, or the fallback row manual.ai.worker_crashed",Keep {placeholders} exactly; reorder words around them if natural.
+manual.ai.worker_crashed,error,worker crashed or failed to load,,,hand-written full template · fallback value for {errorMessage} in Worker error,
+manual.review.not_verified,review_states,Not verified: {errorMessage},,,hand-written full template · src/routes/encounters.$id.tsx · verify failed · {errorMessage} = raw storage error,Keep {placeholders} exactly; reorder words around them if natural.
+manual.review.adopt_failed,error,Adopt failed: {errorMessage},,,hand-written full template · src/routes/encounters.$id.tsx and src/routes/sync.tsx,Keep {placeholders} exactly; reorder words around them if natural.
+manual.review.extraction_none,review_states,{adapterLabel} · no suggestions ({failureReason}) — fill fields manually,,,hand-written full template · src/routes/encounters.$id.tsx · {adapterLabel} = Manual / Demo extraction — not AI / On-device AI (experimental); {failureReason} = app reason text,Keep {placeholders} exactly; reorder words around them if natural.
+manual.review.extraction_summary,review_states,"{adapterLabel} · {modelId} ({backend}/{dtype}) · {seconds} s · rules: {ruleCount} field(s), AI: {aiCount} field(s) · check each against the note",,,"hand-written full template · src/routes/encounters.$id.tsx · AI provenance line · {modelId}/{backend}/{dtype} technical, stay English. Optional suffixes follow: manual.review.summary_warning, manual.review.summary_discarded",Keep {placeholders} exactly; reorder words around them if natural.
+manual.review.summary_warning,review_states, · {warning},,,hand-written full template · optional suffix · {warning} = Shona/mixed warning text (separate row),Keep {placeholders} exactly; reorder words around them if natural.
+manual.review.summary_discarded,review_states, · {count} invalid selection(s) discarded,,,hand-written full template · optional suffix of extraction summary,Keep {placeholders} exactly; reorder words around them if natural.
+manual.new.ai_no_suggestions,offline_ai_install,Draft saved. On-device AI gave no suggestions: {reason} Continue with manual review.,,,hand-written full template · src/routes/encounters.new.tsx · {reason} = app reason sentence (timeout/cancel/invalid output),Keep {placeholders} exactly; reorder words around them if natural.
+manual.new.extraction_failed,error,"Draft saved, but extraction failed: {errorMessage}",,,hand-written full template · src/routes/encounters.new.tsx,Keep {placeholders} exactly; reorder words around them if natural.
+manual.settings.export_failed,error,Export failed: {errorMessage},,,hand-written full template · src/routes/settings.tsx,Keep {placeholders} exactly; reorder words around them if natural.
+manual.settings.delete_failed,error,Delete failed: {errorMessage},,,hand-written full template · src/routes/settings.tsx,Keep {placeholders} exactly; reorder words around them if natural.
+manual.sync.offline,sync,"Offline — {sent} sent, {remaining} kept in queue.",,,hand-written full template · src/routes/sync.tsx · result · numbers,Keep {placeholders} exactly; reorder words around them if natural.
+manual.sync.auth_paused,sync,Paused: sign-in required ({errorMessage}). {remaining} kept in queue; retries after sign-in.,,,hand-written full template · src/routes/sync.tsx · {errorMessage} = raw sign-in service error,Keep {placeholders} exactly; reorder words around them if natural.
+manual.sync.done_rejected,sync,", {rejected} rejected",,,hand-written full template · optional insert in manual.sync.done,Keep {placeholders} exactly; reorder words around them if natural.
+manual.sync.done_last_error,sync, — last error: {errorMessage},,,hand-written full template · optional insert in manual.sync.done · {errorMessage} raw,Keep {placeholders} exactly; reorder words around them if natural.

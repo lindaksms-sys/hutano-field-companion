@@ -47,13 +47,20 @@ Then continue with the full inventory.
 - `synthetic_example_demo` rows are the in-app demo examples (`src/domain/fixtures.ts`). Rewording them also means updating their exact field mappings.
 
 ## Inventory summary (generated)
-- **450 rows** total: ui 144, cue_dictionary 81, offline_ai_install 41, auth 36, review_states 36, sync 28, meaning_distinction 18, out_of_scope_model_prompt 17, error 16, safety_privacy 13, i18n_core 9, synthetic examples 11 (demo 2, dev 3, held-out 6). 84 rows are `[P1]`.
+- **464 rows** total: ui 141, cue_dictionary 81, offline_ai_install 48, review_states 40, auth 35, sync 31, error 25, meaning_distinction 18, out_of_scope_model_prompt 17, safety_privacy 13, i18n_core 9, synthetic examples 11 (demo 2, dev 3, held-out 6). **98 rows are `[P1]`**: the original 84 first-batch rows (all kept) plus 6 core full-sentence messages and 8 error-advice messages.
 - Some English strings repeat in different places (e.g. "Verified" on several screens). Each place has its own row because the context can need different wording.
 
-## Known gaps (dynamic or split strings not fully captured)
-- **Template strings with values** (19 rows, marked `template (dynamic)`) show `{placeholder}` names guessed from code, e.g. `{reason}`, `{adapterLabel}`. Some templates nest a second template and appear truncated (e.g. "Server acknowledged {sent}. {remaining} still queued…"). Check the screen.
-- **Sentences split around a value** in the interface appear as fragments, e.g. "Account created for" + ". Open the confirmation link…" (the email sits between them). Translate them as one sentence and note the word order.
-- **Messages from outside libraries** (browser, Supabase sign-in errors, network and model-runtime errors) are shown as received and aren't in the inventory.
-- **Text built at runtime** from labels (e.g. "{n} field(s) empty") or from status values may combine several rows.
+## Messages with values (hand-written, complete)
+- Every app message that inserts a value is now one complete row with a stable `manual.*` key and **named placeholders** such as `{email}`, `{count}`, `{seconds}`, `{errorMessage}`. These were written by hand from the code, not extracted automatically, so none are cut off. Keep each `{placeholder}` exactly as written; move it wherever Shona word order needs.
+- The former split sentences are now whole: `manual.auth.account_created` ("Account created for {email}. Open the confirmation link…") and `manual.auth.signed_in_as`. The old fragment rows were removed.
+- Messages with optional parts list them as separate rows (e.g. `manual.sync.done` + `manual.sync.done_rejected` + `manual.sync.done_last_error`; `manual.review.extraction_summary` + its two suffix rows). The context column says where each part is inserted.
+- Technical values inside placeholders (`{modelId}`, `{backend}`, `{dtype}`, `{stage}`) stay in English.
+
+## Third-party error text (cannot be translated exhaustively)
+- Raw error text from the browser, the sign-in service, the network and the AI library is open-ended and changes with each browser and version, so it cannot be listed or translated in full. Wherever it appears it fills an `{errorMessage}` placeholder inside an app sentence that *is* translated (e.g. "Not saved. Local storage write failed: {errorMessage}").
+- For AI download failures the app also shows a fixed advice sentence per error group. These 8 rows (`manual.ai.next_step.network`, `.cache`, `.quota`, `.worker`, `.model_init`, `.verification`, `.timeout`, `.unknown`) are complete and marked `[P1]`. The raw text stays only in the copied diagnostic, which is meant for support and stays in English.
+
+## Known remaining limits
+- **Text built at runtime** from short labels (field names, status words) reuses their own rows.
 - Single-quoted strings in code aren't scanned (none are user-facing today). Technical labels (WebGPU, q8, JSON, Supabase, IndexedDB) are included but usually stay in English.
 - The Shona interface currently translates only the 9 `i18n_core` strings. Wiring the rest into the language switch is a follow-up once your translations arrive.
