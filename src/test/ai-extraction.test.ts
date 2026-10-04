@@ -117,3 +117,84 @@ describe("cancellation", () => {
     await expect(runOnDeviceExtraction(NOTE).promise).rejects.toThrow(/not installed/);
   });
 });
+
+describe("install robustness", () => {
+  const mk = () => {
+    const sent: WorkerIn[] = [];
+    const w: WorkerLike & { sent: WorkerIn[] } = { sent, postMessage: (m) => sent.push(m), terminate: vi.fn(), onmessage: null, onerror: null };
+    return w;
+  };
+  const stubBrowser = () => {
+    vi.stubGlobal("Worker", class {});
+    vi.stubGlobal("caches", { open: async () => ({ match: async () => undefined, keys: async () => [] }), delete: async () => true });
+    // @ts-expect-error test window
+    globalThis.window ??= globalThis;
+    (globalThis as unknown as { window: Record<string, unknown> }).window.caches = (globalThis as unknown as { caches: unknown }).caches;
+  };
+  it("cancel during download settles the install and leaves a real state (not stuck)", async () => {
+    stubBrowser();
+    const { installModel, cancelInstall, getAiState } = await import("@/lib/ai-model");
+    const w = mk();
+    setWorkerFactory(() => w);
+    const p = installModel("wasm");
+    await vi.waitFor(() => expect(getAiState().kind).toBe("downloading"));
+    expect(w.sent[0]).toEqual({ type: "install", backend: "wasm" });
+    await cancelInstall();
+    await p; // must resolve
+    expect(w.terminate).toHaveBeenCalled();
+    expect(getAiState().kind).toBe("not_downloaded");
+    w.onmessage?.({ data: { type: "installed", manifest: {} } } as MessageEvent); // late message ignored
+    expect(getAiState().kind).toBe("not_downloaded");
+  });
+  it("worker that cannot start gives a worker-category error", async () => {
+    stubBrowser();
+    const { installModel, getAiState } = await import("@/lib/ai-model");
+    setWorkerFactory(() => {
+      throw new Error("blocked");
+    });
+    await installModel("wasm");
+    const s = getAiState();
+    expect(s.kind).toBe("error");
+    if (s.kind === "error") expect(s.diag?.category).toBe("worker");
+  });
+  it("stalled download times out with diagnostics, keeps cache", async () => {
+    stubBrowser();
+    const m = await import("@/lib/ai-model");
+    const del = vi.spyOn(globalThis.caches as unknown as { delete: () => Promise<boolean> }, "delete");
+    m.INSTALL_TIMEOUTS.stallMs = 30;
+    const w = mk();
+    setWorkerFactory(() => w);
+    const p = m.installModel("wasm");
+    await vi.waitFor(() => expect(m.getAiState().kind).toBe("downloading"));
+    w.onmessage?.({ data: { type: "progress", file: "https://huggingface.co/x/resolve/abc/onnx/model_quantized.onnx?y=1", loaded: 1, total: 9 } } as MessageEvent);
+    await p;
+    const s = m.getAiState();
+    expect(s.kind).toBe("error");
+    if (s.kind === "error") {
+      expect(s.diag).toMatchObject({ stage: "download", category: "timeout", file: "model_quantized.onnx", backend: "wasm" });
+      expect(m.diagnosticText(s.diag!)).not.toContain("https://");
+    }
+    expect(del).not.toHaveBeenCalled();
+    m.INSTALL_TIMEOUTS.stallMs = 120_000;
+  });
+  it("worker error during init is categorized with stage and file basename", async () => {
+    stubBrowser();
+    const m = await import("@/lib/ai-model");
+    const w = mk();
+    setWorkerFactory(() => w);
+    const p = m.installModel("wasm");
+    await vi.waitFor(() => expect(m.getAiState().kind).toBe("downloading"));
+    w.onmessage?.({ data: { type: "error", message: "Failed to fetch (https://cdn.example/ort-wasm.mjs)", stage: "download", file: "ort-wasm.mjs" } } as MessageEvent);
+    await p;
+    const s = m.getAiState();
+    if (s.kind !== "error") throw new Error("expected error");
+    expect(s.diag).toMatchObject({ category: "network", file: "ort-wasm.mjs" });
+    expect(m.categorize("QuotaExceededError", "download")).toBe("quota");
+    expect(m.categorize("Model verification failed (wrong answer)", "verify")).toBe("verification");
+    expect(m.categorize("no available backend found", "initialize")).toBe("model-init");
+  });
+  it("defaults to Compatibility / CPU; GPU never chosen automatically", async () => {
+    const m = await import("@/lib/ai-model");
+    expect(m.getBackendPreference()).toBe("wasm");
+  });
+});
