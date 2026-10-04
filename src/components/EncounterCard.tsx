@@ -1,16 +1,18 @@
 import { Link } from "@tanstack/react-router";
 import type { EncounterRecord } from "@/domain/types";
-import { LANG_LABELS, REVIEW_LABELS, SYNC_LABELS } from "@/lib/labels";
+import { FIELD_LABELS, LANG_LABELS, REVIEW_LABELS, STATE_LABELS, SYNC_LABELS } from "@/lib/labels";
+import { FIELD_KEYS } from "@/domain/types";
 import { StatusPill } from "./StatusPill";
 import { useI18n } from "@/lib/i18n";
 
 export function EncounterCard({ r }: { r: EncounterRecord }) {
   const { tl } = useI18n();
   return (
+    <div className="rounded-xl border border-border bg-card transition-colors hover:border-primary">
     <Link
       to="/encounters/$id"
       params={{ id: r.id }}
-      className="block rounded-xl border border-border bg-card p-4 transition-colors hover:border-primary"
+      className="block p-4"
     >
       <div className="flex flex-wrap items-center gap-2">
         <span className="font-bold">{r.fields.patientCode.value ?? tl("No patient code")}</span>
@@ -26,5 +28,17 @@ export function EncounterCard({ r }: { r: EncounterRecord }) {
         {new Date(r.updatedAt).toLocaleString()}
       </p>
     </Link>
+      <details className="border-t border-border px-4 py-2">
+        <summary className="flex min-h-11 cursor-pointer items-center text-sm font-semibold text-primary">{tl("Show fields")}</summary>
+        <dl className="grid gap-2 pb-2 sm:grid-cols-2">
+          {FIELD_KEYS.map((k) => (
+            <div key={k} className="rounded-md bg-muted p-2">
+              <dt className="text-xs font-semibold text-muted-foreground">{tl(FIELD_LABELS[k])} · {tl(STATE_LABELS[r.fields[k].state])}</dt>
+              <dd className="mt-0.5 break-words text-sm">{r.fields[k].value ?? <span className="italic text-muted-foreground">{tl("Not recorded")}</span>}</dd>
+            </div>
+          ))}
+        </dl>
+      </details>
+    </div>
   );
 }
